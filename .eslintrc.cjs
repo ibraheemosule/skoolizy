@@ -27,11 +27,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json',
+    extraFileExtensions: ['.css'],
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-shadow': 0,
     'react/jsx-one-expression-per-line': 0,
+    '@typescript-eslint/comma-dangle': 0,
   },
 };

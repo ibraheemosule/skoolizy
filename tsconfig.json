@@ -5,6 +5,10 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "src/*": ["./src/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,6 +24,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [".eslintrc.cjs", "vite.config.ts", "src"],
+  "include": [
+    ".eslintrc.cjs",
+    "vite.config.ts",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "src"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
