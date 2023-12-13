@@ -35,5 +35,6 @@ module.exports = {
     '@typescript-eslint/no-shadow': 0,
     'react/jsx-one-expression-per-line': 0,
     '@typescript-eslint/comma-dangle': 0,
+    'react/function-component-definition': 0,
   },
 };
