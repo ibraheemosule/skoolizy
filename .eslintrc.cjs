@@ -27,6 +27,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-shadow': 0,
     'react/jsx-one-expression-per-line': 0,
