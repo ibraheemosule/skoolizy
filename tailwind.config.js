@@ -12,7 +12,22 @@ export default {
         'dark.yellow': '#ecbb5f',
         'dark.gray': '#868686',
       },
+      screens: {
+        xs: '440px',
+        xlg: '900px',
+      },
     },
   },
-  plugins: [],
+  variants: {
+    extend: {
+      backgroundColor: ['group-hover'],
+      display: ['group-hover'],
+    },
+  },
+  plugins: [
+    function addVariant({ addVariant }) {
+      addVariant('child', '& > *');
+      addVariant('child-hover', '& > *:hover');
+    },
+  ],
 };

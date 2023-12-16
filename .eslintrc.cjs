@@ -13,13 +13,9 @@ module.exports = {
   ],
   overrides: [
     {
-      env: {
-        node: true,
-      },
+      env: { node: true },
       files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script',
-      },
+      parserOptions: { sourceType: 'script' },
     },
   ],
   parser: '@typescript-eslint/parser',
@@ -36,5 +32,15 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     '@typescript-eslint/comma-dangle': 0,
     'react/function-component-definition': 0,
+    'react/require-default-props': 0,
+    'object-curly-newline': [
+      'error',
+      {
+        ObjectExpression: { multiline: true },
+        ObjectPattern: { multiline: true },
+        ImportDeclaration: 'never',
+        ExportDeclaration: { multiline: true },
+      },
+    ],
   },
 };
