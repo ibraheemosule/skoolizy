@@ -6,14 +6,14 @@ interface ITopHeader {
 }
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
-  <header className="_full">
+  <header className="_full flex">
     <button
       data-testid="menu-btn"
       onClick={() => setToggleNav(true)}
-      className="fa-regular fa-bars"
+      className="fa fa-bars fa-2x shrink-0 md:hidden"
       type="button"
     />
-    <div className="flex items-center justify-between">
+    <div className="flex grow items-center justify-between">
       <div className="w-2/3 md:w-1/2 mx-auto self-stretch">
         <SearchBar />
       </div>
