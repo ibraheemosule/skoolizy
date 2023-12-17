@@ -10,6 +10,7 @@ const Layout: FC = () => {
   return (
     <main className="relative flex overflow-hidden">
       <section
+        data-testid="nav-wrapper"
         onClick={() => setToggleNav(false)}
         className={`${animate} modal md:relative md:w-1/3  xlg:w-1/4 xl:w-1/6 shrink-0`}
       >

@@ -8,6 +8,7 @@ interface ITopHeader {
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
   <header className="_full">
     <button
+      data-testid="menu-btn"
       onClick={() => setToggleNav(true)}
       className="fa-regular fa-bars"
       type="button"
