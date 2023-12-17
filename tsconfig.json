@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "esModuleInterop": true,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
@@ -27,6 +28,7 @@
   "include": [
     ".eslintrc.cjs",
     "vite.config.ts",
+    "jest.config.cjs",
     "tailwind.config.js",
     "postcss.config.js",
     "src"

@@ -1,17 +1,29 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference types="@testing-library/jest-dom" />
-
 import '@testing-library/jest-dom';
 
-import { screen, render } from '@testing-library/react';
+import { screen, render, act } from '@testing-library/react';
 import Layout from './Layout';
 
-test('should toggle navbar class', async () => {
-  render(<Layout />);
+describe('testing the side nav animation', () => {
+  let menuBtn: HTMLElement;
+  let navWrapper: HTMLElement;
 
-  const menuBtn = await screen.findByTestId('menu-btn');
-  const navWrapper = await screen.findByTestId('nav-wrapper');
+  beforeEach(async () => {
+    render(<Layout />);
+    menuBtn = await screen.findByTestId('menu-btn');
+    navWrapper = await screen.findByTestId('nav-wrapper');
+  });
 
-  menuBtn?.click();
-  expect(navWrapper).toHaveClass('animate-in');
+  test('should animate sidenav to the ui', async () => {
+    await act(async () => menuBtn?.click());
+    expect(navWrapper).toHaveClass('animate-in');
+  });
+
+  test('Should animate sidenav out of the ui', async () => {
+    await act(async () => {
+      menuBtn.click();
+      navWrapper.click();
+    });
+
+    expect(navWrapper).toHaveClass('animate-out');
+  });
 });
