@@ -23,6 +23,20 @@ body {
   }
   .modal {
     background-color: rgba(0, 0, 0, 0.5);
-    @apply z-10 h-screen top-0 left-0 absolute;
+    @apply z-10 h-screen w-full top-0 left-0 absolute;
+  }
+
+  .animate-out,
+  .animate-in {
+    @apply -left-full md:left-0 bg-transparent;
+    transition-property: left background-color;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in;
+  }
+
+  .animate-in {
+    @apply left-0;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation-direction: reverse;
   }
 }

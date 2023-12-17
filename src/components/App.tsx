@@ -1,5 +1,5 @@
-import Dashboard from './dashboard/Dashboard';
+import Layout from './layout/Layout';
 
-const App = () => <Dashboard />;
+const App = () => <Layout />;
 
 export default App;
