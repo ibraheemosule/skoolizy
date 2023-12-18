@@ -1,6 +1,7 @@
 import { memo, useState, FC } from 'react';
 import SideNav from 'components/layout/side-nav/SideNav';
 import Dashboard from 'components/pages/dashboard/Dashboard';
+import BgImage from './bg-image/BgImage';
 import TopHeader from './top-header/TopHeader';
 
 const Layout: FC = () => {
@@ -9,6 +10,7 @@ const Layout: FC = () => {
 
   return (
     <main className="relative flex overflow-hidden">
+      <BgImage />
       <section
         data-testid="nav-wrapper"
         onClick={() => setToggleNav(false)}

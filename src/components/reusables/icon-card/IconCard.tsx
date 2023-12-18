@@ -1,0 +1,36 @@
+import { memo } from 'react';
+import { Circle, Card } from 'components/reusables/ui/others';
+import { IBaseProp } from 'src/ts-types/react-types';
+
+const IconCard = ({ children, className }: IBaseProp) => (
+  <Card className={`p-3 text-white ${className}`}>{children}</Card>
+);
+
+const Wrapper = memo(({ children }: IBaseProp) => (
+  <div className="flex gap-1 justify-between items-center">{children}</div>
+));
+Wrapper.displayName = 'Wrapper';
+
+const Icon = memo(
+  ({ children, size, className }: IBaseProp & { size: string }) => (
+    <Circle size={size} className={`bg-white shrink-0 ${className}`}>
+      {children}
+    </Circle>
+  )
+);
+Icon.displayName = 'Icon';
+
+const IconInfo = memo(({ children }: IBaseProp) => (
+  <div className="flex gap-1 items-center">{children}</div>
+));
+IconInfo.displayName = 'IconInfo';
+
+const Content = memo(({ children }: IBaseProp) => <div>{children}</div>);
+Content.displayName = 'Content';
+
+IconCard.Wrapper = Wrapper;
+IconCard.Icon = Icon;
+IconCard.IconInfo = IconInfo;
+IconCard.Content = Content;
+
+export default IconCard;

@@ -6,7 +6,7 @@ import ProfileMenu from './profile-menu/ProfileMenu';
 const SideNav = () => (
   <div
     onClick={(e) => e.stopPropagation()}
-    className="h-screen flex flex-col w-3/4 xs:w-3/5 sm:w-2/5 md:w-full pt-6 bg-white"
+    className="h-screen flex flex-col w-3/4 xs:w-3/5 sm:w-2/5 md:w-full pt-6 bg-white md:bg-transparent"
   >
     <div className="shrink-0 flex items-center gap-4 _full">
       <i className="fa fa-phone fa-3x" />
