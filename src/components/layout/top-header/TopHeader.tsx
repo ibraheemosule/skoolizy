@@ -25,7 +25,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
             alt="avi"
           />
           <span>Jack</span>
-          <i className="fa fa-arrow-down" />
+          <i className="fa fa-angle-down" />
         </div>
       </div>
     </div>

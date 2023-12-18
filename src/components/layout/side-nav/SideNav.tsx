@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { Heading1 } from 'components/reusables/ui/heading';
 import PrimaryMenu from './primary-menu/PrimaryMenu';
 import ProfileMenu from './profile-menu/ProfileMenu';
 
@@ -9,7 +10,7 @@ const SideNav = () => (
   >
     <div className="shrink-0 flex items-center gap-4 _full">
       <i className="fa fa-phone fa-3x" />
-      <span className="text-3xl font-bold">Classify</span>
+      <Heading1>Classify</Heading1>
     </div>
     <div className="grow overflow-y-auto pb-8">
       <PrimaryMenu />

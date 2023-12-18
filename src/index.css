@@ -19,7 +19,7 @@ body {
 
 @layer components {
   ._full {
-    @apply px-4 w-full;
+    @apply px-4 md:px-6 w-full;
   }
   .modal {
     background-color: rgba(0, 0, 0, 0.5);

@@ -16,9 +16,9 @@ const Layout: FC = () => {
       >
         <SideNav />
       </section>
-      <section className="h-screen w-full overflow-y-auto grow pt-6">
+      <section className="h-screen overflow-y-auto grow pt-6">
         <TopHeader setToggleNav={setToggleNav} />
-        <div className="page _full my-6">
+        <div className="page _full my-6 px-6">
           <Dashboard />
         </div>
       </section>

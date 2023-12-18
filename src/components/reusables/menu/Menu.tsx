@@ -6,7 +6,7 @@ const Menu = ({ children }: IChild) => (
 );
 
 const Title = ({ children }: IChild) => (
-  <h2 className="_full  text-xl py-4">{children}</h2>
+  <h2 className="_full text-xl py-4">{children}</h2>
 );
 
 const Wrapper = ({ children }: IChild) => (
