@@ -6,7 +6,7 @@ import { Card } from 'components/reusables/ui/others';
 
 const Hero = () => (
   <Card className="bg-light.purple p-6 ">
-    <Heading1>Looking for a specialist doctor?</Heading1>
+    <Heading1>Some Upcoming Events</Heading1>
     <BaseText className="mt-2 text-gray-500 font-light">
       Upload a Prescription and Tell Us what you Need. We do the Rest!
     </BaseText>
