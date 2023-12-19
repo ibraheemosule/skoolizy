@@ -3,9 +3,7 @@ import { Circle, Card } from 'components/reusables/ui/others';
 import { IBaseProp } from 'src/ts-types/react-types';
 
 const IconCard = ({ children, className }: IBaseProp) => (
-  <Card className={`p-3 text-white grow md:grow-0 ${className}`}>
-    {children}
-  </Card>
+  <Card className={`p-3 grow md:grow-0 ${className}`}>{children}</Card>
 );
 
 const Wrapper = memo(({ children }: IBaseProp) => (
@@ -22,12 +20,14 @@ const Icon = memo(
 );
 Icon.displayName = 'Icon';
 
-const IconInfo = memo(({ children }: IBaseProp) => (
-  <div className="flex gap-1 items-center">{children}</div>
+const IconInfo = memo(({ children, className }: IBaseProp) => (
+  <div className={`flex gap-1 items-center ${className}`}>{children}</div>
 ));
 IconInfo.displayName = 'IconInfo';
 
-const Content = memo(({ children }: IBaseProp) => <div>{children}</div>);
+const Content = memo(({ children, className }: IBaseProp) => (
+  <div className={className}>{children}</div>
+));
 Content.displayName = 'Content';
 
 IconCard.Wrapper = Wrapper;
