@@ -14,7 +14,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
       type="button"
     />
     <div className="flex grow items-center justify-between">
-      <div className="w-2/3 md:w-1/2 mx-auto self-stretch">
+      <div className="w-2/3 md:w-1/2 lg:w-3/5 self-stretch">
         <SearchBar />
       </div>
       <div>

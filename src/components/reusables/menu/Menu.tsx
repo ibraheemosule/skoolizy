@@ -15,9 +15,9 @@ const Wrapper = ({ children }: IChild) => (
 
 const Item = ({ children }: IChild) => (
   <li className="group pl-6 py-4 text-gray-500 hover:text-black hover:bg-gray-100 cursor-pointer relative">
-    <i className="fa fa-phone group-hover:text-dark.brown" />
+    <i className="fa fa-phone group-hover:text-brown.dark" />
     <span className="ml-3">{children}</span>
-    <i className="absolute hidden bg-dark.brown w-[10px] top-0 right-0 h-full rounded-tl-xl rounded-bl-xl group-hover:block" />
+    <i className="absolute hidden bg-brown.dark w-[10px] top-0 right-0 h-full rounded-tl-xl rounded-bl-xl group-hover:block" />
   </li>
 );
 

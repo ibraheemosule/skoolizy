@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import Hero from './hero/Hero';
 import Categories from './categories/Categories';
-import MyAppointments from './my-appointements/MyAppointments';
+import MyAppointments from './live-classes/LiveClasses';
 
 const Dashboard = () => (
   <section>

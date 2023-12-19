@@ -5,12 +5,12 @@ export default {
     extend: {
       colors: {
         purple: '#7a6ba9',
-        'dark.purple': '#432c81',
-        'light.purple': '#ccc3ff',
-        'dark.brown': '#58315a',
+        'purple.dark': '#432c81',
+        'purple.light': '#ccc3ff',
+        'brown.dark': '#58315a',
         orange: '#ff8989',
-        'dark.yellow': '#ecbb5f',
-        'dark.gray': '#868686',
+        'yellow.dark': '#ecbb5f',
+        'gray.dark': '#868686',
       },
       screens: {
         xs: '440px',

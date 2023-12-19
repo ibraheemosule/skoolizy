@@ -3,7 +3,9 @@ import { Circle, Card } from 'components/reusables/ui/others';
 import { IBaseProp } from 'src/ts-types/react-types';
 
 const IconCard = ({ children, className }: IBaseProp) => (
-  <Card className={`p-3 text-white ${className}`}>{children}</Card>
+  <Card className={`p-3 text-white grow md:grow-0 ${className}`}>
+    {children}
+  </Card>
 );
 
 const Wrapper = memo(({ children }: IBaseProp) => (

@@ -3,10 +3,10 @@ import { BaseText, SmallText } from 'components/reusables/ui/text';
 import IconCard from 'components/reusables/icon-card/IconCard';
 
 const Categories = () => (
-  <div className="mt-6">
+  <div className="mt-8">
     <BaseText>Categories</BaseText>
     <div className="flex flex-wrap mt-4 gap-4 md:flex-nowrap lg:justify-between">
-      <IconCard className="bg-dark.brown">
+      <IconCard className="bg-brown.dark">
         <IconCard.Wrapper>
           <IconCard.Icon size="30">
             <i className="fa fa-video-camera text-black" aria-hidden="true" />
@@ -38,7 +38,7 @@ const Categories = () => (
           <BaseText className="mt-4">Clinic visit appointment</BaseText>
         </IconCard.Content>
       </IconCard>
-      <IconCard className=" bg-dark.yellow">
+      <IconCard className=" bg-yellow.dark">
         <IconCard.Wrapper>
           <IconCard.Icon size="30">
             <i className="fa fa-video-camera text-black" aria-hidden="true" />
