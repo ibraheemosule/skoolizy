@@ -27,6 +27,9 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'function-paren-newline': 0,
+    'implicit-arrow-linebreak': 0,
+    'jsx-a11y/no-noninteractive-tabindex': 0,
     'import/no-extraneous-dependencies': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,
@@ -38,14 +41,6 @@ module.exports = {
     '@typescript-eslint/comma-dangle': 0,
     'react/function-component-definition': 0,
     'react/require-default-props': 0,
-    'object-curly-newline': [
-      'error',
-      {
-        ObjectExpression: { multiline: true },
-        ObjectPattern: { multiline: true },
-        ImportDeclaration: 'never',
-        ExportDeclaration: { multiline: true },
-      },
-    ],
+    'object-curly-newline': ['error', { multiline: true }],
   },
 };

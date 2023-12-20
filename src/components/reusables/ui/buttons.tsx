@@ -29,7 +29,7 @@ export const Check = memo(() => (
 Check.displayName = 'Check';
 
 export const Cancel = memo(() => (
-  <button className="p-1  text-red-800 hover:text-purple.light" type="button">
+  <button className="p-1 text-red-800 hover:text-purple.light" type="button">
     <i className="fa fa-times " />
   </button>
 ));

@@ -5,16 +5,20 @@ import RequestCard from '../../../reusables/request-card/RequestCard';
 
 const Requests = () => (
   <div className="mt-8 md:mt-0">
-    <div className="flex justify-between gap-6">
+    <div className="flex justify-between gap-6 mb-2">
       <BoldText>Requests</BoldText>
       <BaseText>View All Requests</BaseText>
     </div>
-
-    <div className="mt-2 bg-gray-100 rounded-lg">
-      <RequestCard />
-    </div>
-    <div className=" mt-1 bg-gray-100 rounded-lg">
-      <RequestCard />
+    <div className="max-h-[346px] overflow-auto ">
+      <div className="mt-1 bg-gray-100 rounded-lg">
+        <RequestCard />
+      </div>
+      <div className=" mt-1 bg-gray-100 rounded-lg">
+        <RequestCard />
+      </div>
+      <div className=" mt-1 bg-gray-100 rounded-lg">
+        <RequestCard />
+      </div>
     </div>
   </div>
 );

@@ -3,6 +3,7 @@ import Hero from './hero/Hero';
 import Categories from './categories/Categories';
 import MyAppointments from './live-classes/LiveClasses';
 import Requests from './requests/Requests';
+import Highlights from './highlights/Highlights';
 
 const Dashboard = () => (
   <section>
@@ -14,6 +15,7 @@ const Dashboard = () => (
       </div>
       <div className="w-full lg:w-auto grow">
         <Requests />
+        <Highlights />
       </div>
     </div>
   </section>

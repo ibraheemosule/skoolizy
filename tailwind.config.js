@@ -21,7 +21,7 @@ export default {
   variants: {
     extend: {
       backgroundColor: ['group-hover'],
-      display: ['group-hover'],
+      display: ['group-hover', 'group-focus'],
     },
   },
   plugins: [
