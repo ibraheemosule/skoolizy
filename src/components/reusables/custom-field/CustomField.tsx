@@ -76,6 +76,7 @@ const Field = memo(
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
       {onChange ? (
         <input
+          data-testid="custom-input"
           onFocus={focus}
           onBlur={blur}
           onChange={onChange}
@@ -89,6 +90,7 @@ const Field = memo(
         />
       ) : (
         <div
+          data-testid="custom-select"
           onClick={focus}
           onBlur={blur}
           tabIndex={0}
@@ -124,6 +126,7 @@ DropdownWrapper.displayName = 'DropdownWrapper';
 const Dropdown = memo(
   ({ children, onClick }: IBaseProp & { onClick?: () => void }) => (
     <div
+      data-testid="dropdown-wrapper"
       onClick={onClick}
       className={`${
         typeof children === 'string' && 'p-3'
