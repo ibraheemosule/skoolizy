@@ -6,19 +6,19 @@ const CustomTable = () => (
       <thead className="table w-full">
         <tr className="table w-full border-b-4 text-lg bg-purple.light border-white rounded-t-lg">
           <th
-            onClick={() => console.log('click')}
+            onClick={() => null}
             className="py-4 px-2 w-[33%] break-all border-r-2 border-white last:border-0 "
           >
             Classroom
           </th>
           <th
-            onClick={() => console.log('click')}
+            onClick={() => null}
             className="py-4 px-2 w-[33%] break-all border-r-2 border-white last:border-0"
           >
             Subject
           </th>
           <th
-            onClick={() => console.log('click')}
+            onClick={() => null}
             className="py-4 px-2 w-[33%] break-all border-r-2 border-white last:border-0"
           >
             Teacher
@@ -32,19 +32,19 @@ const CustomTable = () => (
             className="table w-full border-b-4 border-white"
           >
             <td
-              onClick={() => console.log('click')}
+              onClick={() => null}
               className="break-all w-[33%] text-center py-4 px-2 border-r-2 font-semibold  border-white last:border-0"
             >
               JSS-1
             </td>
             <td
-              onClick={() => console.log('click')}
+              onClick={() => null}
               className="break-all w-[33%] text-center py-4 px-2 border-r-2 font-semibold  border-white last:border-0"
             >
               Biology
             </td>
             <td
-              onClick={() => console.log('click')}
+              onClick={() => null}
               className="break-all w-[33%] text-center py-4 px-2 border-r-2 font-semibold  border-white last:border-0"
             >
               Mr John Doe
