@@ -3,7 +3,7 @@ import { IBaseProp } from 'src/ts-types/react-types';
 
 export const ActionBtn = memo(({ children, className }: IBaseProp) => (
   <button
-    className={`text-white bg-purple.dark rounded-lg px-4 py-2 ${className}`}
+    className={`text-white bg-purple.dark rounded-lg ${className}`}
     type="button"
   >
     {children}

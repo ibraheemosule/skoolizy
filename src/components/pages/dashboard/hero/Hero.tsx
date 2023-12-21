@@ -10,7 +10,7 @@ const Hero = () => (
     <BaseText className="mt-2 text-gray-500 font-light">
       Upload a Prescription and Tell Us what you Need. We do the Rest!
     </BaseText>
-    <ActionBtn className="mt-4">Read more</ActionBtn>
+    <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
   </Card>
 );
 

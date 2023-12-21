@@ -10,14 +10,18 @@ const RequestCard = () => (
       <IconCard.Icon size="50">
         <i className="fa fa-user" />
       </IconCard.Icon>
-      <IconCard.IconInfo className="grow ml-2">
+      <IconCard.IconInfo className="grow ml-2 flex gap-2">
         <div>
-          <BoldText className="text-gray-500 w-full">Mr John Doe</BoldText>
+          <BoldText className="text-gray-500">Mr John Doe</BoldText>
           <SmallText>Teacher</SmallText>
+        </div>
+        <div className="ml-auto text-gray-500">
+          <SmallText>02/10/23</SmallText>
+          <SmallText>1:00pm</SmallText>
         </div>
       </IconCard.IconInfo>
     </IconCard.Wrapper>
-    <IconCard.Content className=" mt-4 px-4">
+    <IconCard.Content className=" mt-4">
       <div className="border-t border-white pt-3">
         <BaseText>A New board and chalk</BaseText>
 

@@ -2,9 +2,9 @@ import { memo } from 'react';
 import Hero from './hero/Hero';
 import Categories from './categories/Categories';
 import MyAppointments from './live-classes/LiveClasses';
-import Requests from './lastest-requests/LatestRequests';
+import LatestRequests from './lastest-requests/LatestRequests';
 import Highlights from './highlights/Highlights';
-import Rate from './rate/Rate';
+import RateSomeone from './rate-someone/RateSomeone';
 
 const Dashboard = () => (
   <section>
@@ -15,8 +15,8 @@ const Dashboard = () => (
         <MyAppointments />
       </div>
       <div className="w-full lg:w-auto grow">
-        <Requests />
-        <Rate />
+        <LatestRequests />
+        <RateSomeone />
         <Highlights />
       </div>
     </div>

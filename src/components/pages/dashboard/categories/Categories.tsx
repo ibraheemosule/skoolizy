@@ -3,7 +3,7 @@ import { BaseText, SmallText } from 'components/reusables/ui/text';
 import IconCard from 'components/reusables/icon-card/IconCard';
 
 const Categories = () => (
-  <div className="mt-8">
+  <div className="mt-6">
     <BaseText>Categories</BaseText>
     <div className="flex flex-wrap mt-4 gap-4 md:flex-nowrap xlg:justify-between">
       <IconCard className="bg-brown.dark text-white">
