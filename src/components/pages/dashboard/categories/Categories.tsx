@@ -5,7 +5,7 @@ import IconCard from 'components/reusables/icon-card/IconCard';
 const Categories = () => (
   <div className="mt-8">
     <BaseText>Categories</BaseText>
-    <div className="flex flex-wrap mt-4 gap-4 md:flex-nowrap lg:justify-between">
+    <div className="flex flex-wrap mt-4 gap-4 md:flex-nowrap xlg:justify-between">
       <IconCard className="bg-brown.dark text-white">
         <IconCard.Wrapper>
           <IconCard.Icon size="30">

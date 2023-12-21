@@ -9,7 +9,7 @@ const Requests = () => (
       <BoldText>Requests</BoldText>
       <BaseText>View All Requests</BaseText>
     </div>
-    <div className="max-h-[346px] overflow-auto ">
+    <div className="max-h-[250px] overflow-auto ">
       <div className="mt-1 bg-gray-100 rounded-lg">
         <RequestCard />
       </div>

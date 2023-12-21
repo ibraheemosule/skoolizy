@@ -100,7 +100,12 @@ const Field = memo(
           {children}
         </div>
       )}
-      <i onClick={focus} className="inline-block mr-2 fa fa-angle-down" />
+      <i
+        onClick={focus}
+        className={`inline-block mr-2 fa fa-${
+          search ? 'search' : 'angle-down'
+        }`}
+      />
     </div>
   )
 );

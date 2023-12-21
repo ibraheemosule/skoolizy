@@ -27,6 +27,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'no-console': 0,
+    'react/jsx-curly-newline': 0,
     'function-paren-newline': 0,
     'implicit-arrow-linebreak': 0,
     'jsx-a11y/no-noninteractive-tabindex': 0,

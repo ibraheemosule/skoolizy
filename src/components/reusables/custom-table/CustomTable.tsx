@@ -2,24 +2,24 @@ import { memo } from 'react';
 
 const CustomTable = () => (
   <div className=" w-full overflow-hidden overflow-x-auto rounded-lg">
-    <table className="w-full min-w-[640px] mt-4 bg-gray-100 capitalize">
+    <table className="w-full min-w-[640px] mt-4  capitalize">
       <thead className="table w-full">
-        <tr className="table w-full border-b-4 text-lg bg-purple.light border-white rounded-t-lg">
+        <tr className="table w-full border-b text-lg bg-purple.light border-white rounded-t-lg">
           <th
             onClick={() => null}
-            className="py-4 px-2 w-[33%] break-all border-r-2 border-white last:border-0 "
+            className="py-4 px-2 w-[33%] break-all  border-white last:border-0 "
           >
             Classroom
           </th>
           <th
             onClick={() => null}
-            className="py-4 px-2 w-[33%] break-all border-r-2 border-white last:border-0"
+            className="py-4 px-2 w-[33%] break-all  border-white last:border-0"
           >
             Subject
           </th>
           <th
             onClick={() => null}
-            className="py-4 px-2 w-[33%] break-all border-r-2 border-white last:border-0"
+            className="py-4 px-2 w-[33%] break-all  border-white last:border-0"
           >
             Teacher
           </th>
@@ -29,23 +29,23 @@ const CustomTable = () => (
         {new Array(30).fill(';').map(() => (
           <tr
             key={Math.random()}
-            className="table w-full border-b-4 border-white"
+            className="table w-full border-b border-white odd:bg-gray-50 even:bg-gray-100"
           >
             <td
               onClick={() => null}
-              className="break-all w-[33%] text-center py-4 px-2 border-r-2 font-semibold  border-white last:border-0"
+              className="break-all w-[33%] text-center py-4 px-2  font-semibold  border-white last:border-0"
             >
               JSS-1
             </td>
             <td
               onClick={() => null}
-              className="break-all w-[33%] text-center py-4 px-2 border-r-2 font-semibold  border-white last:border-0"
+              className="break-all w-[33%] text-center py-4 px-2  font-semibold  border-white last:border-0"
             >
               Biology
             </td>
             <td
               onClick={() => null}
-              className="break-all w-[33%] text-center py-4 px-2 border-r-2 font-semibold  border-white last:border-0"
+              className="break-all w-[33%] text-center py-4 px-2  font-semibold  border-white last:border-0"
             >
               Mr John Doe
             </td>

@@ -7,3 +7,8 @@ export interface IChild {
 export interface IBaseProp extends IChild {
   className?: string;
 }
+
+export type IconType = {
+  size?: number;
+  color?: string;
+};
