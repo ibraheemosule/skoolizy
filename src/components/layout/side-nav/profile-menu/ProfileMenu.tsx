@@ -3,13 +3,11 @@ import Menu from 'components/reusables/menu/Menu';
 
 const ProfileMenu = () => (
   <Menu>
-    <Menu.Title>Profile Menu</Menu.Title>
+    <Menu.Title>More Options</Menu.Title>
     <Menu.Wrapper>
-      <Menu.Item>Menu item here</Menu.Item>
-      <Menu.Item>Menu item here</Menu.Item>
-      <Menu.Item>Menu item here</Menu.Item>
-      <Menu.Item>Menu item here</Menu.Item>
-      <Menu.Item>Menu item here</Menu.Item>
+      <Menu.Item>My Profile</Menu.Item>
+      <Menu.Item>Settings</Menu.Item>
+      <Menu.Item>Sign out</Menu.Item>
     </Menu.Wrapper>
   </Menu>
 );
