@@ -5,7 +5,7 @@ import Send from 'src/assets/icons/Send';
 import IconCard from 'components/reusables/icon-card/IconCard';
 
 const Highlights = () => (
-  <div className="mt-8 md:mt-6">
+  <div className="mt-8">
     <div>
       <BoldText>Latest Highlights</BoldText>
     </div>
@@ -23,10 +23,10 @@ const Highlights = () => (
       </div>
     </div>
 
-    <div className="max-h-[200px] mt-4 overflow-y-scroll">
+    <div className="max-h-[200px] mt-8 overflow-y-scroll">
       <IconCard className="border-b last:border-0 border-gray-200">
         <IconCard.Wrapper>
-          <IconCard.Icon className="mr-2 self-start bg-red-300" size="40">
+          <IconCard.Icon className="mr-2 self-start bg-gray-200" size="40">
             <i className="fa fa-user" />
           </IconCard.Icon>
           <IconCard.IconInfo className="grow flex-wrap">
@@ -46,7 +46,7 @@ const Highlights = () => (
       </IconCard>
       <IconCard className="border-b last:border-0 border-gray-200">
         <IconCard.Wrapper>
-          <IconCard.Icon className="mr-2 self-start bg-red-300" size="40">
+          <IconCard.Icon className="mr-2 self-start bg-gray-200" size="40">
             <i className="fa fa-user" />
           </IconCard.Icon>
           <IconCard.IconInfo className="grow flex-wrap">
@@ -66,7 +66,7 @@ const Highlights = () => (
       </IconCard>
       <IconCard className="border-b last:border-0 border-gray-200">
         <IconCard.Wrapper>
-          <IconCard.Icon className="mr-2 self-start bg-red-300" size="40">
+          <IconCard.Icon className="mr-2 self-start bg-gray-200" size="40">
             <i className="fa fa-user" />
           </IconCard.Icon>
           <IconCard.IconInfo className="grow flex-wrap">
