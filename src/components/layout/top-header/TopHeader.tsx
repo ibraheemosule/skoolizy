@@ -6,7 +6,7 @@ interface ITopHeader {
 }
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
-  <header className="_full flex">
+  <>
     <button
       data-testid="menu-btn"
       onClick={() => setToggleNav(true)}
@@ -29,7 +29,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
         </div>
       </div>
     </div>
-  </header>
+  </>
 );
 
 export default memo(TopHeader);

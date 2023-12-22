@@ -4,7 +4,7 @@ import { memo } from 'react';
 const TopStats = () => (
   <div className=" bg-brown.dark mt-8 rounded-lg">
     <div className="grid grid-cols-1 gap-px  xs:grid-cols-3 md:grid-cols-2 xlg:grid-cols-3">
-      <div className=" px-4 py-6">
+      <div className=" px-4 py-6 max-xs:mx-auto">
         <BoldText className="text-2xl text-white">Guardian</BoldText>
         <div className="mt-2">
           <p className="text-sm font-medium  text-gray-400">Most Active</p>
@@ -25,7 +25,7 @@ const TopStats = () => (
           </p>
         </div>
       </div>
-      <div className=" px-4 py-6">
+      <div className=" px-4 py-6 max-xs:mx-auto">
         <BoldText className="text-2xl text-white">Teacher</BoldText>
         <div className="mt-2">
           <p className="text-sm font-medium  text-gray-400">Most Active</p>
@@ -46,7 +46,7 @@ const TopStats = () => (
           </p>
         </div>
       </div>
-      <div className=" px-4 py-6">
+      <div className=" px-4 py-6 max-xs:mx-auto">
         <BoldText className="text-2xl text-white">Student</BoldText>
         <div className="mt-2">
           <p className="text-sm font-medium  text-gray-400">Most Active</p>

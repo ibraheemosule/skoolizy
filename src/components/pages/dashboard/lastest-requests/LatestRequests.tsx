@@ -1,12 +1,15 @@
 import { memo } from 'react';
-import { BoldText } from 'components/reusables/ui/text';
+import { BaseText, BoldText } from 'components/reusables/ui/text';
 
 import RequestCard from '../../../reusables/request-card/RequestCard';
 
 const Requests = () => (
   <div className="mt-8 md:mt-0">
-    <BoldText>Latest Requests</BoldText>
-    <div className="max-h-[250px] overflow-auto mt-2">
+    <div className="flex justify-between">
+      <BoldText>Latest Requests</BoldText>
+      <BaseText className=" text-purple.dark">View All</BaseText>
+    </div>
+    <div className="mt-2">
       <div className="mt-1 bg-gray-100 rounded-lg">
         <RequestCard />
       </div>
