@@ -3,7 +3,7 @@ import { memo } from 'react';
 
 const TopStats = () => (
   <div className=" bg-brown.dark mt-8 rounded-lg">
-    <div className="grid grid-cols-1 gap-px  sm:grid-cols-3 md:grid-cols-2 xlg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-px  xs:grid-cols-3 md:grid-cols-2 xlg:grid-cols-3">
       <div className=" px-4 py-6">
         <BoldText className="text-2xl text-white">Guardian</BoldText>
         <div className="mt-2">
