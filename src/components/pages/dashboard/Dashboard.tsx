@@ -1,7 +1,6 @@
 import { memo } from 'react';
-import Categories from 'components/reusables/categories/Categories';
 import Hero from './hero/Hero';
-import MyAppointments from './live-classes/LiveClasses';
+import LiveClasses from './live-classes/LiveClasses';
 import LatestRequests from './lastest-requests/LatestRequests';
 import Highlights from './highlights/Highlights';
 import RateSomeone from './rate-someone/RateSomeone';
@@ -12,8 +11,7 @@ const Dashboard = () => (
     <div className="w-full lg:w-3/5 shrink-0 overflow-auto">
       <Hero />
       <TopStats />
-      <Categories />
-      <MyAppointments />
+      <LiveClasses />
     </div>
     <div className="w-full lg:w-auto grow overflow-auto">
       <LatestRequests />
