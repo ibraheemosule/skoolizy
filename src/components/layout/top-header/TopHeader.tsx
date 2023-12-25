@@ -10,7 +10,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
     <button
       data-testid="menu-btn"
       onClick={() => setToggleNav(true)}
-      className="fa fa-bars fa-2x shrink-0 md:hidden"
+      className="fa fa-bars shrink-0 md:hidden"
       type="button"
     />
     <div className="flex grow items-center justify-between">

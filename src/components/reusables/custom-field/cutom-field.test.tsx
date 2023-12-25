@@ -26,7 +26,7 @@ describe('testing the functionalities of the CustomField component', () => {
   test('input field should not be rendered if onChange prop is not passed ', async () => {
     render(
       <CustomField>
-        <CustomField.Editable />
+        <CustomField.NonEditable />
       </CustomField>
     );
     const input = await screen.queryByTestId('custom-input');

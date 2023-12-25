@@ -76,7 +76,6 @@ type NonEditableType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
 const NonEditable = memo(
   ({ elementRef, focus, blur, children }: NonEditableType) => (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
-      (
       <div
         data-testid="custom-select"
         onClick={focus}
