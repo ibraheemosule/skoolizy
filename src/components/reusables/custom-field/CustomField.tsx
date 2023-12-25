@@ -55,61 +55,88 @@ const CustomField = ({ children }: { children: ReactElement }) => {
   return <div className="flex h-full relative">{renderChildren()}</div>;
 };
 
-type FieldPropsType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
-  children?: ReactNode;
+const Icon = ({
+  search,
+  onClick,
+}: {
   search?: boolean;
+  onClick?: () => void;
+}) => (
+  <i
+    onClick={onClick}
+    className={`inline-block mr-2 fa fa-${search ? 'search' : 'angle-down'}`}
+  />
+);
+
+type NonEditableType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
+  children?: ReactNode;
 };
 
 // props elementRef, focus, blur comes from the CustomField component above
-const Field = memo(
+const NonEditable = memo(
+  ({ elementRef, focus, blur, children }: NonEditableType) => (
+    <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
+      (
+      <div
+        data-testid="custom-select"
+        onClick={focus}
+        onBlur={blur}
+        tabIndex={0}
+        ref={elementRef}
+        className="p-2 pl-4 appearance-none outline-none w-full cursor-pointer"
+      >
+        {children}
+      </div>
+      <Icon onClick={focus} />
+    </div>
+  )
+);
+NonEditable.displayName = 'NonEditable';
+
+type FieldPropsType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  search?: boolean;
+  type?: string;
+  icon?: boolean;
+  id?: string;
+};
+
+const Editable = memo(
   ({
     elementRef,
     focus,
     blur,
     onChange,
+    type,
     value,
-    children,
     search,
+    icon,
+    id,
   }: FieldPropsType) => (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
-      {onChange ? (
-        <input
-          data-testid="custom-input"
-          onFocus={focus}
-          onBlur={blur}
-          onChange={onChange}
-          value={value}
-          ref={elementRef as RefObject<HTMLInputElement>}
-          type={search ? 'search' : 'text'}
-          placeholder="Select someone to rate"
-          className={`p-2 pl-4 appearance-none outline-none w-full ${
-            search ? 'cursor-text' : 'cursor-pointer'
-          }`}
-        />
-      ) : (
-        <div
-          data-testid="custom-select"
-          onClick={focus}
-          onBlur={blur}
-          tabIndex={0}
-          ref={elementRef}
-          className="p-2 pl-4 appearance-none outline-none w-full cursor-pointer"
-        >
-          {children}
-        </div>
-      )}
-      <i
-        onClick={focus}
-        className={`inline-block mr-2 fa fa-${
-          search ? 'search' : 'angle-down'
+      <input
+        data-testid="custom-input"
+        {...(id ? { id } : {})}
+        onFocus={focus}
+        onBlur={blur}
+        onChange={onChange}
+        value={value}
+        ref={elementRef as RefObject<HTMLInputElement>}
+        type={type ?? (search ? 'search' : 'text')}
+        placeholder="Select someone to rate"
+        className={`p-2 pl-4 appearance-none outline-none w-full ${
+          !search && typeof search === 'boolean'
+            ? 'cursor-pointer'
+            : 'cursor-text'
         }`}
       />
+
+      {icon ? <Icon search={search} onClick={focus} /> : null}
     </div>
   )
 );
-Field.displayName = 'Field';
+Editable.displayName = 'Editable';
 
 type DropdownWrapperPropsType = {
   dropdownRef: RefObject<HTMLDivElement>;
@@ -145,6 +172,7 @@ Dropdown.displayName = 'Dropdown';
 
 CustomField.DropdownWrapper = DropdownWrapper;
 CustomField.Dropdown = Dropdown;
-CustomField.Field = Field;
+CustomField.Editable = Editable;
+CustomField.NonEditable = NonEditable;
 
 export default CustomField;

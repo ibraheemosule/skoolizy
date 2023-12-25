@@ -24,10 +24,12 @@ const Rate = () => {
         <div className="grow max-w-[250px]">
           <CustomField>
             <>
-              <CustomField.Field
+              <CustomField.Editable
                 search
                 onChange={(e) => updateName(e.target.value)}
                 value={name}
+                icon
+                id="here"
               />
               <CustomField.DropdownWrapper>
                 <CustomField.Dropdown onClick={() => updateName('john')}>

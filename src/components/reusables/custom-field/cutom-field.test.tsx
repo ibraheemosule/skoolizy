@@ -9,7 +9,7 @@ describe('testing the functionalities of the CustomField component', () => {
   test('value should be update when input is typed into', async () => {
     render(
       <CustomField>
-        <CustomField.Field
+        <CustomField.Editable
           value={value}
           onChange={(e) => {
             value = e.target.value;
@@ -26,7 +26,7 @@ describe('testing the functionalities of the CustomField component', () => {
   test('input field should not be rendered if onChange prop is not passed ', async () => {
     render(
       <CustomField>
-        <CustomField.Field />
+        <CustomField.Editable />
       </CustomField>
     );
     const input = await screen.queryByTestId('custom-input');

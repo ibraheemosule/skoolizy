@@ -27,6 +27,15 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'jsx-a11y/label-has-associated-control': 0,
+    'react/jsx-props-no-spreading': [
+      0,
+      {
+        html: 'ignore',
+        custom: 'enforce',
+        explicitSpread: 'enforce',
+      },
+    ],
     'no-console': 0,
     'react/jsx-curly-newline': 0,
     'function-paren-newline': 0,
