@@ -54,6 +54,7 @@ const CustomField = ({ children }: { children: ReactElement }) => {
         return child;
       })
     );
+
   return <div className="flex h-full relative">{renderChildren()}</div>;
 };
 
@@ -83,7 +84,7 @@ const NonEditable = memo(
         onBlur={blur}
         tabIndex={0}
         ref={elementRef}
-        className="p-2 pl-4 appearance-none outline-none w-full cursor-pointer"
+        className="appearance-none outline-none w-full cursor-pointer"
       >
         {children}
       </div>
@@ -163,7 +164,7 @@ const Dropdown = memo(
       data-testid="dropdown-wrapper"
       onClick={onClick}
       className={`${
-        typeof children === 'string' && 'p-3'
+        typeof children === 'string' && 'p-2'
       } relative bg-white hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
     >
       {children}
