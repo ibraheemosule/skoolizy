@@ -11,6 +11,8 @@ import {
 } from 'react';
 
 import { IBaseProp } from 'src/ts-types/react-types';
+import SearchIcon from 'src/assets/icons/SearchIcon';
+import AngleDownIcon from 'src/assets/icons/AngleDownIcon';
 
 interface ChildProp {
   elementRef: RefObject<HTMLDivElement | HTMLInputElement>;
@@ -62,10 +64,9 @@ const Icon = ({
   search?: boolean;
   onClick?: () => void;
 }) => (
-  <i
-    onClick={onClick}
-    className={`inline-block mr-2 fa fa-${search ? 'search' : 'angle-down'}`}
-  />
+  <button onClick={onClick} className="inline-block mr-2">
+    {search ? <SearchIcon size={20} /> : <AngleDownIcon size={20} />}
+  </button>
 );
 
 type NonEditableType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
@@ -99,6 +100,7 @@ type FieldPropsType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
   type?: string;
   icon?: boolean;
   id?: string;
+  placeholder?: string;
 };
 
 const Editable = memo(
@@ -112,6 +114,7 @@ const Editable = memo(
     search,
     icon,
     id,
+    placeholder,
   }: FieldPropsType) => (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
       <input
@@ -123,7 +126,7 @@ const Editable = memo(
         value={value}
         ref={elementRef as RefObject<HTMLInputElement>}
         type={type ?? (search ? 'search' : 'text')}
-        placeholder="Select someone to rate"
+        placeholder={placeholder || ''}
         className={`p-2 pl-4 appearance-none outline-none w-full ${
           !search && typeof search === 'boolean'
             ? 'cursor-pointer'

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { IconType } from 'src/ts-types/react-types';
 
-const Send = ({ color, size = 24 }: IconType) => (
+const SendIcon = ({ color, size = 24 }: IconType) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -12,4 +12,4 @@ const Send = ({ color, size = 24 }: IconType) => (
   </svg>
 );
 
-export default memo(Send);
+export default memo(SendIcon);

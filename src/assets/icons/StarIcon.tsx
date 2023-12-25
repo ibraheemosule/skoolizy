@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { IconType } from 'src/ts-types/react-types';
 
-const Star = ({ color, size = 24 }: IconType) => (
+const StarIcon = ({ color, size = 24 }: IconType) => (
   <svg
     viewBox="0 0 24 24"
     style={{ height: size, width: size }}
@@ -15,4 +15,4 @@ const Star = ({ color, size = 24 }: IconType) => (
   </svg>
 );
 
-export default memo(Star);
+export default memo(StarIcon);

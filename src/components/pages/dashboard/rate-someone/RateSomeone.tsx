@@ -29,7 +29,7 @@ const Rate = () => {
                 onChange={(e) => updateName(e.target.value)}
                 value={name}
                 icon
-                id="here"
+                placeholder="Rate Someone"
               />
               <CustomField.DropdownWrapper>
                 <CustomField.Dropdown onClick={() => updateName('john')}>
