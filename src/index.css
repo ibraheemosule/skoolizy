@@ -55,11 +55,11 @@ body {
       max-height: 300px;
     }
 
-    30% {
+    80% {
       max-height: 1px;
       opacity: 1;
     }
-    35% {
+    85% {
       opacity: 0;
     }
 

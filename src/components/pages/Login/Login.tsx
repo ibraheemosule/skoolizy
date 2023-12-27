@@ -15,12 +15,12 @@ const Login = () => (
             Sign in to your account
           </h2>
           <p className="mt-2 text-sm leading-6 text-gray-500">
-            Not a member?{' '}
+            Don&apos;t have an account?{' '}
             <a
               href="https://goal.com"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Start a 14 day free trial
+              Sign up
             </a>
           </p>
         </div>
@@ -104,10 +104,10 @@ const Login = () => (
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="mt-6 grid grid-cols-2 gap-4 text-gray-500">
               <a
                 href="https://goal.com"
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-[https://goal.com1D9BF0] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com1D9BF0]"
+                className="flex w-full items-center justify-center gap-3 rounded-md bg-[https://goal.com1D9BF0] px-3 py-1.5  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com1D9BF0]"
               >
                 <svg
                   className="h-5 w-5"
@@ -122,7 +122,7 @@ const Login = () => (
 
               <a
                 href="https://goal.com"
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-[https://goal.com24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com24292F]"
+                className="flex w-full items-center justify-center gap-3 rounded-md bg-[https://goal.com24292F] px-3 py-1.5  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com24292F]"
               >
                 <svg
                   className="h-5 w-5"

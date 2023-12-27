@@ -1,6 +1,6 @@
 import { memo, useState, FC } from 'react';
 import SideNav from 'components/layout/side-nav/SideNav';
-import Dashboard from 'components/pages/dashboard/Dashboard';
+import { Outlet } from 'react-router-dom';
 import BgImage from './bg-image/BgImage';
 import TopHeader from './top-header/TopHeader';
 
@@ -23,7 +23,7 @@ const Layout: FC = () => {
           <TopHeader setToggleNav={setToggleNav} />
         </header>
         <div className="page _full overflow-hidden grow my-6 px-6">
-          <Dashboard />
+          <Outlet />
         </div>
       </section>
     </main>

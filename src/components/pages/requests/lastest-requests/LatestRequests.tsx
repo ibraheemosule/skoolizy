@@ -3,7 +3,7 @@ import { BaseText, BoldText } from 'components/reusables/ui/text';
 
 import RequestCard from '../../../reusables/request-card/RequestCard';
 
-const LatestRequests = () => (
+const Requests = () => (
   <div className="mt-8 md:mt-0">
     <div className="flex justify-between">
       <BoldText>Latest Requests</BoldText>
@@ -23,4 +23,4 @@ const LatestRequests = () => (
   </div>
 );
 
-export default memo(LatestRequests);
+export default memo(Requests);
