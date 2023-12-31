@@ -2,9 +2,9 @@ import { memo } from 'react';
 import CustomField from 'components/reusables/custom-field/CustomField';
 
 const Login = () => (
-  <div className="flex h-screen flex-1">
-    <div className="flex w-full xlg:w-1/2 shrink-0 flex-col justify-center px-4 py-12">
-      <div className="mx-auto w-full max-w-sm lg:w-96">
+  <div className="h-screen _full flex mx-auto max-w-6xl">
+    <div className="flex w-full xlg:w-1/2 flex-col justify-center">
+      <div className="mx-auto w-full max-w-sm xlg:w-96">
         <div className="tx">
           <img
             className="h-10 w-auto"
@@ -143,11 +143,11 @@ const Login = () => (
         </div>
       </div>
     </div>
-    <div className="relative hidden w-1/2 xlg:block">
+    <div className="hidden w-1/2 xlg:block">
       <img
-        className="absolute inset-0 h-full w-full object-cover"
-        src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
-        alt=""
+        className="h-full w-full object-contain"
+        src="https://res.cloudinary.com/ibraheemsulay/image/upload/v1703696961/wepik-export-202312262013541Fhh_itg0vo.png"
+        alt="login"
       />
     </div>
   </div>

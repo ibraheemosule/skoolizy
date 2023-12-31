@@ -84,7 +84,9 @@ const NonEditable = memo(
         onBlur={blur}
         tabIndex={0}
         ref={elementRef}
-        className="appearance-none outline-none w-full cursor-pointer"
+        className={`appearance-none outline-none w-full cursor-pointer ${
+          typeof children === 'string' ? 'p-2' : ''
+        }`}
       >
         {children}
       </div>
@@ -150,7 +152,7 @@ const DropdownWrapper = memo(
   ({ children, dropdownRef }: Partial<DropdownWrapperPropsType>) => (
     <div
       ref={dropdownRef}
-      className="dropdown hidden dropdown absolute text-center cursor-pointer mt-1 shadow top-[100%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
+      className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-1 shadow top-[100%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
     >
       {children}
     </div>
@@ -165,7 +167,7 @@ const Dropdown = memo(
       onClick={onClick}
       className={`${
         typeof children === 'string' && 'p-2'
-      } relative bg-white hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
+      } relative bg-white  hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
     >
       {children}
     </div>
