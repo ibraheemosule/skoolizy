@@ -20,8 +20,8 @@ const Rate = () => {
   return (
     <>
       <BoldText>Rate Someone</BoldText>
-      <div className="flex flex-wrap gap-8 gap-y-3 mt-3">
-        <div className="grow max-w-[250px]">
+      <div className="flex justify-between flex-wrap gap-4 gap-y-3 mt-3">
+        <div className="grow max-w-[180px]">
           <CustomField>
             <>
               <CustomField.Editable

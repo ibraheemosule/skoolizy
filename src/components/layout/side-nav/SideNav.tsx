@@ -10,7 +10,7 @@ const SideNav = () => (
   >
     <div className="shrink-0 flex items-center gap-4 _full">
       <i className="fa fa-phone fa-3x" />
-      <Heading1>Classify</Heading1>
+      <Heading1>Skoolizy</Heading1>
     </div>
     <div className="grow overflow-y-auto pb-8">
       <PrimaryMenu />

@@ -10,7 +10,7 @@ const Hero = () => (
   <div className="mt-8">
     <Carousel>
       <>
-        <div className="item ">
+        <div className="item">
           <Card className="bg-purple.light p-6 ">
             <Heading1>Announnts</Heading1>
             <BaseText className="mt-2 text-gray-500 font-light">
@@ -19,7 +19,7 @@ const Hero = () => (
             <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
           </Card>
         </div>
-        <div className="item ">
+        <div className="item">
           <Card className="bg-purple.light p-6 ">
             <Heading1>Announcementdffads</Heading1>
             <BaseText className="mt-2 text-gray-500 font-light">
@@ -28,7 +28,7 @@ const Hero = () => (
             <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
           </Card>
         </div>
-        <div className="item ">
+        <div className="item">
           <Card className="bg-purple.light p-6 ">
             <Heading1>Auncemedfjnts</Heading1>
             <BaseText className="mt-2 text-gray-500 font-light">

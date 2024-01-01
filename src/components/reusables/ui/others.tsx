@@ -15,7 +15,7 @@ export const Circle = memo(
 Circle.displayName = 'Circle';
 
 export const Card = memo(({ children, className }: IBaseProp) => (
-  <div className={`rounded-2xl ${className}`}>{children}</div>
+  <div className={`rounded-xl ${className}`}>{children}</div>
 ));
 Card.displayName = 'Card';
 

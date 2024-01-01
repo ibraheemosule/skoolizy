@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { BaseText, BoldText, SmallText } from 'components/reusables/ui/text';
+import { BaseText, BoldText, MiniText } from 'components/reusables/ui/text';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 import Send from 'src/assets/icons/SendIcon';
 import IconCard from 'components/reusables/icon-card/IconCard';
@@ -40,8 +40,8 @@ const Highlights = () => (
                 <div className="flex w-full justify-between">
                   <BoldText>Mr John Doe</BoldText>
                   <div className="ml-auto text-gray-500">
-                    <SmallText>02/10/23</SmallText>
-                    <SmallText>1:00pm</SmallText>
+                    <MiniText>02/10/23</MiniText>
+                    <MiniText>1:00pm</MiniText>
                   </div>
                 </div>
                 <BaseText className="text-sm w-full">

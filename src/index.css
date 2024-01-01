@@ -24,6 +24,10 @@ body {
   .modal {
     background-color: rgba(0, 0, 0, 0.5);
     @apply z-10 h-screen w-full top-0 left-0 absolute;
+
+    @media (min-width: 768px) {
+      background-color: transparent !important;
+    }
   }
 
   .animate-out,
@@ -73,4 +77,8 @@ body {
     animation-duration: 0.75s;
     animation-fill-mode: forwards;
   }
+}
+
+.nav-item.active {
+  @apply before:absolute before:block before:content-[''] before:bg-brown.dark before:w-[10px] before:left-0 before:h-full before:rounded-tr-xl before:rounded-br-xl;
 }

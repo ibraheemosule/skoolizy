@@ -1,6 +1,8 @@
 import { FC, ReactElement, memo } from 'react';
 import TwitterIcon from 'src/assets/icons/TwitterIcon';
 import LinkedinIcon from 'src/assets/icons/LinkedinIcon';
+import { NavLink } from 'react-router-dom';
+import { BoldText, SmallText } from '../ui/text';
 
 const iconList = {
   twitter: TwitterIcon,
@@ -8,12 +10,12 @@ const iconList = {
 } as Record<string, FC>;
 
 const UserCard = ({ children }: { children: ReactElement }) => (
-  <li>{children}</li>
+  <li className="max-w-[10rem]">{children}</li>
 );
 
 const Image = memo(({ src }: { src: string }) => (
   <img
-    className="mx-auto h-32 w-32 md:h-48 md:w-48  rounded-full"
+    className="mx-auto h-32 w-32 md:h-40 md:w-40 rounded-full"
     src={src}
     alt=""
   />
@@ -31,10 +33,13 @@ const User = memo(
     children?: ReactElement;
   }) => (
     <>
-      <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight">
-        {user}
-      </h3>
-      <p className="text-sm leading-6 text-gray-600">{role}</p>
+      <BoldText className="text-gray-500 mt-6 leading-7 tracking-tight">
+        <NavLink to="/" className="hover:text-purple.dark">
+          {user}
+        </NavLink>
+      </BoldText>
+
+      <SmallText>{role}</SmallText>
       {children ? (
         <div className="mt-3 flex justify-center gap-x-6">{children}</div>
       ) : null}
