@@ -5,7 +5,7 @@ import Login from 'components/pages/Login/Login';
 import Requests from 'components/pages/requests/Requests';
 import Teachers from 'components/pages/teachers/Teachers';
 import Students from 'components/pages/students/Students';
-import Classrooms from 'components/pages/classrooms/Classrooms';
+import Classroom from 'components/pages/classroom/Classroom';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       { path: 'requests', element: <Requests /> },
       { path: 'teachers', element: <Teachers /> },
       { path: 'students', element: <Students /> },
-      { path: 'classrooms', element: <Classrooms /> },
+      { path: 'classroom', element: <Classroom /> },
     ],
   },
   { path: '/login', element: <Login /> },
