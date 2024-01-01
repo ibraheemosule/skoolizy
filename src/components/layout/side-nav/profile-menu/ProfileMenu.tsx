@@ -5,9 +5,9 @@ const ProfileMenu = () => (
   <Menu>
     <Menu.Title>More Options</Menu.Title>
     <Menu.Wrapper>
-      <Menu.Item>My Profile</Menu.Item>
-      <Menu.Item>Settings</Menu.Item>
-      <Menu.Item>Sign out</Menu.Item>
+      <Menu.Item link="/">My Profile</Menu.Item>
+      <Menu.Item link="/">Settings</Menu.Item>
+      <Menu.Item link="/">Sign out</Menu.Item>
     </Menu.Wrapper>
   </Menu>
 );

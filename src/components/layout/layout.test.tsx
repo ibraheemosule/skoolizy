@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { screen, render, act } from '@testing-library/react';
 import Layout from './Layout';
@@ -8,7 +9,11 @@ describe('testing the side nav animation', () => {
   let navWrapper: HTMLElement;
 
   beforeEach(async () => {
-    render(<Layout />);
+    render(
+      <MemoryRouter>
+        <Layout />
+      </MemoryRouter>
+    );
     menuBtn = await screen.findByTestId('menu-btn');
     navWrapper = await screen.findByTestId('nav-wrapper');
   });
