@@ -6,7 +6,7 @@ const navs = {
   requests: 'requests',
   teachers: 'teachers',
   students: 'students',
-  classes: 'classes',
+  classrooms: 'classrooms',
   subjects: 'subjects',
   highlights: 'highlights',
   records: 'records',
