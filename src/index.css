@@ -82,3 +82,7 @@ body {
 .nav-item.active {
   @apply before:absolute before:block before:content-[''] before:bg-brown.dark before:w-[10px] before:left-0 before:h-full before:rounded-tr-xl before:rounded-br-xl;
 }
+
+.classroom-nav.active {
+  @apply rounded-t-md bg-brown.dark text-white;
+}

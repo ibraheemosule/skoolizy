@@ -13,9 +13,13 @@ module.exports = {
   ],
   overrides: [
     {
-      env: { node: true },
+      env: {
+        node: true,
+      },
       files: ['.eslintrc.{js,cjs}'],
-      parserOptions: { sourceType: 'script' },
+      parserOptions: {
+        sourceType: 'script',
+      },
     },
   ],
   parser: '@typescript-eslint/parser',
@@ -27,6 +31,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'operator-linebreak': 0,
     'react/button-has-type': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'react/jsx-props-no-spreading': [
@@ -53,6 +58,15 @@ module.exports = {
     '@typescript-eslint/comma-dangle': 0,
     'react/function-component-definition': 0,
     'react/require-default-props': 0,
-    'object-curly-newline': ['error', { multiline: true }],
+    'object-curly-newline': [
+      'error',
+      {
+        ObjectExpression: 'always',
+        ObjectPattern: {
+          multiline: true,
+        },
+        ImportDeclaration: 'never',
+      },
+    ],
   },
 };

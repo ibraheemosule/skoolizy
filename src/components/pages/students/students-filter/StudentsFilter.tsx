@@ -9,7 +9,7 @@ const TeachersFilter = () => (
       <div className="mt-1">
         <CustomField>
           <>
-            <CustomField.NonEditable>None</CustomField.NonEditable>
+            <CustomField.NonEditable>Unset</CustomField.NonEditable>
             <CustomField.DropdownWrapper>
               <CustomField.Dropdown>Approved</CustomField.Dropdown>
               <CustomField.Dropdown>Rejected</CustomField.Dropdown>
@@ -24,20 +24,21 @@ const TeachersFilter = () => (
       <div className="mt-1">
         <CustomField>
           <>
-            <CustomField.NonEditable>In Request</CustomField.NonEditable>
+            <CustomField.NonEditable>Unset</CustomField.NonEditable>
             <CustomField.DropdownWrapper>
-              <CustomField.Dropdown>here</CustomField.Dropdown>
+              <CustomField.Dropdown>Male</CustomField.Dropdown>
+              <CustomField.Dropdown>Female</CustomField.Dropdown>
             </CustomField.DropdownWrapper>
           </>
         </CustomField>
       </div>
     </div>
     <div>
-      <BoldText>Filter By:</BoldText>
+      <BoldText>Sort By:</BoldText>
       <div className="mt-1">
         <CustomField>
           <>
-            <CustomField.NonEditable>None</CustomField.NonEditable>
+            <CustomField.NonEditable>Unset</CustomField.NonEditable>
             <CustomField.DropdownWrapper>
               <CustomField.Dropdown>
                 Highest to Lowest Grades
@@ -45,6 +46,23 @@ const TeachersFilter = () => (
               <CustomField.Dropdown>
                 Lowest to Highest Grades
               </CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
+          </>
+        </CustomField>
+      </div>
+    </div>
+    <div>
+      <BoldText>Ratings:</BoldText>
+      <div className="mt-1">
+        <CustomField>
+          <>
+            <CustomField.NonEditable>Unset</CustomField.NonEditable>
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown>0 &gt; 1</CustomField.Dropdown>
+              <CustomField.Dropdown>1 &gt; 2</CustomField.Dropdown>
+              <CustomField.Dropdown>2 &gt; 3</CustomField.Dropdown>
+              <CustomField.Dropdown>3 &gt; 4</CustomField.Dropdown>
+              <CustomField.Dropdown>4 &gt; 5</CustomField.Dropdown>
             </CustomField.DropdownWrapper>
           </>
         </CustomField>

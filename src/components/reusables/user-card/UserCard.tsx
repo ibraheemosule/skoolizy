@@ -15,7 +15,7 @@ const UserCard = ({ children }: { children: ReactElement }) => (
 
 const Image = memo(({ src }: { src: string }) => (
   <img
-    className="mx-auto h-32 w-32 md:h-40 md:w-40 rounded-full"
+    className="mx-auto h-32 w-32 md:h-40 md:w-40 bg-gray-200 rounded-full"
     src={src}
     alt=""
   />
@@ -27,19 +27,30 @@ const User = memo(
     user,
     role,
     children,
+    rating,
   }: {
     user: string;
     role: string;
     children?: ReactElement;
+    rating?: number;
   }) => (
     <>
       <BoldText className="text-gray-500 mt-6 leading-7 tracking-tight">
-        <NavLink to="/" className="hover:text-purple.dark">
+        <NavLink to="/" className=" hover:text-purple.dark">
           {user}
         </NavLink>
       </BoldText>
 
-      <SmallText>{role}</SmallText>
+      <SmallText>
+        <NavLink to="/" className="hover:text-purple.dark">
+          {role}
+        </NavLink>
+      </SmallText>
+      {typeof rating === 'number' ? (
+        <SmallText className="font-semibold text-gray-500  mt-1">
+          {rating} Rating
+        </SmallText>
+      ) : null}
       {children ? (
         <div className="mt-3 flex justify-center gap-x-6">{children}</div>
       ) : null}
