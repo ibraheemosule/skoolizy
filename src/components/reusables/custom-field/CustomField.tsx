@@ -71,13 +71,13 @@ const Icon = ({
   </button>
 );
 
-type NonEditableType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
+type NonEditableType = Partial<ChildProp> & {
   children?: ReactNode;
 };
 
 // props elementRef, focus, blur comes from the CustomField component above
 const NonEditable = memo(
-  ({ elementRef, focus, blur, children }: NonEditableType) => (
+  ({ elementRef, focus, blur, children, dropdownRef }: NonEditableType) => (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
       <div className="absolute -top-full w-full flex gap-3 overflow-x-auto">
         <Tag>
@@ -112,13 +112,23 @@ const NonEditable = memo(
             ))
           : children}
       </div>
-      <Icon onClick={focus} />
+      <Icon
+        onClick={() => {
+          if (
+            window
+              .getComputedStyle(dropdownRef!.current!)
+              .getPropertyValue('display') === 'none'
+          ) {
+            focus?.();
+          }
+        }}
+      />
     </div>
   )
 );
 NonEditable.displayName = 'NonEditable';
 
-type FieldPropsType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
+type FieldPropsType = Partial<ChildProp> & {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | number;
   search?: boolean;
@@ -140,6 +150,7 @@ const Editable = memo(
     icon,
     id,
     placeholder,
+    dropdownRef,
   }: FieldPropsType) => (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
       <input
@@ -159,7 +170,21 @@ const Editable = memo(
         }`}
       />
 
-      {icon ? <Icon search={search} onClick={focus} /> : null}
+      {icon ? (
+        <Icon
+          search={search}
+          onClick={() => {
+            if (
+              dropdownRef?.current &&
+              window
+                .getComputedStyle(dropdownRef.current)
+                .getPropertyValue('display') === 'none'
+            ) {
+              focus?.();
+            }
+          }}
+        />
+      ) : null}
     </div>
   )
 );
