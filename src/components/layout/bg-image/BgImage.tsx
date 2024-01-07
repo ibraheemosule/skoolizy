@@ -4,7 +4,7 @@ const BgImg = () => (
   <div className="fixed -z-10 grid inset-0 place-items-center">
     <img
       src="src/assets/images/layout.png"
-      className=" aspect-square object-contain opacity-[0.02]"
+      className=" aspect-square object-contain opacity-[0.03]"
       alt="school logo"
     />
   </div>

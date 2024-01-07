@@ -18,7 +18,7 @@ const Rate = () => {
   };
 
   return (
-    <div className="mt-8">
+    <div>
       <BoldText>Rate Someone</BoldText>
       <div className="flex flex-wrap gap-8 gap-y-3 mt-3">
         <div className="grow max-w-[250px]">

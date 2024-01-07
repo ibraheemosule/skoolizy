@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'object-curly-newline': 0,
     'operator-linebreak': 0,
     'react/button-has-type': 0,
     'jsx-a11y/label-has-associated-control': 0,
@@ -42,6 +43,9 @@ module.exports = {
         explicitSpread: 'enforce',
       },
     ],
+    '@typescript-eslint/indent': 0,
+    'react/jsx-indent': 0,
+    'no-nested-ternary': 0,
     'no-console': 0,
     'react/jsx-curly-newline': 0,
     'function-paren-newline': 0,
@@ -58,15 +62,5 @@ module.exports = {
     '@typescript-eslint/comma-dangle': 0,
     'react/function-component-definition': 0,
     'react/require-default-props': 0,
-    'object-curly-newline': [
-      'error',
-      {
-        ObjectExpression: 'always',
-        ObjectPattern: {
-          multiline: true,
-        },
-        ImportDeclaration: 'never',
-      },
-    ],
   },
 };

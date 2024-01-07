@@ -5,7 +5,7 @@ import { BoldText } from 'components/reusables/ui/text';
 import CustomField from 'components/reusables/custom-field/CustomField';
 
 const Hero = () => (
-  <div className="">
+  <div className="mb-8">
     <div className="max-w-[150px]">
       <BoldText>Classroom:</BoldText>
       <div className="mt-1">
@@ -32,7 +32,7 @@ const Hero = () => (
       <NavLink className="p-1 classroom-nav shrink-0" to="timetable">
         TimeTable
       </NavLink>
-      <NavLink className="p-1 classroom-nav shrink-0 " to="/">
+      <NavLink className="p-1 classroom-nav shrink-0 " to="record-scores">
         Record Scores
       </NavLink>
       <NavLink className="p-1 classroom-nav shrink-0 " to="/">

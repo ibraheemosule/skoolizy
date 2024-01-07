@@ -13,6 +13,7 @@ import {
 import { IBaseProp } from 'src/ts-types/react-types';
 import SearchIcon from 'src/assets/icons/SearchIcon';
 import AngleDownIcon from 'src/assets/icons/AngleDownIcon';
+import { Tag } from '../ui/others';
 
 interface ChildProp {
   elementRef: RefObject<HTMLDivElement | HTMLInputElement>;
@@ -78,6 +79,14 @@ type NonEditableType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
 const NonEditable = memo(
   ({ elementRef, focus, blur, children }: NonEditableType) => (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
+      <div className="absolute -top-full w-full flex gap-3 overflow-x-auto">
+        <Tag>
+          <>
+            <span>Temitope</span>
+            <button>X</button>
+          </>
+        </Tag>
+      </div>
       <div
         data-testid="custom-select"
         onClick={focus}
@@ -85,10 +94,23 @@ const NonEditable = memo(
         tabIndex={0}
         ref={elementRef}
         className={`appearance-none outline-none w-full cursor-pointer ${
-          typeof children === 'string' ? 'p-2' : ''
+          typeof children === 'string'
+            ? 'p-2'
+            : Array.isArray(children)
+              ? 'flex gap-2 overflow-x-auto'
+              : ''
         }`}
       >
-        {children}
+        {Array.isArray(children)
+          ? children.map((child) => (
+              <Tag key={Math.random()}>
+                <>
+                  <span>{child}</span>
+                  <button>X</button>
+                </>
+              </Tag>
+            ))
+          : children}
       </div>
       <Icon onClick={focus} />
     </div>
@@ -98,7 +120,7 @@ NonEditable.displayName = 'NonEditable';
 
 type FieldPropsType = Partial<Omit<ChildProp, 'dropdownRef'>> & {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  value?: string | number;
   search?: boolean;
   type?: string;
   icon?: boolean;

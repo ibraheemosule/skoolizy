@@ -31,7 +31,7 @@ const SideHeaderTable = ({
   content: Record<string, ReactNode[]>;
   editable?: boolean;
 }) => (
-  <div className="relative bg-purple.light rounded-xl mt-8 overflow-hidden">
+  <div className="relative bg-purple.light rounded-xl overflow-hidden">
     <div className=" overflow-x-scroll overflow-y-visible max-w-full ml-[150px] sm:ml-[200px]">
       <table className=" table-fixed border-collapse w-full">
         {topHeaders ? <TopHeader headers={topHeaders} /> : null}
