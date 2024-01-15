@@ -12,27 +12,28 @@ const Hero = () => (
       <>
         <div className="item">
           <Card className="bg-purple.light p-6 ">
-            <Heading1>Announnts</Heading1>
+            <Heading1>Examination Information</Heading1>
             <BaseText className="mt-2 text-gray-500 font-light">
-              Upload a Prescription and Tell Us what you Need. We do the Rest!
+              Exam commences on the 31st of June, 2024
             </BaseText>
             <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
           </Card>
         </div>
         <div className="item">
           <Card className="bg-purple.light p-6 ">
-            <Heading1>Announcementdffads</Heading1>
+            <Heading1>Next PTA meeting</Heading1>
             <BaseText className="mt-2 text-gray-500 font-light">
-              Upload a Prescription and Tell Us what you Need. We do the Rest!
+              Our PTA meeting comes up on the 31st of August, 2024. Guardians
+              are advised to be present
             </BaseText>
             <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
           </Card>
         </div>
         <div className="item">
           <Card className="bg-purple.light p-6 ">
-            <Heading1>Auncemedfjnts</Heading1>
+            <Heading1>End of Term</Heading1>
             <BaseText className="mt-2 text-gray-500 font-light">
-              Upload a Prescription and Tell Us what you Need. We do the Rest!
+              The current term ends on the 15th of August, 2024
             </BaseText>
             <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
           </Card>

@@ -13,6 +13,7 @@ import {
 import { IBaseProp } from 'src/ts-types/react-types';
 import SearchIcon from 'src/assets/icons/SearchIcon';
 import AngleDownIcon from 'src/assets/icons/AngleDownIcon';
+import CancelIcon from 'src/assets/icons/CancelIcon';
 import { Tag } from '../ui/others';
 
 interface ChildProp {
@@ -56,7 +57,11 @@ const CustomField = ({ children }: { children: ReactElement }) => {
       })
     );
 
-  return <div className="flex h-full relative">{renderChildren()}</div>;
+  return (
+    <div className="flex h-full relative" onMouseLeave={blur}>
+      {renderChildren()}
+    </div>
+  );
 };
 
 const Icon = ({
@@ -70,63 +75,6 @@ const Icon = ({
     {search ? <SearchIcon size={20} /> : <AngleDownIcon size={20} />}
   </button>
 );
-
-type NonEditableType = Partial<ChildProp> & {
-  children?: ReactNode;
-};
-
-// props elementRef, focus, blur comes from the CustomField component above
-const NonEditable = memo(
-  ({ elementRef, focus, blur, children, dropdownRef }: NonEditableType) => (
-    <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
-      <div className="absolute -top-full w-full flex gap-3 overflow-x-auto">
-        <Tag>
-          <>
-            <span>Temitope</span>
-            <button>X</button>
-          </>
-        </Tag>
-      </div>
-      <div
-        data-testid="custom-select"
-        onClick={focus}
-        onBlur={blur}
-        tabIndex={0}
-        ref={elementRef}
-        className={`appearance-none outline-none w-full cursor-pointer ${
-          typeof children === 'string'
-            ? 'p-2'
-            : Array.isArray(children)
-              ? 'flex gap-2 overflow-x-auto'
-              : ''
-        }`}
-      >
-        {Array.isArray(children)
-          ? children.map((child) => (
-              <Tag key={Math.random()}>
-                <>
-                  <span>{child}</span>
-                  <button>X</button>
-                </>
-              </Tag>
-            ))
-          : children}
-      </div>
-      <Icon
-        onClick={() => {
-          if (
-            window
-              .getComputedStyle(dropdownRef!.current!)
-              .getPropertyValue('display') === 'none'
-          ) {
-            focus?.();
-          }
-        }}
-      />
-    </div>
-  )
-);
-NonEditable.displayName = 'NonEditable';
 
 type FieldPropsType = Partial<ChildProp> & {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -142,7 +90,6 @@ const Editable = memo(
   ({
     elementRef,
     focus,
-    blur,
     onChange,
     type,
     value,
@@ -157,7 +104,6 @@ const Editable = memo(
         data-testid="custom-input"
         {...(id ? { id } : {})}
         onFocus={focus}
-        onBlur={blur}
         onChange={onChange}
         value={value}
         ref={elementRef as RefObject<HTMLInputElement>}
@@ -190,22 +136,55 @@ const Editable = memo(
 );
 Editable.displayName = 'Editable';
 
-type DropdownWrapperPropsType = {
-  dropdownRef: RefObject<HTMLDivElement>;
-  children: ReactNode;
+type NonEditableType = Partial<ChildProp> & {
+  children?: ReactNode;
 };
 
-const DropdownWrapper = memo(
-  ({ children, dropdownRef }: Partial<DropdownWrapperPropsType>) => (
-    <div
-      ref={dropdownRef}
-      className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-1 shadow top-[100%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
-    >
-      {children}
+// props elementRef, focus, blur comes from the CustomField component above
+const NonEditable = memo(
+  ({ elementRef, focus, children, dropdownRef }: NonEditableType) => (
+    <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
+      <div
+        data-testid="custom-select"
+        onClick={focus}
+        tabIndex={0}
+        ref={elementRef}
+        className={`appearance-none outline-none max-w-full cursor-pointer  ${
+          typeof children === 'string'
+            ? 'p-2'
+            : Array.isArray(children)
+              ? 'flex gap-2 overflow-x-auto max-w-full p-2'
+              : ''
+        }`}
+      >
+        {Array.isArray(children)
+          ? children.map((child) => (
+              <Tag key={Math.random()}>
+                <div className="flex">
+                  <span className=" whitespace-nowrap pr-2">{child}</span>
+                  <button onClick={() => console.log('here')}>
+                    <CancelIcon size={16} />
+                  </button>
+                </div>
+              </Tag>
+            ))
+          : children}
+      </div>
+      <Icon
+        onClick={() => {
+          if (
+            window
+              .getComputedStyle(dropdownRef!.current!)
+              .getPropertyValue('display') === 'none'
+          ) {
+            focus?.();
+          }
+        }}
+      />
     </div>
   )
 );
-DropdownWrapper.displayName = 'DropdownWrapper';
+NonEditable.displayName = 'NonEditable';
 
 const Dropdown = memo(
   ({ children, onClick }: IBaseProp & { onClick?: () => void }) => (
@@ -221,6 +200,40 @@ const Dropdown = memo(
   )
 );
 Dropdown.displayName = 'Dropdown';
+
+type DropdownWrapperPropsType = {
+  dropdownRef: RefObject<HTMLDivElement>;
+  children: ReactNode;
+  multiselect: boolean;
+  blur: () => void;
+  elementRef: RefObject<HTMLDivElement>;
+};
+
+const DropdownWrapper = memo(
+  ({
+    children,
+    dropdownRef,
+    multiselect,
+  }: Partial<DropdownWrapperPropsType>) => (
+    <div
+      ref={dropdownRef}
+      className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-1 shadow top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
+    >
+      {multiselect ? (
+        <Dropdown>
+          <div className="p-2 bg-white">
+            <input
+              placeholder="Search"
+              className="dropdown-search rounded-md p-2 outline-none border-0 bg-gray-100"
+            />
+          </div>
+        </Dropdown>
+      ) : null}
+      {children}
+    </div>
+  )
+);
+DropdownWrapper.displayName = 'DropdownWrapper';
 
 CustomField.DropdownWrapper = DropdownWrapper;
 CustomField.Dropdown = Dropdown;

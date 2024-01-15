@@ -43,6 +43,7 @@ module.exports = {
         explicitSpread: 'enforce',
       },
     ],
+    'no-spaced-func': 0,
     '@typescript-eslint/indent': 0,
     'react/jsx-indent': 0,
     'no-nested-ternary': 0,

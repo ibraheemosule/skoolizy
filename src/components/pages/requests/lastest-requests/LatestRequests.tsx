@@ -11,8 +11,10 @@ const Requests = () => (
         <div className="mt-1">
           <CustomField>
             <>
-              <CustomField.NonEditable>None</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
+              <CustomField.NonEditable>
+                {['topeloluwa']}
+              </CustomField.NonEditable>
+              <CustomField.DropdownWrapper multiselect>
                 <CustomField.Dropdown>Approved</CustomField.Dropdown>
                 <CustomField.Dropdown>Rejected</CustomField.Dropdown>
                 <CustomField.Dropdown>Pending</CustomField.Dropdown>
