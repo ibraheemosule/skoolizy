@@ -5,7 +5,7 @@ import { BoldText } from 'components/reusables/ui/text';
 import CustomField from 'components/reusables/custom-field/CustomField';
 
 const Hero = () => (
-  <div className="mb-8">
+  <>
     <div className="max-w-[150px]">
       <BoldText>Classroom:</BoldText>
       <div className="mt-1">
@@ -33,7 +33,7 @@ const Hero = () => (
         TimeTable
       </NavLink>
     </nav>
-  </div>
+  </>
 );
 
 export default memo(Hero);

@@ -149,7 +149,7 @@ const NonEditable = memo(
         onClick={focus}
         tabIndex={0}
         ref={elementRef}
-        className={`appearance-none outline-none max-w-full cursor-pointer  ${
+        className={`appearance-none outline-none max-w-full cursor-pointer  grow ${
           typeof children === 'string'
             ? 'p-2'
             : Array.isArray(children)

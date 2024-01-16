@@ -10,7 +10,7 @@ const Classroom = () => (
         <div className="mx-auto w-full">
           <ClassroomNav />
         </div>
-        <div className="mt-4 pb-8 grow h-[70vh] md:h-auto overflow-auto">
+        <div className="mt-8 pb-8 grow h-[70vh] md:h-auto overflow-auto">
           <Outlet />
         </div>
       </div>
