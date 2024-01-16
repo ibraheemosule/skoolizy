@@ -32,12 +32,6 @@ const Hero = () => (
       <NavLink className="p-1 classroom-nav shrink-0" to="timetable">
         TimeTable
       </NavLink>
-      <NavLink className="p-1 classroom-nav shrink-0 " to="record-scores">
-        Record Scores
-      </NavLink>
-      <NavLink className="p-1 classroom-nav shrink-0 " to="/">
-        Performance
-      </NavLink>
     </nav>
   </div>
 );
