@@ -12,58 +12,49 @@ const RecordGrade = () => (
         <div>
           <BoldText>Classroom:</BoldText>
           <div className="mt-1">
-            <CustomField>
-              <>
-                <CustomField.NonEditable>JSS-1</CustomField.NonEditable>
-                <CustomField.DropdownWrapper>
-                  <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
-                  <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
-                  <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
-                  <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
-                  <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
-                  <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
-                </CustomField.DropdownWrapper>
-              </>
+            <CustomField field="select" value="JSS-1">
+              <CustomField.DropdownWrapper>
+                <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
+                <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
+                <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
+                <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
+                <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
+                <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
+              </CustomField.DropdownWrapper>
             </CustomField>
           </div>
         </div>
         <div>
           <BoldText>Grade Limit:</BoldText>
           <div className="mt-1">
-            <CustomField>
-              <>
-                <CustomField.NonEditable>10</CustomField.NonEditable>
-                <CustomField.DropdownWrapper>
-                  <CustomField.Dropdown>20</CustomField.Dropdown>
-                  <CustomField.Dropdown>30</CustomField.Dropdown>
-                  <CustomField.Dropdown>40</CustomField.Dropdown>
-                  <CustomField.Dropdown>50</CustomField.Dropdown>
-                  <CustomField.Dropdown>60</CustomField.Dropdown>
-                  <CustomField.Dropdown>70</CustomField.Dropdown>
-                  <CustomField.Dropdown>80</CustomField.Dropdown>
-                  <CustomField.Dropdown>90</CustomField.Dropdown>
-                  <CustomField.Dropdown>100</CustomField.Dropdown>
-                </CustomField.DropdownWrapper>
-              </>
+            <CustomField field="select" value="10">
+              <CustomField.DropdownWrapper>
+                <CustomField.Dropdown>20</CustomField.Dropdown>
+                <CustomField.Dropdown>30</CustomField.Dropdown>
+                <CustomField.Dropdown>40</CustomField.Dropdown>
+                <CustomField.Dropdown>50</CustomField.Dropdown>
+                <CustomField.Dropdown>60</CustomField.Dropdown>
+                <CustomField.Dropdown>70</CustomField.Dropdown>
+                <CustomField.Dropdown>80</CustomField.Dropdown>
+                <CustomField.Dropdown>90</CustomField.Dropdown>
+                <CustomField.Dropdown>100</CustomField.Dropdown>
+              </CustomField.DropdownWrapper>
             </CustomField>
           </div>
         </div>
         <div>
           <BoldText>Subject:</BoldText>
           <div className="mt-1">
-            <CustomField>
-              <>
-                <CustomField.NonEditable>Unset</CustomField.NonEditable>
-                <CustomField.DropdownWrapper>
-                  <CustomField.Dropdown>Math</CustomField.Dropdown>
-                  <CustomField.Dropdown>English</CustomField.Dropdown>
-                  <CustomField.Dropdown>Physics</CustomField.Dropdown>
-                  <CustomField.Dropdown>Chemistry</CustomField.Dropdown>
-                  <CustomField.Dropdown>Agric</CustomField.Dropdown>
-                  <CustomField.Dropdown>Biology</CustomField.Dropdown>
-                  <CustomField.Dropdown>Further Math</CustomField.Dropdown>
-                </CustomField.DropdownWrapper>
-              </>
+            <CustomField field="select" value="Unset">
+              <CustomField.DropdownWrapper>
+                <CustomField.Dropdown>Math</CustomField.Dropdown>
+                <CustomField.Dropdown>English</CustomField.Dropdown>
+                <CustomField.Dropdown>Physics</CustomField.Dropdown>
+                <CustomField.Dropdown>Chemistry</CustomField.Dropdown>
+                <CustomField.Dropdown>Agric</CustomField.Dropdown>
+                <CustomField.Dropdown>Biology</CustomField.Dropdown>
+                <CustomField.Dropdown>Further Math</CustomField.Dropdown>
+              </CustomField.DropdownWrapper>
             </CustomField>
           </div>
         </div>
