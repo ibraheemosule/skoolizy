@@ -18,27 +18,31 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
     </button>
     <div className="flex grow gap-4 items-center justify-between">
       <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch">
-        <CustomField>
-          <CustomField.Editable icon search placeholder="Search for anything" />
-        </CustomField>
+        <CustomField
+          field="input"
+          icon
+          search
+          placeholder="Search for anything"
+        />
       </div>
       <div className="shrink-0">
-        <CustomField>
-          <>
-            <CustomField.NonEditable>
-              <div className="flex gap-3 rounded-lg p-1 sm:p-2 items-center">
-                <img
-                  className="rounded-full object-fill w-[30px] h-[30px]"
-                  src="https://picsum.photos/200/300"
-                  alt="avi"
-                />
-                <span>Jack</span>
-              </div>
-            </CustomField.NonEditable>
-            <CustomField.DropdownWrapper>
-              <CustomField.Dropdown>here</CustomField.Dropdown>
-            </CustomField.DropdownWrapper>
-          </>
+        <CustomField
+          field="select"
+          value={
+            // eslint-disable-next-line react/jsx-wrap-multilines
+            <div className="flex gap-3 rounded-lg p-1 sm:p-2 items-center">
+              <img
+                className="rounded-full object-fill w-[30px] h-[30px]"
+                src="https://picsum.photos/200/300"
+                alt="avi"
+              />
+              <span>Jack</span>
+            </div>
+          }
+        >
+          <CustomField.DropdownWrapper>
+            <CustomField.Dropdown>here</CustomField.Dropdown>
+          </CustomField.DropdownWrapper>
         </CustomField>
       </div>
     </div>

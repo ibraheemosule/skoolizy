@@ -9,56 +9,42 @@ const Requests = () => (
       <div>
         <BoldText>Filter By:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>
-                {['topeloluwa']}
-              </CustomField.NonEditable>
-              <CustomField.DropdownWrapper multiselect>
-                <CustomField.Dropdown>Approved</CustomField.Dropdown>
-                <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-                <CustomField.Dropdown>Pending</CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="select" value={['topeloluwa']}>
+            <CustomField.DropdownWrapper multiselect>
+              <CustomField.Dropdown>Approved</CustomField.Dropdown>
+              <CustomField.Dropdown>Rejected</CustomField.Dropdown>
+              <CustomField.Dropdown>Pending</CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
       <div>
         <BoldText>Select Class:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>In Request</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>here</CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="select" value="In Request">
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown>here</CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
-      <div>
+      <div className="w-[150px]">
         <BoldText>From Date:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>In Request</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>here</CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="input" value="Unset" icon>
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown>here</CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
       <div>
         <BoldText>To Date:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>In Request</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>here</CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="select" value="In Request">
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown>here</CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>

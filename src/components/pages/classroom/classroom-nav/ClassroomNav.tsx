@@ -9,18 +9,15 @@ const Hero = () => (
     <div className="max-w-[150px]">
       <BoldText>Classroom:</BoldText>
       <div className="mt-1">
-        <CustomField>
-          <>
-            <CustomField.NonEditable>JSS-1</CustomField.NonEditable>
-            <CustomField.DropdownWrapper>
-              <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
-              <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
-              <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
-              <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
-              <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
-              <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
-            </CustomField.DropdownWrapper>
-          </>
+        <CustomField field="select" value="JSS-1">
+          <CustomField.DropdownWrapper>
+            <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
+            <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
+            <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
+            <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
+            <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
+            <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
+          </CustomField.DropdownWrapper>
         </CustomField>
       </div>
     </div>

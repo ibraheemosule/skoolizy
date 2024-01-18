@@ -23,54 +23,45 @@ const TimeTable = () => {
       <div>
         <BoldText>Classroom:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>JSS-1</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
-                <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
-                <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
-                <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
-                <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
-                <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="select" value="Unset">
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
+              <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
+              <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
+              <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
+              <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
+              <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
       <div>
         <BoldText>Time:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>Unset</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
-                {topHeader.map((t) => (
-                  <CustomField.Dropdown key={Math.random()}>
-                    {t}
-                  </CustomField.Dropdown>
-                ))}
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="select" value="Unset">
+            <CustomField.DropdownWrapper>
+              {topHeader.map((t) => (
+                <CustomField.Dropdown key={Math.random()}>
+                  {t}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
       <div>
         <BoldText>Subject:</BoldText>
         <div className="mt-1">
-          <CustomField>
-            <>
-              <CustomField.NonEditable>Unset</CustomField.NonEditable>
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>Math</CustomField.Dropdown>
-                <CustomField.Dropdown>English</CustomField.Dropdown>
-                <CustomField.Dropdown>Physics</CustomField.Dropdown>
-                <CustomField.Dropdown>Chemistry</CustomField.Dropdown>
-                <CustomField.Dropdown>Agric</CustomField.Dropdown>
-                <CustomField.Dropdown>Biology</CustomField.Dropdown>
-                <CustomField.Dropdown>Further Math</CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField field="select" value="Unset">
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown>Math</CustomField.Dropdown>
+              <CustomField.Dropdown>English</CustomField.Dropdown>
+              <CustomField.Dropdown>Physics</CustomField.Dropdown>
+              <CustomField.Dropdown>Chemistry</CustomField.Dropdown>
+              <CustomField.Dropdown>Agric</CustomField.Dropdown>
+              <CustomField.Dropdown>Biology</CustomField.Dropdown>
+              <CustomField.Dropdown>Further Math</CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
