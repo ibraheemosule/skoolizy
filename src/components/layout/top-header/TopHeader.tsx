@@ -17,12 +17,12 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
       <Menu />
     </button>
     <div className="flex grow gap-4 items-center justify-between">
-      <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch">
+      {/* <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch">
         <CustomField>
           <CustomField.Editable icon search placeholder="Search for anything" />
         </CustomField>
-      </div>
-      <div className="shrink-0">
+      </div> */}
+      <div className="shrink-0 ml-auto">
         <CustomField>
           <>
             <CustomField.NonEditable>
