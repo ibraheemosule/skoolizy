@@ -23,6 +23,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
           icon
           search
           placeholder="Search for anything"
+          onChange={() => null}
         />
       </div>
       <div className="shrink-0">

@@ -6,6 +6,7 @@ import {
   ReactNode,
   useCallback,
   useMemo,
+  useEffect,
 } from 'react';
 import { IBaseProp } from 'src/ts-types/react-types';
 import SearchIcon from 'src/assets/icons/SearchIcon';
@@ -47,16 +48,8 @@ type FieldPropsType = Partial<ChildProp> & {
 };
 
 const Editable = memo(
-  ({
-    onChange,
-    type,
-    value,
-    search,
-    icon,
-    id,
-    placeholder,
-  }: FieldPropsType) => {
-    const { focus, elementRef, dropdownRef } = useCustomFieldContext();
+  ({ type, value, search, icon, id, placeholder }: FieldPropsType) => {
+    const { focus, onChange, filterListFn } = useCustomFieldContext();
 
     return (
       <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
@@ -64,9 +57,11 @@ const Editable = memo(
           data-testid="custom-input"
           {...(id ? { id } : {})}
           onFocus={focus}
-          onChange={onChange}
+          onChange={(e) => {
+            onChange?.(e.target.value);
+            filterListFn?.(e.target.value);
+          }}
           value={value}
-          ref={elementRef as RefObject<HTMLInputElement>}
           type={type ?? (search ? 'search' : 'text')}
           placeholder={placeholder || ''}
           className={`p-2 pl-4 appearance-none outline-none w-full ${
@@ -79,16 +74,16 @@ const Editable = memo(
         {icon ? (
           <Icon
             search={search}
-            onClick={() => {
-              if (
-                dropdownRef?.current &&
-                window
-                  .getComputedStyle(dropdownRef.current)
-                  .getPropertyValue('display') === 'none'
-              ) {
-                focus?.();
-              }
-            }}
+            // onClick={() => {
+            //   if (
+            //     dropdownRef?.current &&
+            //     window
+            //       .getComputedStyle(dropdownRef.current)
+            //       .getPropertyValue('display') === 'none'
+            //   ) {
+            //     focus?.();
+            //   }
+            // }}
           />
         ) : null}
       </div>
@@ -102,15 +97,14 @@ type NonEditableType = {
 };
 
 const NonEditable = memo(({ value }: NonEditableType) => {
-  const { focus, elementRef, dropdownRef } = useCustomFieldContext();
+  const { onSelect } = useCustomFieldContext();
+
   return (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
       <div
         data-testid="custom-select"
-        onClick={focus}
         tabIndex={0}
-        ref={elementRef}
-        className={`appearance-none outline-none max-w-full cursor-pointer  grow ${
+        className={`appearance-none outline-none max-w-full cursor-pointer grow ${
           typeof value === 'string'
             ? 'p-2'
             : Array.isArray(value)
@@ -119,83 +113,108 @@ const NonEditable = memo(({ value }: NonEditableType) => {
         }`}
       >
         {Array.isArray(value)
-          ? value.map((child) => (
-              <Tag key={Math.random()}>
-                <div className="flex">
-                  <span className=" whitespace-nowrap pr-2">{child}</span>
-                  <button onClick={() => console.log('here')}>
-                    <CancelIcon size={16} />
-                  </button>
-                </div>
-              </Tag>
-            ))
-          : value}
+          ? value.length
+            ? value.map((prop) => (
+                <Tag onClick={() => onSelect?.(prop)} key={Math.random()}>
+                  <div className="flex">
+                    <span className=" whitespace-nowrap pr-2">{prop}</span>
+                    <button onClick={() => console.log('here')}>
+                      <CancelIcon width={16} height={16} strokeWidth={3} />
+                    </button>
+                  </div>
+                </Tag>
+              ))
+            : 'Select...'
+          : value || 'Select...'}
       </div>
-      <Icon
-        onClick={() => {
-          if (
-            window
-              .getComputedStyle(dropdownRef!.current!)
-              .getPropertyValue('display') === 'none'
-          ) {
-            focus?.();
-          }
-        }}
-      />
+      <Icon />
     </div>
   );
 });
 NonEditable.displayName = 'NonEditable';
 
-const Dropdown = memo(
-  ({ children, onClick }: IBaseProp & { onClick?: () => void }) => {
-    useCustomFieldContext();
-    return (
-      <div
-        data-testid="dropdown"
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick?.();
-        }}
-        className={`${
-          typeof children === 'string' && 'p-2'
-        } relative bg-white  hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
-      >
-        {children}
-      </div>
+type TDropdown = IBaseProp & {
+  value: string | null;
+};
+
+const Dropdown = memo(({ children, value }: TDropdown) => {
+  const { onSelect, fieldValue } = useCustomFieldContext();
+
+  let dropdownValueIsSelected: boolean;
+  if (Array.isArray(fieldValue)) {
+    dropdownValueIsSelected = fieldValue?.some(
+      (v) => v.toLowerCase() === value?.toLowerCase()
     );
+  } else if (typeof fieldValue === 'string') {
+    dropdownValueIsSelected = fieldValue.toLowerCase() === value?.toLowerCase();
+  } else {
+    dropdownValueIsSelected = !!(value && String(fieldValue).includes(value));
   }
-);
+
+  return (
+    <div
+      data-testid="dropdown"
+      onClick={() => {
+        if (value) onSelect?.(value);
+      }}
+      className={`${typeof children === 'string' && 'p-2'} relative ${
+        dropdownValueIsSelected ? 'bg-gray-100 text-black' : 'bg-white'
+      }  hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
+    >
+      {children}
+    </div>
+  );
+});
 Dropdown.displayName = 'Dropdown';
 
 type DropdownWrapperPropsType = {
-  dropdownRef: RefObject<HTMLDivElement>;
   children: ReactNode;
-  multiselect: boolean;
-  blur: () => void;
-  elementRef: RefObject<HTMLDivElement>;
-};
+  closeOnClick?: boolean;
+} & (
+  | {
+      multiselect: true;
+    }
+  | { multiselect?: false }
+);
 
+const noResult = <Dropdown value={null}> No Result </Dropdown>;
 const DropdownWrapper = memo(
-  ({ children, multiselect }: Partial<DropdownWrapperPropsType>) => {
-    const { dropdownRef, field } = useCustomFieldContext();
+  ({
+    children,
+    multiselect = false,
+    closeOnClick = true,
+  }: DropdownWrapperPropsType) => {
+    const { dropdownRef, field, filterListFn } = useCustomFieldContext();
+
+    // if (!filterListFn && multiselect) {
+    //   throw Error(
+    //     'Pass a filter function of ((arg: string) => void) to filter the dropdown list'
+    //   );
+    // }
+    // if (field === 'input' && multiselect) {
+    //   throw Error('Multiselect prop is invalid for a field  of input');
+    // }
 
     return (
       <div
         ref={dropdownRef}
-        className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-1 shadow top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
+        onClick={(e) => (closeOnClick ? null : e.stopPropagation())}
+        className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-2 shadow top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
       >
-        {field === 'select' && multiselect && (
-          <Dropdown>
-            <div className="p-2 bg-white">
+        {multiselect && field === 'select' && (
+          <Dropdown value={null}>
+            <div className="py-2 px-1 bg-white">
               <input
+                onChange={(e) => filterListFn?.(e.target.value)}
                 placeholder="Search"
-                className="dropdown-search rounded-md p-2 outline-none border-0 bg-gray-100"
+                className="dropdown-search w-full rounded-md p-2 outline-none border-0 bg-gray-100"
               />
             </div>
           </Dropdown>
         )}
-        {children}
+        {Array.isArray(children) && !children.length
+          ? noResult
+          : children || noResult}
       </div>
     );
   }
@@ -204,7 +223,12 @@ DropdownWrapper.displayName = 'DropdownWrapper';
 
 type EditableProp = {
   field: 'input';
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (arg: string) => void;
+  value?: string | number;
+  children?: ReactNode;
+} & {
+  field: 'input';
+  onChange?: (arg: string) => void;
   value?: string | number;
   search?: boolean;
   type?: string;
@@ -215,52 +239,88 @@ type EditableProp = {
 
 type NonEditableProp = {
   field: 'select';
-  value: ReactNode;
-};
+  children: ReactNode;
+  onSelect: (arg: string) => void;
+} & (
+  | {
+      value: string[];
+      filterListFn: (v: string) => void;
+    }
+  | { value: string | JSX.Element }
+);
 
-const CustomField = (
-  props: (EditableProp | NonEditableProp) & { children?: ReactNode }
-) => {
+const CustomField = (props: EditableProp | NonEditableProp) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const toggleDropdown = useRef(false);
 
   const focus = useCallback(() => {
     elementRef.current?.focus();
     if (dropdownRef.current) {
       dropdownRef.current.style.animationName = 'dropdown';
-      dropdownRef.current!.style.display = 'block';
+      dropdownRef.current.style.display = 'block';
     }
   }, []);
 
   const blur = useCallback(() => {
     elementRef.current?.blur();
     if (dropdownRef.current) {
-      dropdownRef.current!.style.animationName = 'close-dropdown';
+      dropdownRef.current.style.animationName = 'close-dropdown';
     }
   }, []);
 
-  const value = useMemo(
+  const toggle = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent) => {
+      if (
+        elementRef.current?.contains(e.target as Node) &&
+        toggleDropdown.current
+      ) {
+        focus();
+      } else blur();
+    },
+    [blur, focus]
+  );
+
+  useEffect(() => {
+    document.addEventListener('click', toggle);
+    return () => {
+      document.removeEventListener('click', toggle);
+    };
+  }, []);
+
+  const contextProps = useMemo(
     () => ({
       blur,
       focus,
       elementRef,
       dropdownRef,
       field: props.field,
+      fieldValue: props.value,
+      ...(props.field === 'select'
+        ? {
+            onSelect: props.onSelect,
+            filterListFn: (
+              props as unknown as { filterListFn: (arg: string) => void }
+            ).filterListFn,
+          }
+        : { onChange: props.onChange }),
     }),
-    [blur, focus, elementRef, dropdownRef, props.field]
+    [props.value]
   );
 
   return (
-    <CustomFieldContext.Provider value={value}>
+    <CustomFieldContext.Provider value={contextProps}>
       <div
         className="flex h-full relative"
-        {...(props.field === 'input' ? { onFocus: focus } : {})}
-        onMouseLeave={blur}
-        onClick={focus}
+        // // {...(props.field === 'input' ? { onFocus: focus } : {})}
+        onClick={() => {
+          toggleDropdown.current = !toggleDropdown.current;
+        }}
+        ref={elementRef}
       >
         {props.field === 'input' && (
           <Editable
-            onChange={props.onChange}
+            onChange={(e) => props.onChange?.(e.target.value)}
             value={props.value}
             search={props.search}
             type={props.type}

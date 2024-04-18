@@ -31,6 +31,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'react-hooks/exhaustive-deps': 0,
+    'react/jsx-wrap-multilines': 0,
     'object-curly-newline': 0,
     'operator-linebreak': 0,
     'react/button-has-type': 0,

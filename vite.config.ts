@@ -9,6 +9,9 @@ export default defineConfig({
     alias: {
       src: '/src',
       components: '/src/components',
+      assets: '/src/assets',
+      router: '/src/router',
+      'ts-types': '/src/ts-types',
     },
   },
 });
