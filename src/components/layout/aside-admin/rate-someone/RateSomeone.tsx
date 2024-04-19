@@ -27,7 +27,7 @@ const Rate = () => {
             search
             onChange={(e) => updateName(e.target.value)}
             value={name}
-            icon
+            icon="search"
             placeholder="Rate Someone"
           >
             <CustomField.DropdownWrapper>

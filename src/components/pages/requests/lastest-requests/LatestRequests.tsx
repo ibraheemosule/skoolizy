@@ -3,8 +3,20 @@ import CustomField from 'components/reusables/custom-field/CustomField';
 import { BoldText } from 'components/reusables/ui/text';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 import Modal from 'components/reusables/modal/Modal';
+import useCustomFieldWithFilter from 'components/reusables/custom-field/useCustomFieldWithFilter';
 import RequestCard from '../../../reusables/request-card/RequestCard';
 import NewRequest from './new-request/NewRequest';
+
+const testing = [
+  'here',
+  'lakd',
+  'kdgjfksf',
+  'bakfko',
+  'giodsfsl',
+  'sdkfjakdf',
+  'qdooaldkf',
+  'ksdadkfjkdfj akfjsklajfkjkfsfoi',
+];
 
 const Filter = () => (
   <>
@@ -13,7 +25,7 @@ const Filter = () => (
       <div className="mt-1">
         <CustomField
           field="input"
-          icon
+          icon="caretDown"
           search
           placeholder="Search Request Title"
           onChange={() => null}
@@ -43,7 +55,7 @@ const Filter = () => (
     <div className="mt-4">
       <BoldText>From Date:</BoldText>
       <div className="mt-1">
-        <CustomField field="input" value="Unset" icon>
+        <CustomField field="input" value="Unset" icon="caretDown">
           <CustomField.DropdownWrapper>
             <CustomField.Dropdown>here</CustomField.Dropdown>
           </CustomField.DropdownWrapper>
@@ -105,16 +117,13 @@ const Requests = () => {
   const [modal, setModal] = useState('');
   const [classs, setClasss] = useState('');
   const [user, setUser] = useState<string[]>([]);
-  const [names, setNames] = useState([
-    'here',
-    'lakd',
-    'kdgjfksf',
-    'bakfko',
-    'giodsfsl',
-    'sdkfjakdf',
-    'qdooaldkf',
-    'ksdadkfjkdfj akfjsklajfkjkfsfoi',
-  ]);
+  const [names, setNames] = useState([...testing]);
+  const [value, setValue, list, filterFn] = useCustomFieldWithFilter<string[]>(
+    [],
+    [...testing]
+  );
+  const [date, setDate, dateList, dateListFilterFn] =
+    useCustomFieldWithFilter<string>('', [...testing]);
 
   const addUser = (u: string) => {
     console.log(user, u);
@@ -156,7 +165,26 @@ const Requests = () => {
           <BoldText>Filter By:</BoldText>
           <div className="mt-1">
             <CustomField
-              filterListFn={filterList}
+              filterFn={filterFn}
+              onSelect={setValue}
+              field="select"
+              value={value}
+            >
+              <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+                {list.map((name) => (
+                  <CustomField.Dropdown key={name} value={name}>
+                    {name}
+                  </CustomField.Dropdown>
+                ))}
+              </CustomField.DropdownWrapper>
+            </CustomField>
+          </div>
+        </div>
+        <div>
+          <BoldText>Filter By:</BoldText>
+          <div className="mt-1">
+            <CustomField
+              filterFn={filterList}
               onSelect={addUser}
               field="select"
               value={user}
@@ -192,9 +220,19 @@ const Requests = () => {
         <div className="w-[150px]">
           <BoldText>From Date:</BoldText>
           <div className="mt-1">
-            <CustomField field="input" value="Unset" icon>
+            <CustomField
+              field="input"
+              filterFn={dateListFilterFn}
+              onChange={setDate}
+              value={date}
+              icon="caretDown"
+            >
               <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>here</CustomField.Dropdown>
+                {dateList.map((name) => (
+                  <CustomField.Dropdown key={name} value={name}>
+                    {name}
+                  </CustomField.Dropdown>
+                ))}
               </CustomField.DropdownWrapper>
             </CustomField>
           </div>
@@ -202,7 +240,7 @@ const Requests = () => {
         <div>
           <BoldText>To Date:</BoldText>
           <div className="mt-1">
-            <CustomField field="select" value="In Request">
+            <CustomField onSelect={setValue} field="select" value="In Request">
               <CustomField.DropdownWrapper>
                 <CustomField.Dropdown>here</CustomField.Dropdown>
               </CustomField.DropdownWrapper>

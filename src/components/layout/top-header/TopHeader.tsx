@@ -20,7 +20,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
       <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch">
         <CustomField
           field="input"
-          icon
+          icon="search"
           search
           placeholder="Search for anything"
           onChange={() => null}
@@ -30,7 +30,6 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
         <CustomField
           field="select"
           value={
-            // eslint-disable-next-line react/jsx-wrap-multilines
             <div className="flex gap-3 rounded-lg p-1 sm:p-2 items-center">
               <img
                 className="rounded-full object-fill w-[30px] h-[30px]"

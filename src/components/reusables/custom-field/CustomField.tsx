@@ -2,102 +2,86 @@
 import {
   memo,
   useRef,
-  RefObject,
   ReactNode,
   useCallback,
   useMemo,
   useEffect,
+  Children,
+  isValidElement,
+  FC,
 } from 'react';
 import { IBaseProp } from 'src/ts-types/react-types';
-import SearchIcon from 'src/assets/icons/SearchIcon';
-import AngleDownIcon from 'src/assets/icons/AngleDownIcon';
 import CancelIcon from 'src/assets/icons/CancelIcon';
+import Icon from 'src/assets/icons';
 import {
   useCustomFieldContext,
   CustomFieldContext,
 } from './useCustomFieldContext';
 import { Tag } from '../ui/others';
 
-interface ChildProp {
-  elementRef: RefObject<HTMLDivElement | HTMLInputElement>;
-  dropdownRef: RefObject<HTMLDivElement>;
-  focus: () => void;
-  blur: () => void;
-}
+// interface ChildProp {
+//   elementRef: RefObject<HTMLDivElement | HTMLInputElement>;
+//   dropdownRef: RefObject<HTMLDivElement>;
+//   focus: () => void;
+//   blur: () => void;
+// }
 
-const Icon = ({
-  search,
-  onClick,
-}: {
-  search?: boolean;
-  onClick?: () => void;
-}) => (
-  <button onClick={onClick} className="inline-block mr-2">
-    {search ? <SearchIcon size={20} /> : <AngleDownIcon size={20} />}
-  </button>
-);
+// type FieldPropsType = Partial<ChildProp> & {
+//   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+//   value?: string | number;
+//   search?: boolean;
+//   type?: string;
+//   icon?: 'search' | 'caretDown';
+//   id?: string;
+//   placeholder?: string;
+// };
 
-type FieldPropsType = Partial<ChildProp> & {
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number;
-  search?: boolean;
-  type?: string;
-  icon?: boolean;
-  id?: string;
-  placeholder?: string;
-};
+const Editable = memo(() => {
+  const {
+    focus,
+    onChange,
+    filterFn,
+    value,
+    type,
+    id,
+    search,
+    placeholder,
+    icon,
+  } = useCustomFieldContext();
 
-const Editable = memo(
-  ({ type, value, search, icon, id, placeholder }: FieldPropsType) => {
-    const { focus, onChange, filterListFn } = useCustomFieldContext();
+  return (
+    <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
+      <input
+        data-testid="custom-input"
+        {...(id && { id })}
+        onFocus={focus}
+        onChange={(e) => {
+          onChange?.(e.target.value);
+          filterFn?.(e.target.value);
+        }}
+        value={value}
+        type={type ?? (search ? 'search' : 'text')}
+        placeholder={placeholder || 'Search...'}
+        className={`p-2 pl-4 appearance-none outline-none w-full ${
+          !search && typeof search === 'boolean'
+            ? 'cursor-pointer'
+            : 'cursor-text'
+        }`}
+      />
 
-    return (
-      <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
-        <input
-          data-testid="custom-input"
-          {...(id ? { id } : {})}
-          onFocus={focus}
-          onChange={(e) => {
-            onChange?.(e.target.value);
-            filterListFn?.(e.target.value);
-          }}
-          value={value}
-          type={type ?? (search ? 'search' : 'text')}
-          placeholder={placeholder || ''}
-          className={`p-2 pl-4 appearance-none outline-none w-full ${
-            !search && typeof search === 'boolean'
-              ? 'cursor-pointer'
-              : 'cursor-text'
-          }`}
-        />
-
-        {icon ? (
-          <Icon
-            search={search}
-            // onClick={() => {
-            //   if (
-            //     dropdownRef?.current &&
-            //     window
-            //       .getComputedStyle(dropdownRef.current)
-            //       .getPropertyValue('display') === 'none'
-            //   ) {
-            //     focus?.();
-            //   }
-            // }}
-          />
-        ) : null}
-      </div>
-    );
-  }
-);
+      {icon && (
+        <span className=" mr-1">
+          <Icon height={20} width={20} name={icon} />
+        </span>
+      )}
+    </div>
+  );
+});
 Editable.displayName = 'Editable';
 
-type NonEditableType = {
-  value: ReactNode;
-};
-
-const NonEditable = memo(({ value }: NonEditableType) => {
-  const { onSelect } = useCustomFieldContext();
+const NonEditable = memo(() => {
+  const { onSelect, value } = useCustomFieldContext();
+  const placeholder = <span className="text-gray-400">Select...</span>;
 
   return (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
@@ -124,10 +108,12 @@ const NonEditable = memo(({ value }: NonEditableType) => {
                   </div>
                 </Tag>
               ))
-            : 'Select...'
-          : value || 'Select...'}
+            : placeholder
+          : value || placeholder}
       </div>
-      <Icon />
+      <span className=" mr-1">
+        <Icon height={20} width={20} name="caretDown" />
+      </span>
     </div>
   );
 });
@@ -138,7 +124,7 @@ type TDropdown = IBaseProp & {
 };
 
 const Dropdown = memo(({ children, value }: TDropdown) => {
-  const { onSelect, fieldValue } = useCustomFieldContext();
+  const { onSelect, value: fieldValue } = useCustomFieldContext();
 
   let dropdownValueIsSelected: boolean;
   if (Array.isArray(fieldValue)) {
@@ -177,23 +163,33 @@ type DropdownWrapperPropsType = {
   | { multiselect?: false }
 );
 
-const noResult = <Dropdown value={null}> No Result </Dropdown>;
 const DropdownWrapper = memo(
   ({
     children,
     multiselect = false,
     closeOnClick = true,
   }: DropdownWrapperPropsType) => {
-    const { dropdownRef, field, filterListFn } = useCustomFieldContext();
+    const { dropdownRef, field, filterFn } = useCustomFieldContext();
 
-    // if (!filterListFn && multiselect) {
-    //   throw Error(
-    //     'Pass a filter function of ((arg: string) => void) to filter the dropdown list'
-    //   );
-    // }
-    // if (field === 'input' && multiselect) {
-    //   throw Error('Multiselect prop is invalid for a field  of input');
-    // }
+    Children.toArray(children).forEach((child: React.ReactNode) => {
+      if (!isValidElement(child)) {
+        throw Error('only DropdownWrapper allowed as children');
+      }
+      if ((child.type as FC).displayName !== 'Dropdown') {
+        throw Error('only Dropdown allowed as children');
+      }
+    });
+
+    if (!filterFn && multiselect) {
+      throw Error(
+        'Pass a filter function of ((arg: string) => void) to filter the dropdown list'
+      );
+    }
+    if (field === 'input' && multiselect) {
+      throw Error('Multiselect prop is invalid for a field  of input');
+    }
+
+    const noResult = <Dropdown value={null}> No Result </Dropdown>;
 
     return (
       <div
@@ -205,7 +201,7 @@ const DropdownWrapper = memo(
           <Dropdown value={null}>
             <div className="py-2 px-1 bg-white">
               <input
-                onChange={(e) => filterListFn?.(e.target.value)}
+                onChange={(e) => filterFn?.(e.target.value)}
                 placeholder="Search"
                 className="dropdown-search w-full rounded-md p-2 outline-none border-0 bg-gray-100"
               />
@@ -221,21 +217,26 @@ const DropdownWrapper = memo(
 );
 DropdownWrapper.displayName = 'DropdownWrapper';
 
-type EditableProp = {
+type EditableCommonProp = {
   field: 'input';
-  onChange?: (arg: string) => void;
-  value?: string | number;
-  children?: ReactNode;
-} & {
-  field: 'input';
-  onChange?: (arg: string) => void;
-  value?: string | number;
+  onChange: (arg: string) => void;
+  value: string;
   search?: boolean;
   type?: string;
-  icon?: boolean;
+  icon?: 'search' | 'caretDown';
   id?: string;
   placeholder?: string;
+  children?: JSX.Element;
 };
+
+type EditableProp =
+  | ({
+      children: JSX.Element;
+      filterFn: (v: string) => void;
+    } & EditableCommonProp)
+  | ({
+      children?: never;
+    } & EditableCommonProp);
 
 type NonEditableProp = {
   field: 'select';
@@ -244,15 +245,29 @@ type NonEditableProp = {
 } & (
   | {
       value: string[];
-      filterListFn: (v: string) => void;
+      filterFn: (v: string) => void;
     }
-  | { value: string | JSX.Element }
+  | { value: string; filterFn?: never }
 );
 
 const CustomField = (props: EditableProp | NonEditableProp) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = useRef(false);
+
+  const childProp = (props.children
+    ? Children.toArray(props.children)
+    : []) as unknown as [ReactNode];
+
+  if (childProp?.length > 1) {
+    throw Error('Component can only have one DropdownWrapper as children');
+  }
+  if (
+    isValidElement(childProp[0]) &&
+    (childProp[0].type as FC).displayName !== 'DropdownWrapper'
+  ) {
+    throw Error('only DropdownWrapper allowed as children');
+  }
 
   const focus = useCallback(() => {
     elementRef.current?.focus();
@@ -266,6 +281,7 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
     elementRef.current?.blur();
     if (dropdownRef.current) {
       dropdownRef.current.style.animationName = 'close-dropdown';
+      toggleDropdown.current = false;
     }
   }, []);
 
@@ -295,15 +311,20 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
       elementRef,
       dropdownRef,
       field: props.field,
-      fieldValue: props.value,
+      value: props.value,
       ...(props.field === 'select'
         ? {
             onSelect: props.onSelect,
-            filterListFn: (
-              props as unknown as { filterListFn: (arg: string) => void }
-            ).filterListFn,
+            filterFn: props.filterFn,
           }
-        : { onChange: props.onChange }),
+        : {
+            placeholder: props.placeholder,
+            search: props.search,
+            type: props.type,
+            id: props.id,
+            onChange: props.onChange,
+            ...(props.children && { filterFn: props.filterFn }),
+          }),
     }),
     [props.value]
   );
@@ -314,24 +335,13 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
         className="flex h-full relative"
         // // {...(props.field === 'input' ? { onFocus: focus } : {})}
         onClick={() => {
-          toggleDropdown.current = !toggleDropdown.current;
+          toggleDropdown.current =
+            props.field === 'select' ? !toggleDropdown.current : true;
         }}
         ref={elementRef}
       >
-        {props.field === 'input' && (
-          <Editable
-            onChange={(e) => props.onChange?.(e.target.value)}
-            value={props.value}
-            search={props.search}
-            type={props.type}
-            icon={props.icon}
-            id={props.id}
-            placeholder={props.placeholder}
-          />
-        )}
-        {props.field === 'select' && (
-          <NonEditable value={props.value as string | number} />
-        )}
+        {props.field === 'input' && <Editable />}
+        {props.field === 'select' && <NonEditable />}
 
         {props.children}
       </div>
