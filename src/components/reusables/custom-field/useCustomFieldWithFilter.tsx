@@ -8,7 +8,6 @@ const useCustomFieldWithFilter = <T extends string | string[]>(
   const [filteredList, setFilteredList] = useState(list);
 
   const filterFn = (arg: string) => {
-    console.log(arg, 'here');
     setFilteredList(() =>
       list.filter((v) => v.toLowerCase().includes(arg.toLowerCase()))
     );
@@ -19,15 +18,16 @@ const useCustomFieldWithFilter = <T extends string | string[]>(
       updateValue(v as T);
       return;
     }
+
     if (value.includes(v as string)) {
       updateValue(
         (prev) =>
-          (prev as unknown as string[]).filter((v) =>
-            (v as string)
-              .toLowerCase()
-              .includes((value as unknown as string).toLowerCase())
+          (prev as unknown as string[]).filter(
+            (state) =>
+              (state as string).toLowerCase() !== (v as string).toLowerCase()
           ) as T
       );
+      return;
     }
     updateValue((prev: T) => [...prev, v] as T);
   };

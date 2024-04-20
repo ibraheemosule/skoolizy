@@ -19,23 +19,6 @@ import {
 } from './useCustomFieldContext';
 import { Tag } from '../ui/others';
 
-// interface ChildProp {
-//   elementRef: RefObject<HTMLDivElement | HTMLInputElement>;
-//   dropdownRef: RefObject<HTMLDivElement>;
-//   focus: () => void;
-//   blur: () => void;
-// }
-
-// type FieldPropsType = Partial<ChildProp> & {
-//   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-//   value?: string | number;
-//   search?: boolean;
-//   type?: string;
-//   icon?: 'search' | 'caretDown';
-//   id?: string;
-//   placeholder?: string;
-// };
-
 const Editable = memo(() => {
   const {
     focus,
@@ -46,7 +29,7 @@ const Editable = memo(() => {
     id,
     search,
     placeholder,
-    icon,
+    icon = filterFn ? 'caretDown' : 'search',
   } = useCustomFieldContext();
 
   return (
@@ -69,7 +52,7 @@ const Editable = memo(() => {
         }`}
       />
 
-      {icon && (
+      {icon && type !== 'date' && (
         <span className=" mr-1">
           <Icon height={20} width={20} name={icon} />
         </span>
@@ -100,11 +83,9 @@ const NonEditable = memo(() => {
           ? value.length
             ? value.map((prop) => (
                 <Tag onClick={() => onSelect?.(prop)} key={Math.random()}>
-                  <div className="flex">
+                  <div className="flex items-center">
                     <span className=" whitespace-nowrap pr-2">{prop}</span>
-                    <button onClick={() => console.log('here')}>
-                      <CancelIcon width={16} height={16} strokeWidth={3} />
-                    </button>
+                    <CancelIcon width={16} height={16} strokeWidth={3} />
                   </div>
                 </Tag>
               ))
@@ -124,7 +105,7 @@ type TDropdown = IBaseProp & {
 };
 
 const Dropdown = memo(({ children, value }: TDropdown) => {
-  const { onSelect, value: fieldValue } = useCustomFieldContext();
+  const { onSelect, value: fieldValue, onChange } = useCustomFieldContext();
 
   let dropdownValueIsSelected: boolean;
   if (Array.isArray(fieldValue)) {
@@ -141,7 +122,7 @@ const Dropdown = memo(({ children, value }: TDropdown) => {
     <div
       data-testid="dropdown"
       onClick={() => {
-        if (value) onSelect?.(value);
+        if (value) (onSelect || onChange)?.(value);
       }}
       className={`${typeof children === 'string' && 'p-2'} relative ${
         dropdownValueIsSelected ? 'bg-gray-100 text-black' : 'bg-white'
@@ -218,7 +199,7 @@ const DropdownWrapper = memo(
 DropdownWrapper.displayName = 'DropdownWrapper';
 
 type EditableCommonProp = {
-  field: 'input';
+  field: 'input' | 'date';
   onChange: (arg: string) => void;
   value: string;
   search?: boolean;
@@ -236,6 +217,7 @@ type EditableProp =
     } & EditableCommonProp)
   | ({
       children?: never;
+      filterFn?: never;
     } & EditableCommonProp);
 
 type NonEditableProp = {
@@ -320,8 +302,9 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
         : {
             placeholder: props.placeholder,
             search: props.search,
-            type: props.type,
+            type: props.field === 'date' ? 'date' : props.type,
             id: props.id,
+            icon: props.icon,
             onChange: props.onChange,
             ...(props.children && { filterFn: props.filterFn }),
           }),
@@ -333,14 +316,13 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
     <CustomFieldContext.Provider value={contextProps}>
       <div
         className="flex h-full relative"
-        // // {...(props.field === 'input' ? { onFocus: focus } : {})}
         onClick={() => {
           toggleDropdown.current =
             props.field === 'select' ? !toggleDropdown.current : true;
         }}
         ref={elementRef}
       >
-        {props.field === 'input' && <Editable />}
+        {['input', 'date'].includes(props.field) && <Editable />}
         {props.field === 'select' && <NonEditable />}
 
         {props.children}

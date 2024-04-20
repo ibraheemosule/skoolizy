@@ -5,7 +5,7 @@ export const CustomFieldContext = createContext<{
   blur: () => void;
   elementRef: RefObject<HTMLDivElement | HTMLInputElement>;
   dropdownRef: RefObject<HTMLDivElement>;
-  field: 'input' | 'select';
+  field: 'input' | 'select' | 'date';
   type?: string;
   icon?: 'search' | 'caretDown';
   id?: string;

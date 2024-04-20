@@ -126,7 +126,6 @@ const Requests = () => {
     useCustomFieldWithFilter<string>('', [...testing]);
 
   const addUser = (u: string) => {
-    console.log(user, u);
     if (user.includes(u)) {
       setUser((use) => use.filter((us) => us !== u));
       return;
@@ -135,11 +134,7 @@ const Requests = () => {
   };
 
   const filterList = (val: string) => {
-    console.log(val);
-    setNames((prev) => {
-      console.log(prev, 'ehre');
-      return prev.filter((v) => v.includes(val));
-    });
+    setNames((prev) => prev.filter((v) => v.includes(val)));
   };
 
   return (
@@ -161,6 +156,18 @@ const Requests = () => {
         />
       )}
       <div className="flex flex-wrap gap-8 gap-y-4 mt-8">
+        <div>
+          <BoldText>Filter By:</BoldText>
+          <div className="mt-1">
+            <CustomField
+              // filterFn={filterFn}
+              onChange={setDate}
+              field="date"
+              value={date}
+            />
+          </div>
+        </div>
+
         <div>
           <BoldText>Filter By:</BoldText>
           <div className="mt-1">
