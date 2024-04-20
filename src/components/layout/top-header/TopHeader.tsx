@@ -22,7 +22,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => (
           <CustomField.Editable icon search placeholder="Search for anything" />
         </CustomField>
       </div>
-      <div className="shrink-0">
+      <div className="shrink-0 ml-auto">
         <CustomField>
           <>
             <CustomField.NonEditable>
