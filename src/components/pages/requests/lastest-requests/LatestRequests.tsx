@@ -111,7 +111,7 @@ const Filter = () => {
             value={date}
             icon="caretDown"
           >
-            <CustomField.DropdownWrapper closeOnClick={false}>
+            <CustomField.DropdownWrapper>
               {dateList.map((name) => (
                 <CustomField.Dropdown key={name} value={name}>
                   {name}

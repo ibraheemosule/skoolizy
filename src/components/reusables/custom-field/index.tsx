@@ -314,9 +314,14 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
     <CustomFieldContext.Provider value={contextProps}>
       <div
         className="flex h-full relative"
-        onClick={() => {
-          toggleDropdown.current =
-            props.field === 'select' ? !toggleDropdown.current : true;
+        onClick={(e) => {
+          if (props.field === 'select') {
+            toggleDropdown.current = !toggleDropdown.current;
+            return;
+          }
+          if (dropdownRef.current?.contains(e.target as Node)) {
+            toggleDropdown.current = false;
+          } else toggleDropdown.current = true;
         }}
         ref={elementRef}
       >
