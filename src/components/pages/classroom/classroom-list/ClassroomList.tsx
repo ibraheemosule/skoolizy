@@ -2,7 +2,7 @@ import { memo } from 'react';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import { NavLink } from 'react-router-dom';
 import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 
 const Hero = () => (
   <>

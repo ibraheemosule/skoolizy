@@ -38,15 +38,15 @@ const Modal: FC<TModal> = ({ close, action, title, content, actionText }) => {
         </header>
         <main className="my-6 min-w-[280px] max-w-[80vw] max-h-[65vh] overflow-y-auto">
           {content}
+          {action && (
+            <ActionBtn
+              onClick={() => action()}
+              className="mt-4 px-4 py-2 w-full text-purple.dark hover:opacity-50"
+            >
+              {actionText || 'Submit'}
+            </ActionBtn>
+          )}
         </main>
-        {action && (
-          <ActionBtn
-            onClick={() => action()}
-            className="px-4 py-2 w-full text-purple.dark hover:opacity-50"
-          >
-            {actionText || 'Submit'}
-          </ActionBtn>
-        )}
       </div>
     </div>
   );

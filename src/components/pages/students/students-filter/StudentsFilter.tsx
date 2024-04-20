@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 
 const TeachersFilter = () => (
   <>

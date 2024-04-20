@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 
 const NewRequest = () => (

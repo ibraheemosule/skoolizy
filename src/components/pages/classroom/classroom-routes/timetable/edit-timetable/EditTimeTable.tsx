@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 import { ActionBtn, DeleteBtn } from 'components/reusables/ui/buttons';
 
 const topHeader = [

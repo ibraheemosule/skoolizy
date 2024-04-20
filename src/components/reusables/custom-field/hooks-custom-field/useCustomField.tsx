@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-const useCustomFieldWithFilter = <T extends string | string[]>(
+const useCustomField = <T extends string | string[]>(
   initialValue: T,
-  list: string[]
+  dropDownist: string[]
 ) => {
+  const list = useRef([...dropDownist]);
   const [value, updateValue] = useState(initialValue);
-  const [filteredList, setFilteredList] = useState(list);
+  const [filteredList, setFilteredList] = useState([...dropDownist]);
 
   const filterFn = (arg: string) => {
     setFilteredList(() =>
-      list.filter((v) => v.toLowerCase().includes(arg.toLowerCase()))
+      list.current.filter((v) => v.toLowerCase().includes(arg.toLowerCase()))
     );
   };
 
@@ -35,4 +36,4 @@ const useCustomFieldWithFilter = <T extends string | string[]>(
   return [value, setValue, filteredList, filterFn] as const;
 };
 
-export default useCustomFieldWithFilter;
+export default useCustomField;

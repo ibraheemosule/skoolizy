@@ -16,12 +16,11 @@ import Icon from 'src/assets/icons';
 import {
   useCustomFieldContext,
   CustomFieldContext,
-} from './useCustomFieldContext';
+} from './hooks-custom-field/useCustomFieldContext';
 import { Tag } from '../ui/others';
 
 const Editable = memo(() => {
   const {
-    focus,
     onChange,
     filterFn,
     value,
@@ -37,7 +36,6 @@ const Editable = memo(() => {
       <input
         data-testid="custom-input"
         {...(id && { id })}
-        onFocus={focus}
         onChange={(e) => {
           onChange?.(e.target.value);
           filterFn?.(e.target.value);

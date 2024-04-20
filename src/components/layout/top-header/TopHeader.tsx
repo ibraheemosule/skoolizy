@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
 import Menu from 'src/assets/icons/MenuIcon';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 
 interface ITopHeader {
   setToggleNav: Dispatch<SetStateAction<boolean>>;

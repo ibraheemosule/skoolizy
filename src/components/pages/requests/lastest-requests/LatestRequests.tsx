@@ -1,9 +1,9 @@
 import { memo, useState } from 'react';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 import { BoldText } from 'components/reusables/ui/text';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 import Modal from 'components/reusables/modal/Modal';
-import useCustomFieldWithFilter from 'components/reusables/custom-field/useCustomFieldWithFilter';
+import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
 import RequestCard from '../../../reusables/request-card/RequestCard';
 import NewRequest from './new-request/NewRequest';
 
@@ -18,112 +18,126 @@ const testing = [
   'ksdadkfjkdfj akfjsklajfkjkfsfoi',
 ];
 
-const Filter = () => (
-  <>
-    <div>
-      <BoldText>Request Title:</BoldText>
-      <div className="mt-1">
-        <CustomField
-          field="input"
-          icon="caretDown"
-          search
-          placeholder="Search Request Title"
-          onChange={() => null}
-        />
+const Filter = () => {
+  const [classs, setClasss] = useState('');
+  const [user, setUser] = useState<string[]>([]);
+  const [names, setNames] = useState([...testing]);
+  const [value, setValue, list, filterFn] = useCustomField<string[]>(
+    [],
+    testing
+  );
+  const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
+    '',
+    [...testing]
+  );
+
+  const addUser = (u: string) => {
+    if (user.includes(u)) {
+      setUser((use) => use.filter((us) => us !== u));
+      return;
+    }
+    setUser([...user, u]);
+  };
+
+  const filterList = (val: string) => {
+    setNames((prev) => prev.filter((v) => v.includes(val)));
+  };
+
+  return (
+    <>
+      <div>
+        <BoldText>Filter By:</BoldText>
+        <div className="mt-1">
+          <CustomField
+            filterFn={filterFn}
+            onSelect={setValue}
+            field="select"
+            value={value}
+          >
+            <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+              {list.map((name) => (
+                <CustomField.Dropdown key={name} value={name}>
+                  {name}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
       </div>
-    </div>
-    <div className="mt-4">
-      <BoldText>Requester:</BoldText>
-      <CustomField field="select" value={['topeloluwa']}>
-        <CustomField.DropdownWrapper multiselect>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-        </CustomField.DropdownWrapper>
-      </CustomField>
-    </div>
-    <div className="mt-4">
-      <BoldText>Class:</BoldText>
-      <div className="mt-1">
-        <CustomField field="select" value="In Request">
-          <CustomField.DropdownWrapper>
-            <CustomField.Dropdown>here</CustomField.Dropdown>
-          </CustomField.DropdownWrapper>
-        </CustomField>
+      <div className="mt-4">
+        <BoldText>Filter By:</BoldText>
+        <div className="mt-1">
+          <CustomField
+            filterFn={filterList}
+            onSelect={addUser}
+            field="select"
+            value={user}
+          >
+            <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+              {names.map((name) => (
+                <CustomField.Dropdown key={name} value={name}>
+                  {name}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
       </div>
-    </div>
-    <div className="mt-4">
-      <BoldText>From Date:</BoldText>
-      <div className="mt-1">
-        <CustomField field="input" value="Unset" icon="caretDown">
-          <CustomField.DropdownWrapper>
-            <CustomField.Dropdown>here</CustomField.Dropdown>
-          </CustomField.DropdownWrapper>
-        </CustomField>
+      <div className="mt-4">
+        <BoldText>Select Class:</BoldText>
+        <div className="mt-1">
+          <CustomField
+            onSelect={(v) => setClasss(v)}
+            field="select"
+            value={classs}
+          >
+            <CustomField.DropdownWrapper>
+              {names.map((name) => (
+                <CustomField.Dropdown key={name} value={name}>
+                  {name}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
       </div>
-    </div>
-    <div className="mt-4">
-      <BoldText>To Date:</BoldText>
-      <div className="mt-1">
-        <CustomField field="select" value="In Request">
-          <CustomField.DropdownWrapper>
-            <CustomField.Dropdown>here</CustomField.Dropdown>
-          </CustomField.DropdownWrapper>
-        </CustomField>
+      <div className="mt-4">
+        <BoldText>From Date:</BoldText>
+        <div className="mt-1">
+          <CustomField
+            field="input"
+            filterFn={dateListFilterFn}
+            onChange={setDate}
+            value={date}
+            icon="caretDown"
+          >
+            <CustomField.DropdownWrapper closeOnClick={false}>
+              {dateList.map((name) => (
+                <CustomField.Dropdown key={name} value={name}>
+                  {name}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
       </div>
-    </div>
-    <div className="mt-4">
-      <BoldText>Requester:</BoldText>
-      <CustomField field="select" value={['topeloluwa']}>
-        <CustomField.DropdownWrapper multiselect>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-          <CustomField.Dropdown>Approved</CustomField.Dropdown>
-          <CustomField.Dropdown>Rejected</CustomField.Dropdown>
-          <CustomField.Dropdown>Pending</CustomField.Dropdown>
-        </CustomField.DropdownWrapper>
-      </CustomField>
-    </div>
-    <div className="mt-4">
-      <BoldText>To Date:</BoldText>
-      <div className="mt-1">
-        <CustomField field="select" value="In Request">
-          <CustomField.DropdownWrapper>
-            <CustomField.Dropdown>here</CustomField.Dropdown>
-          </CustomField.DropdownWrapper>
-        </CustomField>
-      </div>
-    </div>
-  </>
-);
+    </>
+  );
+};
 
 const Requests = () => {
   const [modal, setModal] = useState('');
   const [classs, setClasss] = useState('');
   const [user, setUser] = useState<string[]>([]);
   const [names, setNames] = useState([...testing]);
-  const [value, setValue, list, filterFn] = useCustomFieldWithFilter<string[]>(
+  const [value, setValue, list, filterFn] = useCustomField<string[]>(
     [],
+    testing
+  );
+  const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
+    '',
     [...testing]
   );
-  const [date, setDate, dateList, dateListFilterFn] =
-    useCustomFieldWithFilter<string>('', [...testing]);
 
   const addUser = (u: string) => {
     if (user.includes(u)) {
@@ -159,12 +173,7 @@ const Requests = () => {
         <div>
           <BoldText>Filter By:</BoldText>
           <div className="mt-1">
-            <CustomField
-              // filterFn={filterFn}
-              onChange={setDate}
-              field="date"
-              value={date}
-            />
+            <CustomField onChange={setDate} field="date" value={date} />
           </div>
         </div>
 
@@ -240,16 +249,6 @@ const Requests = () => {
                     {name}
                   </CustomField.Dropdown>
                 ))}
-              </CustomField.DropdownWrapper>
-            </CustomField>
-          </div>
-        </div>
-        <div>
-          <BoldText>To Date:</BoldText>
-          <div className="mt-1">
-            <CustomField onSelect={setValue} field="select" value="In Request">
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown>here</CustomField.Dropdown>
               </CustomField.DropdownWrapper>
             </CustomField>
           </div>

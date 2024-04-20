@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
 import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 import ScoreBoard from './score-board/ScoreBoard';
 

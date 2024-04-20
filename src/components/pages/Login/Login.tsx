@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 
 const Login = () => (
   <div className="h-screen _full flex mx-auto max-w-6xl">
@@ -36,7 +36,7 @@ const Login = () => (
                   Email address
                 </label>
                 <div className="mt-2">
-                  <CustomField.Editable type="email" id="email" />
+                  <CustomField type="email" id="email" />
                 </div>
               </div>
 
