@@ -1,19 +1,18 @@
 import { memo, useState } from 'react';
 import { BoldText } from 'components/reusables/ui/text';
 import CustomField from 'components/reusables/custom-field';
+import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
 import StarRatings from 'components/reusables/star-ratings/StarRatings';
 
 const Rate = () => {
-  const [name, setName] = useState('');
+  const [user, setUser, list, filterFn] = useCustomField(
+    [],
+    ['Joshua', 'John', 'Maryam']
+  );
   const [rating, setRating] = useState(0);
 
-  function updateName(value: string) {
-    setName(value);
-    setRating(0);
-  }
-
   const starClicked = (i: number) => {
-    if (!name) return;
+    if (!user.length) return;
     setRating(i);
   };
 
@@ -23,26 +22,17 @@ const Rate = () => {
       <div className="flex justify-between flex-wrap gap-4 gap-y-3 mt-3">
         <div className="grow max-w-[180px]">
           <CustomField
-            field="input"
-            search
-            onChange={(e) => updateName(e.target.value)}
-            value={name}
-            icon="search"
-            placeholder="Rate Someone"
+            field="select"
+            filterFn={filterFn}
+            onSelect={setUser}
+            value={user}
           >
             <CustomField.DropdownWrapper>
-              <CustomField.Dropdown onClick={() => updateName('john')}>
-                john
-              </CustomField.Dropdown>
-              <CustomField.Dropdown onClick={() => updateName('bob')}>
-                bob
-              </CustomField.Dropdown>
-              <CustomField.Dropdown onClick={() => updateName('joshua')}>
-                joshua
-              </CustomField.Dropdown>
-              <CustomField.Dropdown onClick={() => updateName('Zarah')}>
-                Zarah
-              </CustomField.Dropdown>
+              {list.map((v) => (
+                <CustomField.Dropdown key={v} value={v}>
+                  {v}
+                </CustomField.Dropdown>
+              ))}
             </CustomField.DropdownWrapper>
           </CustomField>
         </div>

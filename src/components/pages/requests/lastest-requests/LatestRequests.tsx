@@ -54,7 +54,7 @@ const Filter = () => {
             field="select"
             value={value}
           >
-            <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+            <CustomField.DropdownWrapper>
               {list.map((name) => (
                 <CustomField.Dropdown key={name} value={name}>
                   {name}
@@ -73,7 +73,7 @@ const Filter = () => {
             field="select"
             value={user}
           >
-            <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+            <CustomField.DropdownWrapper>
               {names.map((name) => (
                 <CustomField.Dropdown key={name} value={name}>
                   {name}
@@ -186,7 +186,7 @@ const Requests = () => {
               field="select"
               value={value}
             >
-              <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+              <CustomField.DropdownWrapper>
                 {list.map((name) => (
                   <CustomField.Dropdown key={name} value={name}>
                     {name}
@@ -205,7 +205,7 @@ const Requests = () => {
               field="select"
               value={user}
             >
-              <CustomField.DropdownWrapper multiselect closeOnClick={false}>
+              <CustomField.DropdownWrapper>
                 {names.map((name) => (
                   <CustomField.Dropdown key={name} value={name}>
                     {name}

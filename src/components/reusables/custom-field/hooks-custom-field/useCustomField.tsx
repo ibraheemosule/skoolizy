@@ -18,7 +18,7 @@ import { useRef, useState } from 'react';
 
 const useCustomField = <T extends string | string[]>(
   initialValue: T,
-  dropDownist: string[]
+  dropDownist: string[] = []
 ) => {
   const list = useRef([...dropDownist]);
   const [value, updateValue] = useState(initialValue);

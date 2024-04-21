@@ -7,9 +7,9 @@ export const CustomFieldContext = createContext<{
   dropdownRef: RefObject<HTMLDivElement>;
   field: 'input' | 'select' | 'date';
   type?: string;
-  icon?: 'search' | 'caretDown';
+  icon?: null | 'search' | 'caretDown';
   id?: string;
-  value: string | string[];
+  value: string | string[] | JSX.Element;
   placeholder?: string;
   search?: boolean;
   filterFn?: (v: string) => void;

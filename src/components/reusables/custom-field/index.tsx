@@ -40,7 +40,7 @@ const Editable = memo(() => {
           onChange?.(e.target.value);
           filterFn?.(e.target.value);
         }}
-        value={value}
+        value={value as string}
         type={type ?? (search ? 'search' : 'text')}
         placeholder={placeholder || 'Search...'}
         className={`p-2 pl-4 appearance-none outline-none w-full ${
@@ -133,22 +133,14 @@ const Dropdown = memo(({ children, value }: TDropdown) => {
 Dropdown.displayName = 'Dropdown';
 
 type DropdownWrapperPropsType = {
-  children: ReactNode;
+  children: React.ReactElement[];
   closeOnClick?: boolean;
-} & (
-  | {
-      multiselect: true;
-    }
-  | { multiselect?: false }
-);
+};
 
 const DropdownWrapper = memo(
-  ({
-    children,
-    multiselect = false,
-    closeOnClick = true,
-  }: DropdownWrapperPropsType) => {
-    const { dropdownRef, field, filterFn } = useCustomFieldContext();
+  ({ children, closeOnClick = true }: DropdownWrapperPropsType) => {
+    const { dropdownRef, filterFn, value } = useCustomFieldContext();
+    const multiselect = Array.isArray(value);
 
     Children.toArray(children).forEach((child: React.ReactNode) => {
       if (!isValidElement(child)) {
@@ -164,19 +156,14 @@ const DropdownWrapper = memo(
         'Pass a filter function of ((arg: string) => void) to filter the dropdown list'
       );
     }
-    if (field === 'input' && multiselect) {
-      throw Error('Multiselect prop is invalid for a field  of input');
-    }
-
-    const noResult = <Dropdown value={null}> No Result </Dropdown>;
 
     return (
       <div
         ref={dropdownRef}
-        onClick={(e) => (closeOnClick ? null : e.stopPropagation())}
+        onClick={(e) => (!closeOnClick || multiselect) && e.stopPropagation()}
         className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-2 shadow top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
       >
-        {multiselect && field === 'select' && (
+        {multiselect && (
           <Dropdown value={null}>
             <div className="py-2 px-1 bg-white">
               <input
@@ -187,9 +174,11 @@ const DropdownWrapper = memo(
             </div>
           </Dropdown>
         )}
-        {Array.isArray(children) && !children.length
-          ? noResult
-          : children || noResult}
+        {children?.length ? (
+          children
+        ) : (
+          <Dropdown value={null}> No Result </Dropdown>
+        )}
       </div>
     );
   }
@@ -202,7 +191,7 @@ type EditableCommonProp = {
   value: string;
   search?: boolean;
   type?: string;
-  icon?: 'search' | 'caretDown';
+  icon?: null | 'search' | 'caretDown';
   id?: string;
   placeholder?: string;
   children?: JSX.Element;
@@ -227,7 +216,7 @@ type NonEditableProp = {
       value: string[];
       filterFn: (v: string) => void;
     }
-  | { value: string; filterFn?: never }
+  | { value: JSX.Element | string; filterFn?: never }
 );
 
 const CustomField = (props: EditableProp | NonEditableProp) => {
