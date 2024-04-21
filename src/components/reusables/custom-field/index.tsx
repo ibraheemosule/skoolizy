@@ -31,11 +31,14 @@ const Editable = memo(() => {
     icon = filterFn ? 'caretDown' : 'search',
   } = useCustomFieldContext();
 
+  const dateTypes = ['month', 'week', 'date'];
+
   return (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
       <input
         data-testid="custom-input"
         {...(id && { id })}
+        autoComplete="true"
         onChange={(e) => {
           onChange?.(e.target.value);
           filterFn?.(e.target.value);
@@ -50,7 +53,7 @@ const Editable = memo(() => {
         }`}
       />
 
-      {icon && type !== 'date' && (
+      {icon && !dateTypes.includes(type || '') && (
         <span className=" mr-1">
           <Icon height={20} width={20} name={icon} />
         </span>

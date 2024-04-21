@@ -1,36 +1,46 @@
-import { memo } from 'react';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import { NavLink } from 'react-router-dom';
 import { BoldText } from 'components/reusables/ui/text';
 import CustomField from 'components/reusables/custom-field';
+import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
 
-const Hero = () => (
-  <>
-    <div className="max-w-[150px]">
-      <BoldText>Classroom:</BoldText>
-      <div className="mt-1">
-        <CustomField field="select" value="JSS-1">
-          <CustomField.DropdownWrapper>
-            <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
-            <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
-            <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
-            <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
-            <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
-            <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
-          </CustomField.DropdownWrapper>
-        </CustomField>
+const ClassroomList = () => {
+  const [classroom, setClassroom, classroomList] = useCustomField('', [
+    'JSS-1',
+    'JSS-2',
+    'JSS-3',
+    'SSS-1',
+    'SSS-2',
+    'SSS-3',
+  ]);
+
+  return (
+    <>
+      <div className="max-w-[150px]">
+        <BoldText>Classroom:</BoldText>
+        <div className="mt-1">
+          <CustomField value={classroom} onSelect={setClassroom} field="select">
+            <CustomField.DropdownWrapper>
+              {classroomList.map((sub) => (
+                <CustomField.Dropdown key={sub} value={sub}>
+                  {sub}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
       </div>
-    </div>
-    <nav className="classrooms-nav  mt-8 flex border-b overflow-x-auto border-gray-300 gap-4">
-      <NavLink className="p-1 classroom-nav shrink-0" to="stats">
-        Stats
-      </NavLink>
+      <nav className="classrooms-nav  mt-8 flex border-b overflow-x-auto border-gray-300 gap-4">
+        <NavLink className="p-1 classroom-nav shrink-0" to="stats">
+          Stats
+        </NavLink>
 
-      <NavLink className="p-1 classroom-nav shrink-0" to="timetable">
-        TimeTable
-      </NavLink>
-    </nav>
-  </>
-);
+        <NavLink className="p-1 classroom-nav shrink-0" to="timetable">
+          TimeTable
+        </NavLink>
+      </nav>
+    </>
+  );
+};
 
-export default memo(Hero);
+export default ClassroomList;

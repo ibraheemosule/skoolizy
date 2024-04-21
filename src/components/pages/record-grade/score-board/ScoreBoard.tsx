@@ -17,7 +17,12 @@ const content = [
 const formatContent = content.map(([v, s]) => [
   v,
   <div key={Math.random()} className="w-[70px] mx-auto">
-    <CustomField field="input" value={s} />
+    <CustomField
+      onChange={(v: string) => v}
+      icon={null}
+      field="input"
+      value={String(s)}
+    />
   </div>,
 ]);
 
