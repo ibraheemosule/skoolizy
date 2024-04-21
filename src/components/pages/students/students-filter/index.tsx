@@ -23,7 +23,7 @@ const StudentFilter = () => {
   return (
     <>
       <div>
-        <BoldText>Class:</BoldText>
+        <BoldText>Classroom:</BoldText>
         <div className="mt-1">
           <CustomField value={classroom} onSelect={setClassroom} field="select">
             <CustomField.DropdownWrapper>

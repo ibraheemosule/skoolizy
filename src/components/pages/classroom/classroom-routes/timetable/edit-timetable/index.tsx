@@ -2,8 +2,9 @@ import { memo, useState } from 'react';
 import { BoldText } from 'components/reusables/ui/text';
 import CustomField from 'components/reusables/custom-field';
 import { ActionBtn, DeleteBtn } from 'components/reusables/ui/buttons';
+import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
 
-const topHeader = [
+const periodList = [
   '8-9',
   '9-10',
   '10-11',
@@ -17,32 +18,46 @@ const topHeader = [
 
 const TimeTable = () => {
   const [edit, setEdit] = useState(false);
+  const [classroom, setClassroom, classroomList] = useCustomField('', [
+    'JSS-1',
+    'JSS-2',
+    'JSS-3',
+    'SSS-1',
+    'SSS-2',
+    'SSS-3',
+  ]);
+  const [subject, setSubject, subjectList] = useCustomField('', [
+    'English',
+    'Math',
+    'Biology',
+  ]);
+
+  const [period, setPeriod] = useCustomField('');
 
   return edit ? (
     <div className="flex justify-start flex-wrap gap-x-8 gap-y-4">
       <div>
         <BoldText>Classroom:</BoldText>
         <div className="mt-1">
-          <CustomField field="select" value="Unset">
+          <CustomField value={classroom} onSelect={setClassroom} field="select">
             <CustomField.DropdownWrapper>
-              <CustomField.Dropdown>JSS-1</CustomField.Dropdown>
-              <CustomField.Dropdown>JSS-2</CustomField.Dropdown>
-              <CustomField.Dropdown>JSS-3</CustomField.Dropdown>
-              <CustomField.Dropdown>SSS-1</CustomField.Dropdown>
-              <CustomField.Dropdown>SSS-2</CustomField.Dropdown>
-              <CustomField.Dropdown>SSS-3</CustomField.Dropdown>
+              {classroomList.map((sub) => (
+                <CustomField.Dropdown key={sub} value={sub}>
+                  {sub}
+                </CustomField.Dropdown>
+              ))}
             </CustomField.DropdownWrapper>
           </CustomField>
         </div>
       </div>
       <div>
-        <BoldText>Time:</BoldText>
+        <BoldText>Period:</BoldText>
         <div className="mt-1">
-          <CustomField field="select" value="Unset">
+          <CustomField value={period} onSelect={setPeriod} field="select">
             <CustomField.DropdownWrapper>
-              {topHeader.map((t) => (
-                <CustomField.Dropdown key={Math.random()}>
-                  {t}
+              {periodList.map((sub) => (
+                <CustomField.Dropdown key={sub} value={sub}>
+                  {sub}
                 </CustomField.Dropdown>
               ))}
             </CustomField.DropdownWrapper>
@@ -52,15 +67,13 @@ const TimeTable = () => {
       <div>
         <BoldText>Subject:</BoldText>
         <div className="mt-1">
-          <CustomField field="select" value="Unset">
+          <CustomField value={subject} onSelect={setSubject} field="select">
             <CustomField.DropdownWrapper>
-              <CustomField.Dropdown>Math</CustomField.Dropdown>
-              <CustomField.Dropdown>English</CustomField.Dropdown>
-              <CustomField.Dropdown>Physics</CustomField.Dropdown>
-              <CustomField.Dropdown>Chemistry</CustomField.Dropdown>
-              <CustomField.Dropdown>Agric</CustomField.Dropdown>
-              <CustomField.Dropdown>Biology</CustomField.Dropdown>
-              <CustomField.Dropdown>Further Math</CustomField.Dropdown>
+              {subjectList.map((sub) => (
+                <CustomField.Dropdown key={sub} value={sub}>
+                  {sub}
+                </CustomField.Dropdown>
+              ))}
             </CustomField.DropdownWrapper>
           </CustomField>
         </div>
@@ -76,7 +89,7 @@ const TimeTable = () => {
           onClick={() => setEdit(false)}
           className="self-end xl:ml-auto py-2 px-3 border"
         >
-          Edit Timetable
+          Update Timetable
         </ActionBtn>
       </div>
     </div>

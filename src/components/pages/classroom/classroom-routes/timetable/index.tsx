@@ -1,6 +1,6 @@
 import SideHeaderTable from 'components/reusables/custom-table/SideHeaderTable';
 import { memo } from 'react';
-import EditTimeTable from './edit-timetable/EditTimeTable';
+import EditTimeTable from './edit-timetable';
 
 const topHeader = [
   '8-9',

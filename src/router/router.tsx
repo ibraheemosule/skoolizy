@@ -7,7 +7,7 @@ import Teachers from 'components/pages/teachers';
 import Students from 'components/pages/students';
 import Classroom from 'components/pages/classroom';
 import ClassroomStats from 'components/pages/classroom/classroom-routes/stats/Stats';
-import TimeTable from 'components/pages/classroom/classroom-routes/timetable/TimeTable';
+import TimeTable from 'components/pages/classroom/classroom-routes/timetable';
 import RecordGrade from 'components/pages/record-grade/index';
 
 const router = createBrowserRouter([
