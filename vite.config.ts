@@ -9,9 +9,12 @@ export default defineConfig({
     alias: {
       src: '/src',
       components: '/src/components',
+      icons: '/src/assets/icons',
       assets: '/src/assets',
       router: '/src/router',
+      utils: '/src/utils',
       'ts-types': '/src/ts-types',
+      reusables: '/src/components/reusables',
     },
   },
 });
