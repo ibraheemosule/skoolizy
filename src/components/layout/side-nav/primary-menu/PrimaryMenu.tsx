@@ -9,7 +9,7 @@ const navs = {
   classroom: 'classroom',
   subjects: 'subjects',
   highlights: 'highlights',
-  records: 'records',
+  'record grade': 'record-grade',
   announcements: 'announcements',
   'school information': 'school-information',
 };
@@ -23,15 +23,6 @@ const PrimaryMenu = () => (
           {key}
         </Menu.Item>
       ))}
-      {/* <Menu.Item>Requests</Menu.Item>
-      <Menu.Item>Teachers</Menu.Item>
-      <Menu.Item>Students</Menu.Item>
-      <Menu.Item>Classes</Menu.Item>
-      <Menu.Item>Subjects</Menu.Item>
-      <Menu.Item>Highlights</Menu.Item>
-      <Menu.Item>Records</Menu.Item>
-      <Menu.Item>Announcements</Menu.Item>
-      <Menu.Item>School Information</Menu.Item> */}
     </Menu.Wrapper>
   </Menu>
 );

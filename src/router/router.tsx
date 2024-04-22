@@ -1,14 +1,14 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import Layout from 'components/layout/Layout';
 import Dashboard from 'components/pages/dashboard/Dashboard';
-import Login from 'components/pages/Login/Login';
+import Login from 'components/pages/Login';
 import Requests from 'components/pages/requests/Requests';
-import Teachers from 'components/pages/teachers/Teachers';
-import Students from 'components/pages/students/Students';
-import Classroom from 'components/pages/classroom/Classroom';
+import Teachers from 'components/pages/teachers';
+import Students from 'components/pages/students';
+import Classroom from 'components/pages/classroom';
 import ClassroomStats from 'components/pages/classroom/classroom-routes/stats/Stats';
-import TimeTable from 'components/pages/classroom/classroom-routes/timetable/TimeTable';
-import RecordScores from 'components/pages/classroom/classroom-routes/record-scores/RecordScores';
+import TimeTable from 'components/pages/classroom/classroom-routes/timetable';
+import RecordGrade from 'components/pages/record-grade';
 
 const router = createBrowserRouter([
   {
@@ -52,11 +52,11 @@ const router = createBrowserRouter([
             path: 'timetable',
             element: <TimeTable />,
           },
-          {
-            path: 'record-scores',
-            element: <RecordScores />,
-          },
         ],
+      },
+      {
+        path: 'record-grade',
+        element: <RecordGrade />,
       },
     ],
   },

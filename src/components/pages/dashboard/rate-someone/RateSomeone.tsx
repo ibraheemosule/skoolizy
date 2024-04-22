@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field/CustomField';
+import CustomField from 'components/reusables/custom-field';
 import StarRatings from 'components/reusables/star-ratings/StarRatings';
 
 const Rate = () => {
@@ -22,30 +22,21 @@ const Rate = () => {
       <BoldText>Rate Someone</BoldText>
       <div className="flex flex-wrap gap-8 gap-y-3 mt-3">
         <div className="grow max-w-[250px]">
-          <CustomField>
-            <>
-              <CustomField.Editable
-                search
-                onChange={(e) => updateName(e.target.value)}
-                value={name}
-                icon
-                placeholder="Rate Someone"
-              />
-              <CustomField.DropdownWrapper>
-                <CustomField.Dropdown onClick={() => updateName('john')}>
-                  john
-                </CustomField.Dropdown>
-                <CustomField.Dropdown onClick={() => updateName('bob')}>
-                  bob
-                </CustomField.Dropdown>
-                <CustomField.Dropdown onClick={() => updateName('joshua')}>
-                  joshua
-                </CustomField.Dropdown>
-                <CustomField.Dropdown onClick={() => updateName('Zarah')}>
-                  Zarah
-                </CustomField.Dropdown>
-              </CustomField.DropdownWrapper>
-            </>
+          <CustomField value="lol" field="select">
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown onClick={() => updateName('john')}>
+                john
+              </CustomField.Dropdown>
+              <CustomField.Dropdown onClick={() => updateName('bob')}>
+                bob
+              </CustomField.Dropdown>
+              <CustomField.Dropdown onClick={() => updateName('joshua')}>
+                joshua
+              </CustomField.Dropdown>
+              <CustomField.Dropdown onClick={() => updateName('Zarah')}>
+                Zarah
+              </CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
           </CustomField>
         </div>
         <StarRatings rating={rating} onClick={starClicked} />

@@ -1,10 +1,12 @@
 import { BoldText } from 'components/reusables/ui/text';
 import { memo } from 'react';
-import RateSomeone from '../../rate-someone/RateSomeone';
+import RateSomeone from 'components/reusables/rate-someone';
 
 const TopStats = () => (
   <>
-    <RateSomeone />
+    <div className=" max-w-sm">
+      <RateSomeone />
+    </div>
     <div className=" bg-brown.dark mt-8 rounded-lg">
       <div className="grid grid-cols-1 gap-px  xs:grid-cols-2">
         <div className=" px-4 py-6 max-xs:mx-auto">

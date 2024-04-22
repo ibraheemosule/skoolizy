@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { BaseText, BoldText, SmallText } from 'components/reusables/ui/text';
 import IconCard from 'components/reusables/icon-card/IconCard';
 import { Tag } from 'components/reusables/ui/others';
-import { Check, Cancel } from 'components/reusables/ui/buttons';
+import { Check, CancelBtn } from 'components/reusables/ui/buttons';
 
 const RequestCard = () => (
   <IconCard className="text-black ">
@@ -30,7 +30,7 @@ const RequestCard = () => (
           <Tag>Equipment</Tag>
           <div className="ml-auto flex flex-wrap gap-8 -mt-1">
             <Check />
-            <Cancel />
+            <CancelBtn />
           </div>
         </div>
       </div>
