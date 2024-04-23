@@ -2,9 +2,9 @@ import { memo, useState } from 'react';
 import CustomField from 'components/reusables/custom-field';
 import { BoldText } from 'components/reusables/ui/text';
 import { ActionBtn } from 'components/reusables/ui/buttons';
-import Modal from 'components/reusables/modal/Modal';
+import Modal from 'components/reusables/modal';
 import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
-import RequestCard from '../../../reusables/request-card/RequestCard';
+import RequestCard from '../../../reusables/request-card';
 import NewRequest from './new-request';
 
 const testing = [

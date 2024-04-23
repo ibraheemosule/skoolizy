@@ -1,8 +1,8 @@
 import { memo, useState, FC } from 'react';
-import SideNav from 'components/layout/side-nav/SideNav';
+import SideNav from 'components/layout/side-nav';
 import { Outlet } from 'react-router-dom';
-import BgImage from './bg-image/BgImage';
-import TopHeader from './top-header/TopHeader';
+import BgImage from './bg-image';
+import TopHeader from './top-header';
 
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);

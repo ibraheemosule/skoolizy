@@ -4,7 +4,7 @@ import { BaseText } from 'components/reusables/ui/text';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 import { Card } from 'components/reusables/ui/others';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import Carousel from 'components/reusables/carousel/Carousel';
+import Carousel from 'components/reusables/carousel';
 
 const Hero = () => (
   <div className="mt-8">

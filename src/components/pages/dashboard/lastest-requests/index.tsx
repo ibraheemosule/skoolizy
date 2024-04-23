@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { BaseText, BoldText } from 'components/reusables/ui/text';
 
-import RequestCard from '../../../reusables/request-card/RequestCard';
+import RequestCard from '../../../reusables/request-card';
 
 const LatestRequests = () => (
   <div className="mt-8 md:mt-0">
