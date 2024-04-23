@@ -5,7 +5,7 @@ import { ActionBtn } from 'components/reusables/ui/buttons';
 import Modal from 'components/reusables/modal/Modal';
 import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
 import RequestCard from '../../../reusables/request-card/RequestCard';
-import NewRequest from './new-request/NewRequest';
+import NewRequest from './new-request';
 
 const testing = [
   'here',
@@ -28,7 +28,7 @@ const Filter = () => {
   );
   const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
     '',
-    [...testing]
+    testing
   );
 
   const addUser = (u: string) => {
@@ -56,6 +56,26 @@ const Filter = () => {
           >
             <CustomField.DropdownWrapper>
               {list.map((name) => (
+                <CustomField.Dropdown key={name} value={name}>
+                  {name}
+                </CustomField.Dropdown>
+              ))}
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
+      </div>
+      <div className="mt-4">
+        <BoldText>From Date:</BoldText>
+        <div className="mt-1">
+          <CustomField
+            field="input"
+            filterFn={dateListFilterFn}
+            onChange={setDate}
+            value={date}
+            icon="caretDown"
+          >
+            <CustomField.DropdownWrapper>
+              {dateList.map((name) => (
                 <CustomField.Dropdown key={name} value={name}>
                   {name}
                 </CustomField.Dropdown>
@@ -93,26 +113,6 @@ const Filter = () => {
           >
             <CustomField.DropdownWrapper>
               {names.map((name) => (
-                <CustomField.Dropdown key={name} value={name}>
-                  {name}
-                </CustomField.Dropdown>
-              ))}
-            </CustomField.DropdownWrapper>
-          </CustomField>
-        </div>
-      </div>
-      <div className="mt-4">
-        <BoldText>From Date:</BoldText>
-        <div className="mt-1">
-          <CustomField
-            field="input"
-            filterFn={dateListFilterFn}
-            onChange={setDate}
-            value={date}
-            icon="caretDown"
-          >
-            <CustomField.DropdownWrapper>
-              {dateList.map((name) => (
                 <CustomField.Dropdown key={name} value={name}>
                   {name}
                 </CustomField.Dropdown>

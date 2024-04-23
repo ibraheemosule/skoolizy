@@ -164,7 +164,7 @@ const DropdownWrapper = memo(
       <div
         ref={dropdownRef}
         onClick={(e) => (!closeOnClick || multiselect) && e.stopPropagation()}
-        className="dropdown hidden min-w-max dropdown absolute text-center cursor-pointer mt-2 shadow top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
+        className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
       >
         {multiselect && (
           <Dropdown value={null}>
