@@ -1,30 +1,21 @@
-import { memo } from 'react';
-import CustomField from '../custom-field/CustomField';
+import { memo, ReactNode } from 'react';
 
-const topHeader = ['Student', 'Grade'];
-const content = {
-  'john doe': 0,
-  john: 0,
-  'john d': 0,
-  'john e': 0,
-  'jo doe': 0,
-  'jn doe': 0,
-  'hn doe': 0,
-  'john oe': 0,
-  'john de': 0,
-  'john do': 0,
-  'joh doe': 0,
-  'jon doe': 0,
-  'jhn doe': 0,
-  'ohn doe': 0,
-};
-
-const CustomTable = ({ minWidth }: { minWidth?: string }) => (
+const CustomTable = ({
+  minWidth,
+  header,
+  content,
+  rowClick,
+}: {
+  minWidth?: string;
+  header: string[];
+  content: ReactNode[][];
+  rowClick?: () => void;
+}) => (
   <div className=" w-full overflow-hidden overflow-x-auto rounded-lg">
     <table className={`w-full ${minWidth ?? 'min-w-[640px]'} capitalize`}>
       <thead className="table w-full">
         <tr className="table w-full border-b text-lg bg-purple.light border-white rounded-t-lg">
-          {topHeader.map((header) => (
+          {header.map((header) => (
             <th
               key={Math.random()}
               onClick={() => null}
@@ -36,27 +27,20 @@ const CustomTable = ({ minWidth }: { minWidth?: string }) => (
         </tr>
       </thead>
       <tbody className=" block max-h-[400px] overflow-auto">
-        {Object.entries(content).map(([key, obj]) => (
+        {content.map((val) => (
           <tr
             key={Math.random()}
+            onClick={rowClick}
             className="table w-full border-b border-white odd:bg-gray-50 even:bg-gray-100"
           >
-            <td
-              onClick={() => null}
-              className="break-all w-[33%] text-center py-4 px-2  font-semibold  border-white last:border-0"
-            >
-              {key}
-            </td>
-            <td
-              onClick={() => null}
-              className="break-all w-[33%] text-center py-4 px-2  font-semibold  border-white last:border-0"
-            >
-              <div className="max-w-[100px] mx-auto">
-                <CustomField>
-                  <CustomField.Editable value={obj} type="text" />
-                </CustomField>
-              </div>
-            </td>
+            {val.map((v) => (
+              <td
+                key={Math.random()}
+                className="break-all w-[33%] text-center py-4 px-2  font-semibold  border-white last:border-0"
+              >
+                {v}
+              </td>
+            ))}
           </tr>
         ))}
       </tbody>

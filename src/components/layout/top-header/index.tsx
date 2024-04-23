@@ -1,0 +1,61 @@
+import { Dispatch, FC, SetStateAction, memo } from 'react';
+import Menu from 'src/assets/icons/MenuIcon';
+import CustomField from 'components/reusables/custom-field';
+import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+
+interface ITopHeader {
+  setToggleNav: Dispatch<SetStateAction<boolean>>;
+}
+
+const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
+  const [user, setUser] = useCustomField('john');
+  return (
+    <>
+      <button
+        data-testid="menu-btn"
+        onClick={() => setToggleNav(true)}
+        className="shrink-0 mr-4 md:hidden"
+        type="button"
+      >
+        <Menu />
+      </button>
+      <div className="flex grow gap-4 items-center justify-between">
+        {/* <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch">
+          <CustomField
+            field="input"
+            icon="search"
+            search
+            placeholder="Search for anything"
+            onChange={() => null}
+          />
+        </div> */}
+        <div className="shrink-0 ml-auto">
+          <CustomField
+            field="select"
+            value={
+              <div className="flex gap-3 rounded-lg p-1 sm:p-2 items-center">
+                <img
+                  className="rounded-full object-fill w-[30px] h-[30px]"
+                  src="https://picsum.photos/200/300"
+                  alt="avi"
+                />
+                <span className="capitalize">{user}</span>
+              </div>
+            }
+            onSelect={setUser}
+          >
+            <CustomField.DropdownWrapper>
+              <CustomField.Dropdown value="joshua">Joshua</CustomField.Dropdown>
+              <CustomField.Dropdown value="John">John</CustomField.Dropdown>
+              <CustomField.Dropdown value="Maryam">
+                Maryamisjkjds kajskdjkjfska j sfkjkldfjklajkljfkls
+              </CustomField.Dropdown>
+            </CustomField.DropdownWrapper>
+          </CustomField>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default memo(TopHeader);

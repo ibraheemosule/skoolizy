@@ -1,14 +1,14 @@
 import { memo } from 'react';
-import LatestRequests from './lastest-requests/LatestRequests';
-import Highlights from './highlights/Highlights';
-import RateSomeone from './rate-someone/RateSomeone';
+import RateSomeone from 'components/reusables/rate-someone';
+import LatestRequests from './lastest-requests';
+import Highlights from './highlights';
 
 const AsideAdmin = () => (
   <>
     <div className="mt-8 md:mt-0">
       <LatestRequests />
     </div>
-    <div className="mt-8">
+    <div className="mt-8 max-w-sm">
       <RateSomeone />
     </div>
     <div className="mt-8">

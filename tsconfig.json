@@ -8,8 +8,12 @@
     "skipLibCheck": true,
     "paths": {
       "components/*": ["./src/components/*"],
-      "src/*": ["./src/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "icons/*": ["./src/asseets/icons/*"],
+      "assets/*": ["./src/assets/*"],
+      "reusables/*": ["./src/components/reusables/*"],
+      "ts-types/*": ["./src/ts-types/*"],
+      "src/*": ["./src/*"]
     },
 
     /* Bundler mode */
@@ -27,6 +31,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
+    "@testing-library/jest-dom/vitest",
+    "test-config/setup.ts",
+    "vitest.config.ts",
     ".eslintrc.cjs",
     "vite.config.ts",
     "jest.config.cjs",
