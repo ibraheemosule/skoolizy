@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
-import Hero from './hero/Hero';
-import LiveClasses from './live-classes/LiveClasses';
-import TopStats from './top-stats/TopStats';
+import Hero from './hero';
+import LiveClasses from './live-classes';
+import TopStats from './top-stats';
 
 const Dashboard = () => (
   <section className="flex _full flex-wrap max-h-full overflow-auto lg:flex-nowrap gap-6">

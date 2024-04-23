@@ -11,4 +11,9 @@ export interface IBaseProp extends IChild {
 export type IconType = {
   size?: number;
   color?: string;
+  width?: number;
+  height?: number;
+  stroke?: string;
+  fill?: string;
+  strokeWidth?: number;
 };

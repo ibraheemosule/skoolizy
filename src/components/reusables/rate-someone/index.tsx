@@ -4,7 +4,7 @@ import CustomField from 'components/reusables/custom-field';
 import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
 import StarRatings from 'components/reusables/star-ratings/StarRatings';
 
-const Rate = () => {
+const RateSomeone = () => {
   const [user, setUser, list, filterFn] = useCustomField(
     [],
     ['Joshua', 'John', 'Maryam']
@@ -42,4 +42,4 @@ const Rate = () => {
   );
 };
 
-export default memo(Rate);
+export default memo(RateSomeone);
