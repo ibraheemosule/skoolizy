@@ -1,12 +1,12 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
-import Layout from 'components/layout/Layout';
+import Layout from 'components/layout';
 import Dashboard from 'components/pages/dashboard';
 import Login from 'components/pages/Login';
 import Requests from 'components/pages/requests/Requests';
 import Teachers from 'components/pages/teachers';
 import Students from 'components/pages/students';
 import Classroom from 'components/pages/classroom';
-import ClassroomStats from 'components/pages/classroom/classroom-routes/stats/Stats';
+import ClassroomStats from 'components/pages/classroom/classroom-routes/stats';
 import TimeTable from 'components/pages/classroom/classroom-routes/timetable';
 import RecordGrade from 'components/pages/record-grade';
 

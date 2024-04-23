@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Menu from 'components/reusables/menu/Menu';
+import Menu from 'components/reusables/menu';
 
 const ProfileMenu = () => (
   <Menu>
