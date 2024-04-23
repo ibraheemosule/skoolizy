@@ -23,7 +23,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
         <Menu />
       </button>
       <div className="flex grow gap-4 items-center justify-between">
-        <h2 className="text-gray-500 text-[1.2rem]">{route}</h2>
+        <h2 className="text-gray-500 text-[1.4rem] font-bold">{route}</h2>
         <div className="shrink-0 ml-auto">
           <CustomField>
             <>
