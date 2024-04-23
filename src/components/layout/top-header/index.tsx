@@ -1,4 +1,6 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
+import { capitalizeChar } from 'src/utils/format';
+import { useLocation } from 'react-router-dom';
 import Menu from 'src/assets/icons/MenuIcon';
 import CustomField from 'components/reusables/custom-field';
 import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
@@ -8,6 +10,8 @@ interface ITopHeader {
 }
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
+  const { pathname } = useLocation();
+  const route = capitalizeChar(pathname.slice(1).replace(/\//g, ' | '));
   const [user, setUser] = useCustomField('john');
   return (
     <>
@@ -20,15 +24,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
         <Menu />
       </button>
       <div className="flex grow gap-4 items-center justify-between">
-        {/* <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch">
-          <CustomField
-            field="input"
-            icon="search"
-            search
-            placeholder="Search for anything"
-            onChange={() => null}
-          />
-        </div> */}
+        <h2 className="text-gray-500 text-[1.4rem] font-bold">{route}</h2>
         <div className="shrink-0 ml-auto">
           <CustomField
             field="select"
