@@ -10,7 +10,8 @@ interface ITopHeader {
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
   const { pathname } = useLocation();
-  const route = capitalizeChar(pathname);
+  const route = capitalizeChar(pathname.slice(1));
+
   return (
     <>
       <button

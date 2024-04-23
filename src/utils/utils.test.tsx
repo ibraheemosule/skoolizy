@@ -15,4 +15,9 @@ describe('tests for formatting strings', () => {
     const result = capitalizeChar("Can this / work? here / too_let's_see... ");
     expect(result).toBe("Can This / Work? Here / Too Let's See... ");
   });
+
+  test('function should not capitalize letter that follows a backslash', () => {
+    const result = capitalizeChar('/can i do this');
+    expect(result).toBe('/can I Do This');
+  });
 });
