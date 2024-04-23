@@ -1,8 +1,8 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
-import Menu from 'src/assets/icons/MenuIcon';
-import CustomField from 'components/reusables/custom-field/CustomField';
 import { capitalizeChar } from 'src/utils/format';
 import { useLocation } from 'react-router-dom';
+import Menu from 'src/assets/icons/MenuIcon';
+import CustomField from 'components/reusables/custom-field/CustomField';
 
 interface ITopHeader {
   setToggleNav: Dispatch<SetStateAction<boolean>>;
@@ -23,12 +23,6 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
         <Menu />
       </button>
       <div className="flex grow gap-4 items-center justify-between">
-        {/* <div className="grow md:max-w-[50%] lg:max-w-[60%] self-stretch"> */}
-        {/* <CustomField>
-          <CustomField.Editable icon search placeholder="Search for anything" />
-        </CustomField> */}
-
-        {/* </div> */}
         <h2 className="text-gray-500 text-[1.2rem]">{route}</h2>
         <div className="shrink-0 ml-auto">
           <CustomField>
