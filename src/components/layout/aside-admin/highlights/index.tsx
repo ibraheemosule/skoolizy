@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { BaseText, BoldText, SmallText } from 'components/reusables/ui/text';
 import { ActionBtn } from 'components/reusables/ui/buttons';
 import Send from 'src/assets/icons/SendIcon';
-import IconCard from 'components/reusables/icon-card/IconCard';
+import IconCard from 'components/reusables/icon-card';
 
 const Highlights = () => (
   <>

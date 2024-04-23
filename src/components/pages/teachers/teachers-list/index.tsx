@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import UserCard from 'components/reusables/user-card/UserCard';
+import UserCard from 'components/reusables/user-card';
 
 const people = new Array(30).fill({
   name: 'Whitney Francis',

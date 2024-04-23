@@ -32,7 +32,7 @@
   },
   "include": [
     "@testing-library/jest-dom/vitest",
-    "tests/setup-test.ts",
+    "test-config/setup.ts",
     "vitest.config.ts",
     ".eslintrc.cjs",
     "vite.config.ts",

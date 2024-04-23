@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { BaseText, SmallText } from 'components/reusables/ui/text';
-import IconCard from 'components/reusables/icon-card/IconCard';
+import IconCard from 'components/reusables/icon-card';
 
 const Categories = () => (
   <div className="mt-6">
