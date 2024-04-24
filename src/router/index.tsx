@@ -8,7 +8,7 @@ import Students from 'components/pages/students';
 import Classroom from 'components/pages/classroom';
 import ClassroomStats from 'components/pages/classroom/classroom-routes/stats';
 import TimeTable from 'components/pages/classroom/classroom-routes/timetable';
-import RecordGrade from 'components/pages/record-grade';
+import RecordGrade from 'components/pages/classroom/classroom-routes/record-grade';
 
 const router = createBrowserRouter([
   {
@@ -52,11 +52,11 @@ const router = createBrowserRouter([
             path: 'timetable',
             element: <TimeTable />,
           },
+          {
+            path: 'record-grade',
+            element: <RecordGrade />,
+          },
         ],
-      },
-      {
-        path: 'record-grade',
-        element: <RecordGrade />,
       },
     ],
   },
