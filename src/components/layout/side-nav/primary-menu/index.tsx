@@ -9,7 +9,6 @@ const navs = {
   classroom: 'classroom',
   subjects: 'subjects',
   highlights: 'highlights',
-  'record grade': 'record-grade',
   announcements: 'announcements',
   'school information': 'school-information',
 };
