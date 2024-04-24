@@ -30,7 +30,7 @@ export const DeleteBtn = memo(
   ({ children, className, onClick }: TBtnWithChild) => (
     <button
       onClick={onClick}
-      className={`text-white bg-red-600 rounded-lg ${className}`}
+      className={`text-white bg-red-700 rounded-lg ${className}`}
       type="button"
     >
       {children}

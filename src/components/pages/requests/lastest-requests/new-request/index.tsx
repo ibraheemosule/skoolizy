@@ -17,7 +17,7 @@ const testing = [
 const NewRequest = () => {
   const [value, setValue] = useCustomField<string>('', testing);
   return (
-    <div className="md:w-96">
+    <div className="md:w-96 pb-8">
       <textarea
         placeholder="Add a new request"
         className="w-full outline-none resize-none h-20 bg-gray-100 p-2 rounded-lg"
@@ -25,7 +25,7 @@ const NewRequest = () => {
       />
       <div className="flex mt-4 gap-4 flex-wrap sm:justify-end">
         <CustomField value={value} onSelect={setValue} field="select">
-          <CustomField.DropdownWrapper>
+          <CustomField.DropdownWrapper width={200}>
             {testing.map((name) => (
               <CustomField.Dropdown key={name} value={name}>
                 {name}

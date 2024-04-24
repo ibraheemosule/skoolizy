@@ -125,7 +125,9 @@ const Dropdown = memo(({ children, value }: TDropdown) => {
       onClick={() => {
         if (value) (onSelect || onChange)?.(value);
       }}
-      className={`${typeof children === 'string' && 'p-2'} relative ${
+      className={`${
+        typeof children === 'string' ? 'p-2 break-words' : ''
+      } relative ${
         dropdownValueIsSelected ? 'bg-gray-100 text-black' : 'bg-white'
       }  hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
     >
@@ -138,10 +140,11 @@ Dropdown.displayName = 'Dropdown';
 type DropdownWrapperPropsType = {
   children: React.ReactElement[];
   closeOnClick?: boolean;
+  width?: number;
 };
 
 const DropdownWrapper = memo(
-  ({ children, closeOnClick = true }: DropdownWrapperPropsType) => {
+  ({ children, closeOnClick = true, width }: DropdownWrapperPropsType) => {
     const { dropdownRef, filterFn, value } = useCustomFieldContext();
     const multiselect = Array.isArray(value);
 
@@ -165,6 +168,7 @@ const DropdownWrapper = memo(
         ref={dropdownRef}
         onClick={(e) => (!closeOnClick || multiselect) && e.stopPropagation()}
         className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
+        style={{ minWidth: width || 'max-content' }}
       >
         {multiselect && (
           <Dropdown value={null}>

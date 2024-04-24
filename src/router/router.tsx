@@ -2,7 +2,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import Layout from 'components/layout/Layout';
 import Dashboard from 'components/pages/dashboard';
 import Login from 'components/pages/Login';
-import Requests from 'components/pages/requests/Requests';
+import Requests from 'components/pages/requests';
 import Teachers from 'components/pages/teachers';
 import Students from 'components/pages/students';
 import Classroom from 'components/pages/classroom';

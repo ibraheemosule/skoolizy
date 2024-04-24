@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
-import LatestRequests from './lastest-requests/LatestRequests';
+import LatestRequests from './lastest-requests';
 
 const Requests = () => (
   <section className="flex _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
