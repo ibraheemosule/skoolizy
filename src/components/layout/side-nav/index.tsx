@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Heading1 } from 'components/reusables/ui/heading';
-import PrimaryMenu from './primary-menu/PrimaryMenu';
-import ProfileMenu from './profile-menu/ProfileMenu';
+import PrimaryMenu from './primary-menu';
+import ProfileMenu from './profile-menu';
 
 const SideNav = () => (
   <div

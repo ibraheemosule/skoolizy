@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import RateSomeone from 'components/reusables/rate-someone';
-import LatestRequests from './lastest-requests/LatestRequests';
-import Highlights from './highlights/Highlights';
+import LatestRequests from './lastest-requests';
+import Highlights from './highlights';
 
 const AsideAdmin = () => (
   <>
