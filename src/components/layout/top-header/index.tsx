@@ -11,9 +11,8 @@ interface ITopHeader {
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
   const { pathname } = useLocation();
-  const route = capitalizeChar(
-    pathname.slice(1).replace(/-/g, ' ').replace(/\//g, ' | ')
-  );
+  const route = pathname.slice(1).replace(/-/g, ' ').split('/');
+
   const [user, setUser] = useCustomField('john');
 
   return (
@@ -27,8 +26,15 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
         <Menu />
       </button>
       <div className="flex grow gap-4 items-center justify-between">
-        <h2 className="hidden sm:block sm:text-gray-500 sm:text-[1.4rem] sm:font-bold">
-          {route}
+        <h2 className="hidden sm:block sm:text-gray-500 sm:text-[1.4rem] sm:font-normal">
+          {route.map((r) => (
+            <span
+              key={r}
+              className="pr-4 tracking-tight relative first:before:hidden before:content-[''] before:inline-block before:-left-2 before:absolute before:bottom-1/2 before:translate-y-1/2 before:h-4 before:bg-red before:border-l-2  before:border-gray-200"
+            >
+              {capitalizeChar(r)}
+            </span>
+          ))}
         </h2>
         <div className="shrink-0 ml-auto">
           <CustomField
