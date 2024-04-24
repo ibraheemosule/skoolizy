@@ -62,7 +62,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test -- --watchAll=false"
+      "pre-push": "npx vitest run"
     }
   }
 }
