@@ -40,7 +40,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
             }
             onSelect={setUser}
           >
-            <CustomField.DropdownWrapper>
+            <CustomField.DropdownWrapper width={100}>
               <CustomField.Dropdown value="joshua">Joshua</CustomField.Dropdown>
               <CustomField.Dropdown value="John">John</CustomField.Dropdown>
               <CustomField.Dropdown value="Maryam">
