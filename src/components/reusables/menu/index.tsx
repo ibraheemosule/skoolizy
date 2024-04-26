@@ -1,34 +1,49 @@
 import { memo } from 'react';
-import { IChild } from 'src/ts-types/react-types';
 import { NavLink } from 'react-router-dom';
+import Icon from 'assets/icons';
+import { TIconNames } from 'assets/icons/IconNames';
 
-const Menu = ({ children }: IChild) => (
-  <nav className="border-t border-gray-300 mt-6 pt-4 font-bold">{children}</nav>
-);
+type TVerticalNav = {
+  nav: {
+    label: string;
+    route: string;
+    icon?: TIconNames;
+  }[];
+  title?: string;
+};
 
-const Title = ({ children }: IChild) => (
-  <h2 className="_full text-xl py-4">{children}</h2>
-);
+export const VerticalNav = memo(({ nav, title }: TVerticalNav) => (
+  <nav className="border-t border-gray-300 mt-6 pt-4 font-bold">
+    {title && <h2 className="_full text-xl py-4">{title}</h2>}
+    <menu className="text-gray-800">
+      {nav.map((nav) => (
+        <li key={nav.label} className="group cursor-pointer relative">
+          <NavLink
+            to={nav.route || '#'}
+            className="nav-item capitalize pl-8 text-gray-500 hover:text-black hover:bg-gray-100  py-4 flex items-center relative"
+          >
+            {nav.icon && <Icon name={nav.icon} style={{ marginRight: 10 }} />}
+            <span>{nav.label}</span>
+            <i className="absolute hidden bg-brown.dark w-[10px] top-0 left-0 h-full rounded-tr-xl rounded-br-xl group-hover:block" />
+          </NavLink>
+        </li>
+      ))}
+    </menu>
+  </nav>
+));
 
-const Wrapper = ({ children }: IChild) => (
-  <ul className=" text-gray-800">{children}</ul>
-);
+VerticalNav.displayName = 'VerticalNav';
 
-const Item = ({ children, link }: IChild & { link?: string }) => (
-  <li className="group cursor-pointer relative">
-    <NavLink
-      to={link || '#'}
-      className="nav-item capitalize pl-8 text-gray-500 hover:text-black hover:bg-gray-100  py-4 flex items-center relative"
-    >
-      <i className="fa fa-phone group-hover:text-brown.dark mr-3" />
-      <span>{children}</span>
-      <i className="absolute hidden bg-brown.dark w-[10px] top-0 left-0 h-full rounded-tr-xl rounded-br-xl group-hover:block" />
-    </NavLink>
-  </li>
-);
+type THorizontalNav = { nav: Record<string, string> };
 
-Menu.Title = memo(Title);
-Menu.Item = memo(Item);
-Menu.Wrapper = memo(Wrapper);
+export const HorizontalNav = memo(({ nav }: THorizontalNav) => (
+  <nav className="classrooms-nav  mt-8 flex border-b overflow-x-auto border-gray-300 gap-4">
+    {Object.entries(nav).map(([label, route]) => (
+      <NavLink key={label} className="p-1 horizontal-nav shrink-0" to={route}>
+        {label}
+      </NavLink>
+    ))}
+  </nav>
+));
 
-export default Menu;
+HorizontalNav.displayName = 'HorizontalNav';

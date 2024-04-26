@@ -1,10 +1,11 @@
 import { SVGAttributes } from 'react';
-import { IconNames } from './IconNames';
+import { TIconNames } from './IconNames';
+import logo from './logo';
 
 type TIcon = SVGAttributes<SVGElement>;
 
 const icons: {
-  [key in IconNames]: (prop: TIcon) => JSX.Element;
+  [key in TIconNames]: (prop: TIcon) => JSX.Element;
 } = {
   cancel: ({ color, height, width, stroke, strokeWidth }) => (
     <svg
@@ -74,8 +75,27 @@ const icons: {
       />
     </svg>
   ),
+  logo: (props) => logo(props),
+  paper: ({ style = {}, stroke = 'currentColor', height = 20, width = 20 }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke={stroke}
+      height={height}
+      width={width}
+      style={style}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
+      />
+    </svg>
+  ),
 };
 
-const Icon = ({ name, ...props }: TIcon & { name: IconNames }) =>
+const Icon = ({ name, ...props }: TIcon & { name: TIconNames }) =>
   icons[name]?.(props) ?? null;
 export default Icon;

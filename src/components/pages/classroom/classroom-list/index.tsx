@@ -31,11 +31,11 @@ const ClassroomList = () => {
         </div>
       </div>
       <nav className="classrooms-nav  mt-8 flex border-b overflow-x-auto border-gray-300 gap-4">
-        <NavLink className="p-1 classroom-nav shrink-0" to="stats">
+        <NavLink className="p-1 horizontal-nav shrink-0" to="stats">
           Stats
         </NavLink>
 
-        <NavLink className="p-1 classroom-nav shrink-0" to="timetable">
+        <NavLink className="p-1 horizontal-nav shrink-0" to="timetable">
           TimeTable
         </NavLink>
       </nav>

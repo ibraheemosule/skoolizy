@@ -1,30 +1,53 @@
-import { memo } from 'react';
-import Menu from 'components/reusables/menu';
+import { VerticalNav } from 'reusables/menu';
 
-const navs = {
-  dashboard: 'dashboard',
-  requests: 'requests',
-  teachers: 'teachers',
-  students: 'students',
-  classroom: 'classroom',
-  subjects: 'subjects',
-  highlights: 'highlights',
-  'record grade': 'record-grade',
-  announcements: 'announcements',
-  'school information': 'school-information',
-};
+const navs = [
+  {
+    label: 'dashboard',
+    route: 'dashboard',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'requests',
+    route: 'requests',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'students',
+    route: 'students',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'classroom',
+    route: 'classroom',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'subjects',
+    route: 'subjects',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'hightlights',
+    route: 'hightlights',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'announcements',
+    route: 'announcements',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'record grade',
+    route: 'record-grade',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'school information',
+    route: 'school-information',
+    icon: 'paper',
+  } as const,
+];
 
-const PrimaryMenu = () => (
-  <Menu>
-    <Menu.Title>Main navigation</Menu.Title>
-    <Menu.Wrapper>
-      {Object.entries(navs).map(([key, obj]) => (
-        <Menu.Item link={obj} key={Math.random()}>
-          {key}
-        </Menu.Item>
-      ))}
-    </Menu.Wrapper>
-  </Menu>
-);
+const PrimaryMenu = () => <VerticalNav title="Main Navigation" nav={navs} />;
 
-export default memo(PrimaryMenu);
+export default PrimaryMenu;

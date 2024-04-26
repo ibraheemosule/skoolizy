@@ -1,1 +1,7 @@
-export type IconNames = 'cancel' | 'filter' | 'search' | 'caretDown';
+export type TIconNames =
+  | 'cancel'
+  | 'filter'
+  | 'search'
+  | 'caretDown'
+  | 'logo'
+  | 'paper';

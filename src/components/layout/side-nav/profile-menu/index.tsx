@@ -1,15 +1,23 @@
-import { memo } from 'react';
-import Menu from 'components/reusables/menu';
+import { VerticalNav } from 'reusables/menu';
 
-const ProfileMenu = () => (
-  <Menu>
-    <Menu.Title>More Options</Menu.Title>
-    <Menu.Wrapper>
-      <Menu.Item link="/">My Profile</Menu.Item>
-      <Menu.Item link="/">Settings</Menu.Item>
-      <Menu.Item link="/">Sign out</Menu.Item>
-    </Menu.Wrapper>
-  </Menu>
-);
+const nav = [
+  {
+    label: 'My Profile',
+    route: 'my-profile',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'Settings',
+    route: '/',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'Sign out',
+    route: '/',
+    icon: 'paper',
+  } as const,
+];
 
-export default memo(ProfileMenu);
+const ProfileMenu = () => <VerticalNav title="More Options" nav={nav} />;
+
+export default ProfileMenu;
