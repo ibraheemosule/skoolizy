@@ -37,11 +37,6 @@ const navs = [
     icon: 'paper',
   } as const,
   {
-    label: 'record grade',
-    route: 'record-grade',
-    icon: 'paper',
-  } as const,
-  {
     label: 'school information',
     route: 'school-information',
     icon: 'paper',
