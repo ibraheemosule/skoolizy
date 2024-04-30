@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
 import { ActionBtn, DeleteBtn } from '~reusables/ui/Buttons';
@@ -102,4 +102,4 @@ const TimeTable = () => {
   );
 };
 
-export default memo(TimeTable);
+export default TimeTable;

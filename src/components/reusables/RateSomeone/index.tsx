@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
@@ -42,4 +42,4 @@ const RateSomeone = () => {
   );
 };
 
-export default memo(RateSomeone);
+export default RateSomeone;

@@ -1,8 +1,7 @@
-import { memo } from 'react';
-import { BaseText, BoldText, MiniText } from '~reusables/ui/text';
-import { ActionBtn } from '~reusables/ui/buttons';
-import Send from '~src/assets/icons/SendIcon';
-import IconCard from '~reusables/icon-card';
+import { BaseText, BoldText, MiniText } from '~reusables/ui/Text';
+import { ActionBtn } from '~reusables/ui/Buttons';
+import Send from '~src/assets/Icons/SendIcon';
+import IconCard from '~reusables/IconCard';
 
 const Highlights = () => (
   <div className="mt-8">
@@ -56,4 +55,4 @@ const Highlights = () => (
   </div>
 );
 
-export default memo(Highlights);
+export default Highlights;

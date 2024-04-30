@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~components/reusables/CustomField';
@@ -94,4 +93,4 @@ const RecordGrade = () => {
   );
 };
 
-export default memo(RecordGrade);
+export default RecordGrade;

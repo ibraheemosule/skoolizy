@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
@@ -75,4 +74,4 @@ const TeachersFilter = () => {
   );
 };
 
-export default memo(TeachersFilter);
+export default TeachersFilter;

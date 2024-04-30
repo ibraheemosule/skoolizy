@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 const AcademicInfo = () => (
   <>
     <div className="mt-6 px-4 sm:px-0">
@@ -52,4 +50,4 @@ const AcademicInfo = () => (
   </>
 );
 
-export default memo(AcademicInfo);
+export default AcademicInfo;

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import LatestRequests from './LatestRequests';
 
@@ -13,4 +12,4 @@ const Requests = () => (
   </section>
 );
 
-export default memo(Requests);
+export default Requests;

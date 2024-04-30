@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import CustomTable from '~reusables/custom-table/CustomTable';
 import CustomField from '~reusables/CustomField';
 
@@ -36,4 +35,4 @@ const ScoreBoard = () => (
   </div>
 );
 
-export default memo(ScoreBoard);
+export default ScoreBoard;

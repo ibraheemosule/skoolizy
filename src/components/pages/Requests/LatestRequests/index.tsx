@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { ActionBtn, BaseBtn } from '~reusables/ui/Buttons';
 import Modal from '~reusables/Modal';
 import Icon from '~assets/Icons';
@@ -68,4 +68,4 @@ const Requests = () => {
   );
 };
 
-export default memo(Requests);
+export default Requests;

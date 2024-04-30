@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import SideHeaderTable from '~reusables/custom-table/SideHeaderTable';
 
@@ -17,7 +16,7 @@ const content = {
   ],
 };
 
-const MyAppointments = () => (
+const LiveClasses = () => (
   <div className="mt-8">
     <div className="flex justify-between">
       <BoldText>Classes In Progress</BoldText>
@@ -29,4 +28,4 @@ const MyAppointments = () => (
   </div>
 );
 
-export default memo(MyAppointments);
+export default LiveClasses;

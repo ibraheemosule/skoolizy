@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import UserCard from '~components/reusables/UserCard';
 
 const people = new Array(30).fill({
@@ -30,4 +29,4 @@ const TeachersList = () =>
     </UserCard>
   ));
 
-export default memo(TeachersList);
+export default TeachersList;

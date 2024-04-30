@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import ClassroomList from './ClassroomList';
@@ -21,4 +20,4 @@ const Classroom = () => (
   </section>
 );
 
-export default memo(Classroom);
+export default Classroom;

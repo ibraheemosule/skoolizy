@@ -1,6 +1,5 @@
-import { memo } from 'react';
-import { BaseText, SmallText } from '~reusables/ui/text';
-import IconCard from '~reusables/icon-card';
+import { BaseText, SmallText } from '~reusables/ui/Text';
+import IconCard from '~reusables/IconCard';
 
 const Categories = () => (
   <div className="mt-6">
@@ -58,4 +57,4 @@ const Categories = () => (
   </div>
 );
 
-export default memo(Categories);
+export default Categories;

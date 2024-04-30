@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BaseText, BoldText } from '~reusables/ui/Text';
 
 import RequestCard from '../../../reusables/RequestCard';
@@ -23,4 +22,4 @@ const LatestRequests = () => (
   </>
 );
 
-export default memo(LatestRequests);
+export default LatestRequests;

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 
 const TopStats = () => (
@@ -71,4 +70,4 @@ const TopStats = () => (
   </div>
 );
 
-export default memo(TopStats);
+export default TopStats;

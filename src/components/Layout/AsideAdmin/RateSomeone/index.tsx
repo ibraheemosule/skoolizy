@@ -1,8 +1,8 @@
-import { memo, useState } from 'react';
-import { BoldText } from '~reusables/ui/text';
-import CustomField from '~reusables/custom-field';
-import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
-import StarRatings from '~reusables/star-ratings';
+import { useState } from 'react';
+import { BoldText } from '~reusables/ui/Text';
+import CustomField from '~reusables/CustomField';
+import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import StarRatings from '~reusables/StarRating';
 
 const Rate = () => {
   const [user, setUser, list, filterFn] = useCustomField(
@@ -42,4 +42,4 @@ const Rate = () => {
   );
 };
 
-export default memo(Rate);
+export default Rate;

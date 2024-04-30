@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import CustomField from '~reusables/CustomField';
 import { ActionBtn } from '~reusables/ui/Buttons';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
@@ -41,4 +40,4 @@ const NewRequest = () => {
   );
 };
 
-export default memo(NewRequest);
+export default NewRequest;

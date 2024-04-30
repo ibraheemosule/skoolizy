@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BaseText, BoldText, SmallText } from '~reusables/ui/Text';
 import { ActionBtn } from '~reusables/ui/Buttons';
 import Send from '~assets/Icons/SendIcon';
@@ -56,4 +55,4 @@ const Highlights = () => (
   </>
 );
 
-export default memo(Highlights);
+export default Highlights;

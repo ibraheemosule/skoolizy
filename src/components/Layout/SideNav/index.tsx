@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import Icon from '~assets/Icons';
 import PrimaryMenu from './PrimaryMenu';
 import ProfileMenu from './ProfileMenu';
@@ -18,4 +17,4 @@ const SideNav = () => (
   </div>
 );
 
-export default memo(SideNav);
+export default SideNav;

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { Heading1 } from '~reusables/ui/Heading';
 import { BaseText } from '~reusables/ui/Text';
 import { ActionBtn } from '~reusables/ui/Buttons';
@@ -43,4 +42,4 @@ const Hero = () => (
   </div>
 );
 
-export default memo(Hero);
+export default Hero;

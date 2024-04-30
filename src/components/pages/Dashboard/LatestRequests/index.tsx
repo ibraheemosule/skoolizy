@@ -1,7 +1,5 @@
-import { memo } from 'react';
-import { BaseText, BoldText } from '~reusables/ui/text';
-
-import RequestCard from '../../../reusables/request-card';
+import { BaseText, BoldText } from '~reusables/ui/Text';
+import RequestCard from '../../../reusables/RequestCard';
 
 const LatestRequests = () => (
   <div className="mt-8 md:mt-0">
@@ -23,4 +21,4 @@ const LatestRequests = () => (
   </div>
 );
 
-export default memo(LatestRequests);
+export default LatestRequests;

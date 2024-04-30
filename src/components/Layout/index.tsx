@@ -1,4 +1,4 @@
-import { memo, useState, FC } from 'react';
+import { useState, FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import SideNav from '~components/Layout/SideNav';
 import BgImage from './BgImage';
@@ -30,4 +30,4 @@ const Layout: FC = () => {
   );
 };
 
-export default memo(Layout);
+export default Layout;

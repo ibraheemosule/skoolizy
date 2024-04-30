@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import { HorizontalNav } from '~components/reusables/Menu';
@@ -27,4 +26,4 @@ const MyProfile = () => (
   </section>
 );
 
-export default memo(MyProfile);
+export default MyProfile;

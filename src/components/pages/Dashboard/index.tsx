@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import Hero from './Hero';
 import LiveClasses from './LiveClasses';
@@ -17,4 +16,4 @@ const Dashboard = () => (
   </section>
 );
 
-export default memo(Dashboard);
+export default Dashboard;

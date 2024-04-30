@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import SideHeaderTable from '~reusables/custom-table/SideHeaderTable';
 import EditTimeTable from './EditTimetable';
 
@@ -85,4 +84,4 @@ const TimeTable = () => (
   </>
 );
 
-export default memo(TimeTable);
+export default TimeTable;

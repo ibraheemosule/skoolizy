@@ -19,7 +19,7 @@ import {
 } from './hooks-custom-field/useCustomFieldContext';
 import { Tag } from '../ui/Others';
 
-const Editable = memo(() => {
+const Editable = () => {
   const {
     onChange,
     filterFn,
@@ -60,10 +60,10 @@ const Editable = memo(() => {
       )}
     </div>
   );
-});
+};
 Editable.displayName = 'Editable';
 
-const NonEditable = memo(() => {
+const NonEditable = () => {
   const { onSelect, value } = useCustomFieldContext();
   const placeholder = <span className="text-gray-400">Select...</span>;
 
@@ -98,7 +98,7 @@ const NonEditable = memo(() => {
       </span>
     </div>
   );
-});
+};
 NonEditable.displayName = 'NonEditable';
 
 type TDropdown = IBaseProp & {

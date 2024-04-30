@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import RateSomeone from '~components/reusables/RateSomeone';
 import LatestRequests from './LatestRequests';
 import Highlights from './Highlights';
@@ -17,4 +16,4 @@ const AsideAdmin = () => (
   </>
 );
 
-export default memo(AsideAdmin);
+export default AsideAdmin;

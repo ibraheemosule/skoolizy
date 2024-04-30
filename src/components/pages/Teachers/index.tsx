@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import UsersListLayout from '~components/reusables/UsersListLayout';
 import TeachersList from './TeachersList';
 import TeachersFilter from './TeachersFilter';
@@ -11,4 +10,4 @@ const Teachers = () => (
   />
 );
 
-export default memo(Teachers);
+export default Teachers;

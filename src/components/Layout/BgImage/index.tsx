@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 const BgImg = () => (
   <div className="fixed -z-10 grid inset-0 place-items-center">
     <img
@@ -10,4 +8,4 @@ const BgImg = () => (
   </div>
 );
 
-export default memo(BgImg);
+export default BgImg;

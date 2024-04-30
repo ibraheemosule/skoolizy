@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BaseText, BoldText, SmallText } from '~reusables/ui/Text';
 import IconCard from '~reusables/IconCard';
 import { Tag } from '~reusables/ui/Others';
@@ -38,4 +37,4 @@ const RequestCard = () => (
   </IconCard>
 );
 
-export default memo(RequestCard);
+export default RequestCard;

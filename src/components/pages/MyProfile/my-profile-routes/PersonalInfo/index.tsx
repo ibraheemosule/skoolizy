@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import Icon from '~assets/Icons';
 
 const TopStats = () => (
@@ -123,4 +122,4 @@ const TopStats = () => (
   </>
 );
 
-export default memo(TopStats);
+export default TopStats;

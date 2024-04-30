@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import RateSomeone from '~reusables/RateSomeone';
 
@@ -142,4 +141,4 @@ const TopStats = () => (
   </>
 );
 
-export default memo(TopStats);
+export default TopStats;
