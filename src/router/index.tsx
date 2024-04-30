@@ -8,7 +8,7 @@ import Students from '~components/pages/Students';
 import Classroom from '~components/pages/Classroom';
 import ClassroomStats from '~components/pages/Classroom/classroom-routes/Stats';
 import TimeTable from '~components/pages/Classroom/classroom-routes/Timetable';
-import RecordGrade from '~components/pages/RecordGrade';
+import RecordGrade from '~components/pages/Classroom/classroom-routes/RecordGrade';
 import MyProfile from '~components/pages/MyProfile';
 import PersonalInfo from '~components/pages/MyProfile/my-profile-routes/PersonalInfo';
 import AcademicInfo from '~components/pages/MyProfile/my-profile-routes/AcademicInfo';
@@ -56,11 +56,11 @@ const router = createBrowserRouter([
             path: 'timetable',
             element: <TimeTable />,
           },
+          {
+            path: 'record-grade',
+            element: <RecordGrade />,
+          },
         ],
-      },
-      {
-        path: 'record-grade',
-        element: <RecordGrade />,
       },
       {
         path: 'my-profile',

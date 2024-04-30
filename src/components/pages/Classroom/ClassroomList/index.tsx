@@ -38,6 +38,9 @@ const ClassroomList = () => {
         <NavLink className="p-1 horizontal-nav shrink-0" to="timetable">
           TimeTable
         </NavLink>
+        <NavLink className="p-1 horizontal-nav shrink-0" to="record-grade">
+          Record Grade
+        </NavLink>
       </nav>
     </>
   );
