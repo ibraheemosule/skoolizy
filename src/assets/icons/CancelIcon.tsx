@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { IconType } from 'src/ts-types/react-types';
+import { IconType } from '~ts-types/react-types';
 
 const CancelIcon = ({
   color,

@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+import { BoldText } from '~reusables/ui/text';
+import CustomField from '~reusables/custom-field';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 
 const TeachersFilter = () => {
   const [subject, setSubject, subjectList] = useCustomField('', [

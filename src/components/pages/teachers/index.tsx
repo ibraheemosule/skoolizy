@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import UsersListLayout from 'components/reusables/users-list-layout';
+import UsersListLayout from '~components/reusables/users-list-layout';
 import TeachersList from './teachers-list';
 import TeachersFilter from './teachers-filter';
 

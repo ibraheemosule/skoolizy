@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import RateSomeone from 'components/reusables/rate-someone';
+import RateSomeone from '~components/reusables/rate-someone';
 import LatestRequests from './lastest-requests';
 import Highlights from './highlights';
 

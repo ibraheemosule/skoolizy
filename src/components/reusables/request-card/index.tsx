@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { BaseText, BoldText, SmallText } from 'components/reusables/ui/text';
-import IconCard from 'components/reusables/icon-card';
-import { Tag } from 'components/reusables/ui/others';
-import { Check, CancelBtn } from 'components/reusables/ui/buttons';
+import { BaseText, BoldText, SmallText } from '~reusables/ui/text';
+import IconCard from '~reusables/icon-card';
+import { Tag } from '~reusables/ui/others';
+import { Check, CancelBtn } from '~reusables/ui/buttons';
 
 const RequestCard = () => (
   <IconCard className="text-black ">

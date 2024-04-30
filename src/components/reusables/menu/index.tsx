@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import Icon from 'assets/icons';
-import { TIconNames } from 'assets/icons/IconNames';
+import Icon from '~assets/icons';
+import { TIconNames } from '~assets/icons/IconNames';
 
 type TVerticalNav = {
   nav: {

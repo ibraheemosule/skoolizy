@@ -1,9 +1,9 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
-import { capitalizeChar } from 'src/utils/format';
 import { useLocation } from 'react-router-dom';
-import Menu from 'src/assets/icons/MenuIcon';
-import CustomField from 'components/reusables/custom-field';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+import { capitalizeChar } from '~src/utils/format';
+import Menu from '~assets/icons/MenuIcon';
+import CustomField from '~reusables/custom-field';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 
 interface ITopHeader {
   setToggleNav: Dispatch<SetStateAction<boolean>>;

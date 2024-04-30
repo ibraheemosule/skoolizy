@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { BoldText } from 'components/reusables/ui/text';
-import SideHeaderTable from 'components/reusables/custom-table/SideHeaderTable';
+import { BoldText } from '~reusables/ui/text';
+import SideHeaderTable from '~reusables/custom-table/SideHeaderTable';
 
 const content = {
   Classroom: ['JSS-1', 'JSS-2', 'JSS-3', 'SSS-1', 'SSS-2', 'SSS-3'],

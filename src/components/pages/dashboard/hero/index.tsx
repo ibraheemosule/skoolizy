@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import { Heading1 } from 'components/reusables/ui/heading';
-import { BaseText } from 'components/reusables/ui/text';
-import { ActionBtn } from 'components/reusables/ui/buttons';
-import { Card } from 'components/reusables/ui/others';
+import { Heading1 } from '~reusables/ui/heading';
+import { BaseText } from '~reusables/ui/text';
+import { ActionBtn } from '~reusables/ui/buttons';
+import { Card } from '~reusables/ui/others';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import Carousel from 'components/reusables/carousel';
+import Carousel from '~reusables/carousel';
 
 const Hero = () => (
   <div className="mt-8">

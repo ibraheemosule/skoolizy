@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
+import AsideAdmin from '~components/layout/aside-admin/AsideAdmin';
 import LatestRequests from './lastest-requests';
 
 const Requests = () => (

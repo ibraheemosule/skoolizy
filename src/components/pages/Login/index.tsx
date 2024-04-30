@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import CustomField from 'components/reusables/custom-field';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+import CustomField from '~reusables/custom-field';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 
 const Login = () => {
   const [email, setEmail] = useCustomField('');

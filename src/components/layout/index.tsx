@@ -1,6 +1,6 @@
 import { memo, useState, FC } from 'react';
-import SideNav from 'components/layout/side-nav';
 import { Outlet } from 'react-router-dom';
+import SideNav from '~components/layout/side-nav';
 import BgImage from './bg-image';
 import TopHeader from './top-header';
 

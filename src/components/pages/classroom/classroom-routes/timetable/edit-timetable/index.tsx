@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
-import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field';
-import { ActionBtn, DeleteBtn } from 'components/reusables/ui/buttons';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+import { BoldText } from '~reusables/ui/text';
+import CustomField from '~reusables/custom-field';
+import { ActionBtn, DeleteBtn } from '~reusables/ui/buttons';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 
 const periodList = [
   '8-9',

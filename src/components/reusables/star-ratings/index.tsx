@@ -1,5 +1,5 @@
 import { memo, FC } from 'react';
-import Star from 'src/assets/icons/StarIcon';
+import Star from '~src/assets/icons/StarIcon';
 
 const stars = Array(5).fill('');
 

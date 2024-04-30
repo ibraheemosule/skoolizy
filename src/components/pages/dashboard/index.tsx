@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
+import AsideAdmin from '~components/layout/aside-admin/AsideAdmin';
 import Hero from './hero';
 import LiveClasses from './live-classes';
 import TopStats from './top-stats';

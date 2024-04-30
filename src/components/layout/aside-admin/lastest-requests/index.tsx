@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { BaseText, BoldText } from 'components/reusables/ui/text';
+import { BaseText, BoldText } from '~reusables/ui/text';
 
 import RequestCard from '../../../reusables/request-card';
 

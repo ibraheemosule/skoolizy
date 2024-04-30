@@ -7,8 +7,8 @@ import {
   useRef,
   ElementRef,
 } from 'react';
-import { ActionBtn, BaseBtn } from 'components/reusables/ui/buttons';
-import CancelIcon from 'src/assets/icons/CancelIcon';
+import { ActionBtn, BaseBtn } from '~components/reusables/ui/buttons';
+import CancelIcon from '~src/assets/icons/CancelIcon';
 
 type TModal = {
   close: Dispatch<SetStateAction<boolean>> | (() => void);

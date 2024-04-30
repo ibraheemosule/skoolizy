@@ -1,7 +1,7 @@
 import { memo, useState } from 'react';
-import { ActionBtn, BaseBtn } from 'components/reusables/ui/buttons';
-import Modal from 'components/reusables/modal';
-import Icon from 'assets/icons';
+import { ActionBtn, BaseBtn } from '~reusables/ui/buttons';
+import Modal from '~reusables/modal';
+import Icon from '~assets/icons';
 import RequestCard from '../../../reusables/request-card';
 import NewRequest from './new-request';
 import RequestsFilter from './filter-requests';

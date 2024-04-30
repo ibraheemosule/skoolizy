@@ -1,6 +1,6 @@
-import { BoldText } from 'components/reusables/ui/text';
 import { memo } from 'react';
-import RateSomeone from 'components/reusables/rate-someone';
+import { BoldText } from '~reusables/ui/text';
+import RateSomeone from '~reusables/rate-someone';
 
 const TopStats = () => (
   <>

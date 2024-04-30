@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
-import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
-import { Heading2 } from 'components/reusables/ui/heading';
+import AsideAdmin from '~components/layout/aside-admin/AsideAdmin';
+import { Heading2 } from '~reusables/ui/heading';
 
 interface IUserListLayout {
   type: 'teachers' | 'students' | 'guardians';

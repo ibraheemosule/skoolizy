@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
-import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field';
-import { ActionBtn } from 'components/reusables/ui/buttons';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+import AsideAdmin from '~components/layout/aside-admin/AsideAdmin';
+import { BoldText } from '~reusables/ui/text';
+import CustomField from '~reusables/custom-field';
+import { ActionBtn } from '~reusables/ui/buttons';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 import ScoreBoard from './score-board';
 
 const RecordGrade = () => {

@@ -1,4 +1,4 @@
-import { VerticalNav } from 'reusables/menu';
+import { VerticalNav } from '~reusables/menu';
 
 const navs = [
   {

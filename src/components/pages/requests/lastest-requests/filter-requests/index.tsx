@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { BoldText } from 'reusables/ui/text';
-import CustomField from 'reusables/custom-field';
-import useCustomField from 'reusables/custom-field/hooks-custom-field/useCustomField';
+import { BoldText } from '~reusables/ui/text';
+import CustomField from '~reusables/custom-field';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 
 const testing = [
   'here',

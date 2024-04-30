@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { IBaseProp } from 'src/ts-types/react-types';
+import { IBaseProp } from '~src/ts-types/react-types';
 
 export const Heading1 = memo(({ children, className }: IBaseProp) => (
   <h1 className={`text-3xl font-bold ${className}`}>{children}</h1>

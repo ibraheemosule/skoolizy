@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import CustomTable from 'components/reusables/custom-table/CustomTable';
-import CustomField from 'components/reusables/custom-field';
+import CustomTable from '~reusables/custom-table/CustomTable';
+import CustomField from '~reusables/custom-field';
 
 const topHeader = ['Student', 'Grade'];
 

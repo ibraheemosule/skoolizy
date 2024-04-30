@@ -1,7 +1,7 @@
 import { FC, ReactElement, memo } from 'react';
-import TwitterIcon from 'src/assets/icons/TwitterIcon';
-import LinkedinIcon from 'src/assets/icons/LinkedinIcon';
 import { NavLink } from 'react-router-dom';
+import TwitterIcon from '~src/assets/icons/TwitterIcon';
+import LinkedinIcon from '~src/assets/icons/LinkedinIcon';
 import { BoldText, SmallText } from '../ui/text';
 
 const iconList = {

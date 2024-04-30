@@ -1,5 +1,5 @@
-import { BoldText } from 'components/reusables/ui/text';
 import { memo } from 'react';
+import { BoldText } from '~reusables/ui/text';
 
 const TopStats = () => (
   <div className=" bg-brown.dark mt-8 rounded-lg">

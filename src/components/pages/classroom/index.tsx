@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import AsideAdmin from 'components/layout/aside-admin/AsideAdmin';
 import { Outlet } from 'react-router-dom';
+import AsideAdmin from '~components/layout/aside-admin/AsideAdmin';
 import ClassroomList from './classroom-list';
 
 const Classroom = () => (

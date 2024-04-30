@@ -10,9 +10,9 @@ import {
   isValidElement,
   FC,
 } from 'react';
-import { IBaseProp } from 'src/ts-types/react-types';
-import CancelIcon from 'src/assets/icons/CancelIcon';
-import Icon from 'src/assets/icons';
+import { IBaseProp } from '~src/ts-types/react-types';
+import CancelIcon from '~src/assets/icons/CancelIcon';
+import Icon from '~src/assets/icons';
 import {
   useCustomFieldContext,
   CustomFieldContext,

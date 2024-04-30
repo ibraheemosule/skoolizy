@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import CustomField from 'components/reusables/custom-field';
-import { ActionBtn } from 'components/reusables/ui/buttons';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
+import CustomField from '~reusables/custom-field';
+import { ActionBtn } from '~reusables/ui/buttons';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
 
 const testing = [
   'here',

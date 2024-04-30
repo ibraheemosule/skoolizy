@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Icon from 'assets/icons';
+import Icon from '~assets/icons';
 import PrimaryMenu from './primary-menu';
 import ProfileMenu from './profile-menu';
 

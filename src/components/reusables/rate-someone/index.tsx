@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
-import { BoldText } from 'components/reusables/ui/text';
-import CustomField from 'components/reusables/custom-field';
-import useCustomField from 'components/reusables/custom-field/hooks-custom-field/useCustomField';
-import StarRatings from 'components/reusables/star-ratings';
+import { BoldText } from '~reusables/ui/text';
+import CustomField from '~reusables/custom-field';
+import useCustomField from '~reusables/custom-field/hooks-custom-field/useCustomField';
+import StarRatings from '~reusables/star-ratings';
 
 const RateSomeone = () => {
   const [user, setUser, list, filterFn] = useCustomField(
