@@ -8,12 +8,12 @@ const nav = [
   } as const,
   {
     label: 'Settings',
-    route: '/',
+    route: 'settings',
     icon: 'paper',
   } as const,
   {
     label: 'Sign out',
-    route: '/',
+    action: () => null,
     icon: 'paper',
   } as const,
 ];

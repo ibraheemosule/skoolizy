@@ -27,8 +27,8 @@ const navs = [
     icon: 'paper',
   } as const,
   {
-    label: 'hightlights',
-    route: 'hightlights',
+    label: 'media',
+    route: 'media',
     icon: 'paper',
   } as const,
   {
