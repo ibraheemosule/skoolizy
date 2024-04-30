@@ -7,13 +7,13 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "components/*": ["./src/components/*"],
-      "utils/*": ["./src/utils/*"],
-      "icons/*": ["./src/asseets/icons/*"],
-      "assets/*": ["./src/assets/*"],
-      "reusables/*": ["./src/components/reusables/*"],
-      "ts-types/*": ["./src/ts-types/*"],
-      "src/*": ["./src/*"]
+      "~components/*": ["./src/components/*"],
+      "~utils/*": ["./src/utils/*"],
+      "~icons/*": ["./src/asseets/Icons/*"],
+      "~assets/*": ["./src/assets/*"],
+      "~reusables/*": ["./src/components/reusables/*"],
+      "~ts-types/*": ["./src/ts-types/*"],
+      "~src/*": ["./src/*"]
     },
 
     /* Bundler mode */

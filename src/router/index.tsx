@@ -1,14 +1,18 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
-import Layout from 'components/layout';
-import Dashboard from 'components/pages/dashboard';
-import Login from 'components/pages/Login';
-import Requests from 'components/pages/requests';
-import Teachers from 'components/pages/teachers';
-import Students from 'components/pages/students';
-import Classroom from 'components/pages/classroom';
-import ClassroomStats from 'components/pages/classroom/classroom-routes/stats';
-import TimeTable from 'components/pages/classroom/classroom-routes/timetable';
-import RecordGrade from 'components/pages/classroom/classroom-routes/record-grade';
+import Layout from '~components/Layout';
+import Dashboard from '~components/pages/Dashboard';
+import Login from '~components/pages/Login';
+import Requests from '~components/pages/Requests';
+import Teachers from '~components/pages/Teachers';
+import Students from '~components/pages/Students';
+import Classroom from '~components/pages/Classroom';
+import ClassroomStats from '~components/pages/Classroom/classroom-routes/Stats';
+import TimeTable from '~components/pages/Classroom/classroom-routes/Timetable';
+import RecordGrade from '~components/pages/Classroom/classroom-routes/RecordGrade';
+import MyProfile from '~components/pages/MyProfile';
+import PersonalInfo from '~components/pages/MyProfile/my-profile-routes/PersonalInfo';
+import AcademicInfo from '~components/pages/MyProfile/my-profile-routes/AcademicInfo';
+import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactInfo';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +59,29 @@ const router = createBrowserRouter([
           {
             path: 'record-grade',
             element: <RecordGrade />,
+          },
+        ],
+      },
+      {
+        path: 'my-profile',
+        element: <MyProfile />,
+
+        children: [
+          {
+            path: '',
+            element: <Navigate to="personal-information" />,
+          },
+          {
+            path: 'academic-information',
+            element: <AcademicInfo />,
+          },
+          {
+            path: 'personal-information',
+            element: <PersonalInfo />,
+          },
+          {
+            path: 'contact-information',
+            element: <ContactInfo />,
           },
         ],
       },
