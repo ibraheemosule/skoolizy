@@ -11,7 +11,7 @@ const Hero = () => (
       <div className="item">
         <Card className="bg-purple.light p-6 ">
           <Heading1 className="truncate">Examination Information</Heading1>
-          <BaseText className="mt-4 mb-2 text-gray-500  truncate">
+          <BaseText className="mt-4 mb-2imp text-gray-500  truncate">
             Exam commences on the 31st of June, 2024
           </BaseText>
           <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
@@ -20,7 +20,7 @@ const Hero = () => (
       <div className="item">
         <Card className="bg-purple.light p-6 ">
           <Heading1 className="truncate">Next PTA meeting</Heading1>
-          <BaseText className="mt-4 mb-2 text-gray-500  truncate">
+          <BaseText className="mt-4 mb-2imp text-gray-500  truncate">
             Our PTA meeting comes up on the 31st of August, 2024. Guardians are
             advised to be present
           </BaseText>
@@ -30,7 +30,7 @@ const Hero = () => (
       <div className="item">
         <Card className="bg-purple.light p-6 ">
           <Heading1 className="truncate">End of Term</Heading1>
-          <BaseText className="mt-4 mb-2 text-gray-500  truncate">
+          <BaseText className="mt-4 mb-2imp text-gray-500  truncate">
             The current term ends on the 15th of August, 2024
           </BaseText>
           <ActionBtn className="mt-4 px-4 py-2">Read more</ActionBtn>
