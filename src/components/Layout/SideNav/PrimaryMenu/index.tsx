@@ -17,6 +17,11 @@ const navs = [
     icon: 'paper',
   } as const,
   {
+    label: 'teachers',
+    route: 'teachers',
+    icon: 'paper',
+  } as const,
+  {
     label: 'classroom',
     route: 'classroom',
     icon: 'paper',
@@ -34,11 +39,6 @@ const navs = [
   {
     label: 'announcements',
     route: 'announcements',
-    icon: 'paper',
-  } as const,
-  {
-    label: 'school information',
-    route: 'school-information',
     icon: 'paper',
   } as const,
 ];

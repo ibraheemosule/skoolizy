@@ -75,10 +75,6 @@ const router = createBrowserRouter([
         element: <Students />,
       },
       {
-        path: 'school-information',
-        element: <Students />,
-      },
-      {
         path: 'settings',
         element: <Students />,
       },
