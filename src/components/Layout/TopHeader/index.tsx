@@ -26,11 +26,11 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
         <Menu />
       </button>
       <div className="flex grow gap-4 items-center justify-between">
-        <h2 className="hidden sm:block sm:text-gray-500 sm:text-[1.4rem] sm:font-normal">
+        <h2 className="hidden sm:block text-gray-500 text-xl font-semibold">
           {route.map((r) => (
             <span
               key={r}
-              className="pr-4 tracking-tight relative first:before:hidden before:content-[''] before:inline-block before:-left-2 before:absolute before:bottom-1/2 before:translate-y-1/2 before:h-4 before:bg-red before:border-l-2  before:border-gray-200"
+              className="tracking-tight first:before:hidden before:content-['-'] before:mx-2"
             >
               {capitalizeChar(r)}
             </span>
