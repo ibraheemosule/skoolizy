@@ -20,9 +20,9 @@ type TModal = {
 };
 
 const sizes = {
-  sm: 'max-w-[40vw] lg:max-w-[30vw] xl:max-w-[400px]',
-  md: 'max-w-[80vw] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
-  lg: 'max-w-[80vw]',
+  sm: 'md:min-w-[40%] lg:min-w-[25%] max-w-[40vw] lg:max-w-[30vw] xl:max-w-[400px]',
+  md: 'md:min-w-[60%] lg:min-w-[40%] max-w-[80vw] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
+  lg: 'md:min-w-[80%] lg:min-w-[60%] max-w-[80vw] max-w-[80vw]',
 };
 
 const Modal: FC<TModal> = ({

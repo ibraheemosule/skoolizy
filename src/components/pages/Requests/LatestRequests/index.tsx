@@ -20,6 +20,7 @@ const Requests = () => {
       )}
       {modal === 'filter' && (
         <Modal
+          size="sm"
           title="Filter Requests"
           content={<RequestsFilter />}
           action={() => null}
