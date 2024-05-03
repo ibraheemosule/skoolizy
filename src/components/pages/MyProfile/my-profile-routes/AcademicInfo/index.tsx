@@ -44,7 +44,7 @@ const AcademicInfo = () => {
                       onClick={() => setInfo({ [key]: '' })}
                       className=" text-purple.dark hover:-translate-y-0.5"
                     >
-                      edit
+                      Edit
                     </BaseBtn>
                   </div>
                 ) : null

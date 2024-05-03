@@ -39,7 +39,7 @@ const Modal: FC<TModal> = ({
     <div
       ref={modal}
       onClick={(e) => e.target === modal.current && close((prev) => !prev)}
-      className="absolute transition-all grid place-items-center bg-[#918e8eb3] top-0 left-0 h-screen w-screen z-50 p-8"
+      className="fixed transition-all grid place-items-center bg-[#918e8eb3] top-0 left-0 h-screen w-screen z-50 p-8"
     >
       <div
         className={`transition-all relative min-w-[280px] ${
