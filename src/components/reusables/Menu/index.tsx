@@ -2,11 +2,13 @@ import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import Icon from '~assets/Icons';
 import { TIconNames } from '~assets/Icons/IconNames';
+import { BaseBtn } from '../ui/Buttons';
 
 type TVerticalNav = {
   nav: {
     label: string;
-    route: string;
+    route?: string;
+    action?: () => void;
     icon?: TIconNames;
   }[];
   title?: string;
@@ -16,18 +18,22 @@ export const VerticalNav = memo(({ nav, title }: TVerticalNav) => (
   <nav className="border-t border-gray-300 mt-6 pt-4 font-bold">
     {title && <h2 className="_full text-xl py-4">{title}</h2>}
     <menu className="text-gray-800">
-      {nav.map((nav) => (
-        <li key={nav.label} className="group cursor-pointer relative">
-          <NavLink
-            to={nav.route || '#'}
-            className="nav-item capitalize pl-8 text-gray-500 hover:text-black hover:bg-gray-100  py-4 flex items-center relative"
-          >
-            {nav.icon && <Icon name={nav.icon} style={{ marginRight: 10 }} />}
-            <span>{nav.label}</span>
-            <i className="absolute hidden bg-brown.dark w-[10px] top-0 left-0 h-full rounded-tr-xl rounded-br-xl group-hover:block" />
-          </NavLink>
-        </li>
-      ))}
+      {nav.map((nav) => {
+        const Btn = nav.route ? NavLink : BaseBtn;
+        return (
+          <li key={nav.label} className="group cursor-pointer relative">
+            <Btn
+              to={nav.route || '#'}
+              {...(nav.action && { onClick: nav.action })}
+              className="nav-item w-full capitalize pl-8 text-gray-500 hover:text-black hover:bg-gray-100  py-4 flex items-center relative"
+            >
+              {nav.icon && <Icon name={nav.icon} style={{ marginRight: 10 }} />}
+              <span>{nav.label}</span>
+              <i className="absolute hidden bg-brown.dark w-[10px] top-0 left-0 h-full rounded-tr-xl rounded-br-xl group-hover:block" />
+            </Btn>
+          </li>
+        );
+      })}
     </menu>
   </nav>
 ));

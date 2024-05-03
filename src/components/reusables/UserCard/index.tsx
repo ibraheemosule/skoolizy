@@ -80,16 +80,3 @@ UserCard.User = User;
 UserCard.Icon = Icon;
 
 export default UserCard;
-
-// {people.map((person) => (
-//     <li key={Math.random()}>
-//       <UserCard>
-//         <>
-//           <UserCard.Image src={person.imageUrl} />
-//           <UserCard.User user={person.name} role={person.role}>
-//             <UserCard.Icon url={person.twitter} name="Twitter" />
-//           </UserCard.User>
-//         </>
-//       </UserCard>
-//     </li>
-//   ))}

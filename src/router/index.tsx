@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <Navigate to="dashboard" />,
       },
       {
         path: 'dashboard',
@@ -61,6 +61,22 @@ const router = createBrowserRouter([
             element: <RecordGrade />,
           },
         ],
+      },
+      {
+        path: 'subjects',
+        element: <Students />,
+      },
+      {
+        path: 'media',
+        element: <Students />,
+      },
+      {
+        path: 'announcements',
+        element: <Students />,
+      },
+      {
+        path: 'settings',
+        element: <Students />,
       },
       {
         path: 'my-profile',

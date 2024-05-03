@@ -1,53 +1,60 @@
-const AcademicInfo = () => (
-  <>
-    <div className="mt-6 px-4 sm:px-0">
-      <h3 className="font-semibold  text-gray-900">Contact Information</h3>
-    </div>
-    <div className="mt-6 border-t border-gray-100">
-      <dl className="divide-y divide-gray-100">
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">
-            Email Address
-          </dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            test@yop.com
-          </dd>
-        </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">
-            Phone Number
-          </dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            08067153177
-          </dd>
-        </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">
-            Home Address
-          </dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            15, at test, idimy,lagos
-          </dd>
-        </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">
-            Emergency Email Address
-          </dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            test@yop.com
-          </dd>
-        </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">
-            Emergency Phone Number
-          </dt>
-          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            08012345678
-          </dd>
-        </div>
-      </dl>
-    </div>
-  </>
-);
+import { useState, ReactElement } from 'react';
+import { BaseBtn } from '~components/reusables/ui/Buttons';
+import { DocumentList, List, ListItem } from '~components/reusables/List/List';
+import { capitalizeChar } from '~utils/format';
+import { academic, canEdit } from './u-academic-info';
+import EditListItemModal from '~components/reusables/List/EditListItemModal';
+
+const AcademicInfo = () => {
+  const [info, setInfo] = useState<Record<string, string>>({});
+
+  const udpateValue = (key: string) => (v: string) => setInfo({ [key]: v });
+
+  return Object.entries(academic).map(([k, v]) => (
+    <>
+      <div className="py-6 font-bold text-sm border-b border-gray-100">
+        {capitalizeChar(k)}
+      </div>
+      <List key={k}>
+        {Object.entries(v).map(([key, value]) => {
+          const edit = typeof info[key] === 'string';
+
+          return (
+            <ListItem
+              key={key}
+              title={capitalizeChar(key)}
+              description={
+                edit ? (
+                  <EditListItemModal
+                    close={() => setInfo({})}
+                    value={info[key]}
+                    updateValue={udpateValue(key)}
+                    field={key}
+                  />
+                ) : key === 'certificate_obtained' && Array.isArray(value) ? (
+                  <DocumentList doc={value} />
+                ) : (
+                  <span>{value}</span>
+                )
+              }
+              action={
+                canEdit.includes(key) ? (
+                  <div className="flex gap-4 justify-center">
+                    <BaseBtn
+                      onClick={() => setInfo({ [key]: '' })}
+                      className=" text-purple.dark hover:-translate-y-0.5"
+                    >
+                      edit
+                    </BaseBtn>
+                  </div>
+                ) : null
+              }
+            />
+          );
+        })}
+      </List>
+    </>
+  )) as unknown as ReactElement[];
+};
 
 export default AcademicInfo;

@@ -23,7 +23,7 @@ const Highlights = () => (
       </div>
     </div>
 
-    <div className="max-h-[300px] mt-8 overflow-y-auto">
+    <div className="max-h-[70vh] mt-8 overflow-y-auto">
       {Array(10)
         .fill('')
         .map(() => (

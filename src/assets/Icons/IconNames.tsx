@@ -4,4 +4,6 @@ export type TIconNames =
   | 'search'
   | 'caretDown'
   | 'logo'
-  | 'paper';
+  | 'paper'
+  | 'eye'
+  | 'download';
