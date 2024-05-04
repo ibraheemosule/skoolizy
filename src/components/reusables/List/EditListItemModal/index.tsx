@@ -3,6 +3,7 @@ import { ActionBtn, BaseBtn } from '~reusables/ui/Buttons';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import { capitalizeChar } from '~utils/format';
+import { selectOptions, reqAuth, reqSearch } from './u-edtit-list-item';
 import Modal from '~reusables/Modal';
 
 type TEditInfo = {
@@ -11,15 +12,6 @@ type TEditInfo = {
   close: () => void;
   field: string;
 };
-
-const selectOptions = {
-  gender: ['male', 'female'],
-  marital_status: ['single', 'married', 'divorced'],
-};
-
-const reqAuth = ['email_address', 'phone_number'];
-
-const reqSearch = ['current_location'];
 
 const SimpleEdit = ({ value, updateValue, close, field }: TEditInfo) => {
   const [newValue, setNewValue] = useCustomField(value);
@@ -32,6 +24,7 @@ const SimpleEdit = ({ value, updateValue, close, field }: TEditInfo) => {
   return (
     <Modal
       close={close}
+      size="sm"
       title={`Are you sure you want to update ${capitalizeChar(
         field
       ).toLowerCase()}`}

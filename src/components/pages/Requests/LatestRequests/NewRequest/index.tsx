@@ -16,7 +16,7 @@ const testing = [
 const NewRequest = () => {
   const [value, setValue] = useCustomField<string>('', testing);
   return (
-    <div className="md:w-96 pb-8">
+    <div className="pb-8">
       <textarea
         placeholder="Add a new request"
         className="w-full outline-none resize-none h-20 bg-gray-100 p-2 rounded-lg"
