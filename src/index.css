@@ -87,3 +87,9 @@ body {
 .horizontal-nav.active {
   @apply rounded-t-md bg-brown.dark text-white;
 }
+._media-options-btn span {
+  display: none;
+}
+._media-options-btn:hover span {
+  display: block;
+}

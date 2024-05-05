@@ -15,6 +15,7 @@ type TModal = {
   action?: () => void;
   actionText?: string;
   size?: 'sm' | 'md' | 'lg';
+  scroll?: boolean;
 } & {
   [key in 'title' | 'content']?: ReactNode;
 };
@@ -32,6 +33,7 @@ const Modal: FC<TModal> = ({
   content,
   actionText,
   size,
+  scroll = true,
 }) => {
   const modal = useRef<ElementRef<'div'>>(null);
 
@@ -54,7 +56,9 @@ const Modal: FC<TModal> = ({
         <header>
           <h3 className=" text-xl font-semibold max-w-[90%]">{title}</h3>
         </header>
-        <main className="my-6 max-h-[65vh] overflow-y-auto">
+        <main
+          className={`my-6 ${scroll ? 'overflow-y-auto max-h-[65vh]' : ''}`}
+        >
           {content}
           {action && (
             <ActionBtn
