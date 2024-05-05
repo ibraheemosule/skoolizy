@@ -1,6 +1,6 @@
 import UsersListLayout from '~components/reusables/UsersListLayout';
 import TeachersList from './TeachersList';
-import TeachersFilter from './TeachersFilter';
+import TeachersFilter from './TeachersOptions';
 
 const Teachers = () => (
   <UsersListLayout

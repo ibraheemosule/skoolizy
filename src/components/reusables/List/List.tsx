@@ -63,10 +63,10 @@ export const DocumentList: FC<{ doc: string[] }> = ({ doc }) => (
         </div>
         <div className="ml-4 flex gap-6 flex-shrink-0 items-center">
           <BaseBtn>
-            <Icon name="eye" stroke="blue" height={18} width={18} />
+            <Icon name="eye" stroke="#432c81" height={18} width={18} />
           </BaseBtn>
           <BaseBtn>
-            <Icon name="download" stroke="blue" height={18} width={18} />
+            <Icon name="download" stroke="#432c81" height={18} width={18} />
           </BaseBtn>
         </div>
       </li>

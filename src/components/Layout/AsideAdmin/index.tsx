@@ -5,10 +5,10 @@ import Highlights from './Highlights';
 const AsideAdmin = () => (
   <>
     <div className="mt-8 md:mt-0">
-      <LatestRequests />
+      <RateSomeone />
     </div>
     <div className="mt-8 max-w-sm">
-      <RateSomeone />
+      <LatestRequests />
     </div>
     <div className="mt-8">
       <Highlights />

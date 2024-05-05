@@ -2,14 +2,11 @@ import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 
-const StudentFilter = () => {
-  const [classroom, setClassroom, classroomList] = useCustomField('', [
-    'JSS-1',
-    'JSS-2',
-    'JSS-3',
-    'SSS-1',
-    'SSS-2',
-    'SSS-3',
+export default function TeachersFilter() {
+  const [subject, setSubject, subjectList] = useCustomField('', [
+    'English',
+    'Math',
+    'Biology',
   ]);
   const [gender, setGender] = useCustomField('');
   const [year, setYear] = useCustomField('');
@@ -20,14 +17,15 @@ const StudentFilter = () => {
     '3 > 4',
     '4 > 5',
   ]);
+
   return (
-    <>
+    <div className="text-left mb-4">
       <div>
-        <BoldText>Classroom:</BoldText>
+        <BoldText>Subject:</BoldText>
         <div className="mt-1">
-          <CustomField value={classroom} onSelect={setClassroom} field="select">
+          <CustomField value={subject} onSelect={setSubject} field="select">
             <CustomField.DropdownWrapper>
-              {classroomList.map((sub) => (
+              {subjectList.map((sub) => (
                 <CustomField.Dropdown key={sub} value={sub}>
                   {sub}
                 </CustomField.Dropdown>
@@ -36,7 +34,7 @@ const StudentFilter = () => {
           </CustomField>
         </div>
       </div>
-      <div>
+      <div className="mt-4">
         <BoldText>Gender:</BoldText>
         <div className="mt-1">
           <CustomField value={gender} onSelect={setGender} field="select">
@@ -47,7 +45,7 @@ const StudentFilter = () => {
           </CustomField>
         </div>
       </div>
-      <div>
+      <div className="mt-4">
         <BoldText>Year Joined:</BoldText>
         <div className="mt-1">
           <CustomField
@@ -59,7 +57,7 @@ const StudentFilter = () => {
         </div>
       </div>
 
-      <div>
+      <div className="mt-4">
         <BoldText>Ratings:</BoldText>
         <div className="mt-1">
           <CustomField value={rating} onSelect={setRating} field="select">
@@ -73,8 +71,6 @@ const StudentFilter = () => {
           </CustomField>
         </div>
       </div>
-    </>
+    </div>
   );
-};
-
-export default StudentFilter;
+}

@@ -3,6 +3,7 @@ import Layout from '~components/Layout';
 import Dashboard from '~components/pages/Dashboard';
 import Login from '~components/pages/Login';
 import Requests from '~components/pages/Requests';
+import Media from '~components/pages/Media';
 import Teachers from '~components/pages/Teachers';
 import Students from '~components/pages/Students';
 import Classroom from '~components/pages/Classroom';
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'media',
-        element: <Students />,
+        element: <Media />,
       },
       {
         path: 'announcements',

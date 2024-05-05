@@ -13,6 +13,7 @@ const Requests = () => {
     <div className="flex  flex-col md:h-full md:overflow-hidden">
       {modal === 'newRequest' && (
         <Modal
+          size="md"
           title="New Request"
           content={<NewRequest />}
           close={() => setModal('')}
@@ -20,6 +21,7 @@ const Requests = () => {
       )}
       {modal === 'filter' && (
         <Modal
+          size="sm"
           title="Filter Requests"
           content={<RequestsFilter />}
           action={() => null}
