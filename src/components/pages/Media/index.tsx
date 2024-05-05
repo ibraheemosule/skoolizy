@@ -104,19 +104,21 @@ const Media = () => {
             </div>
             <div className="mb-2 relative group">
               <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn className="flex-col relative _media-options-btn items-center hidden group-hover:flex">
+                <BaseBtn
+                  onClick={() => downloadFile(b)}
+                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-                  <a href={b} download>
-                    <Icon
-                      name="download"
-                      stroke="#fff"
-                      strokeWidth={2}
-                      height={22}
-                      width={22}
-                    />
-                  </a>
+
+                  <Icon
+                    name="download"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    height={22}
+                    width={22}
+                  />
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(b)}
@@ -153,19 +155,21 @@ const Media = () => {
             </div>
             <div className="mb-2 relative group">
               <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn className="flex-col relative _media-options-btn items-center hidden group-hover:flex">
+                <BaseBtn
+                  onClick={() => downloadFile(c)}
+                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-                  <a href={c} download>
-                    <Icon
-                      name="download"
-                      stroke="#fff"
-                      strokeWidth={2}
-                      height={22}
-                      width={22}
-                    />
-                  </a>
+
+                  <Icon
+                    name="download"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    height={22}
+                    width={22}
+                  />
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(c)}
@@ -202,19 +206,21 @@ const Media = () => {
             </div>
             <div className="mb-2 relative group">
               <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn className="flex-col relative _media-options-btn items-center hidden group-hover:flex">
+                <BaseBtn
+                  onClick={() => downloadFile(d)}
+                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-                  <a href={d} download>
-                    <Icon
-                      name="download"
-                      stroke="#fff"
-                      strokeWidth={2}
-                      height={22}
-                      width={22}
-                    />
-                  </a>
+
+                  <Icon
+                    name="download"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    height={22}
+                    width={22}
+                  />
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(d)}
@@ -251,19 +257,21 @@ const Media = () => {
             </div>{' '}
             <div className="mb-2 relative group">
               <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn className="flex-col relative _media-options-btn items-center hidden group-hover:flex">
+                <BaseBtn
+                  onClick={() => downloadFile(a)}
+                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-                  <a href={a} download>
-                    <Icon
-                      name="download"
-                      stroke="#fff"
-                      strokeWidth={2}
-                      height={22}
-                      width={22}
-                    />
-                  </a>
+
+                  <Icon
+                    name="download"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    height={22}
+                    width={22}
+                  />
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(a)}
@@ -300,19 +308,21 @@ const Media = () => {
             </div>
             <div className="mb-2 relative group">
               <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn className="flex-col relative _media-options-btn items-center hidden group-hover:flex">
+                <BaseBtn
+                  onClick={() => downloadFile(b)}
+                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-                  <a href={b} download>
-                    <Icon
-                      name="download"
-                      stroke="#fff"
-                      strokeWidth={2}
-                      height={22}
-                      width={22}
-                    />
-                  </a>
+
+                  <Icon
+                    name="download"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    height={22}
+                    width={22}
+                  />
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(b)}
@@ -349,19 +359,21 @@ const Media = () => {
             </div>
             <div className="mb-2 relative group">
               <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn className="flex-col relative _media-options-btn items-center hidden group-hover:flex">
+                <BaseBtn
+                  onClick={() => downloadFile(d)}
+                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-                  <a href={d} download>
-                    <Icon
-                      name="download"
-                      stroke="#fff"
-                      strokeWidth={2}
-                      height={22}
-                      width={22}
-                    />
-                  </a>
+
+                  <Icon
+                    name="download"
+                    stroke="#fff"
+                    strokeWidth={2}
+                    height={22}
+                    width={22}
+                  />
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(d)}
