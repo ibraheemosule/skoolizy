@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 import Icon from '~assets/Icons';
 import Modal from '~components/reusables/Modal';
 
-export default function NewMedia({ closeModal }: { closeModal: () => void }) {
+const NewMedia = ({ closeModal }: { closeModal: () => void }) => {
   const [image, setImage] = useState('');
 
   const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,4 +41,6 @@ export default function NewMedia({ closeModal }: { closeModal: () => void }) {
       actionText="Done"
     />
   );
-}
+};
+
+export default memo(NewMedia);

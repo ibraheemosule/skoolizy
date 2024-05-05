@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
@@ -15,11 +15,7 @@ const testing = [
   'ksdadkfjkdfj akfjsklajfkjkfsfoi',
 ];
 
-export default function RequestsFilter({
-  closeModal,
-}: {
-  closeModal: () => void;
-}) {
+const FilterRequests = ({ closeModal }: { closeModal: () => void }) => {
   const [classs, setClasss] = useState('');
   const [search, setSearch] = useCustomField('');
   const [user, setUser] = useState<string[]>([]);
@@ -140,4 +136,6 @@ export default function RequestsFilter({
       actionText="Filter"
     />
   );
-}
+};
+
+export default memo(FilterRequests);

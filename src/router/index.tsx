@@ -14,6 +14,7 @@ import MyProfile from '~components/pages/MyProfile';
 import PersonalInfo from '~components/pages/MyProfile/my-profile-routes/PersonalInfo';
 import AcademicInfo from '~components/pages/MyProfile/my-profile-routes/AcademicInfo';
 import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactInfo';
+import Feeds from '~components/pages/Feeds';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: 'announcements',
+        element: <Students />,
+      },
+      {
+        path: 'feeds',
+        element: <Feeds />,
       },
       {
         path: 'requests',
@@ -71,10 +80,7 @@ const router = createBrowserRouter([
         path: 'media',
         element: <Media />,
       },
-      {
-        path: 'announcements',
-        element: <Students />,
-      },
+
       {
         path: 'settings',
         element: <Students />,

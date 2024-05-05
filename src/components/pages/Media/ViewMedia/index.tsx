@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Modal from '~components/reusables/Modal';
 
 type TViewMedia = {
@@ -20,4 +21,4 @@ const ViewMedia = ({ img, closeModal }: TViewMedia) => (
   />
 );
 
-export default ViewMedia;
+export default memo(ViewMedia);

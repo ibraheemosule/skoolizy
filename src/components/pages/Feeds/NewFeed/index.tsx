@@ -15,7 +15,7 @@ const testing = [
   'ksdadkfjkdfj akfjsklajfkjkfsfoi',
 ];
 
-const NewRequest = ({ closeModal }: { closeModal: () => void }) => {
+const NewFeed = ({ closeModal }: { closeModal: () => void }) => {
   const [value, setValue] = useCustomField<string>('', testing);
   return (
     <Modal
@@ -49,4 +49,4 @@ const NewRequest = ({ closeModal }: { closeModal: () => void }) => {
   );
 };
 
-export default memo(NewRequest);
+export default memo(NewFeed);
