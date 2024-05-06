@@ -12,10 +12,9 @@ const UsersListLayout: FC<IUserListLayout> = ({ type, Filter, List }) => (
   <section className="flex  _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
     <div className="w-full min-h-full lg:w-3/5 xl:w-8/12 shrink-0">
       <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden">
-        <div className="mx-auto">
+        <div className=" _full mx-auto">
           <Heading2 className="capitalize">Meet our {type}</Heading2>
-
-          <div className="flex mt-6 flex-wrap gap-8 gap-y-4">
+          <div className="mt-6">
             <Filter />
           </div>
         </div>

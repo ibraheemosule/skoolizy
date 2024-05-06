@@ -3,6 +3,7 @@ import Layout from '~components/Layout';
 import Dashboard from '~components/pages/Dashboard';
 import Login from '~components/pages/Login';
 import Requests from '~components/pages/Requests';
+import Media from '~components/pages/Media';
 import Teachers from '~components/pages/Teachers';
 import Students from '~components/pages/Students';
 import Classroom from '~components/pages/Classroom';
@@ -13,6 +14,7 @@ import MyProfile from '~components/pages/MyProfile';
 import PersonalInfo from '~components/pages/MyProfile/my-profile-routes/PersonalInfo';
 import AcademicInfo from '~components/pages/MyProfile/my-profile-routes/AcademicInfo';
 import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactInfo';
+import Feeds from '~components/pages/Feeds';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: 'announcements',
+        element: <Students />,
+      },
+      {
+        path: 'feeds',
+        element: <Feeds />,
       },
       {
         path: 'requests',
@@ -68,12 +78,9 @@ const router = createBrowserRouter([
       },
       {
         path: 'media',
-        element: <Students />,
+        element: <Media />,
       },
-      {
-        path: 'announcements',
-        element: <Students />,
-      },
+
       {
         path: 'settings',
         element: <Students />,

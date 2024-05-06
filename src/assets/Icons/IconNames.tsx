@@ -6,4 +6,6 @@ export type TIconNames =
   | 'logo'
   | 'paper'
   | 'eye'
-  | 'download';
+  | 'download'
+  | 'trash'
+  | 'upload';

@@ -1,14 +1,14 @@
 import RateSomeone from '~components/reusables/RateSomeone';
 import LatestRequests from './LatestRequests';
-import Highlights from './Highlights';
+import Highlights from './LatestFeeds';
 
 const AsideAdmin = () => (
   <>
     <div className="mt-8 md:mt-0">
-      <LatestRequests />
+      <RateSomeone />
     </div>
     <div className="mt-8 max-w-sm">
-      <RateSomeone />
+      <LatestRequests />
     </div>
     <div className="mt-8">
       <Highlights />

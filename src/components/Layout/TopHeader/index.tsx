@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { capitalizeChar } from '~src/utils/format';
+import { capitalizeChar } from '~src/utils';
 import Menu from '~assets/Icons/MenuIcon';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';

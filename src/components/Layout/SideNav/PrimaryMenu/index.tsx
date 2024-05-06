@@ -7,6 +7,16 @@ const navs = [
     icon: 'paper',
   } as const,
   {
+    label: 'announcements',
+    route: 'announcements',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'feeds',
+    route: 'feeds',
+    icon: 'paper',
+  } as const,
+  {
     label: 'requests',
     route: 'requests',
     icon: 'paper',
@@ -14,6 +24,11 @@ const navs = [
   {
     label: 'students',
     route: 'students',
+    icon: 'paper',
+  } as const,
+  {
+    label: 'teachers',
+    route: 'teachers',
     icon: 'paper',
   } as const,
   {
@@ -34,11 +49,6 @@ const navs = [
   {
     label: 'media',
     route: 'media',
-    icon: 'paper',
-  } as const,
-  {
-    label: 'announcements',
-    route: 'announcements',
     icon: 'paper',
   } as const,
 ];

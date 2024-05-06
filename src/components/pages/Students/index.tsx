@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import UsersListLayout from '~components/reusables/UsersListLayout';
 import StudentsList from './StudentsList';
-import StudentsFilter from './StudentsFilter';
+import StudentsFilter from './StudentsOptions';
 
 const Students = () => (
   <UsersListLayout
