@@ -16,7 +16,11 @@ const testing = [
 ];
 
 const NewRequest = ({ closeModal }: { closeModal: () => void }) => {
-  const [value, setValue] = useCustomField<string>('', testing);
+  const [value, setValue, list, filterFn] = useCustomField<string[]>(
+    [],
+    testing
+  );
+
   return (
     <Modal
       size="md"
@@ -29,15 +33,23 @@ const NewRequest = ({ closeModal }: { closeModal: () => void }) => {
             maxLength={200}
           />
           <div className="flex mt-4 gap-4 flex-wrap sm:justify-end">
-            <CustomField value={value} onSelect={setValue} field="select">
-              <CustomField.DropdownWrapper width={200}>
-                {testing.map((name) => (
-                  <CustomField.Dropdown key={name} value={name}>
-                    {name}
-                  </CustomField.Dropdown>
-                ))}
-              </CustomField.DropdownWrapper>
-            </CustomField>
+            <div className="w-[150px]">
+              <CustomField
+                placeholder="Add Tags"
+                value={value}
+                onSelect={setValue}
+                field="select"
+                filterFn={filterFn}
+              >
+                <CustomField.DropdownWrapper width={200}>
+                  {list.map((name) => (
+                    <CustomField.Dropdown key={name} value={name}>
+                      {name}
+                    </CustomField.Dropdown>
+                  ))}
+                </CustomField.DropdownWrapper>
+              </CustomField>
+            </div>
             <ActionBtn className="px-4 py-2 text-purple.dark hover:opacity-50">
               Request
             </ActionBtn>
