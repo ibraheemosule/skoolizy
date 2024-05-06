@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { BaseBtn, ActionBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import Modal from '~components/reusables/Modal';
-import TeachersFilter from './TeachersFilter';
+import FilterTeachers from './TeachersFilter';
 import NewTeacher from './NewTeacher';
 
 export default function TeachersOption() {
@@ -24,26 +23,8 @@ export default function TeachersOption() {
           Add a new teacher
         </ActionBtn>
       </div>
-      {modal === 'filter' && (
-        <Modal
-          size="sm"
-          title="Filter Teachers By"
-          content={<TeachersFilter />}
-          action={() => null}
-          close={() => setModal('')}
-          actionText="Filter"
-        />
-      )}
-      {modal === 'newTeacher' && (
-        <Modal
-          size="sm"
-          title="Send an invite link to a Teacher"
-          content={<NewTeacher />}
-          action={() => null}
-          close={() => setModal('')}
-          actionText="Filter"
-        />
-      )}
+      {modal === 'filter' && <FilterTeachers closeModal={() => setModal('')} />}
+      {modal === 'newTeacher' && <NewTeacher closeModal={() => setModal('')} />}
     </>
   );
 }

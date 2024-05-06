@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
 import { BoldText } from '~reusables/ui/Text';
+import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
-import Modal from '~reusables/Modal';
 
 const testing = [
   'here',
@@ -15,7 +15,7 @@ const testing = [
   'ksdadkfjkdfj akfjsklajfkjkfsfoi',
 ];
 
-const FilterMedia = ({ closeModal }: { closeModal: () => void }) => {
+const FilterFeeds = ({ closeModal }: { closeModal: () => void }) => {
   const [classs, setClasss] = useState('');
   const [search, setSearch] = useCustomField('');
   const [user, setUser] = useState<string[]>([]);
@@ -44,7 +44,7 @@ const FilterMedia = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <Modal
       size="sm"
-      title="Filter Media"
+      title="Filter Requests"
       content={
         <>
           <div>
@@ -138,4 +138,4 @@ const FilterMedia = ({ closeModal }: { closeModal: () => void }) => {
   );
 };
 
-export default memo(FilterMedia);
+export default memo(FilterFeeds);

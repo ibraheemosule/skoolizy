@@ -53,10 +53,10 @@ const Media = () => {
           </div>
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto columns-1 xs:columns-2  xlg:columns-3 lg:columns-4 gap-4">
             <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
+              <div className="absolute flex justify-around items-center bottom-0 h-14 left-0 w-full bg-[#343232ad]">
                 <BaseBtn
                   onClick={() => downloadFile(a)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
                   <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
@@ -71,7 +71,7 @@ const Media = () => {
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(a)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
                   <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
                     View
@@ -86,7 +86,7 @@ const Media = () => {
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setDeleteMedia(a)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
                   <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
                     Delete
@@ -103,7 +103,7 @@ const Media = () => {
               <img src={a} alt="imaging" />
             </div>
             <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
+              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232df]">
                 <BaseBtn
                   onClick={() => downloadFile(b)}
                   className="flex-col relative _media-options-btn items-center hidden group-hover:flex"

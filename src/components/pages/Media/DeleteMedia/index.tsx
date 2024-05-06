@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Modal from '~components/reusables/Modal';
 
 type TDeleteMedia = {
@@ -22,4 +23,4 @@ const DeleteMedia = ({ img, closeModal }: TDeleteMedia) => (
   />
 );
 
-export default DeleteMedia;
+export default memo(DeleteMedia);

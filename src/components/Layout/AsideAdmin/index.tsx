@@ -1,6 +1,6 @@
 import RateSomeone from '~components/reusables/RateSomeone';
 import LatestRequests from './LatestRequests';
-import Highlights from './Highlights';
+import Highlights from './LatestFeeds';
 
 const AsideAdmin = () => (
   <>
