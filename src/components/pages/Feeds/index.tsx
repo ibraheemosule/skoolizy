@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import { ActionBtn, BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import RequestCard from '~reusables/RequestCard';
+import FeedCard from '~reusables/FeedCard';
 import NewFeed from './NewFeed';
 import FilterFeeds from './FilterFeeds';
 
@@ -28,31 +28,21 @@ const Feeds = () => {
               onClick={() => setModal('newFeed')}
               className="px-4 py-2 text-purple.dark hover:opacity-50"
             >
-              New Feeds
+              New Feed
             </ActionBtn>
           </div>
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
-            <div className="mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
-            <div className=" mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
-            <div className=" mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
-            <div className=" mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
-            <div className=" mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
-            <div className=" mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
-            <div className=" mt-4 bg-gray-100 rounded-lg">
-              <RequestCard />
-            </div>
+            {Array(10)
+              .fill('')
+              .map(() => (
+                <FeedCard
+                  key={Math.random()}
+                  author="Mr John Doe"
+                  date="yes"
+                  content="Explicabo nihil laborum. Saepe facilis consequuntur in
+                        eaque. Consequatur perspiciatis quam. Sed est illo quia"
+                />
+              ))}
           </div>
         </div>
       </div>

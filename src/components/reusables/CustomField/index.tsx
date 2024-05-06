@@ -64,8 +64,12 @@ const Editable = () => {
 Editable.displayName = 'Editable';
 
 const NonEditable = () => {
-  const { onSelect, value } = useCustomFieldContext();
-  const placeholder = <span className="text-gray-400">Select...</span>;
+  const {
+    onSelect,
+    value,
+    placeholder = 'Select...',
+  } = useCustomFieldContext();
+  const emptyValue = <span className="text-gray-400">{placeholder}</span>;
 
   return (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
@@ -90,8 +94,8 @@ const NonEditable = () => {
                   </div>
                 </Tag>
               ))
-            : placeholder
-          : value || placeholder}
+            : emptyValue
+          : value || emptyValue}
       </div>
       <span className=" mr-1">
         <Icon height={20} width={20} name="caretDown" />
@@ -217,6 +221,7 @@ type EditableProp =
 type NonEditableProp = {
   field: 'select';
   children: ReactNode;
+  placeholder?: string;
   onSelect: (arg: string) => void;
 } & (
   | {
@@ -288,13 +293,13 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
       dropdownRef,
       field: props.field,
       value: props.value,
+      placeholder: props.placeholder,
       ...(props.field === 'select'
         ? {
             onSelect: props.onSelect,
             filterFn: props.filterFn,
           }
         : {
-            placeholder: props.placeholder,
             search: props.search,
             type: props.field === 'date' ? 'date' : props.type,
             id: props.id,
