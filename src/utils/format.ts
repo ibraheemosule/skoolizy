@@ -9,11 +9,13 @@ export const capitalizeChar = (str: string) => {
 
 export const formatDate = (str: string) => {
   const newDate = new Date(str);
-  const date = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+  const getDate = `${newDate.getDate()}/${
+    newDate.getMonth() + 1
+  }/${newDate.getFullYear()}`;
   const hour = newDate.getUTCHours();
   const minute = `:${newDate.getUTCMinutes()}`;
-  const newTime = `${hour > 12 ? hour - 12 : hour < 1 ? 12 : hour}${minute}${
+  const getTime = `${hour > 12 ? hour - 12 : hour < 1 ? 12 : hour}${minute}${
     hour > 11 ? 'pm' : 'am'
   }`;
-  return { getDate: date, getTime: newTime };
+  return { getDate, getTime };
 };

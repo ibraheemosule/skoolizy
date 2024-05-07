@@ -1,4 +1,4 @@
-import { capitalizeChar } from './format';
+import { capitalizeChar, formatDate } from './format';
 
 describe('tests for formatting strings', () => {
   test('validate capitalizeChar function formats string as expected', () => {
@@ -19,5 +19,20 @@ describe('tests for formatting strings', () => {
   test('function should not capitalize letter that follows a backslash', () => {
     const result = capitalizeChar('/can i do this');
     expect(result).toBe('/can I Do This');
+  });
+});
+
+describe('tests for formatting date and time', () => {
+  test('time should be in a proper format', () => {
+    const result = formatDate('2022-02-23T00:43:03.000Z').getTime;
+    expect(result).toBe('12:43am');
+  });
+  test('noon time should be formatted properly', () => {
+    const result = formatDate('2022-02-23T12:43:03.000Z').getTime;
+    expect(result).toBe('12:43pm');
+  });
+  test('month should be formatted properly in the date', () => {
+    const result = formatDate('2022-12-23T12:43:03.000Z').getDate;
+    expect(result).toBe('23/12/2022');
   });
 });
