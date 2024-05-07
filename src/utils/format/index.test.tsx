@@ -1,4 +1,4 @@
-import { capitalizeChar, formatDate } from './format';
+import { capitalizeChar, formatDate } from '.';
 
 describe('tests for formatting strings', () => {
   test('validate capitalizeChar function formats string as expected', () => {
