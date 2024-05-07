@@ -8,7 +8,7 @@ export const capitalizeChar = (str: string) => {
 };
 
 export const formatDate = (str: string) => {
-  const newDate = new Date(str);
+  const newDate = new Date(str) || new Date();
   const getDate = `${newDate.getDate()}/${
     newDate.getMonth() + 1
   }/${newDate.getFullYear()}`;
