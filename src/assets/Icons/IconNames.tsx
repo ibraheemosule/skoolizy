@@ -8,4 +8,5 @@ export type TIconNames =
   | 'eye'
   | 'download'
   | 'trash'
-  | 'upload';
+  | 'upload'
+  | 'plus';
