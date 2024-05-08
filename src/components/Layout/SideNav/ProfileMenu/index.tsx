@@ -4,7 +4,7 @@ const nav = [
   {
     label: 'My Profile',
     route: 'my-profile',
-    icon: 'id',
+    icon: 'profile',
   } as const,
   {
     label: 'Settings',

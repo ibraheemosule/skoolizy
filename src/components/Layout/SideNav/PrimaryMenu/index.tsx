@@ -24,7 +24,7 @@ const navs = [
   {
     label: 'students',
     route: 'students',
-    icon: 'reading-icon',
+    icon: 'reading',
   } as const,
   {
     label: 'teachers',
@@ -44,7 +44,7 @@ const navs = [
   {
     label: 'media',
     route: 'media',
-    icon: 'replay',
+    icon: 'photo',
   } as const,
 ];
 
