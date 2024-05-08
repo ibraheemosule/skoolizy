@@ -44,7 +44,7 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <Modal
       size="sm"
-      title="Filter Requests"
+      title="Filter Announcements"
       content={
         <>
           <div>
