@@ -16,6 +16,7 @@ import AcademicInfo from '~components/pages/MyProfile/my-profile-routes/Academic
 import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactInfo';
 import Feeds from '~components/pages/Feeds';
 import Subjects from '~components/pages/Subjects';
+import Announcements from '~components/pages/Announcements';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'announcements',
-        element: <Students />,
+        element: <Announcements />,
       },
       {
         path: 'feeds',

@@ -16,6 +16,7 @@ type TModal = {
   actionText?: string;
   size?: 'sm' | 'md' | 'lg';
   scroll?: boolean;
+  fixedActionBtn?: boolean;
 } & {
   [key in 'title' | 'content']?: ReactNode;
 };
@@ -34,8 +35,18 @@ const Modal: FC<TModal> = ({
   actionText,
   size,
   scroll = true,
+  fixedActionBtn = false,
 }) => {
   const modal = useRef<ElementRef<'div'>>(null);
+
+  const actionUI = (
+    <ActionBtn
+      onClick={() => action?.()}
+      className="mt-4 px-4 py-2 w-full text-purple.dark hover:opacity-50"
+    >
+      {actionText || 'Submit'}
+    </ActionBtn>
+  );
 
   return (
     <div
@@ -60,15 +71,9 @@ const Modal: FC<TModal> = ({
           className={`my-6 ${scroll ? 'overflow-y-auto max-h-[65vh]' : ''}`}
         >
           {content}
-          {action && (
-            <ActionBtn
-              onClick={() => action()}
-              className="mt-4 px-4 py-2 w-full text-purple.dark hover:opacity-50"
-            >
-              {actionText || 'Submit'}
-            </ActionBtn>
-          )}
+          {action && !fixedActionBtn && actionUI}
         </main>
+        {action && fixedActionBtn && actionUI}
       </div>
     </div>
   );
