@@ -4,17 +4,17 @@ const nav = [
   {
     label: 'My Profile',
     route: 'my-profile',
-    icon: 'paper',
+    icon: 'id',
   } as const,
   {
     label: 'Settings',
     route: 'settings',
-    icon: 'paper',
+    icon: 'setting',
   } as const,
   {
     label: 'Sign out',
     action: () => null,
-    icon: 'paper',
+    icon: 'exit',
   } as const,
 ];
 

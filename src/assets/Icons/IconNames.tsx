@@ -8,4 +8,16 @@ export type TIconNames =
   | 'eye'
   | 'download'
   | 'trash'
-  | 'upload';
+  | 'upload'
+  | 'monitor'
+  | 'speaker'
+  | 'newspaper'
+  | 'edit-list'
+  | 'reading-icon'
+  | 'tutor'
+  | 'classroom'
+  | 'books'
+  | 'replay'
+  | 'id'
+  | 'setting'
+  | 'exit';
