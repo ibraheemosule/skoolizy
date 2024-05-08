@@ -4,47 +4,47 @@ const navs = [
   {
     label: 'dashboard',
     route: 'dashboard',
-    icon: 'paper',
+    icon: 'monitor',
   } as const,
   {
     label: 'announcements',
     route: 'announcements',
-    icon: 'paper',
+    icon: 'speaker',
   } as const,
   {
     label: 'feeds',
     route: 'feeds',
-    icon: 'paper',
+    icon: 'newspaper',
   } as const,
   {
     label: 'requests',
     route: 'requests',
-    icon: 'paper',
+    icon: 'edit-list',
   } as const,
   {
     label: 'students',
     route: 'students',
-    icon: 'paper',
+    icon: 'user',
   } as const,
   {
     label: 'teachers',
     route: 'teachers',
-    icon: 'paper',
+    icon: 'tutor',
   } as const,
   {
     label: 'classroom',
     route: 'classroom',
-    icon: 'paper',
+    icon: 'classroom',
   } as const,
   {
     label: 'subjects',
     route: 'subjects',
-    icon: 'paper',
+    icon: 'books',
   } as const,
   {
     label: 'media',
     route: 'media',
-    icon: 'paper',
+    icon: 'photo',
   } as const,
 ];
 
