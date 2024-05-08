@@ -5,28 +5,23 @@ import { BaseBtn } from '../ui/Buttons';
 export const List: FC<{ children: ReactElement[] | ReactElement }> = ({
   children,
 }) => {
-  console.log(children);
-  const value =
-    children &&
-    (Children.toArray(children) as unknown as ReactElement[]).map(
-      (child: ReactElement) => {
-        const el = child.type as unknown as { displayName: string };
+  const value = (Children.toArray(children) as unknown as ReactElement[]).map(
+    (child: ReactElement) => {
+      const el = child.type as unknown as { displayName: string };
 
-        if (el.displayName !== 'ListItem') {
-          throw Error('Component only accepts List Item');
-        }
-
-        if (child.props.parent) {
-          throw Error('ListItem does not accept parent props directly');
-        }
-
-        return cloneElement(child, { parent: true });
+      if (el.displayName !== 'ListItem') {
+        throw Error('Component only accepts List Item');
       }
-    );
 
-  return (
-    <dl className="divide-y divide-gray-100">{value && value.map((v) => v)}</dl>
+      if (child.props.parent) {
+        throw Error('ListItem does not accept parent props directly');
+      }
+
+      return cloneElement(child, { parent: true });
+    }
   );
+
+  return <dl className="divide-y divide-gray-100">{value.map((v) => v)}</dl>;
 };
 
 type TListItem = {
