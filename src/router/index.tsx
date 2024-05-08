@@ -15,6 +15,7 @@ import PersonalInfo from '~components/pages/MyProfile/my-profile-routes/Personal
 import AcademicInfo from '~components/pages/MyProfile/my-profile-routes/AcademicInfo';
 import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactInfo';
 import Feeds from '~components/pages/Feeds';
+import Subjects from '~components/pages/Subjects';
 
 const router = createBrowserRouter([
   {
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'subjects',
-        element: <Students />,
+        element: <Subjects />,
       },
       {
         path: 'media',
