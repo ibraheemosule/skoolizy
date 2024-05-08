@@ -7,7 +7,9 @@ export const List: FC<{ children: ReactElement[] | ReactElement }> = ({
 }) => {
   const value = (Children.toArray(children) as unknown as ReactElement[]).map(
     (child: ReactElement) => {
-      if ((child?.type as unknown as { name: string })?.name !== 'ListItem') {
+      const el = child.type as unknown as { displayName: string };
+
+      if (el.displayName !== 'ListItem') {
         throw Error('Component only accepts List Item');
       }
 
@@ -46,6 +48,8 @@ export const ListItem: FC<TListItem> = (props) => {
     </div>
   );
 };
+
+ListItem.displayName = 'ListItem';
 
 export const DocumentList: FC<{ doc: string[] }> = ({ doc }) => (
   <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
