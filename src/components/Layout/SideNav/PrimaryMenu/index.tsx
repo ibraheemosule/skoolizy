@@ -24,7 +24,7 @@ const navs = [
   {
     label: 'students',
     route: 'students',
-    icon: 'reading',
+    icon: 'user',
   } as const,
   {
     label: 'teachers',

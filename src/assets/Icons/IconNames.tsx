@@ -13,7 +13,7 @@ export type TIconNames =
   | 'speaker'
   | 'newspaper'
   | 'edit-list'
-  | 'reading'
+  | 'user'
   | 'tutor'
   | 'classroom'
   | 'books'

@@ -263,7 +263,7 @@ const icons: {
       </g>
     </svg>
   ),
-  reading: ({
+  user: ({
     width = 20,
     height = 20,
     style = {},
