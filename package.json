@@ -12,10 +12,11 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky install",
-    "test": "jest --watch --coverage=false"
+    "test": "vitest"
   },
   "dependencies": {
     "eslint-config-airbnb-typescript": "^17.1.0",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.8.0",
     "react-dom": "^18.2.0",
@@ -62,7 +63,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test -- --watchAll=false"
+      "pre-push": "npx vitest run"
     }
   }
 }

@@ -46,6 +46,7 @@ body {
 
   @keyframes dropdown {
     0% {
+      visibility: visible;
       display: block;
       max-height: 0px;
     }
@@ -69,7 +70,7 @@ body {
 
     100% {
       max-height: 0px;
-      display: none;
+      visibility: hidden;
     }
   }
 
@@ -83,6 +84,12 @@ body {
   @apply before:absolute before:block before:content-[''] before:bg-brown.dark before:w-[10px] before:left-0 before:h-full before:rounded-tr-xl before:rounded-br-xl;
 }
 
-.classroom-nav.active {
+.horizontal-nav.active {
   @apply rounded-t-md bg-brown.dark text-white;
+}
+._media-options-btn span {
+  display: none;
+}
+._media-options-btn:hover span {
+  display: block;
 }
