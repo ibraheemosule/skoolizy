@@ -52,6 +52,8 @@ export const ListItem: FC<TListItem> = (props) => {
   );
 };
 
+ListItem.displayName = 'ListItem';
+
 export const DocumentList: FC<{ doc: string[] }> = ({ doc }) => (
   <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
     {doc.map((d) => (
