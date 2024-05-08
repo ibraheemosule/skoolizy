@@ -6,17 +6,16 @@ export const List: FC<{ children: ReactElement[] | ReactElement }> = ({
   children,
 }) => {
   const value = (Children.toArray(children) as unknown as ReactElement[]).map(
-    (child: ReactElement) => {
-      if ((child?.type as unknown as { name: string })?.name !== 'ListItem') {
-        throw Error('Component only accepts List Item');
-      }
+    (child: ReactElement) =>
+      // if ((child.type as unknown as { name: string })?.name !== 'ListItem') {
+      //   throw Error('Component only accepts List Item');
+      // }
 
-      if (child.props.parent) {
-        throw Error('ListItem does not accept parent props directly');
-      }
+      // if (child.props.parent) {
+      //   throw Error('ListItem does not accept parent props directly');
+      // }
 
-      return cloneElement(child, { parent: true });
-    }
+      cloneElement(child, { parent: true })
   );
 
   return <dl className="divide-y divide-gray-100">{value.map((v) => v)}</dl>;

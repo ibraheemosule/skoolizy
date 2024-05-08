@@ -6,6 +6,7 @@ import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomF
 const NewSubject = ({ closeModal }: { closeModal: () => void }) => {
   const [topic, setTopic] = useCustomField<string>('');
   const [classroom, setClassroom] = useCustomField<string>('');
+
   return (
     <Modal
       size="sm"
