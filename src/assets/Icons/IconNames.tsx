@@ -20,4 +20,5 @@ export type TIconNames =
   | 'photo'
   | 'profile'
   | 'setting'
-  | 'exit';
+  | 'exit'
+  | 'plus';
