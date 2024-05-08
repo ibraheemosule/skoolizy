@@ -27,7 +27,14 @@ export const VerticalNav = memo(({ nav, title }: TVerticalNav) => (
               {...(nav.action && { onClick: nav.action })}
               className="nav-item w-full capitalize pl-8 text-gray-500 hover:text-black hover:bg-gray-100  py-4 flex items-center relative"
             >
-              {nav.icon && <Icon name={nav.icon} style={{ marginRight: 10 }} />}
+              {nav.icon && (
+                <Icon
+                  height={20}
+                  width={20}
+                  name={nav.icon}
+                  style={{ marginRight: 10 }}
+                />
+              )}
               <span>{nav.label}</span>
               <i className="absolute hidden bg-brown.dark w-[10px] top-0 left-0 h-full rounded-tr-xl rounded-br-xl group-hover:block" />
             </Btn>
