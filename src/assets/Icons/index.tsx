@@ -189,6 +189,28 @@ const icons: {
       <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
     </svg>
   ),
+  plus: ({
+    style = {},
+    stroke = 'currentColor',
+    height = 20,
+    width = 20,
+    strokeWidth = 1.5,
+  }) => (
+    <svg
+      stroke={stroke}
+      viewBox="0 0 20 20"
+      strokeWidth={strokeWidth}
+      height={height}
+      width={width}
+      style={style}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 4.5v15m7.5-7.5h-15"
+      />
+    </svg>
+  ),
 };
 
 const Icon = ({ name, ...props }: TIcon & { name: TIconNames }) =>
