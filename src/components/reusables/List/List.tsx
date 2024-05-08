@@ -10,7 +10,10 @@ export const List: FC<{ children: ReactElement[] | ReactElement }> = ({
     children &&
     (Children.toArray(children) as unknown as ReactElement[]).map(
       (child: ReactElement) => {
-        if ((child.type as unknown as { name: string })?.name !== 'ListItem') {
+        if (
+          (child.type as unknown as { displayName: string })?.displayName !==
+          'ListItem'
+        ) {
           throw Error('Component only accepts List Item');
         }
 
