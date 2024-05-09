@@ -7,7 +7,7 @@ export const capitalizeChar = (str: string) => {
     .join(' ');
 };
 
-export const formatDate = (str: string) => {
+export const formatDate = (str: string = '') => {
   const newDate =
     new Date(str).toString() === 'Invalid Date' ? new Date() : new Date(str);
   const getDate = `${newDate.getDate()}/${
