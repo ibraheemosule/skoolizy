@@ -17,6 +17,11 @@ import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactIn
 import Feeds from '~components/pages/Feeds';
 import Subjects from '~components/pages/Subjects';
 import Announcements from '~components/pages/Announcements';
+import SubjectDetail from '~components/pages/Subjects/SubjectDetail';
+import SubjectStats from '~components/pages/Subjects/SubjectDetail/subject-routes/SubjectStats';
+import SubjectTimetable from '~components/pages/Subjects/SubjectDetail/subject-routes/SubjectTimetable';
+import SubjectRecordGrade from '~components/pages/Subjects/SubjectDetail/subject-routes/SubjectRecordGrade';
+import AllSubjects from '~components/pages/Subjects/AllSubjects';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +82,31 @@ const router = createBrowserRouter([
       {
         path: 'subjects',
         element: <Subjects />,
+        children: [
+          { path: '', element: <AllSubjects /> },
+          {
+            path: ':id',
+            element: <SubjectDetail />,
+            children: [
+              {
+                path: '',
+                element: <Navigate to="stats" />,
+              },
+              {
+                path: 'stats',
+                element: <SubjectStats />,
+              },
+              {
+                path: 'timetable',
+                element: <SubjectTimetable />,
+              },
+              {
+                path: 'record-grade',
+                element: <SubjectRecordGrade />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'media',
