@@ -9,7 +9,7 @@ const NewTeacher = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <Modal
       size="sm"
-      title="Add teacher to a class"
+      title="Add teacher to a subject"
       content={
         <div className="pb-6">
           <CustomField

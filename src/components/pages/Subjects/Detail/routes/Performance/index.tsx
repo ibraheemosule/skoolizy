@@ -1,4 +1,5 @@
 import CustomTable from '~reusables/custom-table/CustomTable';
+import PerformanceOptions from './Options';
 
 const topHeader = ['Student', 'Grade'];
 
@@ -13,14 +14,18 @@ const content = [
 ];
 
 const Performance = () => (
-  <section className="flex _full flex-wrap max-h-full overflow-auto lg:flex-nowrap gap-6">
-    <div className="w-full shrink-0 overflow-auto">
-      <div>
-        <CustomTable
-          header={topHeader}
-          content={content}
-          minWidth="min-w-[300px]"
-        />
+  <section className="flex flex-wrap max-h-full lg:flex-nowrap overflow-auto">
+    <div className="w-full min-h-full shrink-0">
+      <div className="flex flex-col md:h-full md:overflow-hidden">
+        <PerformanceOptions />
+
+        <div className="mt-6 grow h-[70vh] md:h-auto overflow-auto">
+          <CustomTable
+            header={topHeader}
+            content={content}
+            minWidth="min-w-[300px]"
+          />
+        </div>
       </div>
     </div>
   </section>

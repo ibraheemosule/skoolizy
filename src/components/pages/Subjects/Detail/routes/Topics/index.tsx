@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import AddTopic from './Add';
-import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
+import AddTopic from './Options/Add';
+import { BaseBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import DeleteTopic from './Delete';
+import DeleteTopic from './Options/Delete';
+import TopicsOption from './Options';
 
 const Topics = () => {
   const [modal, setModal] = useState('');
@@ -10,15 +11,10 @@ const Topics = () => {
     <>
       {modal === 'add' && <AddTopic closeModal={() => setModal('')} />}
       {modal === 'delete' && <DeleteTopic closeModal={() => setModal('')} />}
-      <section className="flex  _full flex-wrap max-h-full lg:flex-nowrap overflow-auto">
+      <section className="flex flex-wrap max-h-full lg:flex-nowrap overflow-auto">
         <div className="w-full min-h-full shrink-0">
-          <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden">
-            <ActionBtn
-              className="ml-auto block p-2 px-4"
-              onClick={() => setModal('add')}
-            >
-              Add Topic
-            </ActionBtn>
+          <div className="flex flex-col md:h-full md:overflow-hidden">
+            <TopicsOption />
             <ul className="mt-4 grow h-[70vh] md:h-auto overflow-auto">
               {Array(20)
                 .fill('')
