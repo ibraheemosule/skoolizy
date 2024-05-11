@@ -23,7 +23,7 @@ const RecordGrade = () => {
   const [grade, setGrade] = useCustomField('');
 
   return (
-    <section className="flex _full flex-wrap max-h-full overflow-auto lg:flex-nowrap gap-6">
+    <section className="flex flex-wrap max-h-full overflow-auto lg:flex-nowrap gap-6">
       <div className="w-full shrink-0 overflow-auto">
         <div className="flex justify-start flex-wrap gap-x-8 gap-y-4">
           <div>

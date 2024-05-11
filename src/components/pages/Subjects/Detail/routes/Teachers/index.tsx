@@ -2,9 +2,7 @@ import { useState } from 'react';
 import UsersListLayout from '~components/reusables/UsersListLayout';
 import TeachersOptions from './Options';
 import DeleteTeacher from './Options/Delete';
-import Icon from '~assets/Icons';
 import UserCard from '~components/reusables/UserCard';
-import { BaseBtn } from '~components/reusables/ui/Buttons';
 
 const people = new Array(30).fill({
   name: 'Whitney Francis',
@@ -39,11 +37,8 @@ const Teachers = () => {
                       role={person.role}
                       rating={person.rating}
                       imageSrc={person.imageUrl}
-                    >
-                      <BaseBtn onClick={() => setDeleteTeacher('teacher')}>
-                        <Icon name="trash" height={16} width={16} />
-                      </BaseBtn>
-                    </UserCard>
+                      deleteAction={() => setDeleteTeacher('teacher')}
+                    />
                   ))}
                 </>
               }

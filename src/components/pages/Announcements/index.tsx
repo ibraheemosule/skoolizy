@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
-import { ActionBtn, BaseBtn } from '~reusables/ui/Buttons';
+import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewAnnouncement from './NewAnnouncement';
-import FilterAnnouncements from './FilterAnnouncements';
+import NewAnnouncement from './New';
+import FilterAnnouncements from './Filter';
 import { formatDate } from '~utils/format';
-import ViewAnnouncement from './ViewAnnouncement';
+import ViewAnnouncement from './View';
+import ListOptions from '~components/reusables/ListOptions';
 
 const Announcements = () => {
   const [modal, setModal] = useState('');
@@ -24,21 +25,14 @@ const Announcements = () => {
           {view && (
             <ViewAnnouncement view={view} closeModal={() => setView('')} />
           )}
-
-          <div className="flex flex-wrap justify-end gap-2 mt-8">
-            <BaseBtn
-              onClick={() => setModal('filter')}
-              className="px-4 flex gap-1 items-center font-bold text-purple.dark hover:opacity-50"
-            >
-              Filter Announcements <Icon name="filter" height={20} width={20} />
-            </BaseBtn>
-            <ActionBtn
-              onClick={() => setModal('new')}
-              className="px-4 py-2 text-purple.dark hover:opacity-50"
-            >
-              New Announcement
-            </ActionBtn>
+          <div className="mt-8">
+            <ListOptions
+              onManageClick={() => setModal('filter')}
+              onActionClick={() => setModal('new')}
+              actionText="New announcement"
+            />
           </div>
+
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
             <BaseBtn
               onClick={() => setView('annoucement')}

@@ -9,12 +9,9 @@ type TDeleteTeacher = {
 const DeleteTeacher = ({ teacher, closeModal }: TDeleteTeacher) => (
   <Modal
     size="sm"
-    title="Remove Teacher from subject?"
+    title="Delete Teacher from School?"
     content={
-      <p>
-        Deleting {teacher} means the teacher won&apos;t be registered under this
-        subject
-      </p>
+      <p>Deleting {teacher} would also delete the teacher information</p>
     }
     action={() => null}
     close={() => closeModal()}

@@ -1,17 +1,19 @@
-import { ReactElement, memo } from 'react';
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BoldText, SmallText } from '../ui/Text';
+import Icon from '~assets/Icons';
+import { BaseBtn } from '../ui/Buttons';
 
 type TUserCard = {
   user: string;
   role?: string;
-  children?: ReactElement;
   rating?: number;
   imageSrc?: string;
+  deleteAction?: () => void;
 };
 
 const UserCard = memo(
-  ({ user, role, children, rating, imageSrc }: TUserCard) => (
+  ({ user, role, rating, imageSrc, deleteAction }: TUserCard) => (
     <li className="max-w-[10rem] text-center">
       {imageSrc && (
         <img
@@ -39,8 +41,12 @@ const UserCard = memo(
           {rating} Rating
         </SmallText>
       )}
-      {children && (
-        <div className="mt-3 flex justify-center gap-x-6">{children}</div>
+      {deleteAction && (
+        <div className="mt-3 flex justify-center gap-x-6">
+          <BaseBtn onClick={deleteAction}>
+            <Icon name="trash" height={16} width={16} />
+          </BaseBtn>
+        </div>
       )}
     </li>
   )

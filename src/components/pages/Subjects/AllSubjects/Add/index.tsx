@@ -28,6 +28,7 @@ const NewSubject = ({ closeModal }: { closeModal: () => void }) => {
               field="select"
               value={classroom}
               onSelect={setClassroom}
+              placeholder="Select Class"
             >
               <CustomField.DropdownWrapper>
                 <CustomField.Dropdown value="jss-1">JSS 1</CustomField.Dropdown>
