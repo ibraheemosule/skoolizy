@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { ActionBtn, BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewMedia from './NewMedia';
-import FilterMedia from './FilterMedia';
-import DeleteMedia from './DeleteMedia';
-import ViewMedia from './ViewMedia';
+import NewMedia from './Add';
+import FilterMedia from './Filter';
+import DeleteMedia from './Delete';
+import ViewMedia from './View';
 import { downloadFile } from '~utils/files';
 
 const a =

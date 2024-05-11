@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import AddTopic from './AddTopic';
+import AddTopic from './Add';
 import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import DeleteTopic from './DeleteTopic';
+import DeleteTopic from './Delete';
 
 const Topics = () => {
   const [modal, setModal] = useState('');

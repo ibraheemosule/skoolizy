@@ -17,10 +17,10 @@ import ContactInfo from '~components/pages/MyProfile/my-profile-routes/ContactIn
 import Feeds from '~components/pages/Feeds';
 import Subjects from '~components/pages/Subjects';
 import Announcements from '~components/pages/Announcements';
-import SubjectDetail from '~components/pages/Subjects/SubjectDetail';
-import SubjectStats from '~components/pages/Subjects/SubjectDetail/routes/Topics';
-import SubjectTimetable from '~components/pages/Subjects/SubjectDetail/routes/Teachers';
-import SubjectPerformance from '~components/pages/Subjects/SubjectDetail/routes/Performance';
+import SubjectDetail from '~components/pages/Subjects/Detail';
+import SubjectStats from '~components/pages/Subjects/Detail/routes/Topics';
+import SubjectTimetable from '~components/pages/Subjects/Detail/routes/Teachers';
+import SubjectPerformance from '~components/pages/Subjects/Detail/routes/Performance';
 import AllSubjects from '~components/pages/Subjects/AllSubjects';
 
 const router = createBrowserRouter([

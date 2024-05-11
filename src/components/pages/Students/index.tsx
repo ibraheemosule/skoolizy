@@ -1,6 +1,6 @@
 import UsersListLayout from '~reusables/UsersListLayout';
-import StudentsList from './StudentsList';
-import StudentsFilter from './StudentsOptions';
+import StudentsList from './List';
+import StudentsFilter from './Options';
 import { Heading2 } from '~reusables/ui/Heading';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Icon from '~assets/Icons';
 import UserCard from '~components/reusables/UserCard';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
-import DeleteTeacher from './DeleteTeacher';
+import DeleteTeacher from './Delete';
 
 const people = new Array(30).fill({
   name: 'Whitney Francis',

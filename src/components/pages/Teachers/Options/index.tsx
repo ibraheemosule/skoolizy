@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { BaseBtn, ActionBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import FilterTeachers from './TeachersFilter';
-import NewTeacher from './NewTeacher';
+import FilterTeachers from './Filter';
+import NewTeacher from './Add';
 
 export default function TeachersOption() {
   const [modal, setModal] = useState('');

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ActionBtn, BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewSubject from './NewSubject';
-import FilterSubjects from './FilterSubjects';
-import DeleteSubject from './DeleteSubject';
+import NewSubject from './Add';
+import FilterSubjects from './Filter';
+import DeleteSubject from './Delete';
 
 const AllSubjects = () => {
   const [modal, setModal] = useState('');
