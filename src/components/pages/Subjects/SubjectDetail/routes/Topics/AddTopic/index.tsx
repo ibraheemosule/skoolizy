@@ -6,13 +6,7 @@ import Modal from '~reusables/Modal';
 
 const testing = ['JSS-1', 'JSS-2', 'JSS-3', 'SSS-1', 'SSS-2', 'SSS-3'];
 
-const AddTopic = ({
-  closeModal,
-  subject,
-}: {
-  subject: string;
-  closeModal: () => void;
-}) => {
+const AddTopic = ({ closeModal }: { closeModal: () => void }) => {
   const [value, setValue, list, filterFn] = useCustomField<string[]>(
     [],
     ['All', ...testing]
@@ -21,7 +15,7 @@ const AddTopic = ({
   return (
     <Modal
       size="md"
-      title={`Add a new ${subject} topic`}
+      title="Add a new topic"
       content={
         <div className="pb-8">
           <textarea

@@ -18,9 +18,9 @@ import Feeds from '~components/pages/Feeds';
 import Subjects from '~components/pages/Subjects';
 import Announcements from '~components/pages/Announcements';
 import SubjectDetail from '~components/pages/Subjects/SubjectDetail';
-import SubjectStats from '~components/pages/Subjects/SubjectDetail/subject-routes/SubjectStats';
-import SubjectTimetable from '~components/pages/Subjects/SubjectDetail/subject-routes/SubjectTimetable';
-import SubjectRecordGrade from '~components/pages/Subjects/SubjectDetail/subject-routes/SubjectRecordGrade';
+import SubjectStats from '~components/pages/Subjects/SubjectDetail/routes/Topics';
+import SubjectTimetable from '~components/pages/Subjects/SubjectDetail/routes/Teachers';
+import SubjectPerformance from '~components/pages/Subjects/SubjectDetail/routes/Performance';
 import AllSubjects from '~components/pages/Subjects/AllSubjects';
 
 const router = createBrowserRouter([
@@ -90,19 +90,19 @@ const router = createBrowserRouter([
             children: [
               {
                 path: '',
-                element: <Navigate to="stats" />,
+                element: <Navigate to="topics" />,
               },
               {
-                path: 'stats',
+                path: 'topics',
                 element: <SubjectStats />,
               },
               {
-                path: 'timetable',
+                path: 'teachers',
                 element: <SubjectTimetable />,
               },
               {
-                path: 'record-grade',
-                element: <SubjectRecordGrade />,
+                path: 'performance',
+                element: <SubjectPerformance />,
               },
             ],
           },

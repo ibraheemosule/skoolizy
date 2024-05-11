@@ -12,21 +12,13 @@ const people = new Array(30).fill({
 
 const StudentsList = () =>
   people.map((person) => (
-    <UserCard key={Math.random()}>
-      <>
-        <UserCard.Image src={person.imageUrl} />
-        <UserCard.User
-          user={person.name}
-          role={person.role}
-          rating={person.rating}
-        >
-          <>
-            <UserCard.Icon url={person.twitter} name="Twitter" />
-            <UserCard.Icon url={person.linkedin} name="Linkedin" />
-          </>
-        </UserCard.User>
-      </>
-    </UserCard>
+    <UserCard
+      key={Math.random()}
+      user={person.name}
+      role={person.role}
+      rating={person.rating}
+      imageSrc={person.imageUrl}
+    />
   ));
 
 export default StudentsList;

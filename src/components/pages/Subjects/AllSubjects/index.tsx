@@ -5,12 +5,10 @@ import Icon from '~assets/Icons';
 import NewSubject from './NewSubject';
 import FilterSubjects from './FilterSubjects';
 import DeleteSubject from './DeleteSubject';
-import AddTopic from './AddTopic';
 
 const AllSubjects = () => {
   const [modal, setModal] = useState('');
   const [deleteSubject, setDeleteSubject] = useState('');
-  const [addTopic, setAddTopic] = useState('');
 
   return (
     <div className="flex flex-col md:h-full md:overflow-hidden">
@@ -21,9 +19,6 @@ const AllSubjects = () => {
           subject={deleteSubject}
           closeModal={() => setDeleteSubject('')}
         />
-      )}
-      {addTopic && (
-        <AddTopic subject={addTopic} closeModal={() => setAddTopic('')} />
       )}
 
       <div className="flex flex-wrap justify-end gap-2 mt-8">
@@ -41,22 +36,13 @@ const AllSubjects = () => {
         </ActionBtn>
       </div>
       <div className="mt-6 pb-8 grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-2 xl:grid-cols-3 items-start gap-4 grow md:h-auto overflow-auto">
-        <div className="mt-4 bg-gray-100 rounded-lg p-4">
-          <h4 className="text-xl text-purple.dark">
-            <NavLink to="mathematics/stats">Mathematics</NavLink>
-          </h4>
-          <div className="flex justify-between mt-8 text-sm">
-            <BaseBtn
-              onClick={() => setAddTopic('mathematics')}
-              className="flex gap-1 text-purple.dark font-semibold"
-            >
-              <span>Add Topic</span>
-              <Icon name="plus" height={16} width={16} stroke="#432c81" />
-            </BaseBtn>
-            <BaseBtn onClick={() => setDeleteSubject('mathematics')}>
-              <Icon name="trash" height={18} width={18} stroke="#432c81" />
-            </BaseBtn>
-          </div>
+        <div className="mt-4 bg-gray-100 rounded-lg p-4 flex gap-4 justify-between">
+          <NavLink className="text-xl text-purple.dark" to="mathematics">
+            Mathematics
+          </NavLink>
+          <BaseBtn onClick={() => setDeleteSubject('mathematics')}>
+            <Icon name="trash" height={18} width={18} stroke="#432c81" />
+          </BaseBtn>
         </div>
       </div>
     </div>
