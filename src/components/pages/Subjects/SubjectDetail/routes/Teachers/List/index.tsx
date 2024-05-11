@@ -1,4 +1,8 @@
+import { useState } from 'react';
+import Icon from '~assets/Icons';
 import UserCard from '~components/reusables/UserCard';
+import { BaseBtn } from '~components/reusables/ui/Buttons';
+import DeleteTeacher from './DeleteTeacher';
 
 const people = new Array(30).fill({
   name: 'Whitney Francis',
@@ -10,15 +14,32 @@ const people = new Array(30).fill({
   linkedin: '#',
 });
 
-const TeachersList = () =>
-  people.map((person) => (
-    <UserCard
-      key={Math.random()}
-      user={person.name}
-      role={person.role}
-      rating={person.rating}
-      imageSrc={person.imageUrl}
-    />
-  ));
+const TeachersList = () => {
+  const [deleteTeacher, setDeleteTeacher] = useState('');
+  return (
+    <>
+      {deleteTeacher && (
+        <DeleteTeacher
+          teacher={deleteTeacher}
+          closeModal={() => setDeleteTeacher('')}
+        />
+      )}
+
+      {people.map((person) => (
+        <UserCard
+          key={Math.random()}
+          user={person.name}
+          role={person.role}
+          rating={person.rating}
+          imageSrc={person.imageUrl}
+        >
+          <BaseBtn onClick={() => setDeleteTeacher('teacher')}>
+            <Icon name="trash" height={16} width={16} />
+          </BaseBtn>
+        </UserCard>
+      ))}
+    </>
+  );
+};
 
 export default TeachersList;
