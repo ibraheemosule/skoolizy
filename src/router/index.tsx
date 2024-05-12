@@ -22,6 +22,8 @@ import SubjectStats from '~components/pages/Subjects/Detail/routes/Topics';
 import SubjectTimetable from '~components/pages/Subjects/Detail/routes/Teachers';
 import SubjectPerformance from '~components/pages/Subjects/Detail/routes/Performance';
 import AllSubjects from '~components/pages/Subjects/AllSubjects';
+import AllStudents from '~components/pages/Students/AllStudents';
+import StudentDetail from '~components/pages/Students/Detail';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,31 @@ const router = createBrowserRouter([
       {
         path: 'students',
         element: <Students />,
+        children: [
+          { path: '', element: <AllStudents /> },
+          {
+            path: ':id',
+            element: <StudentDetail />,
+            children: [
+              {
+                path: '',
+                element: <Navigate to="topics" />,
+              },
+              {
+                path: 'topics',
+                element: <SubjectStats />,
+              },
+              {
+                path: 'teachers',
+                element: <SubjectTimetable />,
+              },
+              {
+                path: 'performance',
+                element: <SubjectPerformance />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'classroom',

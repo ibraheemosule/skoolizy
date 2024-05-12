@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import UsersListLayout from '~components/reusables/UsersListLayout';
-import TeachersOptions from './Options';
-import DeleteTeacher from './Options/Delete';
-import UserCard from '~components/reusables/UserCard';
+import UsersListLayout from '~reusables/UsersListLayout';
+import StudentsFilter from './Options';
+import { Heading2 } from '~reusables/ui/Heading';
+import UserCard from '~reusables/UserCard';
+import DeleteStudent from '../Delete';
 
 const people = new Array(30).fill({
   user: {
@@ -10,7 +11,7 @@ const people = new Array(30).fill({
     url: 'test',
   },
   role: {
-    name: 'Teacher',
+    name: 'Student',
     url: '/teachers/test',
   },
   rating: 4.5,
@@ -19,19 +20,23 @@ const people = new Array(30).fill({
   twitter: '#',
   linkedin: '#',
 });
-const Teachers = () => {
-  const [deleteTeacher, setDeleteTeacher] = useState('');
+
+const AllStudents = () => {
+  const [deleteStudent, setDeleteStudent] = useState('');
   return (
     <>
-      {deleteTeacher && (
-        <DeleteTeacher
-          teacher={deleteTeacher}
-          closeModal={() => setDeleteTeacher('')}
+      {deleteStudent && (
+        <DeleteStudent
+          student={deleteStudent}
+          closeModal={() => setDeleteStudent('')}
         />
       )}
-      <section className="flex flex-wrap max-h-full lg:flex-nowrap overflow-auto">
+      <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
         <div className="w-full min-h-full shrink-0">
-          <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden">
+          <Heading2 className="capitalize text-center">
+            Meet our Students
+          </Heading2>
+          <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden mt-6">
             <UsersListLayout
               List={
                 <>
@@ -42,12 +47,12 @@ const Teachers = () => {
                       role={person.role}
                       rating={person.rating}
                       imageSrc={person.imageUrl}
-                      deleteAction={() => setDeleteTeacher('teacher')}
+                      deleteAction={() => setDeleteStudent('delete')}
                     />
                   ))}
                 </>
               }
-              Filter={TeachersOptions}
+              Filter={StudentsFilter}
             />
           </div>
         </div>
@@ -56,4 +61,4 @@ const Teachers = () => {
   );
 };
 
-export default Teachers;
+export default AllStudents;
