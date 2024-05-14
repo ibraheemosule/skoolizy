@@ -5,14 +5,14 @@ const stars = Array(5).fill('');
 
 interface IStarRatings {
   rating: number;
-  onClick: (i: number) => void;
+  onClick?: (i: number) => void;
 }
 
 const StarRatings: FC<IStarRatings> = ({ rating, onClick }) => (
   <div className="flex gap-2">
     {stars.map((_, i) => (
       <button
-        onClick={() => onClick(i + 1)}
+        onClick={() => onClick?.(i + 1)}
         key={Math.random()}
         type="button"
         className="h-full"

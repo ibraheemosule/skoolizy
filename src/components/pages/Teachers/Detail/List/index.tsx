@@ -12,9 +12,6 @@ const SubjectList = () => (
     <NavLink className="p-1 horizontal-nav shrink-0" to="results">
       Results
     </NavLink>
-    <NavLink className="p-1 horizontal-nav shrink-0" to="attendance">
-      Attendance
-    </NavLink>
   </nav>
 );
 

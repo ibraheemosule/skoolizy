@@ -4,7 +4,7 @@ import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 
-const FilterTopics = ({ closeModal }: { closeModal: () => void }) => {
+const FilterPerformance = ({ closeModal }: { closeModal: () => void }) => {
   const [subject, setSubject, subjectList] = useCustomField('', [
     'English',
     'Math',
@@ -88,4 +88,4 @@ const FilterTopics = ({ closeModal }: { closeModal: () => void }) => {
   );
 };
 
-export default memo(FilterTopics);
+export default memo(FilterPerformance);

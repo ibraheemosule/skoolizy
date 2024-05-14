@@ -4,12 +4,14 @@ import Icon from '~assets/Icons';
 
 type TListOptins = {
   onManageClick?: () => void;
+  manageText?: string;
   onActionClick?: () => void;
   actionText?: string;
 };
 
 const ListOptions = ({
   onManageClick,
+  manageText = 'Manage List',
   onActionClick,
   actionText = 'Add new',
 }: TListOptins) => (
@@ -17,9 +19,9 @@ const ListOptions = ({
     {onManageClick && (
       <BaseBtn
         onClick={onManageClick}
-        className="px-4 flex gap-2 items-center font-bold text-purple.dark hover:opacity-50"
+        className="flex gap-2 items-center font-bold text-purple.dark hover:opacity-50"
       >
-        Manage List <Icon name="filter" height={20} width={20} />
+        {manageText} <Icon name="filter" height={20} width={20} />
       </BaseBtn>
     )}
     {onActionClick && (

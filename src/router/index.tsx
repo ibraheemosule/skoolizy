@@ -21,9 +21,15 @@ import SubjectDetail from '~components/pages/Subjects/Detail';
 import SubjectStats from '~components/pages/Subjects/Detail/routes/Topics';
 import SubjectTimetable from '~components/pages/Subjects/Detail/routes/Teachers';
 import SubjectPerformance from '~components/pages/Subjects/Detail/routes/Performance';
+import StudentPerformance from '~components/pages/Students/Detail/routes/Performance';
 import AllSubjects from '~components/pages/Subjects/AllSubjects';
 import AllStudents from '~components/pages/Students/AllStudents';
 import StudentDetail from '~components/pages/Students/Detail';
+import Biodata from '~components/pages/Students/Detail/routes/Biodata';
+import StudentResults from '~components/pages/Students/Detail/routes/Results';
+import AllTeachers from '~components/pages/Teachers/AllTeachers';
+import TeacherDetail from '~components/pages/Teachers/Detail';
+import StudentAttendance from '~components/pages/Students/Detail/routes/Attendance';
 
 const router = createBrowserRouter([
   {
@@ -51,10 +57,6 @@ const router = createBrowserRouter([
         element: <Requests />,
       },
       {
-        path: 'teachers',
-        element: <Teachers />,
-      },
-      {
         path: 'students',
         element: <Students />,
         children: [
@@ -65,19 +67,53 @@ const router = createBrowserRouter([
             children: [
               {
                 path: '',
-                element: <Navigate to="topics" />,
+                element: <Navigate to="biodata" />,
               },
               {
-                path: 'topics',
-                element: <SubjectStats />,
-              },
-              {
-                path: 'teachers',
-                element: <SubjectTimetable />,
+                path: 'biodata',
+                element: <Biodata />,
               },
               {
                 path: 'performance',
-                element: <SubjectPerformance />,
+                element: <StudentPerformance />,
+              },
+              {
+                path: 'results',
+                element: <StudentResults />,
+              },
+              {
+                path: 'attendance',
+                element: <StudentAttendance />,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        path: 'teachers',
+        element: <Teachers />,
+        children: [
+          { path: '', element: <AllTeachers /> },
+          {
+            path: ':id',
+            element: <TeacherDetail />,
+            children: [
+              {
+                path: '',
+                element: <Navigate to="biodata" />,
+              },
+              {
+                path: 'biodata',
+                element: <Biodata />,
+              },
+              {
+                path: 'performance',
+                element: <StudentPerformance />,
+              },
+              {
+                path: 'results',
+                element: <StudentResults />,
               },
             ],
           },

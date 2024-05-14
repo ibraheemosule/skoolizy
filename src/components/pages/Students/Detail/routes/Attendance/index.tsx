@@ -1,6 +1,5 @@
 import CustomTable from '~reusables/custom-table/CustomTable';
-import StarRating from '~components/reusables/StarRating';
-import PerformanceOptions from './Options';
+import AttendanceOptions from './Options';
 
 const topHeader = ['Subject', 'Performance (%)'];
 
@@ -12,16 +11,17 @@ const content = [
   ['Biology', 70],
 ];
 
-const Performance = () => (
+const Attendance = () => (
   <section className="flex flex-wrap max-h-full lg:flex-nowrap overflow-auto">
     <div className="w-full min-h-full shrink-0">
       <div className="flex flex-col md:h-full md:overflow-hidden">
         <div className="flex justify-between flex-wrap gap-4">
-          <div className="flex gap-4 flex-wrap">
-            <span className="font-semibold text-lg">Attitude Rating</span>
-            <StarRating rating={2} />
+          <div className="flex gap-4 flex-wrap items-center">
+            <p className="font-semibold text-lg text-gray-600">
+              Absence Count - 4 days
+            </p>
           </div>
-          <PerformanceOptions />
+          <AttendanceOptions />
         </div>
 
         <div className="mt-8 grow h-[70vh] md:h-auto overflow-auto">
@@ -36,4 +36,4 @@ const Performance = () => (
   </section>
 );
 
-export default Performance;
+export default Attendance;

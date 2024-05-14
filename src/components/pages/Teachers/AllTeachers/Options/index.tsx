@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import FilterTeachers from './Filter';
-import NewTeacher from './Add';
+import FilterTeachers from '../Filter';
+import AddStudent from '../Add';
 import ListOptions from '~components/reusables/ListOptions';
 
 export default function TeachersOption() {
@@ -14,7 +14,7 @@ export default function TeachersOption() {
         actionText="Add a new teacher"
       />
       {modal === 'filter' && <FilterTeachers closeModal={() => setModal('')} />}
-      {modal === 'new' && <NewTeacher closeModal={() => setModal('')} />}
+      {modal === 'new' && <AddStudent closeModal={() => setModal('')} />}
     </>
   );
 }
