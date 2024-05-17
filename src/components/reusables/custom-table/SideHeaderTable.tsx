@@ -1,34 +1,34 @@
 import { ReactNode, memo } from 'react';
 
-const cellStyles =
+const style =
   'p-4 w-[100px] sm:w-[150px] text-center border-b border border-gray-200';
-const sideHeaderStyles = `${cellStyles} absolute left-0`;
+// const sideStyle = `${style} absolute left-0`;
 
-const TopHeader = ({
-  headers,
-  sideHeader,
-}: {
-  headers: ReactNode[];
-  sideHeader: boolean;
-}) => (
-  <thead>
-    <tr className="">
-      {sideHeader && (
-        <th
-          className={`${sideHeaderStyles} border-b-0 border-r-0 bg-transparent`}
-        />
-      )}
-      {headers.map((header) => (
-        <th
-          key={Math.random()}
-          className={`${cellStyles} bg-purple.light font-bold`}
-        >
-          {header}
-        </th>
-      ))}
-    </tr>
-  </thead>
-);
+// const TopHeader = ({
+//   headers,
+//   sideHeader,
+// }: {
+//   headers: ReactNode[];
+//   sideHeader: boolean;
+// }) => (
+//   <thead>
+//     <tr className="">
+//       {sideHeader && (
+//         <th
+//           className={`${sideHeaderStyles} border-b-0 border-r-0 bg-transparent`}
+//         />
+//       )}
+//       {headers.map((header) => (
+//         <th
+//           key={Math.random()}
+//           className={`${style} bg-purple.light font-bold`}
+//         >
+//           {header}
+//         </th>
+//       ))}
+//     </tr>
+//   </thead>
+// );
 
 const SideHeaderTable = ({
   topHeaders,
@@ -49,7 +49,23 @@ const SideHeaderTable = ({
     >
       <table className=" table-fixed border-collapse w-full">
         {topHeaders && (
-          <TopHeader sideHeader={!!sideHeader} headers={topHeaders} />
+          <thead>
+            <tr className="">
+              {sideHeader && (
+                <th
+                  className={`${style} absolute left-0 border-b-0 border-r-0 bg-transparent`}
+                />
+              )}
+              {topHeaders.map((header) => (
+                <th
+                  key={Math.random()}
+                  className={`${style} bg-purple.light font-bold`}
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
         )}
         <tbody>
           {content.map((datum, i) => (
@@ -58,7 +74,7 @@ const SideHeaderTable = ({
               className="odd:bg-gray-50 even:bg-gray-100 align-baseline"
             >
               {sideHeader && (
-                <th className={`${sideHeaderStyles} font-bold border-b-0`}>
+                <th className={`${style} font-bold border-b-0 absolute left-0`}>
                   {sideHeader?.[i]}
                 </th>
               )}
@@ -66,7 +82,7 @@ const SideHeaderTable = ({
                 <td
                   key={Math.random()}
                   contentEditable={editable}
-                  className={`${cellStyles}`}
+                  className={`${style}`}
                 >
                   {v}
                 </td>
