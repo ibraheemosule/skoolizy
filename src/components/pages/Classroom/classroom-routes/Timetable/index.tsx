@@ -13,73 +13,29 @@ const topHeader = [
   '3-4',
 ];
 
-const content = {
-  Monday: [
-    'phy',
-    'chem',
-    'bio',
-    'math',
-    'break',
-    'econs',
-    'econs',
-    'bio',
-    'geo',
-  ],
+const sideHeader = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
-  Tuesday: [
-    'phy',
-    'chem',
-    'bio',
-    'math',
-    'break',
-    'econs',
-    'econs',
-    'bio',
-    'geo',
-  ],
+const content = [
+  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
 
-  Wednesday: [
-    'phy',
-    'chem',
-    'bio',
-    'math',
-    'break',
-    'econs',
-    'econs',
-    'bio',
-    'geo',
-  ],
+  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
 
-  Thursday: [
-    'phy',
-    'chem',
-    'bio',
-    'math',
-    'break',
-    'econs',
-    'econs',
-    'bio',
-    'geo',
-  ],
+  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
 
-  Friday: [
-    'phy',
-    'chem',
-    'bio',
-    'math',
-    'break',
-    'econs',
-    'econs',
-    'bio',
-    'geo',
-  ],
-};
+  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
+
+  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
+];
 
 const TimeTable = () => (
   <>
     <EditTimeTable />
     <div className="mt-6">
-      <SideHeaderTable topHeaders={topHeader} content={content} />
+      <SideHeaderTable
+        topHeaders={topHeader}
+        content={content}
+        sideHeader={sideHeader}
+      />
     </div>
   </>
 );

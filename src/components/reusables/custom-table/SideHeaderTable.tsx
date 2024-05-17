@@ -1,15 +1,23 @@
 import { ReactNode, memo } from 'react';
 
 const cellStyles =
-  'p-4 w-[150px] sm:w-[200px] text-center border-b border border-gray-200';
+  'p-4 w-[100px] sm:w-[150px] text-center border-b border border-gray-200';
 const sideHeaderStyles = `${cellStyles} absolute left-0`;
 
-const TopHeader = ({ headers }: { headers: ReactNode[] }) => (
+const TopHeader = ({
+  headers,
+  sideHeader,
+}: {
+  headers: ReactNode[];
+  sideHeader: boolean;
+}) => (
   <thead>
     <tr className="">
-      <th
-        className={`${sideHeaderStyles} border-b-0 border-r-0 bg-transparent`}
-      />
+      {sideHeader && (
+        <th
+          className={`${sideHeaderStyles} border-b-0 border-r-0 bg-transparent`}
+        />
+      )}
       {headers.map((header) => (
         <th
           key={Math.random()}
@@ -26,20 +34,35 @@ const SideHeaderTable = ({
   topHeaders,
   content,
   editable = false,
+  sideHeader,
 }: {
   topHeaders?: ReactNode[];
-  content: Record<string, ReactNode[]>;
+  content: ReactNode[][];
+  sideHeader?: ReactNode[];
   editable?: boolean;
 }) => (
   <div className="relative bg-purple.light rounded-xl overflow-hidden">
-    <div className=" overflow-x-scroll overflow-y-visible max-w-full ml-[150px] sm:ml-[200px]">
+    <div
+      className={`overflow-x-scroll overflow-y-visible max-w-full ${
+        sideHeader ? 'ml-[100px] sm:ml-[150px]' : ''
+      }`}
+    >
       <table className=" table-fixed border-collapse w-full">
-        {topHeaders ? <TopHeader headers={topHeaders} /> : null}
+        {topHeaders && (
+          <TopHeader sideHeader={!!sideHeader} headers={topHeaders} />
+        )}
         <tbody>
-          {Object.entries(content).map(([key, obj]) => (
-            <tr key={Math.random()} className="odd:bg-gray-50 even:bg-gray-100">
-              <th className={`${sideHeaderStyles} font-bold`}>{key}</th>
-              {obj.map((v) => (
+          {content.map((datum, i) => (
+            <tr
+              key={Math.random()}
+              className="odd:bg-gray-50 even:bg-gray-100 align-baseline"
+            >
+              {sideHeader && (
+                <th className={`${sideHeaderStyles} font-bold border-b-0`}>
+                  {sideHeader?.[i]}
+                </th>
+              )}
+              {datum.map((v) => (
                 <td
                   key={Math.random()}
                   contentEditable={editable}
