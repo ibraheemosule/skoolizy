@@ -46,7 +46,7 @@ const Editable = () => {
         value={value as string}
         type={type ?? (search ? 'search' : 'text')}
         placeholder={placeholder || 'Search...'}
-        className={`p-2 pl-4 appearance-none outline-none w-full ${
+        className={`p-2 pl-4 first-letter:uppercase appearance-none outline-none w-full ${
           !search && typeof search === 'boolean'
             ? 'cursor-pointer'
             : 'cursor-text'
@@ -76,7 +76,7 @@ const NonEditable = () => {
       <div
         data-testid="custom-select"
         tabIndex={0}
-        className={`appearance-none outline-none max-w-full cursor-pointer grow ${
+        className={` first-letter:uppercase appearance-none outline-none max-w-full cursor-pointer grow ${
           typeof value === 'string'
             ? 'p-2'
             : Array.isArray(value)
