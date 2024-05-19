@@ -1,31 +1,5 @@
 import AttendanceOptions from './Options';
-import SideHeaderTable from '~components/reusables/custom-table/SideHeaderTable';
-
-const topHeader = [
-  '8-9',
-  '9-10',
-  '10-11',
-  '11-12',
-  'break',
-  '12-1',
-  '1-2',
-  '2-3',
-  '3-4',
-];
-
-const sideHeader = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-
-const content = [
-  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
-
-  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
-
-  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
-
-  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
-
-  ['phy', 'chem', 'bio', 'math', 'break', 'econs', 'econs', 'bio', 'geo'],
-];
+import EventCalendar from '~components/reusables/EventCalendar';
 
 const Attendance = () => (
   <section className="flex flex-wrap max-h-full lg:flex-nowrap overflow-auto">
@@ -41,14 +15,16 @@ const Attendance = () => (
         </div>
 
         <div className="mt-8 grow h-[70vh] md:h-auto overflow-auto">
-          {/* <CustomTable header={top} content={con} minWidth="min-w-[300px]" /> */}
-          <div className="mt-6">
-            <SideHeaderTable
-              topHeaders={topHeader}
-              content={content}
-              sideHeader={sideHeader}
-            />
-          </div>
+          <EventCalendar
+            events={[
+              { title: 'Event 1', date: '2024-05-18' },
+              {
+                title:
+                  'Event 2 ksdjkl k klamkldsa kk akkf aklsjkldfjkla lkflk klsdklf lkaj kl klfalksdj ljalk sflka lkf lad jlkfjlk jlkjldksfj lkajflkjlkdsjlkafjlkasjlks lka lakf lkf lks',
+                date: '2024-05-20T14:10:30Z',
+              },
+            ]}
+          />
         </div>
       </div>
     </div>

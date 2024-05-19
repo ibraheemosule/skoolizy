@@ -35,6 +35,7 @@ const TimeTable = () => (
         topHeaders={topHeader}
         content={content}
         sideHeader={sideHeader}
+        boxWidth="100px"
       />
     </div>
   </>

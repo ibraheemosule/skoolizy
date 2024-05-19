@@ -37,12 +37,12 @@ const LiveClasses = () => (
       <BoldText>Classes In Progress</BoldText>
       <BoldText>1pm - 2pm</BoldText>
     </div>
-    <div>
+    <div className="mt-2">
       <SideHeaderTable
         content={content}
         topHeaders={topHeader}
         sideHeader={sideHeader}
-        boxWidth="100px"
+        boxWidth="200px"
       />
     </div>
   </div>

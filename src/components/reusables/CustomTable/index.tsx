@@ -7,7 +7,7 @@ const SideHeaderTable = ({
   content,
   editable = false,
   sideHeader,
-  boxWidth = '150px',
+  boxWidth = '9.375rem',
 }: {
   topHeaders?: ReactNode[];
   content: ReactNode[][];

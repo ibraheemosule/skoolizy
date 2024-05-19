@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FiterAbsenceDate from './Filter';
-import ReportAbsence from './ReportAbsence';
+import ReportAbsence from '~components/reusables/ReportAbsence';
 import ListOptions from '~components/reusables/ListOptions';
 
 const PerformanceOptions = () => {
@@ -9,8 +9,6 @@ const PerformanceOptions = () => {
   return (
     <>
       <ListOptions
-        onManageClick={() => setModal('filter')}
-        manageText="Filter by date range"
         onActionClick={() => setModal('absent')}
         actionText="Report Absence"
       />
