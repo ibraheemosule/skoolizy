@@ -26,7 +26,7 @@ const TopStats = () => {
               <BaseBtn
                 className=" capitalize"
                 onClick={() => {
-                  if (action === 'record grade') {
+                  if (v === 'record grade') {
                     navigate('/classroom/record-grade');
                   } else setAction(v);
                 }}

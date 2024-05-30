@@ -22,8 +22,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   const [startDate, setStartDate] = useCustomField('');
   const [endDate, setEndDate] = useCustomField('');
 
-  console.log(type);
-
   return (
     <Modal
       size="md"
