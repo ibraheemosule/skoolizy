@@ -1,23 +1,38 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BoldText } from '~reusables/ui/Text';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import ReportAbsence from '~components/reusables/ReportAbsence';
+import NewAnnouncement from '~components/pages/Announcements/New';
 
-const nav = ['Report absence', 'Make announcement', 'Record grade'];
+const nav = ['report absence', 'make announcement', 'record grade'];
 
 const TopStats = () => {
+  const navigate = useNavigate();
   const [action, setAction] = useState('');
   return (
     <>
-      {action === 'Report absence' && (
+      {action === 'report absence' && (
         <ReportAbsence closeModal={() => setAction('')} />
+      )}
+      {action === 'make announcement' && (
+        <NewAnnouncement closeModal={() => setAction('')} />
       )}
       <div className="mt-8 flex gap-8 items-start">
         <menu className="shrink-0 flex flex-col gap-4">
           <h5 className="font-semibold text-lg text-gray-600">Quick Links</h5>
           {nav.map((v) => (
             <li key={v} className="text-purple.dark font-semibold text-base">
-              <BaseBtn onClick={() => setAction(v)}>{v}</BaseBtn>
+              <BaseBtn
+                className=" capitalize"
+                onClick={() => {
+                  if (action === 'record grade') {
+                    navigate('/classroom/record-grade');
+                  } else setAction(v);
+                }}
+              >
+                {v}
+              </BaseBtn>
             </li>
           ))}
         </menu>

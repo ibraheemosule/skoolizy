@@ -24,10 +24,15 @@ const useCustomField = <T extends string | string[]>(
   const [value, updateValue] = useState(initialValue);
   const [filteredList, setFilteredList] = useState([...dropDownist]);
 
-  const filterFn = (arg: string) => {
-    setFilteredList(() =>
-      list.current.filter((v) => v.toLowerCase().includes(arg.toLowerCase()))
-    );
+  const filterFn = (arg: string | string[]) => {
+    if (Array.isArray(arg)) {
+      list.current = arg;
+      setFilteredList(arg);
+    } else {
+      setFilteredList(() =>
+        list.current.filter((v) => v.toLowerCase().includes(arg.toLowerCase()))
+      );
+    }
   };
 
   const setValue = (v: string | string[]) => {

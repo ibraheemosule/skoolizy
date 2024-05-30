@@ -9,7 +9,7 @@ interface IStarRatings {
 }
 
 const StarRatings: FC<IStarRatings> = ({ rating, onClick }) => (
-  <div className="flex gap-2">
+  <div className="flex gap-2 shrink-0">
     {stars.map((_, i) => (
       <button
         onClick={() => onClick?.(i + 1)}

@@ -10,7 +10,7 @@ import {
   isValidElement,
   FC,
 } from 'react';
-import { IBaseProp } from '~src/ts-types/react-types';
+import { IBaseProp } from '~src/shared-ts-types/react-types';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import Icon from '~src/assets/Icons';
 import {
@@ -145,10 +145,16 @@ type DropdownWrapperPropsType = {
   children: React.ReactElement[];
   closeOnClick?: boolean;
   width?: number;
+  loading?: boolean;
 };
 
 const DropdownWrapper = memo(
-  ({ children, closeOnClick = true, width }: DropdownWrapperPropsType) => {
+  ({
+    children,
+    closeOnClick = true,
+    width,
+    loading,
+  }: DropdownWrapperPropsType) => {
     const { dropdownRef, filterFn, value } = useCustomFieldContext();
     const multiselect = Array.isArray(value);
 
@@ -185,10 +191,20 @@ const DropdownWrapper = memo(
             </div>
           </Dropdown>
         )}
-        {children?.length ? (
+        {loading ? (
+          <div className="bg-white">
+            <Icon
+              name="spinner"
+              height={40}
+              width={40}
+              fill="#432c81"
+              style={{ margin: 'auto' }}
+            />
+          </div>
+        ) : children?.length ? (
           children
         ) : (
-          <Dropdown value={null}> No Result </Dropdown>
+          <div className="py-2 px-1 bg-white"> No Result</div>
         )}
       </div>
     );
@@ -308,7 +324,7 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
             ...(props.children && { filterFn: props.filterFn }),
           }),
     }),
-    [props.value]
+    [props.value, props.filterFn]
   );
 
   return (

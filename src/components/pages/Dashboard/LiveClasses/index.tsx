@@ -42,7 +42,7 @@ const LiveClasses = () => (
         content={content}
         topHeaders={topHeader}
         sideHeader={sideHeader}
-        boxWidth="200px"
+        boxWidth="150px"
       />
     </div>
   </div>

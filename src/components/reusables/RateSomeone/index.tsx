@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BoldText } from '~reusables/ui/Text';
+import useGetCountriesAndState from '../hooks/useGetCountriesAndState';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import StarRatings from '~reusables/StarRating';
 
 const RateSomeone = () => {
-  const [user, setUser, list, filterFn] = useCustomField(
-    [],
-    ['Joshua', 'John', 'Maryam']
-  );
+  const { countries, isLoading: fetchingCountry } = useGetCountriesAndState();
+
+  const [user, setUser, list, filterFn] = useCustomField([], []);
   const [rating, setRating] = useState(0);
+
+  useEffect(() => filterFn(countries), [countries.length]);
 
   const starClicked = (i: number) => {
     if (!user.length) return;
@@ -20,16 +22,16 @@ const RateSomeone = () => {
     <>
       <BoldText>Rate Someone</BoldText>
       <div className="flex justify-between flex-wrap gap-4 gap-y-3 mt-3">
-        <div className="grow max-w-[180px]">
+        <div className="grow xs-grow-0 w-[180px]">
           <CustomField
             field="select"
             filterFn={filterFn}
             onSelect={setUser}
             value={user}
           >
-            <CustomField.DropdownWrapper>
+            <CustomField.DropdownWrapper loading={fetchingCountry} width={100}>
               {list.map((v) => (
-                <CustomField.Dropdown key={v} value={v}>
+                <CustomField.Dropdown key={Math.random()} value={v}>
                   {v}
                 </CustomField.Dropdown>
               ))}
