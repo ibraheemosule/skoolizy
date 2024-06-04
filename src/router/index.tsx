@@ -205,7 +205,7 @@ const router = createBrowserRouter([
       }),
       lazyLoad({
         path: 'settings',
-        url: () => import('~components/pages/Media'),
+        url: () => import('~components/pages/Settings'),
       }),
 
       lazyLoad({
