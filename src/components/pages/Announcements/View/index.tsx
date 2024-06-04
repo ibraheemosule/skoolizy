@@ -16,7 +16,7 @@ const ViewAnnouncement = ({ view, closeModal }: TViewAnnouncement) => (
       </div>
     }
     content={
-      <div>
+      <div data-testid="announcement-modal">
         <p>
           Examamination is starting next week monday Examamination is starting
           next week monday Examamination is starting next week
@@ -28,37 +28,6 @@ const ViewAnnouncement = ({ view, closeModal }: TViewAnnouncement) => (
           starting next week monday Examamination is starting next week monday
           Examamination is starting next week mondayExamamination is starting
           next week monday Examamination is starting next week monday{view}{' '}
-          Examamination is starting next week monday Examamination is starting
-          next week monday Examamination is starting next week
-          mondayExamamination is starting next week monday Examamination is
-          starting next week monday{view} Examamination is starting next week
-          monday Examamination is starting next week monday Examamination is
-          starting next week mondayExamamination is starting next week monday
-          Examamination is starting next week monday{view} Examamination is
-          starting next week monday Examamination is starting next week monday
-          Examamination is starting next week mondayExamamination is starting
-          next week monday Examamination is starting next week monday{view}{' '}
-          Examamination is starting next week monday Examamination is starting
-          next week monday Examamination is starting next week
-          mondayExamamination is starting next week monday Examamination is
-          starting next week monday{view} Examamination is starting next week
-          monday Examamination is starting next week monday Examamination is
-          starting next week mondayExamamination is starting next week monday
-          Examamination is starting next week monday{view} Examamination is
-          starting next week monday Examamination is starting next week monday
-          Examamination is starting next week mondayExamamination is starting
-          next week monday Examamination is starting next week monday{view}{' '}
-          Examamination is starting next week monday Examamination is starting
-          next week monday Examamination is starting next week
-          mondayExamamination is starting next week monday Examamination is
-          starting next week monday{view} Examamination is starting next week
-          monday Examamination is starting next week monday Examamination is
-          starting next week mondayExamamination is starting next week monday
-          Examamination is starting next week monday{view} Examamination is
-          starting next week monday Examamination is starting next week monday
-          Examamination is starting next week mondayExamamination is starting
-          next week monday Examamination is starting next week monday{view}{' '}
-          Examamination is starting next week monday Examamination is starting
         </p>
       </div>
     }

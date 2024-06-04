@@ -18,8 +18,13 @@ export const ActionBtn = memo(
 ActionBtn.displayName = 'ActionBtn';
 
 export const BaseBtn = memo(
-  ({ children, className, onClick }: TBtnWithChild) => (
-    <button onClick={onClick} className={`${className}`} type="button">
+  ({ children, className, onClick, testId }: TBtnWithChild) => (
+    <button
+      data-testid={testId}
+      onClick={onClick}
+      className={`${className}`}
+      type="button"
+    >
       {children}
     </button>
   )

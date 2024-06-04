@@ -13,7 +13,10 @@ const Announcements = () => {
   const [view, setView] = useState('');
 
   return (
-    <section className="flex _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
+    <section
+      data-testid="announcements-page"
+      className="flex _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto"
+    >
       <div className="w-full min-h-full lg:w-3/5 xl:w-8/12  shrink-0">
         <div className="flex flex-col md:h-full md:overflow-hidden">
           {modal === 'new' && (
@@ -38,6 +41,7 @@ const Announcements = () => {
               .fill('')
               .map(() => (
                 <BaseBtn
+                  testId="annoucement"
                   key={Math.random()}
                   onClick={() => setView('annoucement')}
                   className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"

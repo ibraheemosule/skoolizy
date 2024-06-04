@@ -6,6 +6,7 @@ export interface IChild {
 
 export interface IBaseProp extends IChild {
   className?: string;
+  testId?: string;
 }
 
 export type IconType = {

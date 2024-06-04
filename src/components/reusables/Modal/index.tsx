@@ -60,7 +60,7 @@ const Modal: FC<TModal> = ({
         } bg-white shadow-sm p-6 rounded-md`}
       >
         <div className="absolute top-4 right-4">
-          <BaseBtn onClick={() => close((prev) => !prev)}>
+          <BaseBtn testId="close-modal" onClick={() => close((prev) => !prev)}>
             <CancelIcon height={25} width={25} />
           </BaseBtn>
         </div>
