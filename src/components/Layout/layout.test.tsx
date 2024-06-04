@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
-import { screen, render, act } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import Layout from '.';
 
 describe('testing the side nav animation', () => {
@@ -19,15 +19,13 @@ describe('testing the side nav animation', () => {
   });
 
   test('should animate sidenav to the ui', async () => {
-    await act(async () => menuBtn?.click());
-    expect(navWrapper).toHaveClass('animate-in');
+    userEvent.click(menuBtn);
+    await waitFor(() => expect(navWrapper).toHaveClass('animate-in'));
   });
 
   test('Should animate sidenav out of the ui', async () => {
-    await act(async () => {
-      menuBtn.click();
-      navWrapper.click();
-    });
+    userEvent.click(menuBtn);
+    userEvent.click(navWrapper);
 
     expect(navWrapper).toHaveClass('animate-out');
   });
