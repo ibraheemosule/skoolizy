@@ -10,7 +10,7 @@ const AsideAdmin = () => (
     <div className="mt-8">
       <LatestRequests />
     </div>
-    <div className="mt-8">
+    <div className="mt-8 pb-8">
       <Highlights />
     </div>
   </>
