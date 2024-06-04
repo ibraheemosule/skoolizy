@@ -34,45 +34,29 @@ const Announcements = () => {
           </div>
 
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
-            <BaseBtn
-              onClick={() => setView('annoucement')}
-              className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
-            >
-              <h4 className="flex gap-2 items-center font-semibold">
-                <Icon name="info" stroke="white" fill="gray" />
-                <span>Examamination is starting next week monday</span>
-              </h4>
-              <div className="flex flex-col">
-                <small>{formatDate().getDate}</small>
-                <small>{formatDate().getTime}</small>
-              </div>
-            </BaseBtn>
-            <BaseBtn
-              onClick={() => setView('annoucement')}
-              className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
-            >
-              <h4 className="flex gap-2 items-center font-semibold">
-                <Icon name="info" stroke="white" fill="gray" />
-                <span>Examamination is starting next week monday</span>
-              </h4>
-              <div className="flex flex-col">
-                <small>{formatDate().getDate}</small>
-                <small>{formatDate().getTime}</small>
-              </div>
-            </BaseBtn>
-            <BaseBtn
-              onClick={() => setView('annoucement')}
-              className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
-            >
-              <h4 className="flex gap-2 items-center font-semibold">
-                <Icon name="info" stroke="white" fill="gray" />
-                <span>Examamination is starting next week monday</span>
-              </h4>
-              <div className="flex flex-col">
-                <small>{formatDate().getDate}</small>
-                <small>{formatDate().getTime}</small>
-              </div>
-            </BaseBtn>
+            {Array(5)
+              .fill('')
+              .map(() => (
+                <BaseBtn
+                  key={Math.random()}
+                  onClick={() => setView('annoucement')}
+                  className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
+                >
+                  <h4 className="flex gap-2 items-center text-left font-semibold">
+                    <Icon
+                      name="info"
+                      stroke="white"
+                      fill="gray"
+                      style={{ alignSelf: 'flex-start', marginTop: 2 }}
+                    />
+                    <span>Examamination is starting next week monday</span>
+                  </h4>
+                  <div className="flex flex-col mt-0.5">
+                    <small>{formatDate().getDate}</small>
+                    <small>{formatDate().getTime}</small>
+                  </div>
+                </BaseBtn>
+              ))}
           </div>
         </div>
       </div>
