@@ -9,7 +9,7 @@ const Layout: FC = () => {
   const animate = toggleNav ? 'animate-in' : 'animate-out';
 
   return (
-    <main className="relative flex overflow-hidden">
+    <main className="fixed inset-0 flex overflow-hidden">
       <BgImage />
       <section
         data-testid="nav-wrapper"

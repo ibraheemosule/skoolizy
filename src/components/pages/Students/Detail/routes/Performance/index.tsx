@@ -19,7 +19,7 @@ const Performance = () => (
         <div className="flex justify-between flex-wrap gap-4">
           <div className="flex gap-4 flex-wrap">
             <span className="font-semibold text-lg">Attitude Rating</span>
-            <StarRating rating={2} />
+            <StarRating rating={0.7} />
           </div>
           <PerformanceOptions />
         </div>

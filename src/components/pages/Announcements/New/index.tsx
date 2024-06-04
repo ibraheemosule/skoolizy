@@ -2,6 +2,7 @@ import { memo, useState } from 'react';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import Modal from '~reusables/Modal';
+import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
 
 const testing = ['everyone', 'parents', 'teachers', 'students'];
@@ -22,6 +23,12 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   const [startDate, setStartDate] = useCustomField('');
   const [endDate, setEndDate] = useCustomField('');
 
+  const nav = {
+    Memo: () => setType('memo'),
+    'Single-day event': () => setType('single-day event'),
+    'Multi-day event': () => setType('multi-day event'),
+  };
+
   return (
     <Modal
       size="md"
@@ -31,14 +38,15 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       fixedActionBtn
       content={
         <div className="pb-8">
-          <div>
+          <HorizontalNav nav={nav} active={type} />
+          <div className="mt-4">
             <BoldText>Title:</BoldText>
             <div className="mt-1">
               <CustomField
                 onChange={(v) => setAnnouncement(v)}
                 field="input"
                 value={announcement}
-                placeholder="Type announcement title"
+                placeholder={`Type ${type} title`}
                 icon={null}
               />
             </div>
@@ -48,14 +56,14 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
             <BoldText>Details:</BoldText>
             <div className="mt-1">
               <textarea
-                placeholder="Type more details about announcement here..."
+                placeholder={`Type more details about ${type} here...`}
                 className="w-full outline-none resize-none h-28 bg-gray-100 p-2 rounded-lg"
                 maxLength={200}
               />
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div className="flex flex-wrap items-center mt-4 gap-4 gap-x-6 sm:justify-end">
               <label className="w-full sm:w-auto" htmlFor="memo">
                 <input
@@ -94,12 +102,14 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                 Multi-day Event
               </label>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex mt-4 gap-4 flex-wrap sm:justify-end">
             {type !== 'memo' && (
               <div className="w-[150px]">
-                <BoldText>{type === 'multi-day' && 'Start '}Date:</BoldText>
+                <BoldText>
+                  {type === 'multi-day event' && 'Start '}Date:
+                </BoldText>
                 <div className="mt-1">
                   <CustomField
                     placeholder="Recipients"
@@ -112,7 +122,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
               </div>
             )}
 
-            {type === 'multi-day' && (
+            {type === 'multi-day event' && (
               <div className="w-[150px]">
                 <BoldText>End Date:</BoldText>
                 <div className="mt-1">

@@ -52,7 +52,6 @@ const Editable = () => {
             : 'cursor-text'
         }`}
       />
-
       {icon && !dateTypes.includes(type || '') && (
         <span className=" mr-1">
           <Icon height={20} width={20} name={icon} />
@@ -324,7 +323,7 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
             ...(props.children && { filterFn: props.filterFn }),
           }),
     }),
-    [props.value, props.filterFn]
+    [props.value, props.filterFn, props.placeholder]
   );
 
   return (

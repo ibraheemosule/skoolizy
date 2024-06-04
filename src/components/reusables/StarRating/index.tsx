@@ -1,5 +1,5 @@
 import { memo, FC } from 'react';
-import Star from '~src/assets/Icons/StarIcon';
+import Icon from '~assets/Icons';
 
 const stars = Array(5).fill('');
 
@@ -10,16 +10,19 @@ interface IStarRatings {
 
 const StarRatings: FC<IStarRatings> = ({ rating, onClick }) => (
   <div className="flex gap-2 shrink-0">
-    {stars.map((_, i) => (
-      <button
-        onClick={() => onClick?.(i + 1)}
-        key={Math.random()}
-        type="button"
-        className="h-full"
-      >
-        <Star color={i + 1 <= rating ? '#432c81' : '#868686'} />
-      </button>
-    ))}
+    {stars.map((_, i) => {
+      const offset = rating >= i + 1 ? 100 : (rating - i) * 100;
+      return (
+        <button
+          onClick={() => onClick?.(i + 1)}
+          key={Math.random()}
+          type="button"
+          className="h-full"
+        >
+          <Icon name="star" offset={offset} />
+        </button>
+      );
+    })}
   </div>
 );
 export default memo(StarRatings);

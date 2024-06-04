@@ -11,6 +11,10 @@ const RateSomeone = () => {
   const [user, setUser, list, filterFn] = useCustomField([], []);
   const [rating, setRating] = useState(0);
 
+  useEffect(() => {
+    if (!user.length) setRating(0);
+  }, [user.length]);
+
   useEffect(() => filterFn(countries), [countries.length]);
 
   const starClicked = (i: number) => {
