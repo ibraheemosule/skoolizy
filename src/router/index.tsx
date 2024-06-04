@@ -160,6 +160,13 @@ const router = createBrowserRouter([
                 '~components/pages/Classroom/classroom-routes/RecordGrade'
               ),
           }),
+          lazyLoad({
+            path: 'performance',
+            url: () =>
+              import(
+                '~components/pages/Classroom/classroom-routes/Performance'
+              ),
+          }),
         ],
       }),
       lazyLoad({
@@ -187,13 +194,6 @@ const router = createBrowserRouter([
                 path: 'teachers',
                 url: () =>
                   import('~components/pages/Subjects/Detail/routes/Teachers'),
-              }),
-              lazyLoad({
-                path: 'performance',
-                url: () =>
-                  import(
-                    '~components/pages/Subjects/Detail/routes/Performance'
-                  ),
               }),
             ],
           }),

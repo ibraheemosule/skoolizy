@@ -9,9 +9,6 @@ const SubjectList = () => (
     <NavLink className="p-1 horizontal-nav shrink-0" to="teachers">
       Teachers
     </NavLink>
-    <NavLink className="p-1 horizontal-nav shrink-0" to="performance">
-      Performance
-    </NavLink>
   </nav>
 );
 
