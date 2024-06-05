@@ -6,7 +6,7 @@ import logo from '~assets/images/logo.png';
 const SideNav = () => (
   <div
     onClick={(e) => e.stopPropagation()}
-    className="h-screen flex flex-col w-3/4 xs:w-3/5 sm:w-2/5 md:w-full pt-6 bg-white md:bg-transparent"
+    className="h-full overflow-auto flex flex-col w-3/4 xs:w-3/5 sm:w-2/5 md:w-full pt-6 bg-white md:bg-transparent"
   >
     <div className="shrink-0 flex pb-2 _full">
       <NavLink to="/">
