@@ -22,9 +22,9 @@ type TModal = {
 };
 
 const sizes = {
-  sm: 'md:min-w-[40%] lg:min-w-[25%] lg:max-w-[30vw] xl:max-w-[400px]',
-  md: 'md:min-w-[60%] lg:min-w-[40%] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
-  lg: 'md:min-w-[80%] lg:min-w-[60%]',
+  sm: 'sm:min-w-[50%] lg:min-w-[30%] lg:max-w-[30vw] xl:max-w-[400px]',
+  md: 'sm:min-w-[65%] lg:min-w-[40%] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
+  lg: 'sm:min-w-[90%] lg:min-w-[60%]',
 };
 
 const Modal: FC<TModal> = ({
@@ -52,7 +52,7 @@ const Modal: FC<TModal> = ({
     <div
       ref={modal}
       onClick={(e) => e.target === modal.current && close((prev) => !prev)}
-      className="fixed text-left transition-all flex justify-center md:items-center bg-[#918e8eb3] top-0 left-0 h-screen w-screen z-50 p-8"
+      className="fixed text-left transition-all flex justify-center md:items-center bg-[#a4a3a3d3] top-0 left-0 h-screen w-screen z-50 p-8"
     >
       <div
         className={`transition-all relative min-w-[280px] flex flex-col h-fit max-h-[80vh] sm:max-h-[90vh] ${

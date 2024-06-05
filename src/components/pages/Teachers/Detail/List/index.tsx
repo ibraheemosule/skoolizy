@@ -1,4 +1,3 @@
-import 'react-alice-carousel/lib/alice-carousel.css';
 import { NavLink } from 'react-router-dom';
 
 const SubjectList = () => (
