@@ -46,7 +46,7 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       size="sm"
       title="Filter Announcements"
       content={
-        <>
+        <div data-testid="filter-annouoncement-modal">
           <div>
             <BoldText>Search Keyword:</BoldText>
             <div className="mt-1">
@@ -129,7 +129,7 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
               </CustomField>
             </div>
           </div>
-        </>
+        </div>
       }
       action={() => null}
       close={() => closeModal()}

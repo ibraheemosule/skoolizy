@@ -5,8 +5,9 @@ type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
 
 export const ActionBtn = memo(
-  ({ children, className, onClick }: TBtnWithChild) => (
+  ({ children, className, onClick, testId }: TBtnWithChild) => (
     <button
+      data-testid={testId}
       onClick={onClick}
       className={`text-white bg-purple.dark rounded-lg ${className}`}
       type="button"

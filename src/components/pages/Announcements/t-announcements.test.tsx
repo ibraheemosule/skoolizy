@@ -39,6 +39,21 @@ describe('Announcements Page', () => {
     );
   });
 
+  it('Should open announcement manage list modal and close', async () => {
+    userEvent.click(screen.getByTestId('manage-list'));
+
+    expect(
+      await screen.findByTestId('filter-annouoncement-modal')
+    ).toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId('close-modal'));
+    await waitFor(() =>
+      expect(
+        screen.queryByTestId('filter-announcement-modal')
+      ).not.toBeInTheDocument()
+    );
+  });
+
   describe('Test announcement time', () => {
     beforeEach(() => {
       cleanup();

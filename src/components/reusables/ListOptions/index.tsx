@@ -18,6 +18,7 @@ const ListOptions = ({
   <div className="flex flex-wrap justify-end gap-4">
     {onManageClick && (
       <BaseBtn
+        testId="manage-list"
         onClick={onManageClick}
         className="flex gap-2 items-center font-bold text-purple.dark hover:opacity-50"
       >
@@ -26,6 +27,7 @@ const ListOptions = ({
     )}
     {onActionClick && (
       <ActionBtn
+        testId="list-action-btn"
         onClick={onActionClick}
         className="px-4 py-2 text-purple.dark hover:opacity-50"
       >
