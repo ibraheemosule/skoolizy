@@ -30,7 +30,6 @@ const icons: {
     width = 24,
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
@@ -46,13 +45,7 @@ const icons: {
     </svg>
   ),
   search: ({ fill = 'currentColor', height = 24, width = 24 }) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      height={height}
-      width={width}
-      fill={fill}
-    >
+    <svg viewBox="0 0 24 24" height={height} width={width} fill={fill}>
       <path
         fillRule="evenodd"
         d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
@@ -61,13 +54,7 @@ const icons: {
     </svg>
   ),
   caretDown: ({ fill = 'currentColor', height = 24, width = 24 }) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      height={height}
-      width={width}
-      fill={fill}
-    >
+    <svg viewBox="0 0 24 24" height={height} width={width} fill={fill}>
       <path
         fillRule="evenodd"
         d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
@@ -78,7 +65,6 @@ const icons: {
   logo: (props) => logo(props),
   paper: ({ style = {}, stroke = 'currentColor', height = 20, width = 20 }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
@@ -102,7 +88,6 @@ const icons: {
     width = 20,
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
@@ -131,7 +116,6 @@ const icons: {
     strokeWidth = 1.5,
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
@@ -155,7 +139,6 @@ const icons: {
     strokeWidth = 1.5,
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
@@ -190,13 +173,7 @@ const icons: {
     </svg>
   ),
   monitor: ({ width = 20, height = 20, style = {} }) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width={width}
-      height={height}
-      style={style}
-    >
+    <svg viewBox="0 0 24 24" width={width} height={height} style={style}>
       <path d="M17,5h4v1h-4v-1Zm0,4h4v-1h-4v1Zm0,3h4v-1h-4v1Zm0,3h4v-1h-4v1Zm-2-5c0,3.309-2.691,6-6,6s-6-2.691-6-6,2.691-6,6-6,6,2.691,6,6Zm-6,5c1.198,0,2.284-.441,3.146-1.146l-3.646-3.646V5.051c-2.52,.255-4.5,2.364-4.5,4.949,0,2.757,2.243,5,5,5Zm5-5c0-2.586-1.98-4.694-4.5-4.949v4.742l3.354,3.354c.705-.862,1.146-1.948,1.146-3.146Zm-1.5,9v3h5.5v1H6v-1h5.5v-3H0V3.5C0,2.122,1.121,1,2.5,1H21.5c1.379,0,2.5,1.122,2.5,2.5v15.5H12.5Zm-11.5-1H23V3.5c0-.827-.673-1.5-1.5-1.5H2.5c-.827,0-1.5,.673-1.5,1.5v14.5Z" />
     </svg>
   ),
@@ -209,7 +186,6 @@ const icons: {
     style = {},
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill={fill}
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
@@ -234,7 +210,6 @@ const icons: {
     style = {},
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill={fill}
       strokeWidth={strokeWidth}
@@ -252,7 +227,6 @@ const icons: {
   ),
   'edit-list': ({ width = 20, height = 20, style = {} }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 106.86 122.88"
       width={width}
       height={height}
@@ -272,7 +246,6 @@ const icons: {
     fill = 'none',
   }) => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill={fill}
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
@@ -431,10 +404,223 @@ const icons: {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+        d="M12 4.5v15m7.5-7.5h-15"
       />
     </svg>
   ),
+  info: ({
+    style = {},
+    stroke = 'currentColor',
+    height = 20,
+    width = 20,
+    strokeWidth = 1.5,
+    fill = 'none',
+  }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill={fill}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke={stroke}
+      height={height}
+      width={width}
+      style={style}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+      />
+    </svg>
+  ),
+
+  spinner: ({ style = {}, fill = '#fff', height = 200, width = 200 }) => (
+    <svg
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid"
+      width={width}
+      height={height}
+      style={{
+        shapeRendering: 'auto',
+        display: 'block',
+        background: 'rgb(255, 255, 255)',
+        ...style,
+      }}
+    >
+      <g>
+        <g transform="rotate(0 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.9166666666666666s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(30 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.8333333333333334s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(60 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.75s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(90 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.6666666666666666s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(120 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.5833333333333334s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(150 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.5s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(180 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.4166666666666667s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(210 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.3333333333333333s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(240 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.25s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(270 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.16666666666666666s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(300 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="-0.08333333333333333s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g transform="rotate(330 50 50)">
+          <rect fill={fill} height="12" width="6" ry="6" rx="3" y="24" x="47">
+            <animate
+              repeatCount="indefinite"
+              begin="0s"
+              dur="1s"
+              keyTimes="0;1"
+              values="1;0"
+              attributeName="opacity"
+            />
+          </rect>
+        </g>
+        <g />
+      </g>
+    </svg>
+  ),
+  star: ({
+    fill = '#432c81',
+    height = 24,
+    width = 24,
+    offset = '50%',
+    stopColor = '#86868658',
+  }) => {
+    const id = String(Math.random());
+    return (
+      <svg viewBox="0 0 24 24" style={{ height, width }}>
+        <defs>
+          <linearGradient id={id} x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset={`${offset}%`} stopColor={fill} />
+            <stop offset={`${offset}%`} stopColor={stopColor} />
+          </linearGradient>
+        </defs>
+        <path
+          fill={`url(#${id})`}
+          fillRule="evenodd"
+          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+          clipRule="evenodd"
+        />
+      </svg>
+    );
+  },
 };
 
 const Icon = ({ name, ...props }: TIcon & { name: TIconNames }) =>

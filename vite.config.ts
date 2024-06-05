@@ -8,14 +8,15 @@ export default defineConfig({
   css: { postcss: { plugins: [tailwindcss()] } },
   resolve: {
     alias: {
-      '~src': path.resolve(__dirname, './src'),
-      '~components': path.resolve(__dirname, './src/components'),
+      '~api': path.resolve(__dirname, './src/api'),
       '~icons': path.resolve(__dirname, './src/assets/Icons'),
       '~assets': path.resolve(__dirname, './src/assets'),
-      '~router': path.resolve(__dirname, './src/router'),
       '~utils': path.resolve(__dirname, './src/utils'),
-      '~ts-types': path.resolve(__dirname, './src/ts-types'),
+      '~shared-ts-types': path.resolve(__dirname, './src/shared-ts-types'),
       '~reusables': path.resolve(__dirname, './src/components/reusables'),
+      '~components': path.resolve(__dirname, './src/components'),
+      '~router': path.resolve(__dirname, './src/router'),
+      '~src': path.resolve(__dirname, './src'),
     },
   },
 });

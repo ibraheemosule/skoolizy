@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { capitalizeChar } from '~src/utils';
 import Menu from '~assets/Icons/MenuIcon';
 import CustomField from '~reusables/CustomField';
@@ -27,13 +27,14 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
       </button>
       <div className="flex grow gap-4 items-center justify-between">
         <h2 className="hidden sm:block text-gray-500 text-xl font-semibold">
-          {route.map((r) => (
-            <span
+          {route.map((r, i) => (
+            <NavLink
               key={r}
-              className="tracking-tight first:before:hidden before:content-['-'] before:mx-2"
+              className="tracking-tight first:before:hidden before:content-['-'] before:mx-2 hover:text-purple.dark"
+              to={route.slice(0, i + 1).join('/')}
             >
               {capitalizeChar(r)}
-            </span>
+            </NavLink>
           ))}
         </h2>
         <div className="shrink-0 ml-auto">

@@ -41,6 +41,9 @@ const ClassroomList = () => {
         <NavLink className="p-1 horizontal-nav shrink-0" to="record-grade">
           Record Grade
         </NavLink>
+        <NavLink className="p-1 horizontal-nav shrink-0" to="performance">
+          Performance
+        </NavLink>
       </nav>
     </>
   );

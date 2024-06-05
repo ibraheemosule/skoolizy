@@ -47,15 +47,30 @@ export const VerticalNav = memo(({ nav, title }: TVerticalNav) => (
 
 VerticalNav.displayName = 'VerticalNav';
 
-type THorizontalNav = { nav: Record<string, string> };
+type THorizontalNav = {
+  nav: Record<string, string | (() => void)>;
+  active?: string;
+};
 
-export const HorizontalNav = memo(({ nav }: THorizontalNav) => (
-  <nav className="classrooms-nav  mt-8 flex border-b overflow-x-auto border-gray-300 gap-4">
-    {Object.entries(nav).map(([label, route]) => (
-      <NavLink key={label} className="p-1 horizontal-nav shrink-0" to={route}>
-        {label}
-      </NavLink>
-    ))}
+export const HorizontalNav = memo(({ nav, active }: THorizontalNav) => (
+  <nav className="classrooms-nav flex border-b overflow-x-auto border-gray-300 gap-4">
+    {Object.entries(nav).map(([label, action]) => {
+      const isRoute = typeof action === 'string';
+      const Btn = isRoute ? NavLink : BaseBtn;
+
+      return (
+        <Btn
+          {...(!isRoute && { onClick: action })}
+          to={isRoute ? action : '#'}
+          key={label}
+          className={`p-1 horizontal-nav ${
+            active?.toLowerCase() === label.toLowerCase() ? 'active' : ''
+          } shrink-0`}
+        >
+          {label}
+        </Btn>
+      );
+    })}
   </nav>
 ));
 

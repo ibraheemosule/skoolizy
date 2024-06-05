@@ -16,14 +16,15 @@ type TModal = {
   actionText?: string;
   size?: 'sm' | 'md' | 'lg';
   scroll?: boolean;
+  fixedActionBtn?: boolean;
 } & {
   [key in 'title' | 'content']?: ReactNode;
 };
 
 const sizes = {
-  sm: 'md:min-w-[40%] lg:min-w-[25%] max-w-[40vw] lg:max-w-[30vw] xl:max-w-[400px]',
-  md: 'md:min-w-[60%] lg:min-w-[40%] max-w-[80vw] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
-  lg: 'md:min-w-[80%] lg:min-w-[60%] max-w-[80vw] max-w-[80vw]',
+  sm: 'md:min-w-[40%] lg:min-w-[25%] lg:max-w-[30vw] xl:max-w-[400px]',
+  md: 'md:min-w-[60%] lg:min-w-[40%] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
+  lg: 'md:min-w-[80%] lg:min-w-[60%]',
 };
 
 const Modal: FC<TModal> = ({
@@ -34,41 +35,43 @@ const Modal: FC<TModal> = ({
   actionText,
   size,
   scroll = true,
+  fixedActionBtn = false,
 }) => {
   const modal = useRef<ElementRef<'div'>>(null);
+
+  const actionUI = (
+    <ActionBtn
+      onClick={() => action?.()}
+      className="mt-4 shrink-0 px-4 py-2 w-full text-purple.dark hover:opacity-50"
+    >
+      {actionText || 'Submit'}
+    </ActionBtn>
+  );
 
   return (
     <div
       ref={modal}
       onClick={(e) => e.target === modal.current && close((prev) => !prev)}
-      className="fixed text-left transition-all grid place-items-center bg-[#918e8eb3] top-0 left-0 h-screen w-screen z-50 p-8"
+      className="fixed text-left transition-all flex justify-center md:items-center bg-[#918e8eb3] top-0 left-0 h-screen w-screen z-50 p-8"
     >
       <div
-        className={`transition-all relative min-w-[280px] ${
+        className={`transition-all relative min-w-[280px] flex flex-col h-fit max-h-[80vh] sm:max-h-[90vh] ${
           sizes[size || 'lg']
         } bg-white shadow-sm p-6 rounded-md`}
       >
         <div className="absolute top-4 right-4">
-          <BaseBtn onClick={() => close((prev) => !prev)}>
+          <BaseBtn testId="close-modal" onClick={() => close((prev) => !prev)}>
             <CancelIcon height={25} width={25} />
           </BaseBtn>
         </div>
-        <header>
+        <header className="shrink-0">
           <h3 className=" text-xl font-semibold max-w-[90%]">{title}</h3>
         </header>
-        <main
-          className={`my-6 ${scroll ? 'overflow-y-auto max-h-[65vh]' : ''}`}
-        >
+        <main className={`grow my-6 ${scroll ? 'overflow-y-auto' : ''}`}>
           {content}
-          {action && (
-            <ActionBtn
-              onClick={() => action()}
-              className="mt-4 px-4 py-2 w-full text-purple.dark hover:opacity-50"
-            >
-              {actionText || 'Submit'}
-            </ActionBtn>
-          )}
+          {action && !fixedActionBtn && actionUI}
         </main>
+        {action && fixedActionBtn && actionUI}
       </div>
     </div>
   );
