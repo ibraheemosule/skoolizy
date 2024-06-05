@@ -1,49 +1,67 @@
 import { ReactNode, memo } from 'react';
 
-const cellStyles =
-  'p-4 w-[150px] sm:w-[200px] text-center border-b border border-gray-200';
-const sideHeaderStyles = `${cellStyles} absolute left-0`;
-
-const TopHeader = ({ headers }: { headers: ReactNode[] }) => (
-  <thead>
-    <tr className="">
-      <th
-        className={`${sideHeaderStyles} border-b-0 border-r-0 bg-transparent`}
-      />
-      {headers.map((header) => (
-        <th
-          key={Math.random()}
-          className={`${cellStyles} bg-purple.light font-bold`}
-        >
-          {header}
-        </th>
-      ))}
-    </tr>
-  </thead>
-);
+const style = 'p-3 text-center';
 
 const SideHeaderTable = ({
   topHeaders,
   content,
   editable = false,
+  sideHeader,
+  boxWidth = '150px',
 }: {
   topHeaders?: ReactNode[];
-  content: Record<string, ReactNode[]>;
+  content: ReactNode[][];
+  sideHeader?: ReactNode[];
   editable?: boolean;
+  boxWidth?: string;
 }) => (
   <div className="relative bg-purple.light rounded-xl overflow-hidden">
-    <div className=" overflow-x-scroll overflow-y-visible max-w-full ml-[150px] sm:ml-[200px]">
+    <div
+      {...(sideHeader && { style: { marginLeft: boxWidth } })}
+      className="overflow-x-scroll overflow-y-visible max-w-full"
+    >
       <table className=" table-fixed border-collapse w-full">
-        {topHeaders ? <TopHeader headers={topHeaders} /> : null}
+        {topHeaders && (
+          <thead>
+            <tr className="border-b border-gray-200">
+              {sideHeader && (
+                <th
+                  style={{ width: boxWidth }}
+                  className={`${style} absolute left-0 bg-transparent`}
+                />
+              )}
+              {topHeaders.map((header) => (
+                <th
+                  key={Math.random()}
+                  style={{ width: boxWidth }}
+                  className="text-center p-3 bg-purple.light font-bold"
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+        )}
         <tbody>
-          {Object.entries(content).map(([key, obj]) => (
-            <tr key={Math.random()} className="odd:bg-gray-50 even:bg-gray-100">
-              <th className={`${sideHeaderStyles} font-bold`}>{key}</th>
-              {obj.map((v) => (
+          {content.map((datum, i) => (
+            <tr
+              key={Math.random()}
+              className="odd:bg-gray-50 even:bg-gray-100 border border-gray-200 align-baseline"
+            >
+              {sideHeader && (
+                <th
+                  style={{ width: boxWidth }}
+                  className="text-center p-3 font-bold absolute left-0"
+                >
+                  {sideHeader[i]}
+                </th>
+              )}
+              {datum.map((v) => (
                 <td
                   key={Math.random()}
                   contentEditable={editable}
-                  className={`${cellStyles}`}
+                  style={{ width: boxWidth }}
+                  className={`${style} `}
                 >
                   {v}
                 </td>

@@ -22,4 +22,6 @@ export type TIconNames =
   | 'setting'
   | 'exit'
   | 'plus'
-  | 'info';
+  | 'info'
+  | 'spinner'
+  | 'star';

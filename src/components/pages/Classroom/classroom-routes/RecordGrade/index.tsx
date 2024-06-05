@@ -5,15 +5,6 @@ import useCustomField from '~components/reusables/CustomField/hooks-custom-field
 import ScoreBoard from './ScoreBoard';
 
 const RecordGrade = () => {
-  const [classroom, setClassroom, classroomList] = useCustomField('', [
-    'JSS-1',
-    'JSS-2',
-    'JSS-3',
-    'SSS-1',
-    'SSS-2',
-    'SSS-3',
-  ]);
-
   const [subject, setSubject, subjectList] = useCustomField('', [
     'English',
     'Math',
@@ -23,27 +14,9 @@ const RecordGrade = () => {
   const [grade, setGrade] = useCustomField('');
 
   return (
-    <section className="flex _full flex-wrap max-h-full overflow-auto lg:flex-nowrap gap-6">
+    <section className="flex flex-wrap max-h-full overflow-auto lg:flex-nowrap gap-6">
       <div className="w-full shrink-0 overflow-auto">
         <div className="flex justify-start flex-wrap gap-x-8 gap-y-4">
-          <div>
-            <BoldText>Class:</BoldText>
-            <div className="mt-1">
-              <CustomField
-                value={classroom}
-                onSelect={setClassroom}
-                field="select"
-              >
-                <CustomField.DropdownWrapper>
-                  {classroomList.map((sub) => (
-                    <CustomField.Dropdown key={sub} value={sub}>
-                      {sub}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
-            </div>
-          </div>
           <div>
             <BoldText>Grade Limit:</BoldText>
             <div className="mt-1">

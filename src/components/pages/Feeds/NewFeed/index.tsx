@@ -15,8 +15,12 @@ const NewFeed = ({ closeModal }: { closeModal: () => void }) => (
         />
         <div className="flex mt-4 gap-4 flex-wrap sm:justify-end">
           <div className="flex items-center gap-2">
-            <input type="checkbox" className="cursor-pointer" />{' '}
-            <label>Anonymous</label>
+            <input
+              id="anonymous-feed"
+              type="checkbox"
+              className="cursor-pointer"
+            />
+            <label htmlFor="anonymous-feed">Anonymous</label>
           </div>
           <ActionBtn className="px-4 py-2 text-purple.dark hover:opacity-50">
             Request

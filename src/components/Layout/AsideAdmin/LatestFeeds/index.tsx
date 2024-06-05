@@ -23,8 +23,8 @@ const Feeds = () => (
       </div>
     </div>
 
-    <div className="max-h-[70vh] mt-8 overflow-y-auto">
-      {Array(10)
+    <div className="mt-8">
+      {Array(5)
         .fill('')
         .map(() => (
           <FeedCard

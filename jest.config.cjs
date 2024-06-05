@@ -9,7 +9,7 @@ module.exports = {
     '^~reusables/(.*)$': '<rootDir>/src/components/reusables/$1',
     '^~icons/(.*)$': '<rootDir>/src/assets/icons/$1',
     '^~assets/(.*)$': '<rootDir>/src/assets/$1',
-    '^~ts-types/(.*)$': '<rootDir>/src/ts-types/$1',
+    '^~shared-ts-types/(.*)$': '<rootDir>/src/shared-ts-types/$1',
     '\\.(css|less)$': 'identity-obj-proxy',
   },
 };

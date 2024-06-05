@@ -1,12 +1,13 @@
 import { memo } from 'react';
-import { IBaseProp } from '~src/ts-types/react-types';
+import { IBaseProp } from '~src/shared-ts-types/react-types';
 
 type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
 
 export const ActionBtn = memo(
-  ({ children, className, onClick }: TBtnWithChild) => (
+  ({ children, className, onClick, testId }: TBtnWithChild) => (
     <button
+      data-testid={testId}
       onClick={onClick}
       className={`text-white bg-purple.dark rounded-lg ${className}`}
       type="button"
@@ -18,8 +19,13 @@ export const ActionBtn = memo(
 ActionBtn.displayName = 'ActionBtn';
 
 export const BaseBtn = memo(
-  ({ children, className, onClick }: TBtnWithChild) => (
-    <button onClick={onClick} className={`${className}`} type="button">
+  ({ children, className, onClick, testId }: TBtnWithChild) => (
+    <button
+      data-testid={testId}
+      onClick={onClick}
+      className={`${className}`}
+      type="button"
+    >
       {children}
     </button>
   )
