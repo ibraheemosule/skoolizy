@@ -1,4 +1,3 @@
-import 'react-alice-carousel/lib/alice-carousel.css';
 import { NavLink } from 'react-router-dom';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
