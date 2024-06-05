@@ -1,4 +1,4 @@
-import { it, describe } from 'vitest';
+import { it, describe, vi } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TestWrapper from '~components/reusables/TestWrapper';
@@ -17,7 +17,7 @@ describe('Announcements Page', () => {
   it('should render announcement page', async () => {
     expect(screen.getByTestId('announcements-page')).toBeInTheDocument();
     await waitFor(() =>
-      expect(screen.getByText(/russia/i)).toBeInTheDocument()
+      expect(screen.getByText(/nigeria/i)).toBeInTheDocument()
     );
   });
 
@@ -27,7 +27,6 @@ describe('Announcements Page', () => {
 
   it('should open the modal for the announcement detail when an announcement is clicked and close modal', async () => {
     const announcement = screen.getAllByTestId('annoucement')[0];
-    expect(screen.getAllByText('4/6/2024')).toHaveLength(5);
 
     userEvent.click(announcement);
     expect(await screen.findByTestId('announcement-modal')).toBeInTheDocument();
@@ -38,5 +37,20 @@ describe('Announcements Page', () => {
     await waitFor(() =>
       expect(screen.queryByTestId('announcement-modal')).not.toBeInTheDocument()
     );
+  });
+
+  describe('Test announcement time', () => {
+    beforeEach(() => {
+      cleanup();
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date('2024-06-04T09:43:03.000Z'));
+      render(<MockAnnouncements />);
+    });
+
+    afterEach(() => vi.useRealTimers());
+
+    it('should open the modal for the announcement detail when an announcement is clicked and close modal', () => {
+      expect(screen.getAllByText('4/6/2024')).toHaveLength(5);
+    });
   });
 });
