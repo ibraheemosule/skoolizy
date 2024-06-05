@@ -4,6 +4,7 @@ import useGetCountriesAndState from '../hooks/useGetCountriesAndState';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import StarRatings from '~reusables/StarRating';
+import ConfirmRatingModal from './ConfirmRatingModal';
 
 const RateSomeone = () => {
   const { countries, isLoading: fetchingCountry } = useGetCountriesAndState();
@@ -22,8 +23,15 @@ const RateSomeone = () => {
     setRating(i);
   };
 
+  const closeModal = () => {
+    setRating(0);
+  };
+
   return (
     <>
+      {!!rating && (
+        <ConfirmRatingModal rating={rating} closeModal={closeModal} />
+      )}
       <BoldText>Rate Someone</BoldText>
       <div className="flex justify-between flex-wrap gap-4 gap-y-3 mt-3">
         <div className="grow xs-grow-0 w-[180px]">
