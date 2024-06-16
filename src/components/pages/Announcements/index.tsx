@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
@@ -7,10 +8,20 @@ import FilterAnnouncements from './Filter';
 import { formatDate } from '~utils/format';
 import ViewAnnouncement from './View';
 import ListOptions from '~components/reusables/ListOptions';
+import Api from '~api';
+
+const { api } = new Api();
 
 const Announcements = () => {
   const [modal, setModal] = useState('');
   const [view, setView] = useState('');
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['ANNOUNCEMENTS'],
+    queryFn: () => api.getAllAnnouncements(),
+  });
+
+  console.log(data, isLoading);
 
   return (
     <section

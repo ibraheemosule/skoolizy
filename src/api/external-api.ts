@@ -10,5 +10,4 @@ export default (api: AxiosInstance) => ({
     const res = await api.get(COUNTRY_URL);
     return res.data;
   },
-  girl: () => null,
 });
