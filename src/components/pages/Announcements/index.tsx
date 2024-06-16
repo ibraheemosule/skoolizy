@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
 import NewAnnouncement from './New';
 import FilterAnnouncements from './Filter';
-import { formatDate } from '~utils/format';
+import { capitalizeChar, formatDate } from '~utils/format';
 import ViewAnnouncement from './View';
 import ListOptions from '~components/reusables/ListOptions';
 import Api from '~api';
@@ -13,15 +14,18 @@ import Api from '~api';
 const { api } = new Api();
 
 const Announcements = () => {
+  const { state } = useLocation();
+  const search = state?.search || '';
+  const type = state?.type || '';
   const [modal, setModal] = useState('');
   const [view, setView] = useState('');
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['ANNOUNCEMENTS'],
-    queryFn: () => api.getAllAnnouncements(),
+  const { data } = useQuery({
+    queryKey: ['ANNOUNCEMENTS', search, type],
+    queryFn: () => api.getAllAnnouncements({ search, type }),
   });
 
-  console.log(data, isLoading);
+  const annoucements = data?.data;
 
   return (
     <section
@@ -48,30 +52,36 @@ const Announcements = () => {
           </div>
 
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
-            {Array(5)
-              .fill('')
-              .map(() => (
-                <BaseBtn
-                  testId="annoucement"
-                  key={Math.random()}
-                  onClick={() => setView('annoucement')}
-                  className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
-                >
-                  <h4 className="flex gap-2 items-center text-left font-semibold">
-                    <Icon
-                      name="info"
-                      stroke="white"
-                      fill="gray"
-                      style={{ alignSelf: 'flex-start', marginTop: 2 }}
-                    />
-                    <span>Examamination is starting next week monday</span>
-                  </h4>
-                  <div className="flex flex-col mt-0.5">
-                    <small>{formatDate().getDate}</small>
-                    <small>{formatDate().getTime}</small>
+            {annoucements?.map((a) => (
+              <BaseBtn
+                testId="annoucement"
+                key={Math.random()}
+                onClick={() => setView('annoucement')}
+                className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
+              >
+                <h4 className="flex gap-2 items-center text-left font-semibold">
+                  <Icon
+                    name="info"
+                    stroke="white"
+                    fill="gray"
+                    style={{ alignSelf: 'flex-start', marginTop: 2 }}
+                  />
+                  <div>
+                    <p className="first-letter:uppercase">{a.title}</p>
+                    <div>
+                      <span className="text-xs tracking-tight font-semibold">
+                        {capitalizeChar(a.type.split('_')[0])}{' '}
+                        {a.type.split('_')[1]} for {a.recipient}
+                      </span>
+                    </div>
                   </div>
-                </BaseBtn>
-              ))}
+                </h4>
+                <div className="flex flex-col mt-0.5">
+                  <small>{formatDate(a.date_created).getDate}</small>
+                  <small>{formatDate(a.date_created).getTime}</small>
+                </div>
+              </BaseBtn>
+            ))}
           </div>
         </div>
       </div>

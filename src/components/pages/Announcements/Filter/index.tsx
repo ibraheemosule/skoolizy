@@ -3,6 +3,8 @@ import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import useFilter from '~components/reusables/hooks/useFilter';
+import { capitalizeChar } from '~utils/format';
 
 const testing = [
   'here',
@@ -15,15 +17,15 @@ const testing = [
   'ksdadkfjkdfj akfjsklajfkjkfsfoi',
 ];
 
+const types = ['memo', 'single_event', 'multi_event'];
+
 const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
+  const { filter } = useFilter();
   const [classs, setClasss] = useState('');
-  const [search, setSearch] = useCustomField('');
+  const [search, setSearch] = useCustomField<string>('');
   const [user, setUser] = useState<string[]>([]);
   const [names, setNames] = useState([...testing]);
-  const [value, setValue, list, filterFn] = useCustomField<string[]>(
-    [],
-    testing
-  );
+  const [type, setType] = useCustomField<string>('');
   const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
     '',
     testing
@@ -41,6 +43,9 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     setNames((prev) => prev.filter((v) => v.includes(val)));
   };
 
+  const filterAnnouncements = () =>
+    filter({ ...(search && { search }), ...(type && { type }) });
+
   return (
     <Modal
       size="sm"
@@ -48,24 +53,19 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       content={
         <div data-testid="filter-annouoncement-modal">
           <div>
-            <BoldText>Search Keyword:</BoldText>
+            <BoldText>Search Title:</BoldText>
             <div className="mt-1">
               <CustomField onChange={setSearch} field="input" value={search} />
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>Filter By:</BoldText>
+            <BoldText>Announcement Type:</BoldText>
             <div className="mt-1">
-              <CustomField
-                filterFn={filterFn}
-                onSelect={setValue}
-                field="select"
-                value={value}
-              >
+              <CustomField onSelect={setType} field="select" value={type}>
                 <CustomField.DropdownWrapper>
-                  {list.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
+                  {types.map((t) => (
+                    <CustomField.Dropdown key={t} value={t}>
+                      {capitalizeChar(t)}
                     </CustomField.Dropdown>
                   ))}
                 </CustomField.DropdownWrapper>
@@ -131,7 +131,7 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
           </div>
         </div>
       }
-      action={() => null}
+      action={filterAnnouncements}
       close={() => closeModal()}
       actionText="Filter"
     />
