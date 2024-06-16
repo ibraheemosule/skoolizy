@@ -10,7 +10,13 @@ const ViewMedia = ({ img, closeModal }: TViewMedia) => (
   <Modal
     size="md"
     scroll={false}
-    content={<img className="w-full h-auto" src={img} alt="imaging" />}
+    content={
+      <img
+        className=" mx-auto w-auto h-full object-contain"
+        src={img}
+        alt="imaging"
+      />
+    }
     close={() => closeModal()}
   />
 );
