@@ -21,11 +21,12 @@ const Announcements = () => {
   const search = state?.search || '';
   const type = state?.type || '';
   const page = state?.page || 1;
+  const eventDays = state?.event_days || '';
   const [modal, setModal] = useState('');
   const [view, setView] = useState('');
 
   const { data, isLoading } = useQuery({
-    queryKey: ['ANNOUNCEMENTS', search, type, page],
+    queryKey: ['ANNOUNCEMENTS', search, type, page, eventDays],
     queryFn: () => api.getAllAnnouncements(state),
     placeholderData: keepPreviousData,
   });

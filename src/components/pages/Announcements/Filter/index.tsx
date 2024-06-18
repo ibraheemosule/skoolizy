@@ -17,6 +17,10 @@ const testing = [
   'ksdadkfjkdfj akfjsklajfkjkfsfoi',
 ];
 
+const nums = Array(365)
+  .fill('')
+  .map((_, i) => String(i));
+
 const types = ['memo', 'single_event', 'multi_event'];
 
 type TFilterAnnouncement = {
@@ -35,6 +39,10 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
     '',
     testing
   );
+  const [days, setDays, daysList, daysListFilterFn] = useCustomField<string>(
+    state.event_days || '',
+    nums
+  );
 
   const addUser = (u: string) => {
     if (user.includes(u)) {
@@ -49,7 +57,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   };
 
   const filterAnnouncements = () => {
-    action({ search, type });
+    action({ search, type, event_days: days });
     closeModal();
   };
 
@@ -73,6 +81,26 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
                   {types.map((t) => (
                     <CustomField.Dropdown key={t} value={t}>
                       {capitalizeChar(t)}
+                    </CustomField.Dropdown>
+                  ))}
+                </CustomField.DropdownWrapper>
+              </CustomField>
+            </div>
+          </div>
+          <div className="mt-4">
+            <BoldText>Event days:</BoldText>
+            <div className="mt-1">
+              <CustomField
+                field="input"
+                filterFn={daysListFilterFn}
+                onChange={setDays}
+                value={days}
+                icon="caretDown"
+              >
+                <CustomField.DropdownWrapper>
+                  {daysList.map((name) => (
+                    <CustomField.Dropdown key={name} value={name}>
+                      {name}
                     </CustomField.Dropdown>
                   ))}
                 </CustomField.DropdownWrapper>
