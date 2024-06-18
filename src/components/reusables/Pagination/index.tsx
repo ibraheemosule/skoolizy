@@ -51,13 +51,12 @@ const Pagination = ({
       </span>
 
       <div className="flex gap-3 items-center shrink-0 ">
-        <BaseBtn onClick={prev}>
-          <Icon name="caretLeftSolid" />
+        <BaseBtn className="flex items-center" onClick={prev}>
+          <Icon name="caretLeftSolid" /> Prev
         </BaseBtn>
-        <BaseBtn onClick={next}>
-          <Icon name="caretRightSolid" />
-        </BaseBtn>{' '}
-        -
+        <BaseBtn className="flex items-center" onClick={next}>
+          Next <Icon name="caretRightSolid" />
+        </BaseBtn>
         <span className="flex items-center gap-1">
           <label className="flex">
             Pages ({totalPage})
