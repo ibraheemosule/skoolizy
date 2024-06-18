@@ -47,7 +47,7 @@ const Pagination = ({
   return (
     <div className="flex grow flex-wrap justify-between gap-4 text-purple.dark font-semibold">
       <span className="flex items-center font-semibold">
-        ({items}) {type}
+        ({items || 0}) {type}
       </span>
 
       <div className="flex gap-3 items-center shrink-0 ">
@@ -59,7 +59,7 @@ const Pagination = ({
         </BaseBtn>
         <span className="flex items-center gap-1">
           <label className="flex">
-            Pages ({totalPage})
+            Pages ({totalPage || 0})
             <input
               value={num}
               onChange={(e) => setNum(e.target.value)}

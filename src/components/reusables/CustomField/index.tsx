@@ -84,18 +84,27 @@ const NonEditable = () => {
               : ''
         }`}
       >
-        {Array.isArray(value)
-          ? value.length
-            ? value.map((prop) => (
+        {(() => {
+          if (Array.isArray(value)) {
+            if (value.length) {
+              return value.map((prop) => (
                 <Tag onClick={() => onSelect?.(prop)} key={Math.random()}>
                   <div className="flex items-center">
-                    <span className=" whitespace-nowrap pr-2">{prop}</span>
+                    <span className=" whitespace-nowrap pr-2">
+                      {prop.split('_').join(' ')}
+                    </span>
                     <CancelIcon width={16} height={16} strokeWidth={3} />
                   </div>
                 </Tag>
-              ))
-            : emptyValue
-          : value || emptyValue}
+              ));
+            }
+            return emptyValue;
+          }
+          if (typeof value === 'string') {
+            return value.split('_').join(' ');
+          }
+          return value || emptyValue;
+        })()}
       </div>
       <span className=" mr-1">
         <Icon height={20} width={20} name="caretDown" />
