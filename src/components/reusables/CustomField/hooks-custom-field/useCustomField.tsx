@@ -34,6 +34,7 @@ const useCustomField = <T extends string | string[]>(
       );
       if (!doesOptionExist) {
         onChange('');
+        setTimeout(() => setFilteredList([...list.current]), 100);
       }
       return;
     }
