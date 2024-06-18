@@ -12,7 +12,10 @@ export const CustomFieldContext = createContext<{
   value: string | string[] | JSX.Element;
   placeholder?: string;
   search?: boolean;
-  filterFn?: (v: string) => void;
+  filterFn?: (
+    v: string,
+    inputFieldBlurValueCheck?: (arg: string) => void
+  ) => void;
   onChange?: (e: string) => void;
   onSelect?: (e: string) => void;
 } | null>(null);

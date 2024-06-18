@@ -43,6 +43,7 @@ const Editable = () => {
           onChange?.(e.target.value);
           filterFn?.(e.target.value);
         }}
+        onBlur={(e) => filterFn?.(e.target.value, onChange)}
         value={value as string}
         type={type ?? (search ? 'search' : 'text')}
         placeholder={placeholder || 'Search...'}
