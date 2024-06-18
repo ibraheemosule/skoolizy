@@ -21,12 +21,22 @@ const Announcements = () => {
   const search = state?.search || '';
   const type = state?.type || '';
   const page = state?.page || 1;
+  const fromDate = state?.from_date || '';
+  const toDate = state?.to_date || '';
   const eventDays = state?.event_days || '';
   const [modal, setModal] = useState('');
   const [view, setView] = useState('');
 
   const { data, isLoading } = useQuery({
-    queryKey: ['ANNOUNCEMENTS', search, type, page, eventDays],
+    queryKey: [
+      'ANNOUNCEMENTS',
+      search,
+      type,
+      page,
+      eventDays,
+      fromDate,
+      toDate,
+    ],
     queryFn: () => api.getAllAnnouncements(state),
     placeholderData: keepPreviousData,
   });
@@ -65,7 +75,6 @@ const Announcements = () => {
             />
             <div className="ml-auto">
               <ListOptions
-                // paginate={paginationData}
                 onManageClick={() => setModal('filter')}
                 onActionClick={() => setModal('new')}
                 actionText="New announcement"

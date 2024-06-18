@@ -1,21 +1,10 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import { capitalizeChar } from '~utils/format';
-
-const testing = [
-  'here',
-  'lakd',
-  'kdgjfksf',
-  'bakfko',
-  'giodsfsl',
-  'sdkfjakdf',
-  'qdooaldkf',
-  'ksdadkfjkdfj akfjsklajfkjkfsfoi',
-];
 
 const nums = Array(365)
   .fill('')
@@ -30,34 +19,23 @@ type TFilterAnnouncement = {
 
 const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   const state = useLocation().state ?? {};
-  const [classs, setClasss] = useState('');
   const [search, setSearch] = useCustomField<string>(state.search || '');
-  const [user, setUser] = useState<string[]>([]);
-  const [names, setNames] = useState([...testing]);
   const [type, setType] = useCustomField<string>(state.type || '');
-  const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
-    '',
-    testing
-  );
+  const [fromDate, setFromDate] = useCustomField(state.from_date || '');
+  const [toDate, setToDate] = useCustomField(state.to_date || '');
   const [days, setDays, daysList, daysListFilterFn] = useCustomField<string>(
     state.event_days || '',
     nums
   );
 
-  const addUser = (u: string) => {
-    if (user.includes(u)) {
-      setUser((use) => use.filter((us) => us !== u));
-      return;
-    }
-    setUser([...user, u]);
-  };
-
-  const filterList = (val: string) => {
-    setNames((prev) => prev.filter((v) => v.includes(val)));
-  };
-
   const filterAnnouncements = () => {
-    action({ search, type, event_days: days });
+    action({
+      search,
+      type,
+      event_days: days,
+      from_date: fromDate,
+      to_date: toDate,
+    });
     closeModal();
   };
 
@@ -65,6 +43,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
     <Modal
       size="sm"
       title="Filter Announcements"
+      fixedActionBtn
       content={
         <div data-testid="filter-annouoncement-modal">
           <div>
@@ -92,6 +71,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
             <div className="mt-1">
               <CustomField
                 field="input"
+                placeholder="Select event duration range..."
                 filterFn={daysListFilterFn}
                 onChange={setDays}
                 value={days}
@@ -108,60 +88,25 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>From Date:</BoldText>
+            <BoldText>Date range from:</BoldText>
             <div className="mt-1">
               <CustomField
+                type="date"
+                onChange={setFromDate}
                 field="input"
-                filterFn={dateListFilterFn}
-                onChange={setDate}
-                value={date}
-                icon="caretDown"
-              >
-                <CustomField.DropdownWrapper>
-                  {dateList.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
+                value={fromDate}
+              />
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>Filter By:</BoldText>
+            <BoldText>Date range to:</BoldText>
             <div className="mt-1">
               <CustomField
-                filterFn={filterList}
-                onSelect={addUser}
-                field="select"
-                value={user}
-              >
-                <CustomField.DropdownWrapper>
-                  {names.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
-            </div>
-          </div>
-          <div className="mt-4">
-            <BoldText>Select Class:</BoldText>
-            <div className="mt-1">
-              <CustomField
-                onSelect={(v) => setClasss(v)}
-                field="select"
-                value={classs}
-              >
-                <CustomField.DropdownWrapper>
-                  {names.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
+                type="date"
+                onChange={setToDate}
+                field="input"
+                value={toDate}
+              />
             </div>
           </div>
         </div>
