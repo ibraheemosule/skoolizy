@@ -621,6 +621,49 @@ const icons: {
       </svg>
     );
   },
+  circledArrowRight: (args) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      width={20}
+      height={20}
+      {...args}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
+    </svg>
+  ),
+  caretRightSolid: (args) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+      width={20}
+      height={20}
+      {...args}
+    >
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+    </svg>
+  ),
+
+  caretLeftSolid: (args) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+      width={20}
+      height={20}
+      {...args}
+    >
+      <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+    </svg>
+  ),
 };
 
 const Icon = ({ name, ...props }: TIcon & { name: TIconNames }) =>

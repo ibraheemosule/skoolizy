@@ -1,9 +1,9 @@
 import { memo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
-import useFilter from '~components/reusables/hooks/useFilter';
 import { capitalizeChar } from '~utils/format';
 
 const testing = [
@@ -19,13 +19,18 @@ const testing = [
 
 const types = ['memo', 'single_event', 'multi_event'];
 
-const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
-  const { filter } = useFilter();
+type TFilterAnnouncement = {
+  action: (arg: { [key: string]: string | number }) => void;
+  closeModal: () => void;
+};
+
+const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
+  const state = useLocation().state ?? {};
   const [classs, setClasss] = useState('');
-  const [search, setSearch] = useCustomField<string>('');
+  const [search, setSearch] = useCustomField<string>(state.search || '');
   const [user, setUser] = useState<string[]>([]);
   const [names, setNames] = useState([...testing]);
-  const [type, setType] = useCustomField<string>('');
+  const [type, setType] = useCustomField<string>(state.type || '');
   const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
     '',
     testing
@@ -43,8 +48,10 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     setNames((prev) => prev.filter((v) => v.includes(val)));
   };
 
-  const filterAnnouncements = () =>
-    filter({ ...(search && { search }), ...(type && { type }) });
+  const filterAnnouncements = () => {
+    action({ search, type });
+    closeModal();
+  };
 
   return (
     <Modal
