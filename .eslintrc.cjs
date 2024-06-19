@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
+    'no-confusing-arrow': 0,
     'import/no-named-as-default': 0,
     'no-plusplus': 0,
     'import/extensions': 0,

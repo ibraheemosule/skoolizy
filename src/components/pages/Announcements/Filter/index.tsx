@@ -55,7 +55,12 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
           <div className="mt-4">
             <BoldText>Announcement Type:</BoldText>
             <div className="mt-1">
-              <CustomField onSelect={setType} field="select" value={type}>
+              <CustomField
+                onSelect={setType}
+                field="select"
+                value={type}
+                placeholder="search..."
+              >
                 <CustomField.DropdownWrapper>
                   {types.map((t) => (
                     <CustomField.Dropdown key={t} value={t}>

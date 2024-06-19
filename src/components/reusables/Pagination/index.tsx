@@ -1,6 +1,5 @@
 import { memo, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BaseBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
 
 type TListOptions = {
@@ -10,6 +9,9 @@ type TListOptions = {
   filterAction: (arg: { [key: string]: string }) => void;
   type: string;
 };
+
+const focus = (condition: boolean | string) =>
+  condition ? ' hover:opacity-50' : 'opacity-20 cursor-not-allowed';
 
 const Pagination = ({
   page,
@@ -46,49 +48,60 @@ const Pagination = ({
 
   return (
     <div className="flex grow flex-wrap justify-between gap-4 text-purple.dark font-semibold">
-      <span className="flex items-center font-semibold">
+      <span className="flex items-center font-bold capitalize">
         ({items || 0}) {type}
       </span>
 
       <div className="flex gap-3 items-center shrink-0 ">
-        <BaseBtn className="flex items-center" onClick={prev}>
+        <button
+          disabled={+num < 2}
+          className={`${focus(Number(page) > 1)} flex items-center`}
+          onClick={prev}
+        >
           <Icon name="caretLeftSolid" /> Prev
-        </BaseBtn>
-        <BaseBtn className="flex items-center" onClick={next}>
+        </button>
+        <button
+          disabled={+num === totalPage}
+          className={`${focus(page !== totalPage)} flex items-center`}
+          onClick={next}
+        >
           Next <Icon name="caretRightSolid" />
-        </BaseBtn>
-        <span className="flex items-center gap-1">
-          <label className="flex">
-            Pages ({totalPage || 0})
-            <input
-              value={num}
-              onChange={(e) => setNum(e.target.value)}
-              onKeyDown={checkPaginationValue}
-              onBlur={() => +num < 1 && setNum(String(page))}
-              className="outline-none border ml-2 text-center max-w-10 px-1"
-            />
-          </label>
-          <BaseBtn
-            onClick={() => filterAction({ page: num })}
-            className="hover:opacity-50 text-white"
-          >
-            <Icon
-              name="circledArrowRight"
-              width={32}
-              height={32}
-              fill="#432c81"
-            />
-          </BaseBtn>
-        </span>
-        <BaseBtn
-          className={`${
-            search ? ' hover:opacity-50' : 'opacity-20 cursor-not-allowed'
-          } font-bold flex gap-x-1 items-center text-purple.dark`}
+        </button>
+        {page && (
+          <span className="flex items-center gap-1">
+            <label className="flex">
+              Pages ({totalPage || 0})
+              <input
+                value={num}
+                onChange={(e) => setNum(e.target.value)}
+                onKeyDown={checkPaginationValue}
+                onBlur={() => +num < 1 && setNum(String(page))}
+                className="outline-none border ml-2 text-center max-w-10 px-1"
+              />
+            </label>
+            <button
+              onClick={() => filterAction({ page: num })}
+              className="hover:opacity-50 text-white"
+            >
+              <Icon
+                name="circledArrowRight"
+                width={32}
+                height={32}
+                fill="#432c81"
+              />
+            </button>
+          </span>
+        )}
+        <button
+          disabled={!search}
+          className={`${focus(
+            search
+          )} flex gap-x-1 items-center text-purple.dark`}
           onClick={() => navigate('.', { replace: true })}
         >
-          <span className="">Reset</span>
+          <span>Reset</span>
           <Icon name="cancel" height={14} width={14} strokeWidth={4} />
-        </BaseBtn>
+        </button>
       </div>
     </div>
   );

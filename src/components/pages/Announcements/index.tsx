@@ -27,9 +27,9 @@ const Announcements = () => {
   const [modal, setModal] = useState('');
   const [view, setView] = useState('');
 
-  const { data, isLoading } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: [
-      'ANNOUNCEMENTS',
+      'announcements',
       search,
       type,
       page,
@@ -83,7 +83,7 @@ const Announcements = () => {
           </div>
 
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
-            {isLoading ? (
+            {isFetching ? (
               <SkeletonLoader type="text" />
             ) : (
               annoucements?.map((a) => (

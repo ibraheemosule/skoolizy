@@ -100,7 +100,7 @@ const NonEditable = () => {
             }
             return emptyValue;
           }
-          if (typeof value === 'string') {
+          if (typeof value === 'string' && value) {
             return value.split('_').join(' ');
           }
           return value || emptyValue;

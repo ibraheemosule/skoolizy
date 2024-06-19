@@ -1,5 +1,6 @@
 import { useState, FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import SideNav from '~components/Layout/SideNav';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
@@ -10,6 +11,7 @@ const Layout: FC = () => {
 
   return (
     <main className="absolute inset-0 flex overflow-hidden">
+      <Toaster />
       <BgImage />
       <section
         data-testid="nav-wrapper"
@@ -22,7 +24,7 @@ const Layout: FC = () => {
         <header className="_full shrink-0 flex">
           <TopHeader setToggleNav={setToggleNav} />
         </header>
-        <div className="page w-full overflow-hidden grow max-w-[86rem] mx-auto my-6">
+        <div className="page w-full overflow-hidden grow max-w-[86rem] mx-auto mb-6">
           <Outlet />
         </div>
       </section>

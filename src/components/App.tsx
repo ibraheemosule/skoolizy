@@ -1,8 +1,30 @@
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import {
+  QueryClientProvider,
+  QueryClient,
+  QueryCache,
+} from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
 import router from '~src/router';
+import popup from '~utils/popup';
+
+const queryCache = new QueryCache({
+  onError: (error) => {
+    popup(
+      'error',
+      (error as unknown as { response: { data: { error: string } } }).response
+        ?.data?.error || error.message
+    );
+  },
+  onSuccess: (data) => {
+    console.log(data);
+    if ((data as unknown as { message: string }).message) {
+      popup('success', (data as { message: string }).message);
+    }
+  },
+});
 
 const queryClient = new QueryClient({
+  queryCache,
   defaultOptions: {
     queries: {
       refetchOnMount: false,
