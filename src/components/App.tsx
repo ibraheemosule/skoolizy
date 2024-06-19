@@ -11,8 +11,8 @@ const queryCache = new QueryCache({
   onError: (error) => {
     popup(
       'error',
-      (error as unknown as { response: { data: { error: string } } }).response
-        ?.data?.error || error.message
+      `Error: ${(error as unknown as { response: { data: { error: string } } })
+        .response?.data?.error}` || error.message
     );
   },
   onSuccess: (data) => {

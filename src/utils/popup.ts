@@ -8,7 +8,7 @@ const popup = (type: 'info' | 'error' | 'success', message: string) => {
       info: '#ccc3ff',
     }[type],
     color: '#fff',
-    maxWidth: '90%',
+    maxWidth: '80vw',
     margin: 'auto',
   };
 
