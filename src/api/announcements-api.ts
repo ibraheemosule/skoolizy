@@ -11,4 +11,16 @@ export default (api: AxiosInstance) => ({
     const res = await api.get('/announcements', { params });
     return res.data;
   },
+  postAnnouncement: async (body: {
+    title: string;
+    type: 'single_event' | 'multi_event' | 'memo';
+    message: string;
+    recipient?: 'all' | 'parents' | 'teachers' | 'students';
+    event_start_date?: string;
+    event_end_date?: string;
+    event_time?: string;
+  }): Promise<TListApi<TAnnouncementsData>> => {
+    const res = await api.post('/announcements', body);
+    return res.data;
+  },
 });

@@ -31,7 +31,7 @@ const Editable = () => {
     icon = filterFn ? 'caretDown' : 'search',
   } = useCustomFieldContext();
 
-  const dateTypes = ['month', 'week', 'date'];
+  const dateTypes = ['month', 'week', 'date', 'time'];
 
   return (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 import useFilter from '~components/reusables/hooks/useFilter';
-import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
 import NewAnnouncement from './New';
 import FilterAnnouncements from './Filter';
@@ -12,6 +11,7 @@ import ListOptions from '~components/reusables/ListOptions';
 import Api from '~api';
 import SkeletonLoader from '~components/reusables/SkeletonLoader';
 import Pagination from '~components/reusables/Pagination';
+import EmptyView from '~components/reusables/empty-view';
 
 const { api } = new Api();
 
@@ -27,7 +27,7 @@ const Announcements = () => {
   const [modal, setModal] = useState('');
   const [view, setView] = useState('');
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, refetch } = useQuery({
     queryKey: [
       'announcements',
       search,
@@ -85,10 +85,10 @@ const Announcements = () => {
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
             {isFetching ? (
               <SkeletonLoader type="text" />
-            ) : (
+            ) : annoucements?.length ? (
               annoucements?.map((a) => (
-                <BaseBtn
-                  testId="annoucement"
+                <button
+                  data-testid="annoucement"
                   key={Math.random()}
                   onClick={() => setView('annoucement')}
                   className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
@@ -114,8 +114,13 @@ const Announcements = () => {
                     <small>{formatDate(a.date_created).getDate}</small>
                     <small>{formatDate(a.date_created).getTime}</small>
                   </div>
-                </BaseBtn>
+                </button>
               ))
+            ) : (
+              <EmptyView
+                message="Could not Fetch Announcements"
+                action={refetch}
+              />
             )}
           </div>
         </div>
