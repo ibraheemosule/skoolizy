@@ -1,20 +1,41 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { IBaseProp } from '~src/shared-ts-types/react-types';
+import { isFuncPromise } from '~utils/checkers';
+import Icon from '~assets/Icons';
 
 type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
 
 export const ActionBtn = memo(
-  ({ children, className, onClick, testId }: TBtnWithChild) => (
-    <button
-      data-testid={testId}
-      onClick={onClick}
-      className={`text-white bg-purple.dark rounded-lg ${className}`}
-      type="button"
-    >
-      {children}
-    </button>
-  )
+  ({ children, className, onClick, testId }: TBtnWithChild) => {
+    const [loading, setLoading] = useState(false);
+
+    const action = async () => {
+      if (onClick && isFuncPromise(onClick)) {
+        setLoading(true);
+        await onClick();
+        setLoading(false);
+      } else onClick?.();
+    };
+
+    return (
+      <button
+        disabled={loading}
+        data-testid={testId}
+        onClick={action}
+        className={`text-white font-normal bg-purple.dark rounded-lg flex w-full justify-center ${className} ${
+          loading ? 'hover:opacity-50' : 'hover:opacity-50 px-4 py-2 '
+        }`}
+        type="button"
+      >
+        {loading ? (
+          <Icon name="spinner" width={40} height={40} fill="white" />
+        ) : (
+          children
+        )}
+      </button>
+    );
+  }
 );
 ActionBtn.displayName = 'ActionBtn';
 

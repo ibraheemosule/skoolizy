@@ -15,12 +15,6 @@ const queryCache = new QueryCache({
         .response?.data?.error}` || error.message
     );
   },
-  onSuccess: (data) => {
-    console.log(data);
-    if ((data as unknown as { message: string }).message) {
-      popup('success', (data as { message: string }).message);
-    }
-  },
 });
 
 const queryClient = new QueryClient({

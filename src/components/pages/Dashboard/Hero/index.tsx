@@ -25,9 +25,9 @@ const Hero = () => {
             <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
               Exam commences on the 31st of June, 2024
             </BaseText>
-            <ActionBtn onClick={renderAnnouncement} className="mt-4 px-4 py-2">
-              Read more
-            </ActionBtn>
+            <div className="mt-4 w-32">
+              <ActionBtn onClick={renderAnnouncement}>Read more</ActionBtn>
+            </div>
           </Card>
         </div>
         <div className="item">
@@ -37,9 +37,9 @@ const Hero = () => {
               Our PTA meeting comes up on the 31st of August, 2024. Guardians
               are advised to be present
             </BaseText>
-            <ActionBtn onClick={renderAnnouncement} className="mt-4 px-4 py-2">
-              Read more
-            </ActionBtn>
+            <div className="mt-4 w-32">
+              <ActionBtn onClick={renderAnnouncement}>Read more</ActionBtn>
+            </div>
           </Card>
         </div>
         <div className="item">
@@ -48,9 +48,9 @@ const Hero = () => {
             <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
               The current term ends on the 15th of August, 2024
             </BaseText>
-            <ActionBtn onClick={renderAnnouncement} className="mt-4 px-4 py-2">
-              Read more
-            </ActionBtn>
+            <div className="mt-4 w-32">
+              <ActionBtn onClick={renderAnnouncement}>Read more</ActionBtn>
+            </div>
           </Card>
         </div>
       </Carousel>

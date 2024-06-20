@@ -434,16 +434,16 @@ const icons: {
     </svg>
   ),
 
-  spinner: ({ style = {}, fill = '#fff', height = 200, width = 200 }) => (
+  spinner: ({ style = {}, fill = 'black', height = 200, width = 200 }) => (
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
       width={width}
       height={height}
+      fill={fill}
       style={{
         shapeRendering: 'auto',
         display: 'block',
-        background: 'rgb(255, 255, 255)',
         ...style,
       }}
     >

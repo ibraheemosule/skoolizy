@@ -40,12 +40,9 @@ const Modal: FC<TModal> = ({
   const modal = useRef<ElementRef<'div'>>(null);
 
   const actionUI = (
-    <ActionBtn
-      onClick={() => action?.()}
-      className="mt-4 shrink-0 px-4 py-2 w-full text-purple.dark hover:opacity-50"
-    >
-      {actionText || 'Submit'}
-    </ActionBtn>
+    <div className="mt-4 shrink-0  w-full">
+      <ActionBtn onClick={action}>{actionText || 'Submit'}</ActionBtn>
+    </div>
   );
 
   return (

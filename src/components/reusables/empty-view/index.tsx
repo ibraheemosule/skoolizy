@@ -16,9 +16,9 @@ const EmptyView = ({
     <img className="w-24 h-24 grayscale" src={empty} alt={message} />
     <h3 className="text-xl font-medium">{message}</h3>
     {action && (
-      <ActionBtn onClick={action} className="p-2 px-4 mt-2">
-        {actionText}
-      </ActionBtn>
+      <div className="mt-2">
+        <ActionBtn onClick={action}>{actionText}</ActionBtn>
+      </div>
     )}
   </div>
 );

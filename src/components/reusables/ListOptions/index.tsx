@@ -26,13 +26,11 @@ const ListOptions = ({
       </BaseBtn>
     )}
     {onActionClick && (
-      <ActionBtn
-        testId="list-action-btn"
-        onClick={onActionClick}
-        className="px-4 py-2 text-purple.dark hover:opacity-50 font-normal"
-      >
-        {actionText}
-      </ActionBtn>
+      <div>
+        <ActionBtn testId="list-action-btn" onClick={onActionClick}>
+          {actionText}
+        </ActionBtn>
+      </div>
     )}
   </div>
 );

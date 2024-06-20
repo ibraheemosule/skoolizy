@@ -6,6 +6,7 @@ import Modal from '~reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
 import Api from '~api';
+import popup from '~utils/popup';
 
 const { api } = new Api();
 
@@ -58,7 +59,14 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     <Modal
       size="md"
       title="Make a new announcement"
-      action={mutateAsync}
+      action={async () => {
+        const res = (await mutateAsync()) as unknown as { message: string };
+        if (res) {
+          popup('success', res.message);
+          closeModal();
+        }
+      }}
+      close={() => closeModal()}
       actionText="Send Announcement"
       fixedActionBtn
       content={
@@ -180,7 +188,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
           </div>
         </div>
       }
-      close={() => closeModal()}
     />
   );
 };

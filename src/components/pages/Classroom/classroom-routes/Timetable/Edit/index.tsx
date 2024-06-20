@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
-import { ActionBtn, DeleteBtn } from '~reusables/ui/Buttons';
+import { ActionBtn } from '~reusables/ui/Buttons';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 
 const periodList = [
@@ -57,25 +57,24 @@ const TimeTable = () => {
         </div>
       </div>
       <div className="flex gap-6 self-end xl:ml-auto">
-        <DeleteBtn
-          onClick={() => setEdit(false)}
-          className="self-end xl:ml-auto py-2 px-3 border"
-        >
-          Cancel
-        </DeleteBtn>
-        <ActionBtn
-          onClick={() => setEdit(false)}
-          className="self-end xl:ml-auto py-2 px-3 border"
-        >
-          Update Timetable
-        </ActionBtn>
+        <div className="self-end xl:ml-auto">
+          <ActionBtn onClick={() => setEdit(false)} className="bg-white border">
+            <span className="text-gray-700 font-semibold">Cancel</span>
+          </ActionBtn>
+        </div>
+        <div className="self-end xl:ml-auto">
+          <ActionBtn
+            className="border-purple.dark border"
+            onClick={() => setEdit(false)}
+          >
+            Update Timetable
+          </ActionBtn>
+        </div>
       </div>
     </div>
   ) : (
-    <div className="text-right">
-      <ActionBtn onClick={() => setEdit(true)} className="py-2 px-3 border">
-        Edit Timetable
-      </ActionBtn>
+    <div className="ml-auto w-40">
+      <ActionBtn onClick={() => setEdit(true)}>Edit Timetable</ActionBtn>
     </div>
   );
 };
