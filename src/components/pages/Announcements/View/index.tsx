@@ -12,12 +12,12 @@ type TViewAnnouncement = {
 };
 
 const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
-  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: [`announcements_${id}`],
     queryFn: () => api.getAnnouncement(id),
   });
 
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: () => api.deleteAnnouncement(id),
     onSuccess: async () =>
