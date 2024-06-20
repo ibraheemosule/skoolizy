@@ -2,9 +2,12 @@ import { memo, useState } from 'react';
 import { IBaseProp } from '~src/shared-ts-types/react-types';
 import { isFuncPromise } from '~utils/checkers';
 import Icon from '~assets/Icons';
+import popup from '~utils/popup';
 
 type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
+
+type TError = { response: { data: { error: string } } } & { message: string };
 
 export const ActionBtn = memo(
   ({ children, className, onClick, testId }: TBtnWithChild) => {
@@ -13,8 +16,14 @@ export const ActionBtn = memo(
     const action = async () => {
       if (onClick && isFuncPromise(onClick)) {
         setLoading(true);
-        await onClick();
-        setLoading(false);
+        try {
+          await onClick();
+        } catch (e: unknown) {
+          const err = e as TError;
+          popup('error', err?.response?.data?.error || err.message);
+        } finally {
+          setLoading(false);
+        }
       } else onClick?.();
     };
 

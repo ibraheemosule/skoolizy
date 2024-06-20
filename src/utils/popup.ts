@@ -1,24 +1,17 @@
 import { toast } from 'react-hot-toast';
 
 const popup = (type: 'info' | 'error' | 'success', message: string) => {
-  const dynamicStyle = {
-    background: {
-      success: '#4caf50',
-      error: '#f44336',
-      info: '#ccc3ff',
-    }[type],
-    color: '#fff',
-    maxWidth: '80vw',
-    margin: 'auto',
-  };
-
   toast(message, {
-    style: dynamicStyle,
-    icon: {
-      success: '✅',
-      error: '❌',
-      info: 'ℹ️',
-    }[type],
+    style: {
+      background: {
+        success: '#4caf50',
+        error: '#900404c2',
+        info: '#ccc3ff',
+      }[type],
+      color: '#fff',
+      maxWidth: '80vw',
+      margin: 'auto',
+    },
   });
 };
 
