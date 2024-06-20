@@ -25,7 +25,7 @@ const Announcements = () => {
   const toDate = state?.to_date || '';
   const eventDays = state?.event_days || '';
   const [modal, setModal] = useState('');
-  const [view, setView] = useState('');
+  const [view, setView] = useState<number | null>(null);
 
   const { data, isFetching, refetch } = useQuery({
     queryKey: [
@@ -63,7 +63,7 @@ const Announcements = () => {
             />
           )}
           {view && (
-            <ViewAnnouncement view={view} closeModal={() => setView('')} />
+            <ViewAnnouncement id={view} closeModal={() => setView(null)} />
           )}
           <div className="mt-8 flex gap-4 flex-wrap">
             <Pagination
@@ -90,7 +90,7 @@ const Announcements = () => {
                 <button
                   data-testid="annoucement"
                   key={Math.random()}
-                  onClick={() => setView('annoucement')}
+                  onClick={() => setView(a.id)}
                   className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
                 >
                   <h4 className="flex gap-2 items-center text-left font-semibold">

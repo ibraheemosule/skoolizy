@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
+import SkeletonLoader from '../SkeletonLoader';
 
 type TModal = {
   close: Dispatch<SetStateAction<boolean>> | (() => void);
@@ -17,6 +18,7 @@ type TModal = {
   size?: 'sm' | 'md' | 'lg';
   scroll?: boolean;
   fixedActionBtn?: boolean;
+  isLoading?: boolean;
 } & {
   [key in 'title' | 'content']?: ReactNode;
 };
@@ -36,6 +38,7 @@ const Modal: FC<TModal> = ({
   size,
   scroll = true,
   fixedActionBtn = false,
+  isLoading = false,
 }) => {
   const modal = useRef<ElementRef<'div'>>(null);
 
@@ -61,14 +64,22 @@ const Modal: FC<TModal> = ({
             <CancelIcon height={25} width={25} />
           </BaseBtn>
         </div>
-        <header className="shrink-0">
-          <h3 className=" text-xl font-semibold max-w-[90%]">{title}</h3>
-        </header>
-        <main className={`grow my-6 ${scroll ? 'overflow-y-auto' : ''}`}>
-          {content}
-          {action && !fixedActionBtn && actionUI}
-        </main>
-        {action && fixedActionBtn && actionUI}
+        {isLoading ? (
+          <div className="mt-8">
+            <SkeletonLoader type="text" />
+          </div>
+        ) : (
+          <>
+            <header className="shrink-0">
+              <h3 className=" text-xl font-semibold max-w-[90%]">{title}</h3>
+            </header>
+            <main className={`grow my-6 ${scroll ? 'overflow-y-auto' : ''}`}>
+              {content}
+              {action && !fixedActionBtn && actionUI}
+            </main>
+            {action && fixedActionBtn && actionUI}
+          </>
+        )}
       </div>
     </div>
   );

@@ -11,6 +11,14 @@ export default (api: AxiosInstance) => ({
     const res = await api.get('/announcements', { params });
     return res.data;
   },
+
+  getAnnouncement: async (
+    id: number
+  ): Promise<{ data: TAnnouncementsData }> => {
+    const res = await api.get(`/announcements/${id}`);
+    return res.data;
+  },
+
   postAnnouncement: async (body: {
     title: string;
     type: 'single_event' | 'multi_event' | 'memo';
@@ -21,6 +29,13 @@ export default (api: AxiosInstance) => ({
     event_time?: string;
   }): Promise<TListApi<TAnnouncementsData>> => {
     const res = await api.post('/announcements', body);
+    return res.data;
+  },
+
+  deleteAnnouncement: async (
+    id: number
+  ): Promise<{ data: TAnnouncementsData }> => {
+    const res = await api.delete(`/announcements/${id}`);
     return res.data;
   },
 });
