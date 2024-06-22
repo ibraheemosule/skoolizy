@@ -1,4 +1,4 @@
-export default {
+export const countries = {
   error: false,
   msg: 'countries and states retrieved',
   data: [
@@ -155,3 +155,5 @@ export default {
     },
   ],
 };
+
+export const test = '';

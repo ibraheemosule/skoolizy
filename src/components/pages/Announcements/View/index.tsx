@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { memo } from 'react';
 import Api from '~api';
 import Modal from '~components/reusables/Modal';
-import popup from '~utils/popup';
 
 const { api } = new Api();
 
@@ -32,24 +31,18 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
       isLoading={isLoading}
       title={
         <div className="flex flex-col gap-1 capitalize">
-          <h3>{data?.data.title}</h3>
+          <h3 data-testid="announcement-title">{data?.data.title}</h3>
           <span className="text-gray-500 text-sm">By Mr Tosin olawole</span>
         </div>
       }
       content={
         <div data-testid="announcement-modal">
-          <p className=" first-letter:uppercase">{data?.data.message}</p>
+          <p className="first-letter:uppercase">{data?.data.message}</p>
         </div>
       }
       close={() => closeModal()}
       {...(data?.data.type !== 'memo' && {
-        action: async () => {
-          const res = (await mutateAsync()) as unknown as { message: string };
-          if (res) {
-            popup('success', res.message);
-            closeModal();
-          }
-        },
+        action: async () => mutateAsync(),
       })}
       fixedActionBtn
       actionText="Delete"

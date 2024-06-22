@@ -13,7 +13,7 @@ const EmptyView = ({
   actionText = 'Retry?',
 }: TEmptyView) => (
   <div className="min-h-[50vh] bg-gray-100 rounded-lg flex flex-col justify-center items-center gap-4 mt-8">
-    <img className="w-24 h-24 grayscale" src={empty} alt={message} />
+    <img className="w-24 h-24 grayscale opacity-70" src={empty} alt={message} />
     <h3 className="text-xl font-medium">{message}</h3>
     {action && (
       <div className="mt-2">

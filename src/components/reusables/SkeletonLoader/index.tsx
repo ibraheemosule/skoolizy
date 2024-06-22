@@ -47,6 +47,7 @@ const loaders = {
 const SkeletonLoader = ({ type }: { type: keyof typeof loaders }) => (
   <div
     role="status"
+    data-testid="skeleton-loader"
     className="h-full flex flex-wrap justify-between animate-pulse"
   >
     {loaders[type]}

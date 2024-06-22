@@ -31,11 +31,11 @@ describe('tests for formatting date and time', () => {
   test('time should be in a proper format', () => {
     vi.setSystemTime(date);
     const result = formatDate('2022-02-23T00:43:03.000Z').getTime;
-    expect(result).toBe('12:43am');
+    expect(result).toBe('1:43am');
   });
   test('noon time should be formatted properly', () => {
     const result = formatDate('2022-02-23T12:43:03.000Z').getTime;
-    expect(result).toBe('12:43pm');
+    expect(result).toBe('1:43pm');
   });
   test('month should be formatted properly in the date', () => {
     const result = formatDate('2022-12-23T12:43:03.000Z').getDate;

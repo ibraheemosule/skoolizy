@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import countries from '../data/countries';
+import { countries } from './data';
 
 const COUNTRY_URL = String(import.meta.env.VITE_COUNTRIES_URL);
 

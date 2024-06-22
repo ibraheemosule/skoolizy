@@ -88,7 +88,7 @@ const Announcements = () => {
             ) : annoucements?.length ? (
               annoucements?.map((a) => (
                 <button
-                  data-testid="annoucement"
+                  data-testid="announcement"
                   key={Math.random()}
                   onClick={() => setView(a.id)}
                   className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"

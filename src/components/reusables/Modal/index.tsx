@@ -41,7 +41,12 @@ const Modal: FC<TModal> = ({
 
   const actionUI = (
     <div className="mt-4 shrink-0 w-full">
-      <ActionBtn className={btnClass} loading={loading} onClick={modalAction}>
+      <ActionBtn
+        testId="modal-action-button"
+        className={btnClass}
+        loading={loading}
+        onClick={modalAction}
+      >
         {actionText || 'Submit'}
       </ActionBtn>
     </div>

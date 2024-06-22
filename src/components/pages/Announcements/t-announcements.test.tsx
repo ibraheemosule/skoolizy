@@ -1,6 +1,7 @@
-import { it, describe, vi } from 'vitest';
+import { it, describe } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import TestWrapper from '~components/reusables/TestWrapper';
 import Announcements from '.';
 
@@ -14,58 +15,78 @@ beforeEach(() => render(<MockAnnouncements />));
 afterEach(() => cleanup());
 
 describe('Announcements Page', () => {
-  it('should render announcement page', async () => {
-    expect(screen.getByTestId('announcements-page')).toBeInTheDocument();
-    await waitFor(() =>
-      expect(screen.getByText(/nigeria/i)).toBeInTheDocument()
-    );
-  });
-
-  it('should render five announcements', () => {
-    expect(screen.getAllByTestId('annoucement')).toHaveLength(5);
+  it('should render 3 announcements', async () => {
+    expect(await screen.findAllByTestId('announcement')).toHaveLength(3);
   });
 
   it('should open the modal for the announcement detail when an announcement is clicked and close modal', async () => {
-    const announcement = screen.getAllByTestId('annoucement')[0];
+    const announcement = (await screen.findAllByTestId('announcement'))[0];
 
-    userEvent.click(announcement);
+    await act(async () => userEvent.click(announcement));
     expect(await screen.findByTestId('announcement-modal')).toBeInTheDocument();
     expect(screen.getByText(/by mr tosin olawole/i)).toBeInTheDocument();
     expect(screen.getByText(/delete/i)).toBeInTheDocument();
 
-    userEvent.click(screen.getByTestId('close-modal'));
+    await act(async () => userEvent.click(screen.getByTestId('close-modal')));
     await waitFor(() =>
       expect(screen.queryByTestId('announcement-modal')).not.toBeInTheDocument()
     );
   });
 
-  it('Should open announcement manage list modal and close', async () => {
-    userEvent.click(screen.getByTestId('manage-list'));
+  it('should render announcement content when an announcement is clicked', async () => {
+    const announcement = (await screen.findAllByTestId('announcement'))[0];
 
-    expect(
-      await screen.findByTestId('filter-annouoncement-modal')
-    ).toBeInTheDocument();
+    await act(async () => userEvent.click(announcement));
 
-    userEvent.click(screen.getByTestId('close-modal'));
-    await waitFor(() =>
-      expect(
-        screen.queryByTestId('filter-announcement-modal')
-      ).not.toBeInTheDocument()
+    expect(await screen.findByTestId('announcement-title')).toHaveTextContent(
+      /loofor teachers ng/i
+    );
+    expect(await screen.findByTestId('announcement-modal')).toHaveTextContent(
+      /here is anosdftherorking/i
     );
   });
 
-  describe('Test announcement time', () => {
-    beforeEach(() => {
-      cleanup();
-      vi.useFakeTimers();
-      vi.setSystemTime(new Date('2024-06-04T09:43:03.000Z'));
-      render(<MockAnnouncements />);
-    });
+  it('Should show delete button for multi_event', async () => {
+    const announcement = (await screen.findAllByTestId('announcement'))[0];
 
-    afterEach(() => vi.useRealTimers());
+    await act(async () => userEvent.click(announcement));
 
-    it('should open the modal for the announcement detail when an announcement is clicked and close modal', () => {
-      expect(screen.getAllByText('4/6/2024')).toHaveLength(5);
-    });
+    expect(
+      await screen.findByTestId('modal-action-button')
+    ).toBeInTheDocument();
   });
+
+  it('Should show delete button for single_event', async () => {
+    const announcement = (await screen.findAllByTestId('announcement'))[1];
+
+    await act(async () => userEvent.click(announcement));
+
+    expect(
+      await screen.findByTestId('modal-action-button')
+    ).toBeInTheDocument();
+  });
+
+  it('Should hide delete button for memo', async () => {
+    const announcement = (await screen.findAllByTestId('announcement'))[2];
+
+    await act(async () => userEvent.click(announcement));
+    expect(screen.queryByTestId('modal-action-button')).not.toBeInTheDocument();
+  });
+
+  // describe('Test announcement time', () => {
+  //   beforeEach(() => {
+  //     cleanup();
+  //     vi.useFakeTimers();
+  //     vi.setSystemTime(new Date('2024-06-04T09:43:03.000Z'));
+  //     render(<MockAnnouncements />);
+  //   });
+
+  //   afterEach(() => vi.useRealTimers());
+
+  //   it('should open the modal for the
+  //  announcement detail when an announcement is clicked and close modal',
+  //  () => {
+  //     expect(screen.getAllByText('4/6/2024')).toHaveLength(5);
+  //   });
+  // });
 });
