@@ -1,41 +1,32 @@
-import { memo, useState } from 'react';
+import { ButtonHTMLAttributes, ReactNode, memo } from 'react';
 import { IBaseProp } from '~src/shared-ts-types/react-types';
-import { isFuncPromise } from '~utils/checkers';
 import Icon from '~assets/Icons';
-import popup from '~utils/popup';
+
+type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: ReactNode;
+  testId?: string;
+  loading?: boolean;
+};
 
 type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
 
-type TError = { response: { data: { error: string } } } & { message: string };
-
 export const ActionBtn = memo(
-  ({ children, className, onClick, testId }: TBtnWithChild) => {
-    const [loading, setLoading] = useState(false);
-
-    const action = async () => {
-      if (onClick && isFuncPromise(onClick)) {
-        setLoading(true);
-        try {
-          await onClick();
-        } catch (e: unknown) {
-          const err = e as TError;
-          popup('error', err?.response?.data?.error || err.message);
-        } finally {
-          setLoading(false);
-        }
-      } else onClick?.();
-    };
-
+  ({ children, onClick, testId, loading, className, ...props }: TButton) => {
+    const styles =
+      'text-white font-normal bg-purple.dark rounded-lg flex w-full justify-center';
     return (
       <button
         disabled={loading}
         data-testid={testId}
-        onClick={action}
-        className={`text-white font-normal bg-purple.dark rounded-lg flex w-full justify-center ${className} ${
-          loading ? 'hover:opacity-50' : 'hover:opacity-50 px-4 py-2 '
+        onClick={onClick}
+        className={`${className ? '' : styles} ${
+          loading
+            ? 'opacity-50'
+            : `hover:opacity-50 ${className ? '' : 'px-4 py-2'}`
         }`}
         type="button"
+        {...props}
       >
         {loading ? (
           <Icon name="spinner" width={40} height={40} fill="white" />

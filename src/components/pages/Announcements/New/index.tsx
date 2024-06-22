@@ -6,7 +6,6 @@ import Modal from '~reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
 import Api from '~api';
-import popup from '~utils/popup';
 
 const { api } = new Api();
 
@@ -22,7 +21,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     'single_event' | 'multi_event' | 'memo'
   >('memo');
   const [title, setTitle] = useCustomField('');
-  const [details, setDetails] = useCustomField('');
+  const [message, setMessage] = useCustomField('');
   const [recipient, setRecipient] = useCustomField<
     'all' | 'parents' | 'students' | 'teachers'
   >('all');
@@ -40,7 +39,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     mutationFn: () =>
       api.postAnnouncement({
         title,
-        message: details,
+        message,
         ...(type !== 'memo' && { event_start_date: startDate }),
         ...(type === 'multi_event' && { event_end_date: endDate }),
         ...(type === 'single_event' && { event_time: `${eventTime}:00` }),
@@ -59,13 +58,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     <Modal
       size="md"
       title="Make a new announcement"
-      action={async () => {
-        const res = (await mutateAsync()) as unknown as { message: string };
-        if (res) {
-          popup('success', res.message);
-          closeModal();
-        }
-      }}
+      action={async () => mutateAsync()}
       close={() => closeModal()}
       actionText="Send Announcement"
       fixedActionBtn
@@ -86,13 +79,13 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
           </div>
 
           <div className="mt-4">
-            <BoldText>Details:</BoldText>
+            <BoldText>Message {type !== 'memo' && '(Optional)'}:</BoldText>
             <div className="mt-1">
               <textarea
-                placeholder={`Type more details about ${type} here...`}
+                placeholder="Type Message here..."
                 className="w-full outline-none resize-none h-28 bg-gray-100 p-2 rounded-lg"
-                value={details}
-                onChange={(e) => setDetails(e.target.value)}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
           </div>

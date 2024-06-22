@@ -5,7 +5,7 @@ const popup = (type: 'info' | 'error' | 'success', message: string) => {
     style: {
       background: {
         success: '#4caf50',
-        error: '#900404c2',
+        error: '#ad0a0a',
         info: '#ccc3ff',
       }[type],
       color: '#fff',

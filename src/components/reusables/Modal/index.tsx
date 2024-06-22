@@ -1,33 +1,11 @@
-import {
-  Dispatch,
-  FC,
-  SetStateAction,
-  memo,
-  ReactNode,
-  useRef,
-  ElementRef,
-} from 'react';
+import { FC, memo, useRef, ElementRef, useState } from 'react';
 import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import SkeletonLoader from '../SkeletonLoader';
-
-type TModal = {
-  close: Dispatch<SetStateAction<boolean>> | (() => void);
-  action?: () => void;
-  actionText?: string;
-  size?: 'sm' | 'md' | 'lg';
-  scroll?: boolean;
-  fixedActionBtn?: boolean;
-  isLoading?: boolean;
-} & {
-  [key in 'title' | 'content']?: ReactNode;
-};
-
-const sizes = {
-  sm: 'sm:min-w-[50%] lg:min-w-[30%] lg:max-w-[30vw] xl:max-w-[400px]',
-  md: 'sm:min-w-[65%] lg:min-w-[40%] md:max-w-[60vw] lg:max-w-[40vw] xl:max-w-[700px]',
-  lg: 'sm:min-w-[90%] lg:min-w-[60%]',
-};
+import { isFuncPromise } from '~utils/index';
+import popup from '~utils/popup';
+import { TError, TModal } from './t-modal';
+import { sizes } from './u-modal';
 
 const Modal: FC<TModal> = ({
   close,
@@ -39,12 +17,33 @@ const Modal: FC<TModal> = ({
   scroll = true,
   fixedActionBtn = false,
   isLoading = false,
+  btnClass,
 }) => {
   const modal = useRef<ElementRef<'div'>>(null);
+  const [loading, setLoading] = useState(false);
+
+  const modalAction = async () => {
+    let res: unknown;
+    if (action && isFuncPromise(action)) {
+      setLoading(true);
+      try {
+        res = await action();
+        if (res) popup('success', (res as { message: string }).message);
+      } catch (e: unknown) {
+        const err = e as TError;
+        popup('error', err?.response?.data?.error || err.message);
+      } finally {
+        setLoading(false);
+      }
+    } else action?.();
+    if (res) close((prev) => !prev);
+  };
 
   const actionUI = (
-    <div className="mt-4 shrink-0  w-full">
-      <ActionBtn onClick={action}>{actionText || 'Submit'}</ActionBtn>
+    <div className="mt-4 shrink-0 w-full">
+      <ActionBtn className={btnClass} loading={loading} onClick={modalAction}>
+        {actionText || 'Submit'}
+      </ActionBtn>
     </div>
   );
 
