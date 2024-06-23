@@ -103,17 +103,19 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
               />
             </div>
           </div>
-          <div className="mt-4">
-            <BoldText>Date range to:</BoldText>
-            <div className="mt-1">
-              <CustomField
-                type="date"
-                onChange={setToDate}
-                field="input"
-                value={toDate}
-              />
+          {fromDate && (
+            <div className="mt-4">
+              <BoldText>Date range to (Optional):</BoldText>
+              <div className="mt-1">
+                <CustomField
+                  type="date"
+                  onChange={setToDate}
+                  field="input"
+                  value={toDate}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       }
       action={filterAnnouncements}
