@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import Modal from '~reusables/Modal';
@@ -35,6 +35,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   const [endDate, setEndDate] = useCustomField('');
   const [eventTime, setEventTime] = useCustomField('');
 
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: () =>
       api.postAnnouncement({
@@ -45,6 +46,10 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
         ...(type === 'single_event' && { event_time: `${eventTime}:00` }),
         recipient,
         type,
+      }),
+    onSuccess: async () =>
+      queryClient.invalidateQueries({
+        queryKey: ['announcements'],
       }),
   });
 
