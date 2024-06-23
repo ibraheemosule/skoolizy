@@ -144,3 +144,9 @@ thead[role='presentation'] tr[role='row'] .fc-col-header-cell {
 .fc-daygrid-day-top {
   justify-content: center;
 }
+
+@media (min-width: 768px) {
+  .fc-view-harness {
+    height: 50vh !important;
+  }
+}
