@@ -14,8 +14,8 @@ export const formatDate = (str: string = '') => {
     newDate.getMonth() + 1
   }/${newDate.getFullYear()}`;
   const hour = newDate.getHours();
-  const minute = `:${newDate.getMinutes()}`;
-  const getTime = `${hour > 12 ? hour - 12 : hour < 1 ? 12 : hour}${
+  const minute = `${newDate.getMinutes()}`;
+  const getTime = `${hour > 12 ? hour - 12 : hour < 1 ? 12 : hour}:${
     +minute < 10 ? `0${minute}` : minute
   }${hour > 11 ? 'pm' : 'am'}`;
   return { getDate, getTime };
