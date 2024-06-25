@@ -39,8 +39,9 @@ const Pagination = ({
   };
 
   const checkPaginationValue = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const allowedKeys = ['Backspace', 'ArrowRight', 'ArrowLeft'];
     const isInvalidValue =
-      e.key !== 'Backspace' &&
+      !allowedKeys.includes(e.key) &&
       (Number.isNaN(+e.key) || Number(num + e.key) > Number(totalPage));
 
     if (isInvalidValue) e.preventDefault();

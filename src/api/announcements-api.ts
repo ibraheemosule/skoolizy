@@ -32,6 +32,21 @@ export default (api: AxiosInstance) => ({
     return res.data;
   },
 
+  updateAnnouncement: async (
+    id: number,
+    body: {
+      title?: string;
+      message?: string;
+      recipient?: 'all' | 'parents' | 'teachers' | 'students';
+      event_start_date?: string;
+      event_end_date?: string;
+      event_time?: string;
+    }
+  ): Promise<TListApi<TAnnouncementsData>> => {
+    const res = await api.put(`/announcements/${id}`, body);
+    return res.data;
+  },
+
   deleteAnnouncement: async (
     id: number
   ): Promise<{ data: TAnnouncementsData }> => {

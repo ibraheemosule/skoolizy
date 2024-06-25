@@ -59,7 +59,7 @@ const Modal: FC<TModal> = ({
       className="fixed text-left transition-all flex justify-center md:items-center bg-[#a4a3a3d3] top-0 left-0 h-screen w-screen z-50 p-8"
     >
       <div
-        className={`transition-all relative min-w-[280px] flex flex-col h-fit max-h-[80vh] sm:max-h-[90vh] ${
+        className={`min-w-[100%] transition-all relative flex flex-col h-fit max-h-[80vh] sm:max-h-[90vh] ${
           sizes[size || 'lg']
         } bg-white shadow-sm p-6 rounded-md`}
       >
