@@ -2,8 +2,8 @@ export const mockAllAnnouncements = {
   data: [
     {
       date_created: '2024-06-16T08:46:30',
-      event_end_date: '2024-09-28',
-      event_start_date: '2024-07-19',
+      event_end_date: '2030-09-28',
+      event_start_date: '2030-07-19',
       event_time: null,
       id: 1,
       message: 'here is anosdftherorking',
@@ -15,7 +15,7 @@ export const mockAllAnnouncements = {
     {
       date_created: '2024-06-16T08:44:58',
       event_end_date: null,
-      event_start_date: '2024-06-19',
+      event_start_date: '2039-06-19',
       event_time: '09:00:00',
       id: 2,
       message: 'here is anosdftherorking',
