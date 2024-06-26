@@ -179,25 +179,29 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
                 </div>
               )}
 
-              <div className="mt-4">
-                <BoldText>Time of Event:</BoldText>
-                <div className="mt-1">
-                  <CustomField
-                    placeholder="Recipients"
-                    value={eventTime}
-                    onChange={setEventTime}
-                    field="input"
-                    type="time"
-                    icon={null}
-                  />
+              {data?.data.event_time && (
+                <div className="mt-4">
+                  <BoldText>Time of Event:</BoldText>
+                  <div className="mt-1">
+                    <CustomField
+                      placeholder="Recipients"
+                      value={eventTime}
+                      onChange={setEventTime}
+                      field="input"
+                      type="time"
+                      icon={null}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
           {active === 'information' && isEditable && (
             <h3 className="font-bold">Message</h3>
           )}
-          <p className="first-letter:uppercase">{data?.data.message}</p>
+          {active === 'information' && (
+            <p className="first-letter:uppercase">{data?.data.message}</p>
+          )}
         </div>
       }
       close={() => closeModal()}
