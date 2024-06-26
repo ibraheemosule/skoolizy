@@ -1,58 +1,54 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Heading1 } from '~reusables/ui/Heading';
 import { BaseText } from '~reusables/ui/Text';
 import { ActionBtn } from '~reusables/ui/Buttons';
 import { Card } from '~reusables/ui/Others';
 import Carousel from '~reusables/Carousel';
 import ViewAnnouncementModal from '~components/pages/Announcements/View';
+import SkeletonLoader from '~components/reusables/SkeletonLoader';
+import Api from '~api';
+
+const { api } = new Api();
 
 const Hero = () => {
-  const [announcement, setAnnouncement] = useState('');
+  const [announcement, setAnnouncement] = useState<number | null>(null);
+  const { data } = useQuery({
+    queryKey: ['announcements'],
+    queryFn: () => api.getAllAnnouncements(),
+  });
 
-  const renderAnnouncement = () => setAnnouncement('new announcement');
+  const renderAnnouncement = (id: number) => setAnnouncement(id);
   return (
     <div className="mt-8">
       {announcement && (
         <ViewAnnouncementModal
-          view={announcement}
-          closeModal={() => setAnnouncement('')}
+          id={announcement}
+          closeModal={() => setAnnouncement(null)}
         />
       )}
       <Carousel>
-        <div className="item">
-          <Card className="bg-purple.light p-6 ">
-            <Heading1 className="truncate">Examination Information</Heading1>
-            <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
-              Exam commences on the 31st of June, 2024
-            </BaseText>
-            <div className="mt-4 w-32">
-              <ActionBtn onClick={renderAnnouncement}>Read more</ActionBtn>
+        {data ? (
+          data.data.map((datum) => (
+            <div className="item" key={datum.id}>
+              <Card className="bg-purple.light p-6 ">
+                <Heading1 className="truncate">{datum.title}</Heading1>
+                <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
+                  {datum.message}
+                </BaseText>
+                <div className="mt-4 w-32">
+                  <ActionBtn onClick={() => renderAnnouncement(datum.id)}>
+                    Read more
+                  </ActionBtn>
+                </div>
+              </Card>
             </div>
-          </Card>
-        </div>
-        <div className="item">
-          <Card className="bg-purple.light p-6 ">
-            <Heading1 className="truncate">Next PTA meeting</Heading1>
-            <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
-              Our PTA meeting comes up on the 31st of August, 2024. Guardians
-              are advised to be present
-            </BaseText>
-            <div className="mt-4 w-32">
-              <ActionBtn onClick={renderAnnouncement}>Read more</ActionBtn>
-            </div>
-          </Card>
-        </div>
-        <div className="item">
-          <Card className="bg-purple.light p-6 ">
-            <Heading1 className="truncate">End of Term</Heading1>
-            <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
-              The current term ends on the 15th of August, 2024
-            </BaseText>
-            <div className="mt-4 w-32">
-              <ActionBtn onClick={renderAnnouncement}>Read more</ActionBtn>
-            </div>
-          </Card>
-        </div>
+          ))
+        ) : (
+          <div className="h-48">
+            <SkeletonLoader type="section" />
+          </div>
+        )}
       </Carousel>
     </div>
   );

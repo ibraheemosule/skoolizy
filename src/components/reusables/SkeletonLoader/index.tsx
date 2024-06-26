@@ -42,6 +42,10 @@ const loaders = {
         className="h-64 w-52 bg-gray-100 rounded-sm dark:bg-gray-100 m-4 mt-0"
       />
     )),
+
+  section: (
+    <div className="h-full w-full bg-gray-700 rounded-md dark:bg-gray-100 mb-4" />
+  ),
 };
 
 const SkeletonLoader = ({ type }: { type: keyof typeof loaders }) => (
