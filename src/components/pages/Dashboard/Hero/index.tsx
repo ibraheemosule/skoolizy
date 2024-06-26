@@ -32,11 +32,13 @@ const Hero = () => {
           data.data.map((datum) => (
             <div className="item" key={datum.id}>
               <Card className="bg-purple.light p-6 ">
-                <Heading1 className="truncate">{datum.title}</Heading1>
-                <BaseText className="mt-4 mb-2imp text-gray-500 truncate">
+                <Heading1 className="truncate first-letter:capitalize">
+                  {datum.title}
+                </Heading1>
+                <BaseText className="mt-4 text-gray-500 truncate first-letter:capitalize">
                   {datum.message}
                 </BaseText>
-                <div className="mt-4 w-32">
+                <div className="mt-4 w-32 first-letter:capitalize">
                   <ActionBtn onClick={() => renderAnnouncement(datum.id)}>
                     Read more
                   </ActionBtn>
