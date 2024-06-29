@@ -7,6 +7,8 @@ import CustomField from '~components/reusables/CustomField';
 import { BoldText } from '~components/reusables/ui/Text';
 import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
 import { formatDate } from '~utils/format';
+import { Tag } from '~components/reusables/ui/Others';
+import { ActionBtn } from '~components/reusables/ui/Buttons';
 
 const { api } = new Api();
 
@@ -115,6 +117,15 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
                     <small className="text-sm text-gray-500">
                       {formatDate(data?.data.event_time || '').getTime}
                     </small>
+                  </div>
+                )}
+                {data?.data.reminder && (
+                  <div className=" self-start sm:ml-auto">
+                    <ActionBtn className="p-0 bg-transparent">
+                      <Tag className="font-semibold text-sm px-1 py-0.5 rounded-md">
+                        Stop reminder
+                      </Tag>
+                    </ActionBtn>
                   </div>
                 )}
               </div>

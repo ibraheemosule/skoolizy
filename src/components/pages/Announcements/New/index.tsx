@@ -5,16 +5,10 @@ import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomF
 import Modal from '~reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
+import { recipientsList, reminders, navRouting } from './u-new';
 import Api from '~api';
 
 const { api } = new Api();
-
-const recipientsList = ['all', 'parents', 'teachers', 'students'];
-const navRouting = {
-  memo: 'Memo',
-  single_event: 'Single-day event',
-  multi_event: 'Multi-day event',
-};
 
 const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   const [type, setType] = useCustomField<
@@ -25,12 +19,10 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   const [recipient, setRecipient] = useCustomField<
     'all' | 'parents' | 'students' | 'teachers'
   >('all');
-  const [reminder, setReminder, reminderList] = useCustomField('', [
-    'None',
-    'daily',
-    'Every Two days',
-    'Every week',
-  ]);
+  const [reminder, setReminder, reminderList] = useCustomField(
+    '',
+    Object.keys(reminders)
+  );
   const [startDate, setStartDate] = useCustomField('');
   const [endDate, setEndDate] = useCustomField('');
   const [eventTime, setEventTime] = useCustomField('');
@@ -41,7 +33,11 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       api.postAnnouncement({
         title,
         message,
-        ...(type !== 'memo' && { event_start_date: startDate }),
+
+        ...(type !== 'memo' && {
+          event_start_date: startDate,
+          reminder: reminders[reminder as keyof typeof reminders],
+        }),
         ...(type === 'multi_event' && { event_end_date: endDate }),
         ...(type === 'single_event' && { event_time: `${eventTime}:00` }),
         recipient,

@@ -103,17 +103,23 @@ const Announcements = () => {
                     <div>
                       <p className="first-letter:uppercase">{a.title}</p>
                       <div>
-                        <span className="text-xs tracking-tight font-semibold">
-                          {capitalizeChar(a.type.split('_')[0])}{' '}
-                          {a.type.split('_')[1]} for {a.recipient}
+                        <span className="text-sm text-gray-500 font-semibold">
+                          Created on{' '}
+                          <small className="font-bold">
+                            {formatDate(a.date_created).getDate} -{' '}
+                            {formatDate(a.date_created).getTime}
+                          </small>
                         </span>
                       </div>
                     </div>
                   </h4>
-                  <div className="flex flex-col mt-0.5">
-                    <small>{formatDate(a.date_created).getDate}</small>
-                    <small>{formatDate(a.date_created).getTime}</small>
-                  </div>
+                  <span className="sr-only">
+                    A {capitalizeChar(a.type.split('_').join(' '))} announcement
+                    sent to {a.recipient}
+                  </span>
+                  <span className="capitalize text-sm p-0 bg-transparent text-gray-500 font-semibold mr-4">
+                    {a.recipient} {capitalizeChar(a.type.split('_').join(' '))}
+                  </span>
                 </button>
               ))
             ) : (
