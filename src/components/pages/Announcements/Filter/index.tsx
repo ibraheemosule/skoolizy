@@ -100,6 +100,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
                 onChange={setFromDate}
                 field="input"
                 value={fromDate}
+                id="announcement-date-range-from"
               />
             </div>
           </div>

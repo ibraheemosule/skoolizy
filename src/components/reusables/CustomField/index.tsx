@@ -31,7 +31,9 @@ const Editable = () => {
     icon = filterFn ? 'caretDown' : 'search',
   } = useCustomFieldContext();
 
-  const dateTypes = ['month', 'week', 'date', 'time'];
+  const isDate = ['month', 'week', 'date', 'time'].includes(type || '');
+  const styles =
+    'p-2 pl-4 first-letter:uppercase appearance-none outline-none w-full';
 
   return (
     <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
@@ -47,13 +49,13 @@ const Editable = () => {
         value={value as string}
         type={type ?? (search ? 'search' : 'text')}
         placeholder={placeholder || 'Search...'}
-        className={`p-2 pl-4 first-letter:uppercase appearance-none outline-none w-full ${
+        className={`${styles} ${isDate} ${
           !search && typeof search === 'boolean'
             ? 'cursor-pointer'
             : 'cursor-text'
         }`}
       />
-      {icon && !dateTypes.includes(type || '') && (
+      {icon && !isDate && (
         <span className=" mr-1">
           <Icon height={20} width={20} name={icon} />
         </span>
