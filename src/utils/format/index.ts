@@ -20,3 +20,15 @@ export const formatDate = (str: string = '') => {
   }${hour > 11 ? 'pm' : 'am'}`;
   return { getDate, getTime };
 };
+
+export const dateToDbFormat = (date: Date | null) => {
+  if (!date) return date;
+  return date
+    .toLocaleDateString('en-CA', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    })
+    .split('/')
+    .join('-');
+};

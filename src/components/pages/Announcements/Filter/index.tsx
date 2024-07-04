@@ -1,10 +1,11 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import DateTimePicker from 'react-datetime-picker';
 import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
-import { capitalizeChar } from '~utils/format';
+import { capitalizeChar, dateToDbFormat } from '~utils/format';
 
 const nums = Array(365)
   .fill('')
@@ -21,20 +22,25 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   const state = useLocation().state ?? {};
   const [search, setSearch] = useCustomField<string>(state.search || '');
   const [type, setType] = useCustomField<string>(state.type || '');
-  const [fromDate, setFromDate] = useCustomField(state.from_date || '');
-  const [toDate, setToDate] = useCustomField(state.to_date || '');
+  const [fromDate, setFromDate] = useState<Date | null>(
+    state.from_date ? new Date(state.from_date) : null
+  );
+  const [toDate, setToDate] = useState<Date | null>(
+    state.to_date ? new Date(state.to_date) : null
+  );
   const [days, setDays, daysList, daysListFilterFn] = useCustomField<string>(
     state.event_days || '',
     nums
   );
 
   const filterAnnouncements = () => {
+    console.log(toDate);
     action({
       search,
       type,
       event_days: days,
-      from_date: fromDate,
-      to_date: toDate,
+      from_date: dateToDbFormat(fromDate) || '',
+      to_date: dateToDbFormat(toDate) || '',
     });
     closeModal();
   };
@@ -95,12 +101,21 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
           <div className="mt-4">
             <BoldText>Date range from:</BoldText>
             <div className="mt-1">
-              <CustomField
+              {/* <CustomField
                 type="date"
                 onChange={setFromDate}
                 field="input"
                 value={fromDate}
                 id="announcement-date-range-from"
+              /> */}
+              <DateTimePicker
+                format="dd/MM/yyyy"
+                dayPlaceholder="DD"
+                monthPlaceholder="MM"
+                yearPlaceholder="YYYY"
+                calendarIcon={null}
+                onChange={(arg: Date | null) => setFromDate(arg)}
+                value={fromDate}
               />
             </div>
           </div>
@@ -108,10 +123,14 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
             <div className="mt-4">
               <BoldText>Date range to (Optional):</BoldText>
               <div className="mt-1">
-                <CustomField
-                  type="date"
-                  onChange={setToDate}
-                  field="input"
+                <DateTimePicker
+                  format="dd/MM/yyyy"
+                  minDate={fromDate}
+                  dayPlaceholder="DD"
+                  monthPlaceholder="MM"
+                  yearPlaceholder="YYYY"
+                  calendarIcon={null}
+                  onChange={(arg: Date | null) => setToDate(arg)}
                   value={toDate}
                 />
               </div>

@@ -12,7 +12,7 @@ const EmptyView = ({
   action,
   actionText = 'Retry?',
 }: TEmptyView) => (
-  <div className="min-h-[50vh] bg-gray-100 rounded-lg flex flex-col justify-center items-center gap-4 mt-8">
+  <div className="min-h-[50vh] border-gray-200 border bg-gray-50 rounded-lg flex flex-col justify-center items-center gap-4 mt-8">
     <img className="w-24 h-24 grayscale opacity-70" src={empty} alt={message} />
     <h3 className="text-xl font-medium">{message}</h3>
     {action && (
