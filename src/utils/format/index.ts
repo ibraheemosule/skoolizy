@@ -8,8 +8,10 @@ export const capitalizeChar = (str: string) => {
 };
 
 export const formatDate = (str: string = '') => {
-  const newDate =
-    new Date(str).toString() === 'Invalid Date' ? new Date() : new Date(str);
+  let newDate: Date;
+  if (new Date(str).toString() === 'Invalid Date') newDate = new Date();
+  else newDate = new Date(str.length === 19 ? `${str}Z` : str);
+
   const getDate = `${newDate.getDate()}/${
     newDate.getMonth() + 1
   }/${newDate.getFullYear()}`;
