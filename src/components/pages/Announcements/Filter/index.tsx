@@ -34,7 +34,6 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   );
 
   const filterAnnouncements = () => {
-    console.log(toDate);
     action({
       search,
       type,

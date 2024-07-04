@@ -33,7 +33,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       api.postAnnouncement({
         title,
         message,
-
         ...(type !== 'memo' && {
           event_start_date: startDate,
           reminder: reminders[reminder as keyof typeof reminders],
