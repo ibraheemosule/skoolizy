@@ -1,7 +1,7 @@
 import { vi } from 'vitest';
 import { capitalizeChar, formatDate } from '.';
 
-const date = new Date('2022-02-23T09:43:03.000Z');
+const date = new Date('2022-02-23T09:43:03.000');
 describe('tests for formatting strings', () => {
   test('validate capitalizeChar function formats string as expected', () => {
     const result = capitalizeChar('i_am_just_for_test');
@@ -30,27 +30,25 @@ describe('tests for formatting date and time', () => {
 
   test('time should be in a proper format', () => {
     vi.setSystemTime(date);
-    const result = formatDate('2022-02-23T00:43:03.000Z').getTime;
-    expect(result).toBe('1:43am');
+    const result = formatDate('2022-02-23T00:43:03.000').getTime;
+    expect(result).toBe('12:43am');
   });
   test('noon time should be formatted properly', () => {
-    const result = formatDate('2022-02-23T12:43:03.000Z').getTime;
-    expect(result).toBe('1:43pm');
+    const result = formatDate('2022-02-23T12:43:03.000').getTime;
+    expect(result).toBe('12:43pm');
   });
   test('month should be formatted properly in the date', () => {
-    const result = formatDate('2022-12-23T12:43:03.000Z').getDate;
+    const result = formatDate('2022-12-23T12:43:03.000').getDate;
     expect(result).toBe('23/12/2022');
   });
   test('invalid values should return current date and time', () => {
     vi.setSystemTime(date);
     expect(formatDate('[]')).toStrictEqual(
-      formatDate('2022-02-23T09:43:03.000Z')
+      formatDate('2022-02-23T09:43:03.000')
     );
-    expect(formatDate('')).toStrictEqual(
-      formatDate('2022-02-23T09:43:03.000Z')
-    );
+    expect(formatDate('')).toStrictEqual(formatDate('2022-02-23T09:43:03.000'));
     expect(formatDate('123135636346467757662')).toStrictEqual(
-      formatDate('2022-02-23T09:43:03.000Z')
+      formatDate('2022-02-23T09:43:03.000')
     );
   });
 });
