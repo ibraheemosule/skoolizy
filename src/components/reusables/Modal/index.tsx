@@ -1,4 +1,4 @@
-import { FC, memo, useRef, ElementRef, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import SkeletonLoader from '../SkeletonLoader';
@@ -19,7 +19,6 @@ const Modal: FC<TModal> = ({
   isLoading = false,
   btnClass,
 }) => {
-  const modal = useRef<ElementRef<'div'>>(null);
   const [loading, setLoading] = useState(false);
 
   const modalAction = async () => {
@@ -53,11 +52,7 @@ const Modal: FC<TModal> = ({
   );
 
   return (
-    <div
-      ref={modal}
-      onClick={(e) => e.target === modal.current && close((prev) => !prev)}
-      className="fixed text-left transition-all flex justify-center md:items-center bg-[#a4a3a3d3] top-0 left-0 h-screen w-screen z-50 p-8"
-    >
+    <div className="fixed text-left transition-all flex justify-center md:items-center bg-[#a4a3a3d3] top-0 left-0 h-screen w-screen z-50 p-8">
       <div
         className={`min-w-[100%] transition-all relative flex flex-col h-fit max-h-[80vh] sm:max-h-[90vh] ${
           sizes[size || 'lg']
