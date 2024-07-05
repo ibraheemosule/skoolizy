@@ -23,7 +23,7 @@ export const ActionBtn = memo(
         className={`${className ? '' : styles} ${
           loading
             ? 'opacity-50'
-            : `hover:opacity-50 ${className ? '' : 'px-4 py-2'}`
+            : `hover:bg-purple ${className ? '' : 'px-4 py-2'}`
         }`}
         type="button"
         {...props}

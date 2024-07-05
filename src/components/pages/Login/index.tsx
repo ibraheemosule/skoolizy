@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import CustomField from '~components/reusables/CustomField';
 import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
+import logo from '~assets/images/logo.png';
+import { ActionBtn } from '~components/reusables/ui/Buttons';
 
 const Login = () => {
   const [email, setEmail] = useCustomField('');
@@ -10,11 +12,7 @@ const Login = () => {
       <div className="flex w-full xlg:w-1/2 flex-col justify-center">
         <div className="mx-auto w-full max-w-sm xlg:w-96">
           <div className="tx">
-            <img
-              className="h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+            <img height={40} width={40} src={logo} alt="logo" />
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign in to your account
             </h2>
@@ -22,7 +20,7 @@ const Login = () => {
               Don&apos;t have an account?{' '}
               <a
                 href="https://goal.com"
-                className="font-semibold text-indigo-600 hover:text-indigo-500"
+                className="font-semibold text-purple.dark hover:text-purple"
               >
                 Sign up
               </a>
@@ -93,21 +91,14 @@ const Login = () => {
                   <div className="text-sm leading-6">
                     <a
                       href="https://goal.com"
-                      className="font-semibold text-indigo-600 hover:text-indigo-500"
+                      className="font-semibold text-purple.dark hover:text-purple"
                     >
                       Forgot password?
                     </a>
                   </div>
                 </div>
 
-                <div>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Sign in
-                  </button>
-                </div>
+                <ActionBtn>Sign in</ActionBtn>
               </form>
             </div>
 
@@ -129,7 +120,7 @@ const Login = () => {
               <div className="mt-6 grid grid-cols-2 gap-4 text-gray-500">
                 <a
                   href="https://goal.com"
-                  className="flex w-full items-center justify-center gap-3 rounded-md bg-[https://goal.com1D9BF0] px-3 py-1.5  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com1D9BF0]"
+                  className="flex w-full items-center justify-center gap-3 rounded-md  px-3 py-1.5  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com1D9BF0]"
                 >
                   <svg
                     className="h-5 w-5"
@@ -146,7 +137,7 @@ const Login = () => {
 
                 <a
                   href="https://goal.com"
-                  className="flex w-full items-center justify-center gap-3 rounded-md bg-[https://goal.com24292F] px-3 py-1.5  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com24292F]"
+                  className="flex w-full items-center justify-center gap-3 rounded-md px-3 py-1.5  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[https://goal.com24292F]"
                 >
                   <svg
                     className="h-5 w-5"
