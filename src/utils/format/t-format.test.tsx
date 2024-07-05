@@ -37,6 +37,10 @@ describe('tests for formatting date and time', () => {
     const result = formatDate('2022-02-23T12:43:03.000').getTime;
     expect(result).toBe('12:43pm');
   });
+  test('24 hour format should be returned if 24 is passed second argument', () => {
+    const result = formatDate('2022-02-23T13:43:03.000', 24).getTime;
+    expect(result).toBe('13:43:00');
+  });
   test('month should be formatted properly in the date', () => {
     const result = formatDate('2022-12-23T12:43:03.000').getDate;
     expect(result).toBe('23/12/2022');

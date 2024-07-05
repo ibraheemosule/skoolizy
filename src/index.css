@@ -194,8 +194,19 @@ thead[role='presentation'] tr[role='row'] .fc-col-header-cell {
   color: black;
 }
 
+.react-datetime-picker__button:hover
+  .react-datetime-picker__button__icon:hover {
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.react-datetime-picker__clear-button,
+.react-datetime-picker__clear-button:hover,
+.react-datetime-picker__button:hover,
+.react-datetime-picker__button__icon:hover,
 .react-datetime-picker__button:enabled:focus
   .react-datetime-picker__button__icon {
+  color: black;
   stroke: black;
   stroke-width: 1.5px;
 }

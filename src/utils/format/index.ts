@@ -7,19 +7,27 @@ export const capitalizeChar = (str: string) => {
     .join(' ');
 };
 
-export const formatDate = (str: string = '') => {
+export const formatDate = (str: string = '', format = 12) => {
   let newDate: Date;
-  if (new Date(str).toString() === 'Invalid Date') newDate = new Date();
+  if (!str || new Date(str).toString() === 'Invalid Date') newDate = new Date();
   else newDate = new Date(str.length === 19 ? `${str}Z` : str);
 
   const getDate = `${newDate.getDate()}/${
     newDate.getMonth() + 1
   }/${newDate.getFullYear()}`;
-  const hour = newDate.getHours();
-  const minute = `${newDate.getMinutes()}`;
-  const getTime = `${hour > 12 ? hour - 12 : hour < 1 ? 12 : hour}:${
-    +minute < 10 ? `0${minute}` : minute
-  }${hour > 11 ? 'pm' : 'am'}`;
+
+  const hour = String(newDate.getHours()).padStart(2, '0');
+  const minute = String(newDate.getMinutes()).padStart(2, '0');
+  let getTime = `${String(hour).padStart(2, '0')}:${minute.padStart(
+    2,
+    '0'
+  )}:00`;
+
+  if (format === 12) {
+    getTime = `${+hour > 12 ? +hour - 12 : +hour < 1 ? 12 : hour}:${minute}${
+      +hour > 11 ? 'pm' : 'am'
+    }`;
+  }
   return { getDate, getTime };
 };
 

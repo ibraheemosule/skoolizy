@@ -1,5 +1,6 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import DateTimePicker from 'react-datetime-picker';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import Modal from '~reusables/Modal';
@@ -7,6 +8,7 @@ import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
 import { recipientsList, reminders, navRouting } from './u-new';
 import Api from '~api';
+import { dateToDbFormat, formatDate } from '~utils/format';
 
 const { api } = new Api();
 
@@ -23,9 +25,9 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
     '',
     Object.keys(reminders)
   );
-  const [startDate, setStartDate] = useCustomField('');
-  const [endDate, setEndDate] = useCustomField('');
-  const [eventTime, setEventTime] = useCustomField('');
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [eventTime, setEventTime] = useState<Date | null>(null);
 
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
@@ -34,11 +36,15 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
         title,
         message,
         ...(type !== 'memo' && {
-          event_start_date: startDate,
+          event_start_date: dateToDbFormat(startDate) || '',
           reminder: reminders[reminder as keyof typeof reminders],
         }),
-        ...(type === 'multi_event' && { event_end_date: endDate }),
-        ...(type === 'single_event' && { event_time: `${eventTime}:00` }),
+        ...(type === 'multi_event' && {
+          event_end_date: dateToDbFormat(endDate) || '',
+        }),
+        ...(type === 'single_event' && {
+          event_time: formatDate(String(eventTime), 24).getTime,
+        }),
         recipient,
         type,
       }),
@@ -90,17 +96,19 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
             </div>
           </div>
 
-          <div className="flex mt-4 gap-4 flex-wrap sm:justify-end">
+          <div className="flex mt-4 gap-4 flex-wrap">
             {type !== 'memo' && (
               <div className="w-[150px]">
                 <BoldText>{type === 'multi_event' && 'Start '}Date:</BoldText>
                 <div className="mt-1">
-                  <CustomField
-                    placeholder="Recipients"
+                  <DateTimePicker
+                    format="dd/MM/yyyy"
+                    dayPlaceholder="DD"
+                    monthPlaceholder="MM"
+                    yearPlaceholder="YYYY"
+                    calendarIcon={null}
+                    onChange={(arg: Date | null) => setStartDate(arg)}
                     value={startDate}
-                    onChange={setStartDate}
-                    field="input"
-                    type="date"
                   />
                 </div>
               </div>
@@ -110,12 +118,14 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
               <div className="w-[150px]">
                 <BoldText>End Date:</BoldText>
                 <div className="mt-1">
-                  <CustomField
-                    placeholder="Recipients"
+                  <DateTimePicker
+                    format="dd/MM/yyyy"
+                    dayPlaceholder="DD"
+                    monthPlaceholder="MM"
+                    yearPlaceholder="YYYY"
+                    calendarIcon={null}
+                    onChange={(arg: Date | null) => setEndDate(arg)}
                     value={endDate}
-                    onChange={setEndDate}
-                    field="input"
-                    type="date"
                   />
                 </div>
               </div>
@@ -125,13 +135,13 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
               <div className="w-[150px]">
                 <BoldText>Time of Event:</BoldText>
                 <div className="mt-1">
-                  <CustomField
-                    placeholder="Recipients"
+                  <DateTimePicker
+                    format="hh:mm a"
+                    hourPlaceholder="HH"
+                    minutePlaceholder="MM"
+                    calendarIcon={null}
+                    onChange={(arg: Date | null) => setEventTime(arg)}
                     value={eventTime}
-                    onChange={setEventTime}
-                    field="input"
-                    type="time"
-                    icon={null}
                   />
                 </div>
               </div>
