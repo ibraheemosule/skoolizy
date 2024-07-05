@@ -10,7 +10,7 @@ export const capitalizeChar = (str: string) => {
 export const formatDate = (str: string = '', format = 12) => {
   let newDate: Date;
   if (!str || new Date(str).toString() === 'Invalid Date') newDate = new Date();
-  else newDate = new Date(str.length === 19 ? `${str}Z` : str);
+  else newDate = new Date(str);
 
   const getDate = `${newDate.getDate()}/${
     newDate.getMonth() + 1
