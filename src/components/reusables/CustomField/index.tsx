@@ -56,9 +56,9 @@ const Editable = () => {
         }`}
       />
       {icon && !isDate && (
-        <span className=" mr-1">
+        <button className=" mr-1">
           <Icon height={20} width={20} name={icon} />
-        </span>
+        </button>
       )}
     </div>
   );

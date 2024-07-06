@@ -8,26 +8,27 @@ const useGetCountriesAndState = (arg: string = '') => {
   const [country, setCountry] = useState(arg);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['COUNTRIES'],
+    queryKey: ['countries'],
     queryFn: () => api.getCountryAndState(),
   });
 
   let countries: string[] = [];
   let countryIso: string | undefined = '';
-  let state: string[] = [];
+  let states: string[] = [];
 
   if (data?.data) {
-    countries = data.data.map((c) => c.name);
+    countries = [...new Set(data.data.map((c) => c.name))];
 
     if (country) {
       countryIso = data.data.find((c) => c.name === country)?.iso2 ?? '';
-      state =
-        data.data.find((c) => c.name === country)?.state.map((s) => s.name) ??
-        [];
+      states =
+        data.data
+          .find((c) => c.name === country)
+          ?.states?.map((s) => s.name.split(' ').slice(0, -1).join(' ')) ?? [];
     }
   }
 
-  return { countries, setCountry, state, countryIso, isLoading };
+  return { countries, setCountry, states, countryIso, isLoading };
 };
 
 export default useGetCountriesAndState;

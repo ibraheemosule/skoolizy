@@ -238,6 +238,10 @@ const router = createBrowserRouter([
     path: 'login',
     url: () => import('~components/pages/Login'),
   }),
+  lazyLoad({
+    path: 'signup',
+    url: () => import('~components/pages/Signup'),
+  }),
 ]);
 
 export default router;
