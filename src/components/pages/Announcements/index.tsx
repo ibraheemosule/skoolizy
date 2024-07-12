@@ -49,7 +49,7 @@ const Announcements = () => {
   return (
     <section
       data-testid="announcements-page"
-      className="flex _full max-h-full gap-6 overflow-auto"
+      className="flex max-h-full gap-6 overflow-auto"
     >
       <div className="w-full min-h-full shrink-0">
         <div className="flex flex-col h-full overflow-hidden">

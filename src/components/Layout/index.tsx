@@ -24,7 +24,7 @@ const Layout: FC = () => {
         <header className="_full shrink-0 flex">
           <TopHeader setToggleNav={setToggleNav} />
         </header>
-        <div className="page w-full overflow-hidden grow max-w-[86rem] mx-auto mb-6">
+        <div className="_full overflow-hidden grow max-w-[96rem] mx-auto mb-6">
           <Outlet />
         </div>
       </section>

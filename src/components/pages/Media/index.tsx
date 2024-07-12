@@ -23,7 +23,7 @@ const Media = () => {
   const [deleteMedia, setDeleteMedia] = useState('');
 
   return (
-    <section className="flex _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
+    <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
       <div className="w-full min-h-full">
         <div className="flex  flex-col md:h-full md:overflow-hidden">
           {modal === 'new' && <NewMedia closeModal={() => setModal('')} />}

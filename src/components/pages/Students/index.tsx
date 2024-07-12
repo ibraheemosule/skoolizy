@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 // import AsideAdmin from '~components/Layout/AsideAdmin';
 
 const Students = () => (
-  <section className="flex _full flex-wrap max-h-full overflow-auto">
+  <section className="flex flex-wrap max-h-full overflow-auto">
     <div className="w-full">
       <Outlet />
     </div>

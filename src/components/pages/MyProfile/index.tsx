@@ -9,7 +9,7 @@ const nav = {
 };
 
 const MyProfile = () => (
-  <section className="flex  _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
+  <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
     <div className="w-full min-h-full lg:w-3/5 xl:w-8/12 shrink-0">
       <div className="flex mx-auto flex-col md:h-full md:overflow-hidden">
         <div className="mx-auto w-full">

@@ -33,7 +33,7 @@ const RateSomeone = () => {
         <ConfirmRatingModal rating={rating} closeModal={closeModal} />
       )}
       <BoldText>Rate Someone</BoldText>
-      <div className="flex justify-between flex-wrap gap-4 gap-y-3 mt-3">
+      <div className="flex justify-between flex-wrap lg:flex-nowrap gap-3 mt-3">
         <div className="grow xs-grow-0 w-[180px]">
           <CustomField
             field="select"
