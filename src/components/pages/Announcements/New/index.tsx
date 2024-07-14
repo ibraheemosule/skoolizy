@@ -69,7 +69,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       actionText="Send Announcement"
       fixedActionBtn
       content={
-        <div className="pb-8">
+        <div className="pb-8 mt-6">
           <HorizontalNav nav={nav} active={navRouting[type]} />
           <div className="mt-4">
             <BoldText>Title:</BoldText>

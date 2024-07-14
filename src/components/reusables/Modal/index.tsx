@@ -58,7 +58,7 @@ const Modal: FC<TModal> = ({
           sizes[size || 'lg']
         } bg-white shadow-sm p-6 rounded-md`}
       >
-        <div className="absolute top-4 right-4">
+        <div className="text-right">
           <BaseBtn testId="close-modal" onClick={() => close((prev) => !prev)}>
             <CancelIcon height={25} width={25} />
           </BaseBtn>
@@ -69,10 +69,12 @@ const Modal: FC<TModal> = ({
           </div>
         ) : (
           <>
-            <header className="shrink-0">
-              <h3 className=" text-xl font-semibold max-w-[90%]">{title}</h3>
-            </header>
-            <main className={`grow my-6 ${scroll ? 'overflow-y-auto' : ''}`}>
+            {title && (
+              <header className="shrink-0">
+                <div className=" text-xl font-semibold">{title}</div>
+              </header>
+            )}
+            <main className={`grow ${scroll ? 'overflow-y-auto' : ''}`}>
               {content}
               {action && !fixedActionBtn && actionUI}
             </main>

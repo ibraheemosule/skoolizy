@@ -50,7 +50,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
       title="Filter Announcements"
       fixedActionBtn
       content={
-        <div data-testid="filter-annouoncement-modal">
+        <div className="mt-6" data-testid="filter-annouoncement-modal">
           <div>
             <BoldText>Search Title:</BoldText>
             <div className="mt-1">

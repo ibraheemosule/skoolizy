@@ -91,10 +91,12 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
       title={
         <div className="flex flex-col gap-1 capitalize">
           <h3 data-testid="announcement-title">{data?.data.title}</h3>
-          <span className="text-gray-500 text-sm">By Mr Tosin olawole</span>
+          <span className="text-gray-500 text-sm border-b pb-3">
+            By Mr Tosin olawole
+          </span>
           {isEditable && (
             <>
-              <div className="flex mt-4 gap-6 sm:gap-6 gap-y-4 flex-wrap max-w-92">
+              <div className="flex mt-4 gap-6 sm:gap-6 gap-y-4 flex-wrap border-b pb-3">
                 {data?.data.event_start_date && (
                   <div className="flex flex-col">
                     <small className="text-xs font-bold">Event Starts</small>
@@ -119,10 +121,10 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
                     </small>
                   </div>
                 )}
-                {data?.data.reminder && (
+                {data?.data.reminder && active === 'edit event' && (
                   <div className=" self-start sm:ml-auto">
                     <ActionBtn className="p-0 bg-transparent">
-                      <Tag className="font-semibold text-sm px-1 py-0.5 rounded-md">
+                      <Tag className="font-semibold text-sm p-1 rounded-md">
                         Stop reminder
                       </Tag>
                     </ActionBtn>
@@ -137,7 +139,7 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
         </div>
       }
       content={
-        <div data-testid="announcement-modal">
+        <div data-testid="announcement-modal" className="py-6">
           {active === 'edit event' && (
             <div>
               <div className="mt-1">
