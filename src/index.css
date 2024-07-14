@@ -210,3 +210,7 @@ thead[role='presentation'] tr[role='row'] .fc-col-header-cell {
   stroke: black;
   stroke-width: 1.5px;
 }
+
+ul.alice-carousel__dots {
+  margin-top: 1rem;
+}

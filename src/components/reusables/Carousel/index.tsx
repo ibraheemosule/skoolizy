@@ -11,9 +11,9 @@ const Carousel = ({
     autoPlay
     autoPlayInterval={2000}
     animationType="fadeout"
-    disableDotsControls
     keyboardNavigation
     infinite
+    disableButtonsControls
   >
     {children}
   </AliceCarousel>
