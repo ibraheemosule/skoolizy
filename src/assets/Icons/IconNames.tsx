@@ -27,4 +27,6 @@ export type TIconNames =
   | 'star'
   | 'circledArrowRight'
   | 'caretRightSolid'
-  | 'caretLeftSolid';
+  | 'caretLeftSolid'
+  | 'twitter'
+  | 'github';

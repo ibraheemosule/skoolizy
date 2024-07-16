@@ -10,6 +10,7 @@ import {
   isValidElement,
   FC,
 } from 'react';
+import { DateTimePicker, DateTimePickerProps } from 'react-datetime-picker';
 import { IBaseProp } from '~src/shared-ts-types/react-types';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import Icon from '~src/assets/Icons';
@@ -28,6 +29,8 @@ const Editable = () => {
     id,
     search,
     placeholder,
+    pattern,
+    error,
     icon = filterFn ? 'caretDown' : 'search',
   } = useCustomFieldContext();
 
@@ -36,8 +39,13 @@ const Editable = () => {
     'p-2 pl-4 first-letter:uppercase appearance-none outline-none w-full';
 
   return (
-    <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
+    <div
+      className={`w-full cursor-pointer bg-white flex items-center border ${
+        error ? 'border-pink-800' : 'border-gray-200'
+      }  rounded-lg overflow-hidden`}
+    >
       <input
+        {...(pattern && { pattern })}
         data-testid="custom-input"
         {...(id && { id })}
         autoComplete="true"
@@ -70,11 +78,16 @@ const NonEditable = () => {
     onSelect,
     value,
     placeholder = 'Select...',
+    error,
   } = useCustomFieldContext();
   const emptyValue = <span className="text-gray-400">{placeholder}</span>;
 
   return (
-    <div className="relative w-full cursor-pointer bg-white flex items-center border border-gray-200 rounded-lg overflow-hidden">
+    <div
+      className={`relative w-full cursor-pointer bg-white flex items-center border  ${
+        error ? 'border-pink-800' : 'border-gray-200'
+      }  rounded-lg overflow-hidden`}
+    >
       <div
         data-testid="custom-select"
         tabIndex={0}
@@ -233,6 +246,8 @@ type EditableCommonProp = {
   id?: string;
   placeholder?: string;
   children?: JSX.Element;
+  pattern?: string;
+  error?: string;
 };
 
 type EditableProp =
@@ -250,6 +265,7 @@ type NonEditableProp = {
   children: ReactNode;
   placeholder?: string;
   onSelect: (arg: string) => void;
+  error?: string;
 } & (
   | {
       value: string[];
@@ -258,7 +274,16 @@ type NonEditableProp = {
   | { value: JSX.Element | string; filterFn?: never }
 );
 
-const CustomField = (props: EditableProp | NonEditableProp) => {
+interface IDatePicker extends DateTimePickerProps {
+  field: 'date-time';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
+const CustomField = (
+  props: (EditableProp | NonEditableProp | IDatePicker) & {
+    onBlur?: () => void;
+  }
+) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = useRef(false);
@@ -321,6 +346,8 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
       field: props.field,
       value: props.value,
       placeholder: props.placeholder,
+      error: props.error,
+      onBlur: props.onBlur,
       ...(props.field === 'select'
         ? {
             onSelect: props.onSelect,
@@ -328,6 +355,7 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
           }
         : {
             search: props.search,
+            pattern: props.pattern,
             type: props.field === 'date' ? 'date' : props.type,
             id: props.id,
             icon: props.icon,
@@ -335,7 +363,7 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
             ...(props.children && { filterFn: props.filterFn }),
           }),
     }),
-    [props.value, props.filterFn, props.placeholder]
+    [props.value, props.filterFn, props.placeholder, props.error]
   );
 
   return (
@@ -352,11 +380,36 @@ const CustomField = (props: EditableProp | NonEditableProp) => {
           } else toggleDropdown.current = true;
         }}
         ref={elementRef}
+        {...(props.onBlur && {
+          onBlur: () => {
+            if (props.field !== 'select') props.onBlur?.();
+          },
+        })}
       >
         {['input', 'date'].includes(props.field) && <Editable />}
+        {props.field === 'date-time' && (
+          <div className="w-full" ref={dropdownRef}>
+            <DateTimePicker
+              className={props.error ? 'error' : ''}
+              format="dd/MM/yyyy"
+              dayPlaceholder="DD"
+              monthPlaceholder="MM"
+              yearPlaceholder="YYYY"
+              calendarIcon={null}
+              onChange={props.onChange}
+              value={props.value}
+              disabled={props.disabled}
+            />
+          </div>
+        )}
         {props.field === 'select' && <NonEditable />}
 
         {props.children}
+        {props.error && (
+          <small className="text-pink-800 absolute -bottom-6 left-0 first-letter:capitalize">
+            {props.error}
+          </small>
+        )}
       </div>
     </CustomFieldContext.Provider>
   );

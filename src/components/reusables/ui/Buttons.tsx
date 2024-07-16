@@ -20,7 +20,7 @@ export const ActionBtn = memo(
         disabled={loading}
         data-testid={testId}
         onClick={onClick}
-        className={`${className ? '' : styles} ${
+        className={`${className || styles} ${
           loading
             ? 'opacity-50'
             : ` ${className ? '' : 'px-4 py-2 hover:bg-purple'}`

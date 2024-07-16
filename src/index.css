@@ -172,6 +172,10 @@ thead[role='presentation'] tr[role='row'] .fc-col-header-cell {
   padding: 0.4rem 0.5rem;
 }
 
+.error .react-datetime-picker__wrapper {
+  border-color: #9d174d;
+}
+
 .react-datetime-picker__inputGroup__input:invalid {
   background: none;
 }

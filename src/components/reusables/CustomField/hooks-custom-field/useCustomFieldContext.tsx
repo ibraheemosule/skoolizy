@@ -11,6 +11,9 @@ export const CustomFieldContext = createContext<{
   id?: string;
   value: string | string[] | JSX.Element;
   placeholder?: string;
+  pattern?: string;
+  onBlur?: () => void;
+  error?: string;
   search?: boolean;
   filterFn?: (
     v: string,

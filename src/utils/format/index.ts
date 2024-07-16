@@ -1,3 +1,11 @@
+export const phoneNumberFormats = ['234', '80', '70', '81', '90', '91'];
+
+export const onlyAlphabet = (text: string) => {
+  const re = /^[a-zA-Z ]+$/;
+  if (text.match(re)) return true;
+  return false;
+};
+
 export const capitalizeChar = (str: string) => {
   if (typeof str !== 'string' || !str) return '';
   return str
