@@ -60,6 +60,7 @@ const PersonalInfoForm = () => {
   // ]);
 
   const validateInput = (key: string, value: string) => {
+    console.log(personalInfoFieldValidation(key, value), key, value);
     setError((prev) => ({
       ...prev,
       ...personalInfoFieldValidation(key, value),

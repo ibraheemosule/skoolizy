@@ -1,6 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
 import {
-  memo,
   useRef,
   ReactNode,
   useCallback,
@@ -10,280 +9,17 @@ import {
   isValidElement,
   FC,
 } from 'react';
-import { DateTimePicker, DateTimePickerProps } from 'react-datetime-picker';
-import { IBaseProp } from '~src/shared-ts-types/react-types';
-import CancelIcon from '~src/assets/Icons/CancelIcon';
-import Icon from '~src/assets/Icons';
-import {
-  useCustomFieldContext,
-  CustomFieldContext,
-} from './hooks-custom-field/useCustomFieldContext';
-import { Tag } from '../ui/Others';
+import { DateTimePicker } from 'react-datetime-picker';
+import { TCustomField } from './t-customField';
 
-const Editable = () => {
-  const {
-    onChange,
-    filterFn,
-    value,
-    type,
-    id,
-    search,
-    placeholder,
-    pattern,
-    error,
-    icon = filterFn ? 'caretDown' : 'search',
-  } = useCustomFieldContext();
+import { CustomFieldContext } from './hooks-custom-field/useCustomFieldContext';
 
-  const isDate = ['month', 'week', 'date', 'time'].includes(type || '');
-  const styles =
-    'p-2 pl-4 first-letter:uppercase appearance-none outline-none w-full';
+import Editable from './Editable';
+import NonEditable from './NonEditable';
+import Dropdown from './DropdownWrapper/Dropdown';
+import DropdownWrapper from './DropdownWrapper';
 
-  return (
-    <div
-      className={`w-full cursor-pointer bg-white flex items-center border ${
-        error ? 'border-pink-800' : 'border-gray-200'
-      }  rounded-lg overflow-hidden`}
-    >
-      <input
-        {...(pattern && { pattern })}
-        data-testid="custom-input"
-        {...(id && { id })}
-        autoComplete="true"
-        onChange={(e) => {
-          onChange?.(e.target.value);
-          filterFn?.(e.target.value);
-        }}
-        onBlur={(e) => filterFn?.(e.target.value, onChange)}
-        value={value as string}
-        type={type ?? (search ? 'search' : 'text')}
-        placeholder={placeholder || 'Search...'}
-        className={`${styles} ${isDate} ${
-          !search && typeof search === 'boolean'
-            ? 'cursor-pointer'
-            : 'cursor-text'
-        }`}
-      />
-      {icon && !isDate && (
-        <button className=" mr-1">
-          <Icon height={20} width={20} name={icon} />
-        </button>
-      )}
-    </div>
-  );
-};
-Editable.displayName = 'Editable';
-
-const NonEditable = () => {
-  const {
-    onSelect,
-    value,
-    placeholder = 'Select...',
-    error,
-  } = useCustomFieldContext();
-  const emptyValue = <span className="text-gray-400">{placeholder}</span>;
-
-  return (
-    <div
-      className={`relative w-full cursor-pointer bg-white flex items-center border  ${
-        error ? 'border-pink-800' : 'border-gray-200'
-      }  rounded-lg overflow-hidden`}
-    >
-      <div
-        data-testid="custom-select"
-        tabIndex={0}
-        className={` first-letter:uppercase appearance-none outline-none max-w-full cursor-pointer grow ${
-          typeof value === 'string'
-            ? 'p-2'
-            : Array.isArray(value)
-              ? 'flex gap-2 overflow-x-auto max-w-full p-2'
-              : ''
-        }`}
-      >
-        {(() => {
-          if (Array.isArray(value)) {
-            if (value.length) {
-              return value.map((prop) => (
-                <Tag onClick={() => onSelect?.(prop)} key={Math.random()}>
-                  <div className="flex items-center">
-                    <span className=" whitespace-nowrap pr-2">
-                      {prop.split('_').join(' ')}
-                    </span>
-                    <CancelIcon width={16} height={16} strokeWidth={3} />
-                  </div>
-                </Tag>
-              ));
-            }
-            return emptyValue;
-          }
-          if (typeof value === 'string' && value) {
-            return value.split('_').join(' ');
-          }
-          return value || emptyValue;
-        })()}
-      </div>
-      <span className=" mr-1">
-        <Icon height={20} width={20} name="caretDown" />
-      </span>
-    </div>
-  );
-};
-NonEditable.displayName = 'NonEditable';
-
-type TDropdown = IBaseProp & {
-  value: string | null;
-};
-
-const Dropdown = memo(({ children, value }: TDropdown) => {
-  const { onSelect, value: fieldValue, onChange } = useCustomFieldContext();
-
-  let dropdownValueIsSelected: boolean;
-  if (Array.isArray(fieldValue)) {
-    dropdownValueIsSelected = fieldValue?.some(
-      (v) => v.toLowerCase() === value?.toLowerCase()
-    );
-  } else if (typeof fieldValue === 'string') {
-    dropdownValueIsSelected = fieldValue.toLowerCase() === value?.toLowerCase();
-  } else {
-    dropdownValueIsSelected = !!(value && String(fieldValue).includes(value));
-  }
-
-  return (
-    <div
-      data-testid="dropdown"
-      onClick={() => {
-        if (value) (onSelect || onChange)?.(value);
-      }}
-      className={`${
-        typeof children === 'string' ? 'p-2 break-words' : ''
-      } relative ${
-        dropdownValueIsSelected ? 'bg-gray-100 text-black' : 'bg-white'
-      }  hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}
-    >
-      {children}
-    </div>
-  );
-});
-Dropdown.displayName = 'Dropdown';
-
-type DropdownWrapperPropsType = {
-  children: React.ReactElement[];
-  closeOnClick?: boolean;
-  width?: number;
-  loading?: boolean;
-};
-
-const DropdownWrapper = memo(
-  ({
-    children,
-    closeOnClick = true,
-    width,
-    loading,
-  }: DropdownWrapperPropsType) => {
-    const { dropdownRef, filterFn, value } = useCustomFieldContext();
-    const multiselect = Array.isArray(value);
-
-    Children.toArray(children).forEach((child: React.ReactNode) => {
-      if (!isValidElement(child)) {
-        throw Error('only DropdownWrapper allowed as children');
-      }
-      if ((child.type as FC).displayName !== 'Dropdown') {
-        throw Error('only Dropdown allowed as children');
-      }
-    });
-
-    if (!filterFn && multiselect) {
-      throw Error(
-        'Pass a filter function of ((arg: string) => void) to filter the dropdown list'
-      );
-    }
-
-    return (
-      <div
-        ref={dropdownRef}
-        onClick={(e) => (!closeOnClick || multiselect) && e.stopPropagation()}
-        className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
-        style={{ minWidth: width || 'max-content' }}
-      >
-        {multiselect && (
-          <Dropdown value={null}>
-            <div className="py-2 px-1 bg-white">
-              <input
-                onChange={(e) => filterFn?.(e.target.value)}
-                placeholder="Search"
-                className="dropdown-search w-full rounded-md p-2 outline-none border-0 bg-gray-100"
-              />
-            </div>
-          </Dropdown>
-        )}
-        {loading ? (
-          <div className="bg-white">
-            <Icon
-              name="spinner"
-              height={40}
-              width={40}
-              fill="#432c81"
-              style={{ margin: 'auto' }}
-            />
-          </div>
-        ) : children?.length ? (
-          children
-        ) : (
-          <div className="py-2 px-1 bg-white"> No Result</div>
-        )}
-      </div>
-    );
-  }
-);
-DropdownWrapper.displayName = 'DropdownWrapper';
-
-type EditableCommonProp = {
-  field: 'input' | 'date';
-  onChange: (arg: string) => void;
-  value: string;
-  search?: boolean;
-  type?: string;
-  icon?: null | 'search' | 'caretDown';
-  id?: string;
-  placeholder?: string;
-  children?: JSX.Element;
-  pattern?: string;
-  error?: string;
-};
-
-type EditableProp =
-  | ({
-      children: JSX.Element;
-      filterFn: (v: string) => void;
-    } & EditableCommonProp)
-  | ({
-      children?: never;
-      filterFn?: never;
-    } & EditableCommonProp);
-
-type NonEditableProp = {
-  field: 'select';
-  children: ReactNode;
-  placeholder?: string;
-  onSelect: (arg: string) => void;
-  error?: string;
-} & (
-  | {
-      value: string[];
-      filterFn: (v: string) => void;
-    }
-  | { value: JSX.Element | string; filterFn?: never }
-);
-
-interface IDatePicker extends DateTimePickerProps {
-  field: 'date-time';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
-const CustomField = (
-  props: (EditableProp | NonEditableProp | IDatePicker) & {
-    onBlur?: () => void;
-  }
-) => {
+const CustomField = (props: TCustomField) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = useRef(false);
@@ -347,7 +83,6 @@ const CustomField = (
       value: props.value,
       placeholder: props.placeholder,
       error: props.error,
-      onBlur: props.onBlur,
       ...(props.field === 'select'
         ? {
             onSelect: props.onSelect,
@@ -366,6 +101,10 @@ const CustomField = (
     [props.value, props.filterFn, props.placeholder, props.error]
   );
 
+  useEffect(() => {
+    if (toggleDropdown.current) props.onBlur?.();
+  }, [props.value]);
+
   return (
     <CustomFieldContext.Provider value={contextProps}>
       <div
@@ -382,7 +121,9 @@ const CustomField = (
         ref={elementRef}
         {...(props.onBlur && {
           onBlur: () => {
-            if (props.field !== 'select') props.onBlur?.();
+            if (props.field === 'select') {
+              if (!dropdownRef.current) props.onBlur?.();
+            } else props.onBlur?.();
           },
         })}
       >
