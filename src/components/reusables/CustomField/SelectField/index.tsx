@@ -1,26 +1,14 @@
-import {
-  //   Children,
-  //   FC,
-  //   isValidElement,
-  memo,
-  //   ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import Icon from '~assets/Icons';
 import { Tag } from '~components/reusables/ui/Others';
 import Dropdown from '../DropdownWrapper/Dropdown';
 
 type TSelectField = {
-  //   children?: React.ReactElement[];
+  dropdownElement?: (value: string | number) => JSX.Element;
   width?: number;
   loading?: boolean;
   error?: boolean;
-  //   onSelect: (e: string | number | (string | number)[]) => void;
   placeholder?: string;
-  //   value: string | string[];
   list: (string | number)[] | { [key: string | number]: string | number };
 } & (
   | { value: string; onSelect: (e: string) => void }
@@ -33,11 +21,11 @@ const SelectField = ({
   value,
   width,
   loading,
-  //   children,
   error,
   onSelect,
   placeholder,
   list,
+  dropdownElement,
 }: TSelectField) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -47,33 +35,6 @@ const SelectField = ({
   const listRef = useRef<(string | number)[]>([]);
   const [filteredList, setFilteredList] = useState(listRef.current);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    listRef.current = isListArray ? list : Object.keys(list);
-    setFilteredList(listRef.current);
-  }, [list]);
-
-  useEffect(() => {
-    setFilteredList(
-      listRef.current.filter((v) =>
-        String(v).toLowerCase().startsWith(search.toLowerCase())
-      )
-    );
-  }, [search]);
-
-  //   const childProp = (children ? Children.toArray(children) : []) as unknown as [
-  //     ReactNode,
-  //   ];
-
-  //   if (childProp?.length > 1) {
-  //     throw Error('Component can only have one DropdownWrapper as children');
-  //   }
-  //   if (
-  //     isValidElement(childProp[0]) &&
-  //     (childProp[0].type as FC).displayName !== 'DropdownWrapper'
-  //   ) {
-  //     throw Error('only DropdownWrapper allowed as children');
-  //   }
 
   const focus = useCallback(() => {
     elementRef.current?.focus();
@@ -93,17 +54,25 @@ const SelectField = ({
 
   const toggleDropdown = useCallback(
     (e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent) => {
-      console.log(74);
       if (elementRef.current?.contains(e.target as Node) && toggle.current) {
-        console.log(80);
         focus();
-      } else {
-        console.log(82);
-        blur();
-      }
+      } else blur();
     },
     [blur, focus]
   );
+
+  useEffect(() => {
+    listRef.current = isListArray ? list : Object.keys(list);
+    setFilteredList(listRef.current);
+  }, [list]);
+
+  useEffect(() => {
+    setFilteredList(
+      listRef.current.filter((v) =>
+        String(v).toLowerCase().startsWith(search.toLowerCase())
+      )
+    );
+  }, [search]);
 
   useEffect(() => {
     document.addEventListener('click', toggleDropdown);
@@ -129,6 +98,8 @@ const SelectField = ({
     }
     (onSelect as (e: string | number) => void)(arg);
   };
+
+  const content = dropdownElement || ((arg: string | number) => arg);
 
   return (
     <div
@@ -181,54 +152,55 @@ const SelectField = ({
           <Icon height={20} width={20} name="caretDown" />
         </span>
       </div>
-      {toggle && (
-        <div
-          ref={dropdownRef}
-          onClick={(e) => multiselect && e.stopPropagation()}
-          className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
-          style={{ minWidth: width || 'max-content' }}
-        >
-          {listRef.current.length && (
-            <Dropdown value={null}>
-              <div
-                className="pt-2 pb-4 px-1 bg-white"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search"
-                  className="dropdown-search w-full rounded-md p-3 outline-none border-0 bg-gray-100"
-                />
-              </div>
-            </Dropdown>
-          )}
-          {loading ? (
-            <div className="bg-white">
-              <Icon
-                name="spinner"
-                height={40}
-                width={40}
-                fill="#432c81"
-                style={{ margin: 'auto' }}
+
+      <div
+        ref={dropdownRef}
+        onClick={(e) => multiselect && e.stopPropagation()}
+        className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
+        style={{ minWidth: width || 'max-content' }}
+      >
+        {!!listRef.current.length && (
+          <Dropdown value={null}>
+            <div
+              className="pt-2 pb-4 px-1 bg-white"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search"
+                className="dropdown-search w-full rounded-md p-3 outline-none border-0 bg-gray-100"
               />
             </div>
-          ) : filteredList?.length ? (
-            filteredList.map((v: string | number) => (
-              <Dropdown
-                key={v}
-                value={v}
-                fieldValue={value}
-                onSelect={handleSelect}
-              >
-                {isListArray ? v : list[v]}
-              </Dropdown>
-            ))
-          ) : (
+          </Dropdown>
+        )}
+        {loading ? (
+          <div className="bg-white">
+            <Icon
+              name="spinner"
+              height={40}
+              width={40}
+              fill="#432c81"
+              style={{ margin: 'auto' }}
+            />
+          </div>
+        ) : filteredList?.length ? (
+          filteredList.map((v: string | number) => (
+            <Dropdown
+              key={v}
+              value={v}
+              fieldValue={value}
+              onSelect={handleSelect}
+            >
+              {content(isListArray ? v : list[v])}
+            </Dropdown>
+          ))
+        ) : (
+          !!list.length && (
             <div className="pt-1 pb-3 px-1 bg-white"> No Result</div>
-          )}
-        </div>
-      )}
+          )
+        )}
+      </div>
     </div>
   );
 };

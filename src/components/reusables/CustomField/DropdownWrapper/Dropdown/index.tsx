@@ -25,6 +25,8 @@ const Dropdown = memo(
       );
     }
 
+    console.log(children);
+
     return (
       <div
         data-testid="dropdown"
