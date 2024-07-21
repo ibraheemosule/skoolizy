@@ -70,11 +70,8 @@ export const personalInfoFieldValidation = (
       break;
 
     case 'gender':
-      if (!value.length) {
-        error.gender = 'Gender is required';
-      } else if (!['male', 'female'].includes(String(value))) {
-        error.gender = 'Gender should be male or female';
-      }
+      if (!value.length) error.gender = 'Gender is required';
+
       break;
 
     default:

@@ -32,7 +32,9 @@ const Dropdown = memo(
           if (value) onSelect?.(value);
         }}
         className={`${
-          typeof children === 'string' ? 'p-2 py-3 break-words' : ''
+          typeof children === 'string'
+            ? 'p-2 py-3 break-words first-letter:capitalize'
+            : ''
         } relative ${
           dropdownValueIsSelected ? 'bg-gray-100 text-black' : 'bg-white'
         }  hover:bg-gray-100 hover:text-black border-gray-100 last:rounded-b-lg`}

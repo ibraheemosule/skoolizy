@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import Icon from '~assets/Icons';
 import { Tag } from '~components/reusables/ui/Others';
 import Dropdown from '../DropdownWrapper/Dropdown';
@@ -18,52 +18,47 @@ type TSelectField = {
   | { value: string[]; onSelect: (e: string[]) => void }
 );
 
-const SelectField = ({
+type TDropdownWrapper = {
+  dropdownElement?: (value: string | number) => JSX.Element;
+  width?: number;
+  loading?: boolean;
+  toggle: boolean;
+  error?: string;
+  list: (string | number)[] | { [key: string | number]: string | number };
+  handleSelect: (arg: string | number) => void;
+  value: string | number | number[] | string[];
+  onBlur?: () => void;
+};
+
+const DropdownWrapper = ({
   value,
   width,
   loading,
-  error,
-  onSelect,
-  placeholder,
   list,
   dropdownElement,
+  toggle,
+  handleSelect,
   onBlur,
-}: TSelectField) => {
-  const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
+  error,
+}: TDropdownWrapper) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const toggle = useRef(false);
   const multiselect = Array.isArray(value);
   const isListArray = Array.isArray(list);
   const listRef = useRef<(string | number)[]>([]);
   const [filteredList, setFilteredList] = useState(listRef.current);
   const [search, setSearch] = useState('');
-  const numTimeOpened = useRef(0);
+  const valueRef = useRef<string>('');
 
-  const focus = useCallback(() => {
-    elementRef.current?.focus();
-    numTimeOpened.current += 1;
-    if (dropdownRef.current) {
-      dropdownRef.current.style.animationName = 'dropdown';
-      dropdownRef.current.style.display = 'block';
-    }
-  }, []);
+  valueRef.current = (
+    typeof value === 'number' ? String(value) : value
+  ) as string;
 
-  const blur = useCallback(() => {
-    elementRef.current?.blur();
-    if (dropdownRef.current) {
-      dropdownRef.current.style.animationName = 'close-dropdown';
-      toggle.current = false;
-    }
-  }, []);
-
-  const toggleDropdown = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent) => {
-      if (elementRef.current?.contains(e.target as Node) && toggle.current) {
-        focus();
-      } else blur();
-    },
-    [blur, focus]
-  );
+  useEffect(() => {
+    if (error) onBlur?.();
+    return () => {
+      if (!valueRef.current.length) onBlur?.();
+    };
+  }, [value]);
 
   useEffect(() => {
     listRef.current = isListArray ? list : Object.keys(list);
@@ -78,10 +73,91 @@ const SelectField = ({
     );
   }, [search]);
 
-  useEffect(() => {
-    if (numTimeOpened.current) onBlur?.();
-    console.log(value, new Date().getSeconds(), 'useeffect');
-  }, [value]);
+  const content = dropdownElement || ((arg: string | number) => arg);
+
+  return toggle ? (
+    <div
+      ref={dropdownRef}
+      onClick={(e) => multiselect && e.stopPropagation()}
+      className={`dropdown ${
+        toggle ? '' : 'hidden'
+      } min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto`}
+      style={{ minWidth: width || 'max-content' }}
+    >
+      {listRef.current?.length > 10 && (
+        <Dropdown value={null}>
+          <div
+            className="pt-2 pb-4 px-1 bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search"
+              className="dropdown-search w-full rounded-md p-3 outline-none border-0 bg-gray-100"
+            />
+          </div>
+        </Dropdown>
+      )}
+      {loading ? (
+        <div className="bg-white">
+          <Icon
+            name="spinner"
+            height={40}
+            width={40}
+            fill="#432c81"
+            style={{ margin: 'auto' }}
+          />
+        </div>
+      ) : filteredList?.length ? (
+        filteredList.map((v: string | number) => (
+          <Dropdown
+            key={v}
+            value={v}
+            fieldValue={value}
+            onSelect={handleSelect}
+          >
+            {content(isListArray ? v : list[v])}
+          </Dropdown>
+        ))
+      ) : (
+        !!list.length && (
+          <div className="pt-1 pb-3 px-1 bg-white"> No Result</div>
+        )
+      )}
+    </div>
+  ) : null;
+};
+
+const SelectField = ({
+  value,
+  width,
+  loading,
+  error,
+  onSelect,
+  placeholder,
+  list,
+  dropdownElement,
+  onBlur,
+}: TSelectField) => {
+  const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
+  const [toggle, setToggle] = useState(false);
+  const multiselect = Array.isArray(value);
+
+  const toggleDropdown = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent
+  ) => {
+    if (!elementRef.current?.contains(e.target as Node)) {
+      setToggle(false);
+      return;
+    }
+
+    if (multiselect) {
+      setToggle(true);
+    } else {
+      setToggle((val) => !val);
+    }
+  };
 
   useEffect(() => {
     document.addEventListener('click', toggleDropdown);
@@ -108,28 +184,8 @@ const SelectField = ({
     (onSelect as (e: string | number) => void)(arg);
   };
 
-  const content = dropdownElement || ((arg: string | number) => arg);
-
   return (
-    <div
-      className="flex h-full relative"
-      ref={elementRef}
-      onClick={(e) => {
-        if (!multiselect) {
-          toggle.current = !toggle.current;
-          return;
-        }
-        if (dropdownRef.current?.contains(e.target as Node)) {
-          toggle.current = false;
-        } else toggle.current = true;
-      }}
-      // {...(onBlur && {
-      //   onBlur: () => {
-      //     console.log(value, new Date().getSeconds(), 'blurred');
-      //     setTimeout(onBlur, 100);
-      //   },
-      // })}
-    >
+    <div className="flex h-full relative" ref={elementRef}>
       <div
         className={`relative w-full cursor-pointer bg-white flex items-center border  ${
           error ? 'border-pink-800' : 'border-gray-200'
@@ -145,7 +201,10 @@ const SelectField = ({
           {multiselect &&
             (value.length
               ? value.map((prop) => (
-                  <Tag onClick={() => handleSelect(prop)} key={Math.random()}>
+                  <Tag
+                    onClick={() => toggle && handleSelect(prop)}
+                    key={Math.random()}
+                  >
                     <div className="flex items-center">
                       <span className=" whitespace-nowrap pr-2">
                         {String(prop).split('_').join(' ')}
@@ -168,54 +227,19 @@ const SelectField = ({
         </span>
       </div>
 
-      <div
-        ref={dropdownRef}
-        onClick={(e) => multiselect && e.stopPropagation()}
-        className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
-        style={{ minWidth: width || 'max-content' }}
-      >
-        {listRef.current?.length > 10 && (
-          <Dropdown value={null}>
-            <div
-              className="pt-2 pb-4 px-1 bg-white"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search"
-                className="dropdown-search w-full rounded-md p-3 outline-none border-0 bg-gray-100"
-              />
-            </div>
-          </Dropdown>
-        )}
-        {loading ? (
-          <div className="bg-white">
-            <Icon
-              name="spinner"
-              height={40}
-              width={40}
-              fill="#432c81"
-              style={{ margin: 'auto' }}
-            />
-          </div>
-        ) : filteredList?.length ? (
-          filteredList.map((v: string | number) => (
-            <Dropdown
-              key={v}
-              value={v}
-              fieldValue={value}
-              onSelect={handleSelect}
-            >
-              {content(isListArray ? v : list[v])}
-            </Dropdown>
-          ))
-        ) : (
-          !!list.length && (
-            <div className="pt-1 pb-3 px-1 bg-white"> No Result</div>
-          )
-        )}
-      </div>
+      {list && toggle && (
+        <DropdownWrapper
+          list={list}
+          toggle={toggle}
+          dropdownElement={dropdownElement}
+          width={width}
+          loading={loading}
+          handleSelect={handleSelect}
+          value={value}
+          onBlur={onBlur}
+          error={error}
+        />
+      )}
       {error && (
         <small className="text-pink-800 absolute -bottom-6 left-0 first-letter:capitalize">
           {error}
