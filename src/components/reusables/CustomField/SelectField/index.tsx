@@ -7,8 +7,9 @@ type TSelectField = {
   dropdownElement?: (value: string | number) => JSX.Element;
   width?: number;
   loading?: boolean;
-  error?: boolean;
+  error?: string;
   placeholder?: string;
+  onBlur?: () => void;
   list: (string | number)[] | { [key: string | number]: string | number };
 } & (
   | { value: string; onSelect: (e: string) => void }
@@ -26,6 +27,7 @@ const SelectField = ({
   placeholder,
   list,
   dropdownElement,
+  onBlur,
 }: TSelectField) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -35,9 +37,11 @@ const SelectField = ({
   const listRef = useRef<(string | number)[]>([]);
   const [filteredList, setFilteredList] = useState(listRef.current);
   const [search, setSearch] = useState('');
+  const numTimeOpened = useRef(0);
 
   const focus = useCallback(() => {
     elementRef.current?.focus();
+    numTimeOpened.current += 1;
     if (dropdownRef.current) {
       dropdownRef.current.style.animationName = 'dropdown';
       dropdownRef.current.style.display = 'block';
@@ -73,6 +77,11 @@ const SelectField = ({
       )
     );
   }, [search]);
+
+  useEffect(() => {
+    if (numTimeOpened.current) onBlur?.();
+    console.log(value, new Date().getSeconds(), 'useeffect');
+  }, [value]);
 
   useEffect(() => {
     document.addEventListener('click', toggleDropdown);
@@ -114,6 +123,12 @@ const SelectField = ({
           toggle.current = false;
         } else toggle.current = true;
       }}
+      // {...(onBlur && {
+      //   onBlur: () => {
+      //     console.log(value, new Date().getSeconds(), 'blurred');
+      //     setTimeout(onBlur, 100);
+      //   },
+      // })}
     >
       <div
         className={`relative w-full cursor-pointer bg-white flex items-center border  ${
@@ -159,7 +174,7 @@ const SelectField = ({
         className="dropdown hidden min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto"
         style={{ minWidth: width || 'max-content' }}
       >
-        {!!listRef.current.length && (
+        {listRef.current?.length > 10 && (
           <Dropdown value={null}>
             <div
               className="pt-2 pb-4 px-1 bg-white"
@@ -201,6 +216,11 @@ const SelectField = ({
           )
         )}
       </div>
+      {error && (
+        <small className="text-pink-800 absolute -bottom-6 left-0 first-letter:capitalize">
+          {error}
+        </small>
+      )}
     </div>
   );
 };

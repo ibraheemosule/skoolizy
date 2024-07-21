@@ -16,7 +16,7 @@ export const personalInfoValidation = (fields: { [key: string]: string }) => {
 
   Object.keys(fields).forEach((field) => {
     if (optional.includes(field)) return;
-    if (!fields[field]) error[field] = `${field} is required`;
+    if (!fields[field]?.length) error[field] = `${field} is required`;
   });
 
   if (Object.keys(error).length) popup('error', 'Some Fields are invalid');
@@ -26,7 +26,7 @@ export const personalInfoValidation = (fields: { [key: string]: string }) => {
 
 export const personalInfoFieldValidation = (
   key: string,
-  value: string
+  value: string | string[]
 ): { [key: string]: string } => {
   const error: { [key: string]: string } = { [key]: '' };
 
@@ -60,7 +60,7 @@ export const personalInfoFieldValidation = (
     case 'middleName':
       if (key === 'middleName' && !value) break;
       if (!value) error[key] = `${key.split('N').join(' n')} is required`;
-      else if (!onlyAlphabet(value)) {
+      else if (!onlyAlphabet(String(value))) {
         error[key] = 'Name should contain only letters';
       } else if (value.length < 3) {
         error[key] = `${key.split('N').join(' n')} is too short`;
@@ -70,14 +70,11 @@ export const personalInfoFieldValidation = (
       break;
 
     case 'gender':
-      console.log('here', value);
       if (!value.length) {
         error.gender = 'Gender is required';
-        console.log('banbnvnvn');
+      } else if (!['male', 'female'].includes(String(value))) {
+        error.gender = 'Gender should be male or female';
       }
-      // else if (!['male', 'female'].includes(value)) {
-      //   error.gender = 'Gender should be male or female';
-      // }
       break;
 
     default:

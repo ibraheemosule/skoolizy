@@ -1,45 +1,50 @@
-import { memo, useState } from 'react';
-// import CustomField from '~components/reusables/CustomField';
-// import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
+import { memo, useEffect, useState } from 'react';
+import CustomField from '~components/reusables/CustomField';
+import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
 import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
-// import PrevNextBtn from '~components/reusables/PrevNextBtn';
-// import { useSignupContext } from '../u-signup';
-// import {
-//   personalInfoValidation,
-//   personalInfoFieldValidation,
-// } from './u-personalInfoForm';
+import PrevNextBtn from '~components/reusables/PrevNextBtn';
+import { useSignupContext } from '../u-signup';
+import {
+  personalInfoValidation,
+  personalInfoFieldValidation,
+} from './u-personalInfoForm';
 import SelectField from '~components/reusables/CustomField/SelectField';
 
 const PersonalInfoForm = () => {
-  // const { step, setStep, totalSteps } = useSignupContext();
-  // const [error, setError] = useState<{ [key: string]: string }>({});
+  const { step, setStep, totalSteps } = useSignupContext();
+  const [error, setError] = useState<{ [key: string]: string }>({});
   // const [firstName, setFirstName] = useCustomField('');
-  // const [middleName, setMiddleName] = useCustomField('');
-  // const [lastName, setLastName] = useCustomField('');
+  const [middleName, setMiddleName] = useCustomField('');
+  const [lastName, setLastName] = useCustomField('');
   // const [gender, setGender, list, filterFn] = useCustomField(
   //   [],
   //   ['male', 'female', 'telling']
   // );
-  // const [nationality, setNationality, countryList, filterCountryFn] =
-  //   useCustomField('', []);
-  // const [stateOfOrigin, setStateOfOrigin, stateList, filterStateFn] =
-  //   useCustomField('', []);
-  // const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
-  const [val, setVal] = useState<string[]>([]);
+  const [gender, setGender] = useState<string>('');
+  const [nationality, setNationality, countryList, filterCountryFn] =
+    useCustomField('', []);
+  const [stateOfOrigin, setStateOfOrigin, stateList, filterStateFn] =
+    useCustomField('', []);
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
+  const [firstName, setFirstName] = useState('');
 
-  const { countries } = useGetCountriesAndState();
+  const {
+    countries,
+    isLoading: fetchingCountry,
+    states,
+    setCountry,
+  } = useGetCountriesAndState();
 
-  // useEffect(() => {
-  //   filterCountryFn(countries);
-  // }, [countries.length]);
+  useEffect(() => {
+    filterCountryFn(countries);
+  }, [countries.length]);
 
-  // useEffect(() => {
-  //   filterStateFn(states);
-  // }, [states.length]);
+  useEffect(() => {
+    filterStateFn(states);
+  }, [states.length]);
 
-  // useEffect(() => setCountry(nationality), [nationality]);
+  useEffect(() => setCountry(nationality), [nationality]);
 
-  // console.log(countries);
   // useEffect(() => {
   //   const err = personalInfoValidation({
   //     firstName,
@@ -57,29 +62,29 @@ const PersonalInfoForm = () => {
   //   stateOfOrigin,
   // ]);
 
-  // const validateInput = (key: string, value: string) => {
-  //   console.log(personalInfoFieldValidation(key, value), key, value);
-  //   setError((prev) => ({
-  //     ...prev,
-  //     ...personalInfoFieldValidation(key, value),
-  //   }));
-  // };
+  const validateInput = (key: string, value: string | string[]) => {
+    console.log(personalInfoFieldValidation(key, value), key, value);
+    setError((prev) => ({
+      ...prev,
+      ...personalInfoFieldValidation(key, value),
+    }));
+  };
 
-  // const proceed = () => {
-  //   const err = personalInfoValidation({
-  //     firstName,
-  //     middleName,
-  //     lastName,
-  //     gender,
-  //   });
+  const proceed = () => {
+    const err = personalInfoValidation({
+      firstName,
+      middleName,
+      lastName,
+      gender,
+    });
 
-  //   if (Object.keys(err).length) {
-  //     setError(err);
-  //     return;
-  //   }
-  //   setError({});
-  //   if (step < totalSteps) setStep(step + 1);
-  // };
+    if (Object.keys(err).length) {
+      setError(err);
+      return;
+    }
+    setError({});
+    if (step < totalSteps) setStep(step + 1);
+  };
 
   return (
     <>
@@ -91,12 +96,7 @@ const PersonalInfoForm = () => {
           First Name
         </label>
         <div className="mt-2">
-          <SelectField
-            list={countries}
-            value={val}
-            onSelect={(arg: string[]) => setVal(arg)}
-          />
-          {/* <CustomField
+          <CustomField
             error={error.firstName}
             onBlur={() => validateInput('firstName', firstName)}
             field="input"
@@ -106,11 +106,11 @@ const PersonalInfoForm = () => {
             id="first-name"
             placeholder="Enter your first name"
             icon={null}
-          /> */}
+          />
         </div>
       </div>
 
-      {/* <div>
+      <div>
         <label
           htmlFor="middle-name"
           className="block text-sm font-medium leading-6 text-gray-900"
@@ -162,7 +162,14 @@ const PersonalInfoForm = () => {
           Gender
         </label>
         <div className="mt-2">
-          <CustomField
+          <SelectField
+            list={['male', 'female', 'test']}
+            value={gender}
+            onSelect={setGender}
+            onBlur={() => validateInput('gender', gender)}
+            error={error.gender}
+          />
+          {/* <CustomField
             error={error.gender}
             onBlur={() => validateInput('gender', gender)}
             field="select"
@@ -178,7 +185,7 @@ const PersonalInfoForm = () => {
                 </CustomField.Dropdown>
               ))}
             </CustomField.DropdownWrapper>
-          </CustomField>
+          </CustomField> */}
         </div>
       </div>
 
@@ -246,15 +253,15 @@ const PersonalInfoForm = () => {
             </CustomField.DropdownWrapper>
           </CustomField>
         </div>
-      </div> */}
-      {/* <PrevNextBtn
+      </div>
+      <PrevNextBtn
         disablePrev={step === 1}
         disableNext={step === totalSteps}
         prevAction={() => step > 1 && setStep(step - 1)}
         nextAction={() => {
           proceed();
         }}
-      /> */}
+      />
     </>
   );
 };
