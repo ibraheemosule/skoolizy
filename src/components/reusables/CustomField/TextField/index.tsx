@@ -21,7 +21,9 @@ const TextField = ({ error, icon, ...props }: TTextField) => {
   return (
     <div className="flex h-full relative">
       <div
-        className={`w-full cursor-pointer bg-white items-center border ${
+        className={`w-full cursor-pointer ${
+          props.disabled ? 'bg-gray-200' : 'bg-white cursor-pointer'
+        } items-center border ${
           error ? 'border-pink-800' : 'border-gray-200'
         }  rounded-lg overflow-hidden`}
       >
