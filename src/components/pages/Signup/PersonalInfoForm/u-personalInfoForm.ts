@@ -116,4 +116,14 @@ export const personalInfoFieldValidation = (
   //   }
 };
 
-export const test = {};
+export const personalInfoInitialState = {
+  first_name: '',
+  middle_name: '',
+  last_name: '',
+  gender: '',
+  nationality: '',
+  state_of_origin: '',
+  date_of_birth: '',
+};
+
+export const personalInfoOptionalFields = ['middle_name'];

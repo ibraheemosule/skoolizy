@@ -1,59 +1,24 @@
-import { memo, useEffect, useState } from 'react';
-import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
+import { memo } from 'react';
 import PrevNextBtn from '~components/reusables/PrevNextBtn';
-import { useSignupContext } from '../u-signup';
-import { personalInfoFieldValidation } from './u-personalInfoForm';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import DateTimeField from '~components/reusables/CustomField/DateTimeField';
 import TextField from '~components/reusables/CustomField/TextField';
-import useBulkState from '~components/reusables/hooks/useBulkState';
 
-const initialState = {
-  first_name: '',
-  middle_name: '',
-  last_name: '',
-  gender: '',
-  nationality: '',
-  state_of_origin: '',
-  date_of_birth: '',
-};
-
-const optionalFields = ['middle_name'];
+import usePersonalInfoForm from './usePersonalInfoForm';
 
 const PersonalInfoForm = () => {
   const {
     countries,
-    isLoading: fetchingCountry,
+    fetchingCountry,
     states,
-    setCountry,
-  } = useGetCountriesAndState();
-
-  const [state, setState] = useBulkState<{
-    [key: string]: string | Date;
-  }>({
-    ...initialState,
-  });
-
-  const { step, setStep, totalSteps } = useSignupContext();
-  const [error, setError] = useState<{ [key: string]: string }>({
-    ...initialState,
-  });
-
-  useEffect(() => setCountry(String(state.nationality)), [state.nationality]);
-
-  const validateInput = (key: string, value: string | string[]) => {
-    setError((prev) => ({
-      ...prev,
-      ...personalInfoFieldValidation(key, value),
-    }));
-  };
-
-  const disableNextBtn =
-    step === totalSteps ||
-    !!Object.values(error).filter(Boolean).length ||
-    !!Object.entries(state).filter(
-      ([key, val]) => !optionalFields.includes(key) && !val
-    ).length;
+    setState,
+    setStep,
+    validateInput,
+    disableNextBtn,
+    state,
+    error,
+    step,
+  } = usePersonalInfoForm();
 
   return (
     <>
