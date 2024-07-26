@@ -18,6 +18,7 @@ const PersonalInfoForm = () => {
     state,
     error,
     step,
+    proceed,
   } = usePersonalInfoForm();
 
   return (
@@ -156,7 +157,7 @@ const PersonalInfoForm = () => {
         disablePrev={step === 1}
         disableNext={disableNextBtn}
         prevAction={() => setStep(step - 1)}
-        nextAction={() => setStep(step + 1)}
+        nextAction={proceed}
       />
     </>
   );

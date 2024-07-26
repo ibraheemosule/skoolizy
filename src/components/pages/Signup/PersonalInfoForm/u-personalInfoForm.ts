@@ -1,14 +1,6 @@
 import { capitalizeChar, onlyAlphabet } from '~utils/format';
 
 export const optional = ['middleName'];
-export const required = [
-  'firstName',
-  'lastName',
-  'gender',
-  'date_of_birth',
-  'nationality',
-  'state_of_origin',
-];
 
 export const personalInfoFieldValidation = (
   key: string,

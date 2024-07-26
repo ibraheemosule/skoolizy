@@ -4,6 +4,7 @@ import { SignupContext } from './u-signup';
 import logo from '~assets/images/logo.png';
 import PersonalInfoForm from './PersonalInfoForm';
 import ContactInfoForm from './ContactInfoForm';
+import useBulkState from '~components/reusables/hooks/useBulkState';
 
 const steps = {
   1: 'Personal Info',
@@ -14,18 +15,21 @@ const totalSteps = Object.keys(steps).length;
 
 const Signup = () => {
   const [step, setStep] = useState(1);
+  const [signupDetails, setSignupDetails] = useBulkState({});
 
-  const state = useMemo(
+  const values = useMemo(
     () => ({
       step,
       setStep,
       totalSteps,
+      signupDetails,
+      setSignupDetails,
     }),
     [step]
   );
 
   return (
-    <SignupContext.Provider value={state}>
+    <SignupContext.Provider value={values}>
       <section className="flex _full flex-wrap fixed inset-0 xlg:flex-nowrap overflow-auto xlg:overflow-hidden gap-6">
         <div className="w-full xlg:w-1/2 py-8 overflow-auto">
           <div className="mx-auto w-full max-w-sm xlg:w-96">

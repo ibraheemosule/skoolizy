@@ -4,6 +4,8 @@ export const SignupContext = createContext<{
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   totalSteps: number;
+  signupDetails: { [key: string]: string | undefined | Date };
+  setSignupDetails: Dispatch<{ [key: string]: string | undefined | Date }>;
 } | null>(null);
 
 export const useSignupContext = () => {

@@ -9,6 +9,8 @@ import {
 } from './u-personalInfoForm';
 
 const usePersonalInfoForm = () => {
+  const { step, setStep, totalSteps, signupDetails, setSignupDetails } =
+    useSignupContext();
   const {
     countries,
     isLoading: fetchingCountry,
@@ -19,10 +21,15 @@ const usePersonalInfoForm = () => {
   const [state, setState] = useBulkState<{
     [key: string]: string | Date;
   }>({
-    ...personalInfoInitialState,
+    first_name: signupDetails.first_name || '',
+    middle_name: signupDetails.middle_name || '',
+    last_name: signupDetails.last_name || '',
+    gender: signupDetails.gender || '',
+    nationality: signupDetails.nationality || '',
+    state_of_origin: signupDetails.state_of_origin || '',
+    date_of_birth: signupDetails.date_of_birth || '',
   });
 
-  const { step, setStep, totalSteps } = useSignupContext();
   const [error, setError] = useState<{ [key: string]: string }>({
     ...personalInfoInitialState,
   });
@@ -34,6 +41,11 @@ const usePersonalInfoForm = () => {
       ...prev,
       ...personalInfoFieldValidation(key, value),
     }));
+  };
+
+  const proceed = () => {
+    setSignupDetails(state);
+    setStep(step + 1);
   };
 
   const disableNextBtn =
@@ -54,6 +66,7 @@ const usePersonalInfoForm = () => {
     state,
     error,
     step,
+    proceed,
   };
 };
 
