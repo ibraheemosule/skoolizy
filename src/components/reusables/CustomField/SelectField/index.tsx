@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Icon from '~assets/Icons';
 import { Tag } from '~components/reusables/ui/Others';
 import Dropdown from '../DropdownWrapper/Dropdown';
@@ -10,6 +10,7 @@ type TSelectField = {
   error?: string;
   placeholder?: string;
   onBlur?: () => void;
+  disabled?: boolean;
   list: (string | number)[] | { [key: string | number]: string | number };
 } & (
   | { value: string; onSelect: (e: string) => void }
@@ -60,7 +61,7 @@ const DropdownWrapper = ({
     };
   }, [value]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     listRef.current = isListArray ? list : Object.keys(list);
     setFilteredList(listRef.current);
   }, [list]);
@@ -139,6 +140,7 @@ const SelectField = ({
   list,
   dropdownElement,
   onBlur,
+  disabled,
 }: TSelectField) => {
   const elementRef = useRef<HTMLDivElement | HTMLInputElement>(null);
   const [toggle, setToggle] = useState(false);
@@ -147,6 +149,7 @@ const SelectField = ({
   const toggleDropdown = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent
   ) => {
+    if (disabled) return;
     if (!elementRef.current?.contains(e.target as Node)) {
       setToggle(false);
       return;
@@ -164,7 +167,7 @@ const SelectField = ({
     return () => {
       document.removeEventListener('click', toggleDropdown);
     };
-  }, []);
+  }, [disabled]);
 
   const emptyValue = (
     <span className="text-gray-400">{placeholder || 'Select..'}</span>
@@ -187,14 +190,17 @@ const SelectField = ({
   return (
     <div className="flex h-full relative" ref={elementRef}>
       <div
-        className={`relative w-full cursor-pointer bg-white flex items-center border  ${
-          error ? 'border-pink-800' : 'border-gray-200'
-        }  rounded-lg overflow-hidden`}
+        className={`relative w-full  ${
+          disabled ? 'bg-gray-200' : 'bg-white cursor-pointer'
+        } 
+       flex items-center border  ${
+         error ? 'border-pink-800' : 'border-gray-200'
+       }  rounded-lg overflow-hidden`}
       >
         <div
           data-testid="custom-select"
           tabIndex={0}
-          className={` first-letter:uppercase appearance-none outline-none max-w-full cursor-pointer grow ${
+          className={` first-letter:uppercase appearance-none outline-none max-w-full grow ${
             multiselect ? 'flex gap-2 overflow-x-auto max-w-full p-2' : 'p-2'
           }`}
         >

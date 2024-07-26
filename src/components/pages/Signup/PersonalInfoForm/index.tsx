@@ -1,33 +1,34 @@
-import { memo, useEffect, useState } from 'react';
+import { Dispatch, memo, useEffect, useReducer, useState } from 'react';
 import CustomField from '~components/reusables/CustomField';
-import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
 import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
 import PrevNextBtn from '~components/reusables/PrevNextBtn';
 import { useSignupContext } from '../u-signup';
-import {
-  personalInfoValidation,
-  personalInfoFieldValidation,
-} from './u-personalInfoForm';
+import { personalInfoFieldValidation } from './u-personalInfoForm';
 import SelectField from '~components/reusables/CustomField/SelectField';
+import DateTimeField from '~components/reusables/CustomField/DateTimeField';
+
+const initialState = {
+  first_name: '',
+  middle_name: '',
+  last_name: '',
+  gender: '',
+  nationality: '',
+  state_of_origin: '',
+  date_of_birth: '',
+};
+
+const optionalFields = ['middle_name'];
+
+const useBulkState = <T,>(initialState: T): [T, Dispatch<Partial<T>>] => {
+  const [state, setState] = useReducer(
+    (state: T, newState: Partial<T>) => ({ ...state, ...newState }),
+    initialState
+  );
+
+  return [state, setState];
+};
 
 const PersonalInfoForm = () => {
-  const { step, setStep, totalSteps } = useSignupContext();
-  const [error, setError] = useState<{ [key: string]: string }>({});
-  // const [firstName, setFirstName] = useCustomField('');
-  const [middleName, setMiddleName] = useCustomField('');
-  const [lastName, setLastName] = useCustomField('');
-  // const [gender, setGender, list, filterFn] = useCustomField(
-  //   [],
-  //   ['male', 'female', 'telling']
-  // );
-  const [gender, setGender] = useState<string>('');
-  const [nationality, setNationality, countryList, filterCountryFn] =
-    useCustomField('', []);
-  const [stateOfOrigin, setStateOfOrigin, stateList, filterStateFn] =
-    useCustomField('', []);
-  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
-  const [firstName, setFirstName] = useState('');
-
   const {
     countries,
     isLoading: fetchingCountry,
@@ -35,32 +36,18 @@ const PersonalInfoForm = () => {
     setCountry,
   } = useGetCountriesAndState();
 
-  useEffect(() => {
-    filterCountryFn(countries);
-  }, [countries.length]);
+  const [state, setState] = useBulkState<{
+    [key: string]: string | Date;
+  }>({
+    ...initialState,
+  });
 
-  useEffect(() => {
-    filterStateFn(states);
-  }, [states.length]);
+  const { step, setStep, totalSteps } = useSignupContext();
+  const [error, setError] = useState<{ [key: string]: string }>({
+    ...initialState,
+  });
 
-  useEffect(() => setCountry(nationality), [nationality]);
-
-  // useEffect(() => {
-  //   const err = personalInfoValidation({
-  //     firstName,
-  //     middleName,
-  //     lastName,
-  //     gender,
-  //   });
-  // }, [
-  //   firstName,
-  //   middleName,
-  //   lastName,
-  //   gender,
-  //   dateOfBirth,
-  //   nationality,
-  //   stateOfOrigin,
-  // ]);
+  useEffect(() => setCountry(String(state.nationality)), [state.nationality]);
 
   const validateInput = (key: string, value: string | string[]) => {
     setError((prev) => ({
@@ -69,20 +56,23 @@ const PersonalInfoForm = () => {
     }));
   };
 
-  const proceed = () => {
-    const err = personalInfoValidation({
-      firstName,
-      middleName,
-      lastName,
-      gender,
-    });
+  const disableNextBtn =
+    step === totalSteps ||
+    !!Object.values(error).filter(Boolean).length ||
+    !!Object.entries(state).filter(
+      ([key, val]) => !optionalFields.includes(key) && !val
+    ).length;
 
-    if (Object.keys(err).length) {
-      setError(err);
-      return;
+  const proceed = () => {
+    if (step < totalSteps && !Object.values(error).filter(Boolean).length) {
+      setStep(step + 1);
     }
-    setError({});
-    if (step < totalSteps) setStep(step + 1);
+    console.log(
+      'toutesting here',
+      step,
+      totalSteps,
+      !!Object.values(error).filter((v) => !!v).length
+    );
   };
 
   return (
@@ -96,11 +86,11 @@ const PersonalInfoForm = () => {
         </label>
         <div className="mt-2">
           <CustomField
-            error={error.firstName}
-            onBlur={() => validateInput('firstName', firstName)}
+            error={error.first_name}
+            onBlur={() => validateInput('first_name', String(state.first_name))}
             field="input"
-            value={firstName}
-            onChange={setFirstName}
+            value={String(state.first_name)}
+            onChange={(arg: string) => setState({ first_name: arg })}
             type="text"
             id="first-name"
             placeholder="Enter your first name"
@@ -118,11 +108,14 @@ const PersonalInfoForm = () => {
         </label>
         <div className="mt-2">
           <CustomField
-            error={error.middleName}
-            onBlur={() => middleName && validateInput('middleName', middleName)}
+            error={error.middle_name}
+            onBlur={() =>
+              state.middle_name &&
+              validateInput('middle_name', String(state.middle_name))
+            }
             field="input"
-            value={middleName}
-            onChange={setMiddleName}
+            value={state.middle_name as string}
+            onChange={(arg: string) => setState({ middle_name: arg })}
             type="text"
             id="middle-name"
             placeholder="Enter your middle name"
@@ -140,11 +133,11 @@ const PersonalInfoForm = () => {
         </label>
         <div className="mt-2">
           <CustomField
-            error={error.lastName}
-            onBlur={() => validateInput('lastName', lastName)}
+            error={error.last_name}
+            onBlur={() => validateInput('last_name', String(state.last_name))}
             field="input"
-            value={lastName}
-            onChange={setLastName}
+            value={String(state.last_name)}
+            onChange={(arg: string) => setState({ last_name: arg })}
             type="text"
             id="last-name"
             placeholder="Enter your last name"
@@ -162,29 +155,12 @@ const PersonalInfoForm = () => {
         </label>
         <div className="mt-2">
           <SelectField
-            list={['male', 'female', 'test']}
-            value={gender}
-            onSelect={setGender}
-            onBlur={() => validateInput('gender', gender)}
+            list={['male', 'female']}
+            value={String(state.gender)}
+            onSelect={(arg: string) => setState({ gender: arg })}
+            onBlur={() => validateInput('gender', String(state.gender))}
             error={error.gender}
           />
-          {/* <CustomField
-            error={error.gender}
-            onBlur={() => validateInput('gender', gender)}
-            field="select"
-            value={gender}
-            onSelect={setGender}
-            filterFn={filterFn}
-            placeholder="Select your Gender"
-          >
-            <CustomField.DropdownWrapper>
-              {list.map((v) => (
-                <CustomField.Dropdown value={v} key={v}>
-                  <span className="p-2 capitalize block">{v}</span>
-                </CustomField.Dropdown>
-              ))}
-            </CustomField.DropdownWrapper>
-          </CustomField> */}
         </div>
       </div>
 
@@ -196,15 +172,15 @@ const PersonalInfoForm = () => {
           Date of Birth
         </label>
         <div className="mt-2">
-          <CustomField
-            field="date-time"
-            onChange={(arg: Date | null) => setDateOfBirth(arg)}
-            value={dateOfBirth}
-            format="dd/MM/yyyy"
-            dayPlaceholder="DD"
-            monthPlaceholder="MM"
-            yearPlaceholder="YYYY"
-            calendarIcon={null}
+          <DateTimeField
+            error={error.date_of_birth}
+            onChange={(arg: Date | null) =>
+              arg && setState({ date_of_birth: arg })
+            }
+            value={state.date_of_birth}
+            onBlur={() =>
+              validateInput('date_of_birth', String(state.date_of_birth))
+            }
           />
         </div>
       </div>
@@ -214,21 +190,16 @@ const PersonalInfoForm = () => {
           Nationality
         </label>
         <div className="mt-2">
-          <CustomField
-            field="input"
-            value={nationality}
-            filterFn={filterCountryFn}
-            onChange={setNationality}
-            placeholder="Choose your nationality"
-          >
-            <CustomField.DropdownWrapper loading={fetchingCountry} width={100}>
-              {countryList.map((v) => (
-                <CustomField.Dropdown value={v} key={v}>
-                  <span className="p-2 capitalize block">{v}</span>
-                </CustomField.Dropdown>
-              ))}
-            </CustomField.DropdownWrapper>
-          </CustomField>
+          <SelectField
+            list={countries}
+            value={String(state.nationality)}
+            onSelect={(arg: string) => setState({ nationality: arg })}
+            onBlur={() =>
+              validateInput('nationality', String(state.nationality))
+            }
+            error={error.nationality}
+            loading={fetchingCountry}
+          />
         </div>
       </div>
       <div>
@@ -236,26 +207,21 @@ const PersonalInfoForm = () => {
           State of Origin
         </label>
         <div className="mt-2">
-          <CustomField
-            field="input"
-            value={stateOfOrigin}
-            onChange={setStateOfOrigin}
-            filterFn={filterStateFn}
-            placeholder="Select your State of origin"
-          >
-            <CustomField.DropdownWrapper>
-              {stateList.map((v) => (
-                <CustomField.Dropdown value={v} key={v}>
-                  <span className="p-2 capitalize block">{v}</span>
-                </CustomField.Dropdown>
-              ))}
-            </CustomField.DropdownWrapper>
-          </CustomField>
+          <SelectField
+            list={states}
+            value={String(state.state_of_origin)}
+            onSelect={(arg: string) => setState({ state_of_origin: arg })}
+            onBlur={() =>
+              validateInput('state_of_origin', String(state.state_of_origin))
+            }
+            error={error.state_of_origin}
+            disabled={!state.nationality}
+          />
         </div>
       </div>
       <PrevNextBtn
         disablePrev={step === 1}
-        disableNext={step === totalSteps}
+        disableNext={disableNextBtn}
         prevAction={() => step > 1 && setStep(step - 1)}
         nextAction={() => {
           proceed();

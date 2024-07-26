@@ -1,5 +1,4 @@
-import { onlyAlphabet } from '~utils/format';
-import popup from '~utils/popup';
+import { capitalizeChar, onlyAlphabet } from '~utils/format';
 
 export const optional = ['middleName'];
 export const required = [
@@ -10,19 +9,6 @@ export const required = [
   'nationality',
   'state_of_origin',
 ];
-
-export const personalInfoValidation = (fields: { [key: string]: string }) => {
-  const error: { [key: string]: string } = {};
-
-  Object.keys(fields).forEach((field) => {
-    if (optional.includes(field)) return;
-    if (!fields[field]?.length) error[field] = `${field} is required`;
-  });
-
-  if (Object.keys(error).length) popup('error', 'Some Fields are invalid');
-
-  return error;
-};
 
 export const personalInfoFieldValidation = (
   key: string,
@@ -55,23 +41,25 @@ export const personalInfoFieldValidation = (
   //   }
 
   switch (key) {
-    case 'firstName':
-    case 'lastName':
-    case 'middleName':
-      if (key === 'middleName' && !value) break;
-      if (!value) error[key] = `${key.split('N').join(' n')} is required`;
+    case 'first_name':
+    case 'last_name':
+    case 'middle_name':
+      if (key === 'middle_name' && !value) break;
+      if (!value) error[key] = `${capitalizeChar(key)} is required`;
       else if (!onlyAlphabet(String(value))) {
-        error[key] = 'Name should contain only letters';
+        error[key] = `${capitalizeChar(key)} should contain only letters`;
       } else if (value.length < 3) {
-        error[key] = `${key.split('N').join(' n')} is too short`;
+        error[key] = `${capitalizeChar(key)} is too short`;
       } else if (value.length > 25) {
-        error[key] = `${key.split('N').join(' n')} is too long`;
+        error[key] = `${capitalizeChar(key)} is too long`;
       }
       break;
 
     case 'gender':
-      if (!value.length) error.gender = 'Gender is required';
-
+    case 'nationality':
+    case 'state_of_origin':
+    case 'date_of_birth':
+      if (!value.length) error[key] = `${capitalizeChar(key)} is required`;
       break;
 
     default:
