@@ -12,7 +12,7 @@ const usePersonalInfoForm = () => {
   const {
     countries,
     isLoading: fetchingCountry,
-    states,
+    states: countryStates,
     setCountry,
   } = useGetCountriesAndState();
 
@@ -46,7 +46,7 @@ const usePersonalInfoForm = () => {
   return {
     countries,
     fetchingCountry,
-    states,
+    countryStates,
     setState,
     setStep,
     validateInput,

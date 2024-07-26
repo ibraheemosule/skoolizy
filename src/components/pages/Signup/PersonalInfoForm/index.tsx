@@ -10,7 +10,7 @@ const PersonalInfoForm = () => {
   const {
     countries,
     fetchingCountry,
-    states,
+    countryStates,
     setState,
     setStep,
     validateInput,
@@ -141,7 +141,7 @@ const PersonalInfoForm = () => {
         </label>
         <div className="mt-2">
           <SelectField
-            list={states}
+            list={countryStates}
             value={String(state.state_of_origin)}
             onSelect={(arg: string) => setState({ state_of_origin: arg })}
             onBlur={() =>
