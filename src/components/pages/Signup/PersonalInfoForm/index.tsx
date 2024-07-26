@@ -1,4 +1,4 @@
-import { Dispatch, memo, useEffect, useReducer, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
 import PrevNextBtn from '~components/reusables/PrevNextBtn';
 import { useSignupContext } from '../u-signup';
@@ -6,6 +6,7 @@ import { personalInfoFieldValidation } from './u-personalInfoForm';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import DateTimeField from '~components/reusables/CustomField/DateTimeField';
 import TextField from '~components/reusables/CustomField/TextField';
+import useBulkState from '~components/reusables/hooks/useBulkState';
 
 const initialState = {
   first_name: '',
@@ -18,15 +19,6 @@ const initialState = {
 };
 
 const optionalFields = ['middle_name'];
-
-const useBulkState = <T,>(initialState: T): [T, Dispatch<Partial<T>>] => {
-  const [state, setState] = useReducer(
-    (state: T, newState: Partial<T>) => ({ ...state, ...newState }),
-    initialState
-  );
-
-  return [state, setState];
-};
 
 const PersonalInfoForm = () => {
   const {
@@ -62,18 +54,6 @@ const PersonalInfoForm = () => {
     !!Object.entries(state).filter(
       ([key, val]) => !optionalFields.includes(key) && !val
     ).length;
-
-  const proceed = () => {
-    if (step < totalSteps && !Object.values(error).filter(Boolean).length) {
-      setStep(step + 1);
-    }
-    console.log(
-      'toutesting here',
-      step,
-      totalSteps,
-      !!Object.values(error).filter((v) => !!v).length
-    );
-  };
 
   return (
     <>
@@ -210,10 +190,8 @@ const PersonalInfoForm = () => {
       <PrevNextBtn
         disablePrev={step === 1}
         disableNext={disableNextBtn}
-        prevAction={() => step > 1 && setStep(step - 1)}
-        nextAction={() => {
-          proceed();
-        }}
+        prevAction={() => setStep(step - 1)}
+        nextAction={() => setStep(step + 1)}
       />
     </>
   );
