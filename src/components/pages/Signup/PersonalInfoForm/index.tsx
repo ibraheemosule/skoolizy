@@ -1,11 +1,11 @@
 import { Dispatch, memo, useEffect, useReducer, useState } from 'react';
-import CustomField from '~components/reusables/CustomField';
 import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
 import PrevNextBtn from '~components/reusables/PrevNextBtn';
 import { useSignupContext } from '../u-signup';
 import { personalInfoFieldValidation } from './u-personalInfoForm';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import DateTimeField from '~components/reusables/CustomField/DateTimeField';
+import TextField from '~components/reusables/CustomField/TextField';
 
 const initialState = {
   first_name: '',
@@ -85,16 +85,12 @@ const PersonalInfoForm = () => {
           First Name
         </label>
         <div className="mt-2">
-          <CustomField
+          <TextField
             error={error.first_name}
-            onBlur={() => validateInput('first_name', String(state.first_name))}
-            field="input"
             value={String(state.first_name)}
-            onChange={(arg: string) => setState({ first_name: arg })}
-            type="text"
-            id="first-name"
+            onChange={(e) => setState({ first_name: e.target.value })}
+            onBlur={() => validateInput('first_name', String(state.first_name))}
             placeholder="Enter your first name"
-            icon={null}
           />
         </div>
       </div>
@@ -107,19 +103,15 @@ const PersonalInfoForm = () => {
           Middle Name
         </label>
         <div className="mt-2">
-          <CustomField
+          <TextField
             error={error.middle_name}
             onBlur={() =>
               state.middle_name &&
               validateInput('middle_name', String(state.middle_name))
             }
-            field="input"
-            value={state.middle_name as string}
-            onChange={(arg: string) => setState({ middle_name: arg })}
-            type="text"
-            id="middle-name"
+            value={String(state.middle_name)}
+            onChange={(e) => setState({ middle_name: e.target.value })}
             placeholder="Enter your middle name"
-            icon={null}
           />
         </div>
       </div>
@@ -132,16 +124,12 @@ const PersonalInfoForm = () => {
           Last Name
         </label>
         <div className="mt-2">
-          <CustomField
+          <TextField
             error={error.last_name}
             onBlur={() => validateInput('last_name', String(state.last_name))}
-            field="input"
             value={String(state.last_name)}
-            onChange={(arg: string) => setState({ last_name: arg })}
-            type="text"
-            id="last-name"
+            onChange={(e) => setState({ last_name: e.target.value })}
             placeholder="Enter your last name"
-            icon={null}
           />
         </div>
       </div>

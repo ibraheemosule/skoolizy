@@ -4,7 +4,6 @@ import { useCustomFieldContext } from '../hooks-custom-field/useCustomFieldConte
 const Editable = () => {
   const {
     onChange,
-    filterFn,
     value,
     type,
     id,
@@ -12,7 +11,7 @@ const Editable = () => {
     placeholder,
     pattern,
     error,
-    icon = filterFn ? 'caretDown' : 'search',
+    icon,
   } = useCustomFieldContext();
 
   const isDate = ['month', 'week', 'date', 'time'].includes(type || '');
@@ -32,9 +31,7 @@ const Editable = () => {
         autoComplete="true"
         onChange={(e) => {
           onChange?.(e.target.value);
-          filterFn?.(e.target.value);
         }}
-        onBlur={(e) => filterFn?.(e.target.value, onChange)}
         value={value as string}
         type={type ?? (search ? 'search' : 'text')}
         placeholder={placeholder || 'Search...'}
