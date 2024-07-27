@@ -18,7 +18,7 @@ const ContactInfoForm = () => {
         >
           Email address
         </label>
-        <div className="mt-2">
+        <div>
           <CustomField
             field="input"
             value={email}
@@ -38,7 +38,7 @@ const ContactInfoForm = () => {
         >
           Phone Number
         </label>
-        <div className="mt-2">
+        <div>
           <CustomField
             field="input"
             value={email}
@@ -59,7 +59,7 @@ const ContactInfoForm = () => {
         >
           Password
         </label>
-        <div className="mt-2">
+        <div>
           <CustomField
             field="input"
             value={password}
@@ -79,7 +79,7 @@ const ContactInfoForm = () => {
         >
           Re-enter Password
         </label>
-        <div className="mt-2">
+        <div>
           <CustomField
             field="input"
             value={password}

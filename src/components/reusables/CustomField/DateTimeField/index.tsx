@@ -14,6 +14,7 @@ const DateTimeField = ({
       monthPlaceholder="MM"
       yearPlaceholder="YYYY"
       calendarIcon={null}
+      clearIcon={null}
       {...props}
     />
 

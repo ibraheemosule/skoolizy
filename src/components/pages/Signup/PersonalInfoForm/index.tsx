@@ -30,7 +30,7 @@ const PersonalInfoForm = () => {
         >
           First Name
         </label>
-        <div className="mt-2">
+        <div>
           <TextField
             error={error.first_name}
             value={String(state.first_name)}
@@ -48,7 +48,7 @@ const PersonalInfoForm = () => {
         >
           Middle Name
         </label>
-        <div className="mt-2">
+        <div>
           <TextField
             error={error.middle_name}
             onBlur={() =>
@@ -69,7 +69,7 @@ const PersonalInfoForm = () => {
         >
           Last Name
         </label>
-        <div className="mt-2">
+        <div>
           <TextField
             error={error.last_name}
             onBlur={() => validateInput('last_name', String(state.last_name))}
@@ -87,7 +87,7 @@ const PersonalInfoForm = () => {
         >
           Gender
         </label>
-        <div className="mt-2">
+        <div>
           <SelectField
             list={['male', 'female']}
             value={String(state.gender)}
@@ -105,7 +105,7 @@ const PersonalInfoForm = () => {
         >
           Date of Birth
         </label>
-        <div className="mt-2">
+        <div>
           <DateTimeField
             error={error.date_of_birth}
             onChange={(arg: Date | null) =>
@@ -123,7 +123,7 @@ const PersonalInfoForm = () => {
         <label className="block text-sm font-medium leading-6 text-gray-900">
           Nationality
         </label>
-        <div className="mt-2">
+        <div>
           <SelectField
             list={countries}
             value={String(state.nationality)}
@@ -141,7 +141,7 @@ const PersonalInfoForm = () => {
         <label className="block text-sm font-medium leading-6 text-gray-900">
           State of Origin
         </label>
-        <div className="mt-2">
+        <div>
           <SelectField
             list={countryStates}
             value={String(state.state_of_origin)}
