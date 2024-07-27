@@ -136,6 +136,7 @@ const PersonalInfoForm = () => {
           />
         </div>
       </div>
+
       <div>
         <label className="block text-sm font-medium leading-6 text-gray-900">
           State of Origin

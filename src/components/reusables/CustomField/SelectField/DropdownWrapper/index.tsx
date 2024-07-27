@@ -65,23 +65,24 @@ const DropdownWrapper = ({
       onClick={(e) => multiselect && e.stopPropagation()}
       className={`dropdown ${
         toggle ? '' : 'hidden'
-      } min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg max-h-[300px] overflow-y-auto`}
+      } min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg`}
       style={{ minWidth: width || 'max-content' }}
     >
       {listRef.current?.length > 10 && (
-        <Dropdown value={null}>
-          <div
-            className="pt-2 pb-4 px-1 bg-white"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search"
-              className="dropdown-search w-full rounded-md p-3 outline-none border-0 bg-gray-100"
-            />
-          </div>
-        </Dropdown>
+        <div
+          className="pt-2 pb-4 px-1 bg-white relative"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search"
+            className="dropdown-search w-full rounded-md p-3 outline-none border-0 bg-gray-100 pl-8"
+          />
+          <span className="absolute left-3 top-1/2 -translate-y-2/3">
+            <Icon name="search" height={18} width={18} stroke="#9ca3af" />
+          </span>
+        </div>
       )}
       {loading ? (
         <div className="bg-white">
@@ -94,16 +95,18 @@ const DropdownWrapper = ({
           />
         </div>
       ) : filteredList?.length ? (
-        filteredList.map((v: string | number) => (
-          <Dropdown
-            key={v}
-            value={v}
-            fieldValue={value}
-            onSelect={handleSelect}
-          >
-            {content(isListArray ? v : list[v])}
-          </Dropdown>
-        ))
+        <div className="max-h-[300px]  overflow-y-auto">
+          {filteredList.map((v: string | number) => (
+            <Dropdown
+              key={v}
+              value={v}
+              fieldValue={value}
+              onSelect={handleSelect}
+            >
+              {content(isListArray ? v : list[v])}
+            </Dropdown>
+          ))}
+        </div>
       ) : (
         !!list.length && (
           <div className="pt-1 pb-3 px-1 bg-white"> No Result</div>
