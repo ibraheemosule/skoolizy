@@ -49,6 +49,21 @@ const DropdownWrapper = ({
     setFilteredList(listRef.current);
   }, [list]);
 
+  useLayoutEffect(() => {
+    const dropdown = dropdownRef.current!;
+    const rect = dropdown.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+
+    if (spaceBelow < 150 && spaceAbove > 150) {
+      dropdown.style.top = 'auto';
+      dropdown.style.bottom = '100%';
+    } else {
+      dropdown.style.top = '100%';
+      dropdown.style.bottom = 'auto';
+    }
+  }, []);
+
   useEffect(() => {
     setFilteredList(
       listRef.current.filter((v) =>
@@ -65,7 +80,7 @@ const DropdownWrapper = ({
       onClick={(e) => multiselect && e.stopPropagation()}
       className={`dropdown ${
         toggle ? '' : 'hidden'
-      } min-w-max dropdown absolute text-center shadow border cursor-pointer mt-2 top-[90%] z-20 w-full rounded-lg`}
+      } min-w-max dropdown absolute text-center shadow border cursor-pointer my-2 z-20 w-full rounded-lg`}
       style={{ minWidth: width || 'max-content' }}
     >
       {listRef.current?.length > 10 && (
