@@ -156,7 +156,7 @@ const PersonalInfoForm = () => {
       </div>
       <PrevNextBtn
         disablePrev={step === 1}
-        disableNext={disableNextBtn}
+        disableNext={false && disableNextBtn}
         prevAction={() => setStep(step - 1)}
         nextAction={proceed}
       />

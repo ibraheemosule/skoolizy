@@ -50,3 +50,5 @@ export const dateToDbFormat = (date: Date | null) => {
     .split('/')
     .join('-');
 };
+
+export const onlyNumericInput = (str: string) => str.replace(/[^0-9]/g, '');

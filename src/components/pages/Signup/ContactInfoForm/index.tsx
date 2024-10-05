@@ -1,101 +1,93 @@
 import { memo } from 'react';
-import CustomField from '~components/reusables/CustomField';
 import PrevNextBtn from '~components/reusables/PrevNextBtn';
-import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
-import { useSignupContext } from '../u-signup';
+import TextField from '~components/reusables/CustomField/TextField';
+import useContactInfoForm from './useContactFormInfo';
+import { onlyNumericInput } from '~utils/format';
 
 const ContactInfoForm = () => {
-  const { step, setStep, totalSteps } = useSignupContext();
-  const [email, setEmail] = useCustomField('');
-  const [password, setPassword] = useCustomField('');
+  const {
+    setState,
+    setStep,
+    validateInput,
+    disableNextBtn,
+    state,
+    error,
+    step,
+    proceed,
+  } = useContactInfoForm();
 
   return (
     <>
       <div>
         <label
-          htmlFor="email"
+          htmlFor="first-name"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
-          Email address
+          Email
         </label>
         <div>
-          <CustomField
-            field="input"
-            value={email}
-            onChange={setEmail}
+          <TextField
             type="email"
-            id="email"
-            placeholder="Enter your email"
-            icon={null}
+            error={error.email}
+            value={String(state.email)}
+            onChange={(e) => setState({ email: e.target.value })}
+            onBlur={() => validateInput('email', String(state.email))}
+            placeholder="Enter your Email"
           />
         </div>
       </div>
 
       <div>
         <label
-          htmlFor="phone"
+          htmlFor="phone-number"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
           Phone Number
         </label>
         <div>
-          <CustomField
-            field="input"
-            value={email}
-            onChange={setEmail}
+          <TextField
             type="tel"
-            id="phone"
-            pattern="[0-9]+"
-            placeholder="Enter phone number"
-            icon={null}
+            id="phone-number"
+            error={error.phone_number}
+            onBlur={() =>
+              state.phone_number &&
+              validateInput('phone_number', String(state.phone_number))
+            }
+            value={String(state.phone_number)}
+            onChange={(e) =>
+              setState({ phone_number: onlyNumericInput(e.target.value) })
+            }
+            placeholder="Enter your Phone Number"
           />
         </div>
       </div>
 
       <div>
         <label
-          htmlFor="password"
+          htmlFor="home-address"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
-          Password
+          Home Address
         </label>
         <div>
-          <CustomField
-            field="input"
-            value={password}
-            onChange={setPassword}
-            placeholder="Create a password"
-            type="text"
-            icon={null}
-            id="email"
+          <TextField
+            id="home-address"
+            error={error.home_address}
+            onBlur={() =>
+              validateInput('home_address', String(state.home_address))
+            }
+            value={String(state.home_address)}
+            onChange={(e) => setState({ home_address: e.target.value })}
+            placeholder="Enter your last name"
           />
         </div>
       </div>
 
-      <div>
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium leading-6 text-gray-900"
-        >
-          Re-enter Password
-        </label>
-        <div>
-          <CustomField
-            field="input"
-            value={password}
-            onChange={setPassword}
-            placeholder="Retype password"
-            type="text"
-            icon={null}
-            id="email"
-          />
-        </div>
-      </div>
       <PrevNextBtn
         disablePrev={step === 1}
-        disableNext={step === totalSteps}
-        prevAction={() => step > 1 && setStep(step - 1)}
-        nextAction={() => step < totalSteps && setStep(step + 1)}
+        disableNext={disableNextBtn}
+        prevAction={() => setStep(step - 1)}
+        nextAction={proceed}
       />
     </>
   );

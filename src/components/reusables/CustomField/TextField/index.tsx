@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useEffect, useRef } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef } from 'react';
 import { TIconNames } from '~assets/Icons/IconNames';
 import Icon from '~assets/Icons';
 
@@ -6,6 +6,8 @@ type TTextField = InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
   icon?: TIconNames;
   onBlur?: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 };
 
 const TextField = ({ error, icon, ...props }: TTextField) => {
