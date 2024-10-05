@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import { memo } from 'react';
 
 import { IBaseProp } from '~src/shared-ts-types/react-types';

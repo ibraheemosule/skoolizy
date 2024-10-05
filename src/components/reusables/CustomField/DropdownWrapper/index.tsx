@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import { memo, Children, isValidElement, FC } from 'react';
 
 import Icon from '~src/assets/Icons';
