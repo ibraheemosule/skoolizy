@@ -4,7 +4,7 @@ import Highlights from './LatestFeeds';
 
 const AsideAdmin = () => (
   <>
-    <div className="mt-8 md:mt-0  max-w-sm">
+    <div className="mt-8 md:mt-0 max-w-md">
       <RateSomeone />
     </div>
     <div className="mt-8">

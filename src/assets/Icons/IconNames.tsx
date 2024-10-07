@@ -24,4 +24,10 @@ export type TIconNames =
   | 'plus'
   | 'info'
   | 'spinner'
-  | 'star';
+  | 'star'
+  | 'circledArrowRight'
+  | 'caretRightSolid'
+  | 'caretLeftSolid'
+  | 'twitter'
+  | 'github'
+  | 'eyeCancel';

@@ -232,12 +232,16 @@ const router = createBrowserRouter([
           }),
         ],
       }),
-      lazyLoad({
-        path: 'login',
-        url: () => import('~components/pages/Login'),
-      }),
     ],
   },
+  lazyLoad({
+    path: 'login',
+    url: () => import('~components/pages/Login'),
+  }),
+  lazyLoad({
+    path: 'signup',
+    url: () => import('~components/pages/Signup'),
+  }),
 ]);
 
 export default router;

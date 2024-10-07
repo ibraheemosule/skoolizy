@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { capitalizeChar } from '~src/utils';
+import { capCharRemoveUnderscore } from '~src/utils';
 import Menu from '~assets/Icons/MenuIcon';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
@@ -33,7 +33,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
               className="tracking-tight first:before:hidden before:content-['-'] before:mx-2 hover:text-purple.dark"
               to={route.slice(0, i + 1).join('/')}
             >
-              {capitalizeChar(r)}
+              {capCharRemoveUnderscore(r)}
             </NavLink>
           ))}
         </h2>

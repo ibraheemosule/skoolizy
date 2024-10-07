@@ -9,7 +9,7 @@ const Feeds = () => {
   const [modal, setModal] = useState('');
 
   return (
-    <section className="flex _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
+    <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
       <div className="w-full min-h-full lg:w-3/5 xl:w-8/12  shrink-0">
         <div className="flex flex-col md:h-full md:overflow-hidden">
           {modal === 'new' && <NewFeed closeModal={() => setModal('')} />}

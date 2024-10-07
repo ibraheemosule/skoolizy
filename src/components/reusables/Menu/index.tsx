@@ -53,7 +53,7 @@ type THorizontalNav = {
 };
 
 export const HorizontalNav = memo(({ nav, active }: THorizontalNav) => (
-  <nav className="classrooms-nav flex border-b overflow-x-auto border-gray-300 gap-4">
+  <nav className="classrooms-nav flex border-b overflow-x-auto border-gray-100 gap-4">
     {Object.entries(nav).map(([label, action]) => {
       const isRoute = typeof action === 'string';
       const Btn = isRoute ? NavLink : BaseBtn;

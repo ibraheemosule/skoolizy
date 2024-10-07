@@ -1,5 +1,5 @@
 import { List, ListItem } from '~components/reusables/List/List';
-import { capitalizeChar } from '~utils/format';
+import { capCharRemoveUnderscore } from '~utils/format';
 
 export const personal = {
   first_name: 'Tajudeen',
@@ -18,7 +18,11 @@ export const personal = {
 const Biodata = () => (
   <List>
     {Object.entries(personal).map(([key, value]) => (
-      <ListItem key={key} title={capitalizeChar(key)} description={value} />
+      <ListItem
+        key={key}
+        title={capCharRemoveUnderscore(key)}
+        description={value}
+      />
     ))}
   </List>
 );

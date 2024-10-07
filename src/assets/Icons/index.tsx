@@ -7,6 +7,41 @@ type TIcon = SVGAttributes<SVGElement>;
 const icons: {
   [key in TIconNames]: (prop: TIcon) => JSX.Element;
 } = {
+  eyeCancel: (props) => (
+    <svg viewBox="0 0 512 512" {...props}>
+      <path d="M432 448a15.92 15.92 0 01-11.31-4.69l-352-352a16 16 0 0122.62-22.62l352 352A16 16 0 01432 448zM255.66 384c-41.49 0-81.5-12.28-118.92-36.5-34.07-22-64.74-53.51-88.7-91v-.08c19.94-28.57 41.78-52.73 65.24-72.21a2 2 0 00.14-2.94L93.5 161.38a2 2 0 00-2.71-.12c-24.92 21-48.05 46.76-69.08 76.92a31.92 31.92 0 00-.64 35.54c26.41 41.33 60.4 76.14 98.28 100.65C162 402 207.9 416 255.66 416a239.13 239.13 0 0075.8-12.58 2 2 0 00.77-3.31l-21.58-21.58a4 4 0 00-3.83-1 204.8 204.8 0 01-51.16 6.47zM490.84 238.6c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.66 96a227.34 227.34 0 00-74.89 12.83 2 2 0 00-.75 3.31l21.55 21.55a4 4 0 003.88 1 192.82 192.82 0 0150.21-6.69c40.69 0 80.58 12.43 118.55 37 34.71 22.4 65.74 53.88 89.76 91a.13.13 0 010 .16 310.72 310.72 0 01-64.12 72.73 2 2 0 00-.15 2.95l19.9 19.89a2 2 0 002.7.13 343.49 343.49 0 0068.64-78.48 32.2 32.2 0 00-.1-34.78z" />
+      <path d="M256 160a95.88 95.88 0 00-21.37 2.4 2 2 0 00-1 3.38l112.59 112.56a2 2 0 003.38-1A96 96 0 00256 160zM165.78 233.66a2 2 0 00-3.38 1 96 96 0 00115 115 2 2 0 001-3.38z" />
+    </svg>
+  ),
+  github: (props) => (
+    <svg
+      width={20}
+      height={20}
+      className="h-5 w-5"
+      aria-hidden="true"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  twitter: (props) => (
+    <svg
+      width={20}
+      height={20}
+      aria-hidden="true"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      {...props}
+    >
+      <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+    </svg>
+  ),
   cancel: ({ color, height, width, stroke, strokeWidth }) => (
     <svg
       viewBox="0 0 24 24"
@@ -44,8 +79,14 @@ const icons: {
       />
     </svg>
   ),
-  search: ({ fill = 'currentColor', height = 24, width = 24 }) => (
-    <svg viewBox="0 0 24 24" height={height} width={width} fill={fill}>
+  search: ({ fill = 'currentColor', height = 24, width = 24, ...props }) => (
+    <svg
+      viewBox="0 0 24 24"
+      height={height}
+      width={width}
+      fill={fill}
+      {...props}
+    >
       <path
         fillRule="evenodd"
         d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
@@ -80,21 +121,15 @@ const icons: {
       />
     </svg>
   ),
-  eye: ({
-    style = {},
-    strokeWidth = 1.5,
-    stroke = 'currentColor',
-    height = 20,
-    width = 20,
-  }) => (
+  eye: (props) => (
     <svg
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={strokeWidth}
-      stroke={stroke}
-      height={height}
-      width={width}
-      style={style}
+      strokeWidth="1.5"
+      stroke="currentColor"
+      height="20"
+      width="20"
+      {...props}
     >
       <path
         strokeLinecap="round"
@@ -434,16 +469,16 @@ const icons: {
     </svg>
   ),
 
-  spinner: ({ style = {}, fill = '#fff', height = 200, width = 200 }) => (
+  spinner: ({ style = {}, fill = 'black', height = 200, width = 200 }) => (
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
       width={width}
       height={height}
+      fill={fill}
       style={{
         shapeRendering: 'auto',
         display: 'block',
-        background: 'rgb(255, 255, 255)',
         ...style,
       }}
     >
@@ -621,6 +656,49 @@ const icons: {
       </svg>
     );
   },
+  circledArrowRight: (args) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      width={20}
+      height={20}
+      {...args}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
+    </svg>
+  ),
+  caretRightSolid: (args) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+      width={20}
+      height={20}
+      {...args}
+    >
+      <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+    </svg>
+  ),
+
+  caretLeftSolid: (args) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+      width={20}
+      height={20}
+      {...args}
+    >
+      <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+    </svg>
+  ),
 };
 
 const Icon = ({ name, ...props }: TIcon & { name: TIconNames }) =>

@@ -1,71 +1,75 @@
 import { memo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import DateTimePicker from 'react-datetime-picker';
 import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import { capCharRemoveUnderscore, dateToDbFormat } from '~utils/format';
 
-const testing = [
-  'here',
-  'lakd',
-  'kdgjfksf',
-  'bakfko',
-  'giodsfsl',
-  'sdkfjakdf',
-  'qdooaldkf',
-  'ksdadkfjkdfj akfjsklajfkjkfsfoi',
-];
+const nums = Array(365)
+  .fill('')
+  .map((_, i) => String(i));
 
-const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
-  const [classs, setClasss] = useState('');
-  const [search, setSearch] = useCustomField('');
-  const [user, setUser] = useState<string[]>([]);
-  const [names, setNames] = useState([...testing]);
-  const [value, setValue, list, filterFn] = useCustomField<string[]>(
-    [],
-    testing
+const types = ['memo', 'single_event', 'multi_event'];
+
+type TFilterAnnouncement = {
+  action: (arg: { [key: string]: string | number }) => void;
+  closeModal: () => void;
+};
+
+const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
+  const state = useLocation().state ?? {};
+  const [search, setSearch] = useCustomField<string>(state.search || '');
+  const [type, setType] = useCustomField<string>(state.type || '');
+  const [fromDate, setFromDate] = useState<Date | null>(
+    state.from_date ? new Date(state.from_date) : null
   );
-  const [date, setDate, dateList, dateListFilterFn] = useCustomField<string>(
-    '',
-    testing
+  const [toDate, setToDate] = useState<Date | null>(
+    state.to_date ? new Date(state.to_date) : null
+  );
+  const [days, setDays, daysList, daysListFilterFn] = useCustomField<string>(
+    state.event_days || '',
+    nums
   );
 
-  const addUser = (u: string) => {
-    if (user.includes(u)) {
-      setUser((use) => use.filter((us) => us !== u));
-      return;
-    }
-    setUser([...user, u]);
-  };
-
-  const filterList = (val: string) => {
-    setNames((prev) => prev.filter((v) => v.includes(val)));
+  const filterAnnouncements = () => {
+    action({
+      search,
+      type,
+      event_days: days,
+      from_date: dateToDbFormat(fromDate) || '',
+      to_date: dateToDbFormat(toDate) || '',
+    });
+    closeModal();
   };
 
   return (
     <Modal
       size="sm"
       title="Filter Announcements"
+      fixedActionBtn
       content={
-        <div data-testid="filter-annouoncement-modal">
+        <div className="mt-6" data-testid="filter-annouoncement-modal">
           <div>
-            <BoldText>Search Keyword:</BoldText>
+            <BoldText>Search Title:</BoldText>
             <div className="mt-1">
               <CustomField onChange={setSearch} field="input" value={search} />
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>Filter By:</BoldText>
+            <BoldText>Announcement Type:</BoldText>
             <div className="mt-1">
               <CustomField
-                filterFn={filterFn}
-                onSelect={setValue}
+                onSelect={setType}
                 field="select"
-                value={value}
+                value={type}
+                placeholder="search..."
               >
                 <CustomField.DropdownWrapper>
-                  {list.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
+                  {types.map((t) => (
+                    <CustomField.Dropdown key={t} value={t}>
+                      {capCharRemoveUnderscore(t)}
                     </CustomField.Dropdown>
                   ))}
                 </CustomField.DropdownWrapper>
@@ -73,17 +77,18 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>From Date:</BoldText>
+            <BoldText>Event days:</BoldText>
             <div className="mt-1">
               <CustomField
                 field="input"
-                filterFn={dateListFilterFn}
-                onChange={setDate}
-                value={date}
+                placeholder="Select event duration range..."
+                filterFn={daysListFilterFn}
+                onChange={setDays}
+                value={days}
                 icon="caretDown"
               >
                 <CustomField.DropdownWrapper>
-                  {dateList.map((name) => (
+                  {daysList.map((name) => (
                     <CustomField.Dropdown key={name} value={name}>
                       {name}
                     </CustomField.Dropdown>
@@ -93,45 +98,46 @@ const FilterAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>Filter By:</BoldText>
+            <BoldText>Date range from:</BoldText>
             <div className="mt-1">
-              <CustomField
-                filterFn={filterList}
-                onSelect={addUser}
-                field="select"
-                value={user}
-              >
-                <CustomField.DropdownWrapper>
-                  {names.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
+              {/* <CustomField
+                type="date"
+                onChange={setFromDate}
+                field="input"
+                value={fromDate}
+                id="announcement-date-range-from"
+              /> */}
+              <DateTimePicker
+                format="dd/MM/yyyy"
+                dayPlaceholder="DD"
+                monthPlaceholder="MM"
+                yearPlaceholder="YYYY"
+                calendarIcon={null}
+                onChange={(arg: Date | null) => setFromDate(arg)}
+                value={fromDate}
+              />
             </div>
           </div>
-          <div className="mt-4">
-            <BoldText>Select Class:</BoldText>
-            <div className="mt-1">
-              <CustomField
-                onSelect={(v) => setClasss(v)}
-                field="select"
-                value={classs}
-              >
-                <CustomField.DropdownWrapper>
-                  {names.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
+          {fromDate && (
+            <div className="mt-4">
+              <BoldText>Date range to (Optional):</BoldText>
+              <div className="mt-1">
+                <DateTimePicker
+                  format="dd/MM/yyyy"
+                  minDate={fromDate}
+                  dayPlaceholder="DD"
+                  monthPlaceholder="MM"
+                  yearPlaceholder="YYYY"
+                  calendarIcon={null}
+                  onChange={(arg: Date | null) => setToDate(arg)}
+                  value={toDate}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       }
-      action={() => null}
+      action={filterAnnouncements}
       close={() => closeModal()}
       actionText="Filter"
     />

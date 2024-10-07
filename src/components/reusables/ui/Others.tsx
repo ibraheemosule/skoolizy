@@ -19,13 +19,13 @@ export const Card = memo(({ children, className }: IBaseProp) => (
 Card.displayName = 'Card';
 
 export const Tag = memo(
-  ({ children, onClick }: IBaseProp & { onClick?: () => void }) => (
+  ({ children, onClick, className }: IBaseProp & { onClick?: () => void }) => (
     <button
       onClick={(e) => {
         e.stopPropagation();
         onClick?.();
       }}
-      className="bg-purple.light text-brown.dark p-.5 px-2 rounded-lg"
+      className={`bg-purple.light text-brown.dark p-.5 px-2 rounded-lg ${className}`}
     >
       {children}
     </button>

@@ -1,7 +1,14 @@
-import { NavLink } from 'react-router-dom';
 import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import { HorizontalNav } from '~components/reusables/Menu';
+
+const nav = {
+  Stats: 'stats',
+  Timetable: 'timetable',
+  'Record Grade': 'record-grade',
+  Performace: 'performance',
+};
 
 const ClassroomList = () => {
   const [classroom, setClassroom, classroomList] = useCustomField('', [
@@ -29,21 +36,9 @@ const ClassroomList = () => {
           </CustomField>
         </div>
       </div>
-      <nav className="classrooms-nav  mt-8 flex border-b overflow-x-auto border-gray-300 gap-4">
-        <NavLink className="p-1 horizontal-nav shrink-0" to="stats">
-          Stats
-        </NavLink>
-
-        <NavLink className="p-1 horizontal-nav shrink-0" to="timetable">
-          TimeTable
-        </NavLink>
-        <NavLink className="p-1 horizontal-nav shrink-0" to="record-grade">
-          Record Grade
-        </NavLink>
-        <NavLink className="p-1 horizontal-nav shrink-0" to="performance">
-          Performance
-        </NavLink>
-      </nav>
+      <div className="mt-8">
+        <HorizontalNav nav={nav} />
+      </div>
     </>
   );
 };

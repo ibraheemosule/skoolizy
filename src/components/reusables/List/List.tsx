@@ -14,7 +14,9 @@ export const List: FC<{ children: ReactElement[] | ReactElement }> = ({
       }
 
       if (child.props.parent) {
-        throw Error('ListItem does not accept parent props directly');
+        throw Error(
+          'ListItem does not accept parent props directly... Leave it omitted'
+        );
       }
 
       return cloneElement(child, { parent: true });

@@ -1,5 +1,5 @@
 {
-  "name": "classify",
+  "name": "skoolizy",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -24,7 +24,9 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.8.0",
+    "react-datetime-picker": "^6.0.1",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.21.1",
     "tailwindcss": "^3.4.3",
     "vite": "^5.0.0"
