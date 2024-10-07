@@ -5,7 +5,7 @@ import useFilter from '~components/reusables/hooks/useFilter';
 import Icon from '~assets/Icons';
 import NewAnnouncement from './New';
 import FilterAnnouncements from './Filter';
-import { capitalizeChar, formatDate } from '~utils/format';
+import { capCharRemoveUnderscore, formatDate } from '~utils/format';
 import ViewAnnouncement from './View';
 import ListOptions from '~components/reusables/ListOptions';
 import Api from '~api';
@@ -114,11 +114,12 @@ const Announcements = () => {
                     </div>
                   </h4>
                   <span className="sr-only">
-                    A {capitalizeChar(a.type.split('_').join(' '))} announcement
-                    sent to {a.recipient}
+                    A {capCharRemoveUnderscore(a.type.split('_').join(' '))}{' '}
+                    announcement sent to {a.recipient}
                   </span>
                   <span className="capitalize text-sm p-0 bg-transparent text-gray-500 font-semibold mr-4">
-                    {a.recipient} {capitalizeChar(a.type.split('_').join(' '))}
+                    {a.recipient}{' '}
+                    {capCharRemoveUnderscore(a.type.split('_').join(' '))}
                   </span>
                 </button>
               ))

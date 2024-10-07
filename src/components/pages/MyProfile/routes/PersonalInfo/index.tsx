@@ -1,10 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { List, ListItem } from '~components/reusables/List/List';
-import { capitalizeChar } from '~utils/format';
-import { personal, canEdit } from './u-personal-info';
-import EditListItemModal from '~components/reusables/List/EditListItemModal';
+import { capCharRemoveUnderscore } from '~utils/format';
+import { personal, canEdit, personalInfoDropdownEdit } from './u-personal-info';
+import { ListItemEditModal } from '~components/reusables/List/EditListItemModal';
 import { SmallText } from '~components/reusables/ui/Text';
+import TextField from '~components/reusables/CustomField/TextField';
+import SelectField from '~components/reusables/CustomField/SelectField';
 
 const PersonalInfo = () => {
   const [info, setInfo] = useState<Record<string, string>>({});
@@ -40,18 +42,45 @@ const PersonalInfo = () => {
       <List>
         {Object.entries(personal).map(([key, value]) => {
           const edit = typeof info[key] === 'string';
+
           return (
             <ListItem
               key={key}
-              title={capitalizeChar(key)}
+              title={capCharRemoveUnderscore(key)}
               description={
                 edit ? (
-                  <EditListItemModal
+                  <ListItemEditModal
                     close={() => setInfo({})}
                     value={info[key]}
-                    updateValue={udpateValue(key)}
                     field={key}
-                  />
+                  >
+                    {Object.keys(personalInfoDropdownEdit).includes(key) ? (
+                      <SelectField
+                        list={
+                          personalInfoDropdownEdit[
+                            key as keyof typeof personalInfoDropdownEdit
+                          ]
+                        }
+                        value={info[key]}
+                        onSelect={(arg: string) => udpateValue(key)(arg)}
+                      />
+                    ) : (
+                      <TextField
+                        value={info[key]}
+                        onChange={(e) => udpateValue(key)(e.target.value)}
+                        placeholder={`Update ${capCharRemoveUnderscore(
+                          key
+                        )}...`}
+                        type={
+                          key.includes('phone')
+                            ? 'tel'
+                            : key.includes('email')
+                              ? 'email'
+                              : 'text'
+                        }
+                      />
+                    )}
+                  </ListItemEditModal>
                 ) : (
                   value
                 )
@@ -60,7 +89,7 @@ const PersonalInfo = () => {
                 canEdit.includes(key) ? (
                   <div className="flex gap-4 justify-center">
                     <BaseBtn
-                      onClick={() => setInfo({ [key]: '' })}
+                      onClick={() => setInfo({ [key]: value })}
                       className=" text-purple.dark hover:-translate-y-0.5"
                     >
                       Edit

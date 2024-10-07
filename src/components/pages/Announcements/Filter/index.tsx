@@ -5,7 +5,7 @@ import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
-import { capitalizeChar, dateToDbFormat } from '~utils/format';
+import { capCharRemoveUnderscore, dateToDbFormat } from '~utils/format';
 
 const nums = Array(365)
   .fill('')
@@ -69,7 +69,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
                 <CustomField.DropdownWrapper>
                   {types.map((t) => (
                     <CustomField.Dropdown key={t} value={t}>
-                      {capitalizeChar(t)}
+                      {capCharRemoveUnderscore(t)}
                     </CustomField.Dropdown>
                   ))}
                 </CustomField.DropdownWrapper>

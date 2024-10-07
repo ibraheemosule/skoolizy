@@ -22,7 +22,7 @@ export const academic = {
   },
 };
 
-export const canEdit = [
+export const canEdits = [
   'email_address',
   'phone_number',
   'home_address',

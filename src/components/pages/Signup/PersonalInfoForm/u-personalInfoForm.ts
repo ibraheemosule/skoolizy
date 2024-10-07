@@ -1,4 +1,4 @@
-import { capitalizeChar, onlyAlphabet } from '~utils/format';
+import { capCharRemoveUnderscore, onlyAlphabet } from '~utils/format';
 
 export const optional = ['middleName'];
 
@@ -37,13 +37,15 @@ export const personalInfoFieldValidation = (
     case 'last_name':
     case 'middle_name':
       if (key === 'middle_name' && !value) break;
-      if (!value) error[key] = `${capitalizeChar(key)} is required`;
+      if (!value) error[key] = `${capCharRemoveUnderscore(key)} is required`;
       else if (!onlyAlphabet(String(value))) {
-        error[key] = `${capitalizeChar(key)} should contain only letters`;
+        error[key] = `${capCharRemoveUnderscore(
+          key
+        )} should contain only letters`;
       } else if (value.length < 3) {
-        error[key] = `${capitalizeChar(key)} is too short`;
+        error[key] = `${capCharRemoveUnderscore(key)} is too short`;
       } else if (value.length > 25) {
-        error[key] = `${capitalizeChar(key)} is too long`;
+        error[key] = `${capCharRemoveUnderscore(key)} is too long`;
       }
       break;
 
@@ -51,7 +53,9 @@ export const personalInfoFieldValidation = (
     case 'nationality':
     case 'state_of_origin':
     case 'date_of_birth':
-      if (!value.length) error[key] = `${capitalizeChar(key)} is required`;
+      if (!value.length) {
+        error[key] = `${capCharRemoveUnderscore(key)} is required`;
+      }
       break;
 
     default:

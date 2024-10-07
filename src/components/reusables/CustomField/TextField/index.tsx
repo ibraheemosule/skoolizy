@@ -1,4 +1,10 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useRef } from 'react';
+import {
+  ChangeEvent,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { TIconNames } from '~assets/Icons/IconNames';
 import Icon from '~assets/Icons';
 
@@ -12,6 +18,8 @@ type TTextField = InputHTMLAttributes<HTMLInputElement> & {
 
 const TextField = ({ error, icon, ...props }: TTextField) => {
   const prevValue = useRef('');
+  const [showPassword, setShowPassword] = useState(false);
+  const isPassword = props.type === 'password';
 
   useEffect(() => {
     if (props.value || prevValue.current) {
@@ -33,12 +41,24 @@ const TextField = ({ error, icon, ...props }: TTextField) => {
           placeholder="Search..."
           className="p-2 pl-4 first-letter:uppercase appearance-none outline-none w-full"
           {...props}
+          {...(showPassword && { type: 'text' })}
         />
-        {icon && (
-          <button className=" mr-1">
+        {icon ? (
+          <button className=" mr-4 absolute right-0 top-1/2 -translate-y-1/2">
             <Icon height={20} width={20} name={icon} />
           </button>
-        )}
+        ) : isPassword ? (
+          <button
+            onClick={() => setShowPassword(!showPassword)}
+            className=" mr-4 absolute right-0 top-1/2 -translate-y-1/2"
+          >
+            <Icon
+              height={20}
+              width={20}
+              name={showPassword ? 'eye' : 'eyeCancel'}
+            />
+          </button>
+        ) : null}
       </div>
       {error && (
         <small className="text-pink-800 absolute -bottom-6 left-0 first-letter:capitalize">

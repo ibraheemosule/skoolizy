@@ -11,31 +11,30 @@ type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
 type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
 
+const styles =
+  'text-white font-normal bg-purple.dark rounded-lg flex w-full justify-center';
+
 export const ActionBtn = memo(
-  ({ children, onClick, testId, loading, className, ...props }: TButton) => {
-    const styles =
-      'text-white font-normal bg-purple.dark rounded-lg flex w-full justify-center';
-    return (
-      <button
-        disabled={loading}
-        data-testid={testId}
-        onClick={onClick}
-        className={`${className || styles} ${
-          loading
-            ? 'opacity-50'
-            : ` ${className ? '' : 'px-4 py-2 hover:bg-purple'}`
-        }`}
-        type="button"
-        {...props}
-      >
-        {loading ? (
-          <Icon name="spinner" width={40} height={40} fill="white" />
-        ) : (
-          children
-        )}
-      </button>
-    );
-  }
+  ({ children, onClick, testId, loading, className, ...props }: TButton) => (
+    <button
+      disabled={loading}
+      data-testid={testId}
+      onClick={onClick}
+      className={`${className || styles} ${
+        loading
+          ? 'opacity-50 cursor-waitx'
+          : ` ${className ? '' : 'px-4 py-2 hover:bg-purple'}`
+      } ${props.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      type="button"
+      {...props}
+    >
+      {loading ? (
+        <Icon name="spinner" width={40} height={40} fill="white" />
+      ) : (
+        children
+      )}
+    </button>
+  )
 );
 ActionBtn.displayName = 'ActionBtn';
 

@@ -29,4 +29,5 @@ export type TIconNames =
   | 'caretRightSolid'
   | 'caretLeftSolid'
   | 'twitter'
-  | 'github';
+  | 'github'
+  | 'eyeCancel';
