@@ -42,6 +42,7 @@ const PersonalInfo = () => {
       <List>
         {Object.entries(personal).map(([key, value]) => {
           const edit = typeof info[key] === 'string';
+          console.log(edit);
 
           return (
             <ListItem
