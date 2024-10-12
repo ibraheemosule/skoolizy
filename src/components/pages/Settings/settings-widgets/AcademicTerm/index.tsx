@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 import Modal from '~components/reusables/Modal';
 import { List, ListItem } from '~reusables/List/List';
-import { BaseBtn } from '~reusables/ui/Buttons';
+import { ActionBtn } from '~reusables/ui/Buttons';
 import { BoldText } from '~reusables/ui/Text';
 import { formatDate } from '~utils/format';
 
@@ -11,10 +11,8 @@ const AcademicTerm = () => {
   const [isModalOpen, setIsModalOpen] = useState<{ [key: string]: boolean }>(
     {}
   );
-  const dateType = ['Start Date', 'End Date'];
 
   function handleDate(val: string, arg: Date | null) {
-    if (!arg) return;
     setDate((prevDate) => ({
       ...prevDate,
       [val]: arg,
@@ -33,46 +31,49 @@ const AcademicTerm = () => {
         <BoldText>Academic Term</BoldText>
       </div>
       <List>
-        {dateType.map((val, i) => (
+        {['Start Date', 'End Date'].map((val) => (
           <ListItem
             key={val}
             title={val}
             action={
               <div>
-                <BaseBtn
-                  className="my-6 sm:m-0 cursor-pointer"
+                <ActionBtn
+                  className="my-6 sm:m-0 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed"
                   onClick={() => handleModal(val)}
+                  disabled={val === 'End Date' && !date['Start Date']}
                 >
                   Edit
-                </BaseBtn>
+                </ActionBtn>
                 {isModalOpen[val] && (
                   <Modal
                     size="sm"
                     action={() => handleModal(val)}
-                    title={`${dateType[i].padEnd(
-                      dateType[i].length + 2,
-                      ' : '
-                    )}`}
+                    title={`Update ${val}`}
                     close={() => {
                       handleDate(val, null);
                       handleModal(val);
                     }}
                     actionText="Update"
                     content={
-                      <DateTimePicker
-                        format="dd/MM/yyyy"
-                        minDate={
-                          i ? new Date(date['Start Date'] as Date) : new Date(0)
-                        }
-                        dayPlaceholder="DD"
-                        monthPlaceholder="MM"
-                        yearPlaceholder="YYYY"
-                        calendarIcon={null}
-                        onChange={(arg: Date | null) => {
-                          handleDate(val, arg);
-                        }}
-                        value={date[val]}
-                      />
+                      <div className="mt-4">
+                        <DateTimePicker
+                          format="dd/MM/yyyy"
+                          minDate={
+                            val === 'Start Date'
+                              ? new Date()
+                              : new Date(date['Start Date'] as Date)
+                          }
+                          className="mb-6"
+                          dayPlaceholder="DD"
+                          monthPlaceholder="MM"
+                          yearPlaceholder="YYYY"
+                          calendarIcon={null}
+                          onChange={(arg: Date | null) => {
+                            handleDate(val, arg);
+                          }}
+                          value={date[val]}
+                        />
+                      </div>
                     }
                   />
                 )}
