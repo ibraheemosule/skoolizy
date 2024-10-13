@@ -1,2 +1,2 @@
-export const alertType = ['Email Alerts', 'SMS Alerts'];
+export const alerts = ['Email Alerts', 'SMS Alerts'] as const;
 export const t = '';

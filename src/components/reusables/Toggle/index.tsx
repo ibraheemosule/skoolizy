@@ -1,19 +1,22 @@
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 
 type ToggleModal = {
-  className: string;
-  toggle: () => void;
-  tClass: string;
+  className?: string;
+  toggle: boolean;
+  setToggle: () => void;
 };
 
-const Toggle = ({ toggle, className, tClass, ...props }: ToggleModal) => (
+const Toggle = ({ toggle, setToggle, className }: ToggleModal) => (
   <BaseBtn
-    className={`mt-2 sm:mt-0 w-12 h-6 rounded-full ${className}`}
-    onClick={toggle}
-    {...props}
+    className={`mt-2 sm:mt-0 w-12 h-6 rounded-full ${className} ${
+      toggle ? 'bg-brown.dark' : 'bg-gray-200'
+    }`}
+    onClick={setToggle}
   >
     <div
-      className={`duration-500 relative top-0 w-6 h-full scale-90 rounded-full ${tClass}`}
+      className={`duration-500 relative top-0 w-6 h-full scale-90 rounded-full ${
+        toggle ? 'left-6 bg-white' : 'left-0 bg-brown.dark'
+      }`}
     />
   </BaseBtn>
 );

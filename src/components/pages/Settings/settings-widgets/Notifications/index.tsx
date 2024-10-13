@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { alertType } from './u-notifications';
+import Toggle from '~components/reusables/Toggle/index';
 import { List, ListItem } from '~reusables/List/List';
 import { BoldText } from '~reusables/ui/Text';
-import Toggle from '~components/reusables/Toggle/index';
+import { alerts } from './u-notifications';
 
+type AlertType = (typeof alerts)[number];
 const Notifications = () => {
-  const [toggle, setToggle] = useState<{ [key: string]: boolean }>({});
+  const [toggle, setToggle] = useState({} as { [key in AlertType]: boolean });
 
-  function handleToggle(alert: string) {
+  function handleToggle(alert: AlertType) {
     setToggle((prevToggle) => ({
       ...prevToggle,
       [alert]: !prevToggle[alert],
@@ -20,17 +21,14 @@ const Notifications = () => {
         <BoldText>Notifications</BoldText>
       </div>
       <List>
-        {alertType.map((val) => (
+        {alerts.map((val) => (
           <ListItem
             key={val}
             title={val}
             description={
               <Toggle
-                className={`${toggle[val] ? 'bg-brown.dark' : 'bg-gray-200'}`}
-                toggle={() => handleToggle(val)}
-                tClass={`${
-                  toggle[val] ? 'left-6 bg-white' : 'left-0 bg-brown.dark'
-                }`}
+                toggle={toggle[val]}
+                setToggle={() => handleToggle(val)}
               />
             }
           />

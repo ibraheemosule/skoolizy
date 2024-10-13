@@ -6,32 +6,37 @@ import { ActionBtn } from '~reusables/ui/Buttons';
 import { BoldText } from '~reusables/ui/Text';
 import { formatDate } from '~utils/format';
 
+const dateType = ['Start Date', 'End Date'] as const;
+
+type TDateType = (typeof dateType)[number];
+
 const AcademicTerm = () => {
-  const [date, setDate] = useState<{ [key: string]: Date | null }>({});
-  const [isModalOpen, setIsModalOpen] = useState<{ [key: string]: boolean }>(
-    {}
+  const [date, setDate] = useState({} as { [key in TDateType]: Date | null });
+  const [isModalOpen, setIsModalOpen] = useState(
+    {} as { [key in TDateType]: boolean }
   );
 
-  function handleDate(val: string, arg: Date | null) {
+  function handleDate(val: TDateType, arg: Date | null) {
     setDate((prevDate) => ({
       ...prevDate,
       [val]: arg,
     }));
   }
 
-  function handleModal(val: string) {
+  function handleModal(val: TDateType) {
     setIsModalOpen((prevModal) => ({
       ...prevModal,
       [val]: !prevModal[val],
     }));
   }
+
   return (
     <>
       <div className="py-6 border-b border-gray-100">
         <BoldText>Academic Term</BoldText>
       </div>
       <List>
-        {['Start Date', 'End Date'].map((val) => (
+        {dateType.map((val) => (
           <ListItem
             key={val}
             title={val}
@@ -50,7 +55,6 @@ const AcademicTerm = () => {
                     action={() => handleModal(val)}
                     title={`Update ${val}`}
                     close={() => {
-                      handleDate(val, null);
                       handleModal(val);
                     }}
                     actionText="Update"
