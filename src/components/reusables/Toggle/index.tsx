@@ -8,9 +8,9 @@ type ToggleModal = {
 
 const Toggle = ({ toggle, setToggle, className }: ToggleModal) => (
   <BaseBtn
-    className={`mt-2 sm:mt-0 w-12 h-6 rounded-full ${className} ${
+    className={`mt-2 sm:mt-0 w-12 h-6 rounded-full ${
       toggle ? 'bg-brown.dark' : 'bg-gray-200'
-    }`}
+    } ${className}`}
     onClick={setToggle}
   >
     <div
