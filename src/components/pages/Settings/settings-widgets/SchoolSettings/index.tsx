@@ -9,6 +9,7 @@ import { ActionBtn } from '../../../../reusables/ui/Buttons';
 const schoolSettingsType = ['School Name', 'Logo'] as const;
 
 type SchoolSettingsType = (typeof schoolSettingsType)[number];
+
 const SchoolSettings = () => {
   const [temporarySchoolName, setTemporarySchoolName] = useState('');
   const [activeSchoolName, setActiveSchoolName] = useState('');
