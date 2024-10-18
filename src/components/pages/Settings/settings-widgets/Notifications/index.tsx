@@ -18,7 +18,7 @@ const Notifications = () => {
   return (
     <>
       <div className="py-6 border-b border-gray-100">
-        <BoldText>Notifications</BoldText>
+        <BoldText>Notification Settings</BoldText>
       </div>
       <List>
         {alerts.map((val) => (
