@@ -109,7 +109,7 @@ const SchoolSettings = () => {
           key="Logo"
           title="Logo"
           description={
-            activeSchoolLogo.length ? (
+            activeSchoolLogo ? (
               <img
                 src={activeSchoolLogo}
                 alt="upload"
@@ -141,7 +141,7 @@ const SchoolSettings = () => {
                   actionText="Update"
                   content={
                     <div className="pb-8">
-                      {temporarySchoolLogo.length !== 0 && (
+                      {temporarySchoolLogo && (
                         <img
                           src={temporarySchoolLogo}
                           alt="upload"
@@ -152,7 +152,7 @@ const SchoolSettings = () => {
                       <label className="w-40 mx-auto flex flex-col items-center py-2 mt-6 rounded-lg shadow-sm uppercase border cursor-pointer">
                         <Icon name="upload" />
                         <span className="mt-2 text-xs font-bold">
-                          {temporarySchoolLogo?.length
+                          {temporarySchoolLogo
                             ? 'Replace image'
                             : 'Select an image'}
                         </span>
