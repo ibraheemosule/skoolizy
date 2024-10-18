@@ -33,7 +33,7 @@ const AcademicTerm = () => {
   return (
     <>
       <div className="py-6 border-b border-gray-100">
-        <BoldText>Academic Term</BoldText>
+        <BoldText>Academic Term Settings</BoldText>
       </div>
       <List>
         {dateType.map((val) => (
@@ -52,6 +52,7 @@ const AcademicTerm = () => {
                 {isModalOpen[val] && (
                   <Modal
                     size="sm"
+                    scroll={false}
                     action={() => handleModal(val)}
                     title={`Update ${val}`}
                     close={() => {
@@ -67,7 +68,7 @@ const AcademicTerm = () => {
                               ? new Date()
                               : new Date(date['Start Date'] as Date)
                           }
-                          className="mb-6"
+                          className="mb-2"
                           dayPlaceholder="DD"
                           monthPlaceholder="MM"
                           yearPlaceholder="YYYY"
