@@ -1,4 +1,3 @@
-import AcademicTerm from './settings-widgets/AcademicTerm/index';
 import Notifications from './settings-widgets/Notifications/index';
 import SchoolSettings from './settings-widgets/SchoolSettings';
 
@@ -13,7 +12,6 @@ const Settings = () => (
         <div className="mt-8 pb-8 grow h-[70vh] md:h-auto overflow-auto">
           <SchoolSettings />
           <Notifications />
-          <AcademicTerm />
         </div>
       </div>
     </div>
