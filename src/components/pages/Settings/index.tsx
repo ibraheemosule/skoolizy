@@ -1,5 +1,5 @@
-import Notifications from './settings-widgets/Notifications/index';
-import SchoolSettings from './settings-widgets/SchoolSettings';
+import Notifications from './NotificationSettings/index';
+import SchoolSettings from '~components/pages/Settings/SchoolSettings';
 
 const Settings = () => (
   <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">

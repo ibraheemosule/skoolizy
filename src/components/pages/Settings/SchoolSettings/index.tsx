@@ -1,8 +1,8 @@
 import { BoldText } from '~reusables/ui/Text';
-import SchoolLogoSetting from './SchoolLogo/index';
-import SchoolNameSetting from './SchoolName';
-import AcademicTerm from '~components/pages/Settings/settings-widgets/AcademicTerm';
-import { List } from '../../../../reusables/List/List';
+import SchoolLogoSetting from './LogoSettings/index';
+import SchoolNameSetting from './NameSettings';
+import AcademicTerm from '~components/pages/Settings/SchoolSettings/TermSettings';
+import { List } from '~components/reusables/List/List';
 
 const SchoolSettings = () => (
   <div>
