@@ -5,7 +5,7 @@ import { BoldText } from '~reusables/ui/Text';
 import { alerts } from './u-notifications';
 
 type AlertType = (typeof alerts)[number];
-const Notifications = () => {
+const NotificationSetting = () => {
   const [toggle, setToggle] = useState({} as { [key in AlertType]: boolean });
 
   function handleToggle(alert: AlertType) {
@@ -38,4 +38,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default NotificationSetting;

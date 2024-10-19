@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 import Modal from '~components/reusables/Modal';
-import { List, ListItem } from '~reusables/List/List';
+import { ListItem } from '~reusables/List/List';
 import { ActionBtn } from '~reusables/ui/Buttons';
 import { formatDate } from '~utils/format';
 
@@ -9,7 +9,7 @@ const dateType = ['Start Date', 'End Date'] as const;
 
 type TDateType = (typeof dateType)[number];
 
-const AcademicTerm = () => {
+const TermSetting = () => {
   const [date, setDate] = useState({} as { [key in TDateType]: Date | null });
   const [isModalOpen, setIsModalOpen] = useState(
     {} as { [key in TDateType]: boolean }
@@ -30,20 +30,22 @@ const AcademicTerm = () => {
   }
 
   return (
-    <List>
+    <>
       {dateType.map((val) => (
         <ListItem
           key={val}
           title={val}
           action={
             <div>
-              <ActionBtn
-                className="my-6 sm:m-0 cursor-pointer disabled:opacity-25 disabled:cursor-not-allowed"
-                onClick={() => handleModal(val)}
-                disabled={val === 'End Date' && !date['Start Date']}
-              >
-                Edit
-              </ActionBtn>
+              <div className="flex gap-4 justify-center">
+                <ActionBtn
+                  onClick={() => handleModal(val)}
+                  className=" text-purple.dark hover:-translate-y-0.5 disabled:opacity-25 disabled:hover:-translate-y-0 disabled:cursor-not-allowed"
+                  disabled={val === 'End Date' && !date['Start Date']}
+                >
+                  Edit
+                </ActionBtn>
+              </div>
               {isModalOpen[val] && (
                 <Modal
                   size="sm"
@@ -84,9 +86,8 @@ const AcademicTerm = () => {
           }
         />
       ))}
-    </List>
+    </>
   );
 };
 
-AcademicTerm.displayName = 'ListItem';
-export default AcademicTerm;
+export default TermSetting;

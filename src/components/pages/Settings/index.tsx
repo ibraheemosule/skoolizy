@@ -1,5 +1,5 @@
-import Notifications from './NotificationSettings/index';
-import SchoolSettings from '~components/pages/Settings/SchoolSettings';
+import SchoolSetting from '~components/pages/Settings/SchoolSettings';
+import NotificationSetting from './NotificationSetting/index';
 
 const Settings = () => (
   <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
@@ -10,8 +10,8 @@ const Settings = () => (
         add class */}
 
         <div className="mt-8 pb-8 grow h-[70vh] md:h-auto overflow-auto">
-          <SchoolSettings />
-          <Notifications />
+          <SchoolSetting />
+          <NotificationSetting />
         </div>
       </div>
     </div>
