@@ -32,7 +32,6 @@ const LogoSetting = () => {
 
   return (
     <ListItem
-      key="Logo"
       title="Logo"
       description={
         activeSchoolLogo ? (

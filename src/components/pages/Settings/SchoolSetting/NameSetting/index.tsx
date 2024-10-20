@@ -30,7 +30,6 @@ const NameSetting = () => {
 
   return (
     <ListItem
-      key="School Name"
       title="School Name"
       description={<p>{activeSchoolName || 'N/A'}</p>}
       action={
