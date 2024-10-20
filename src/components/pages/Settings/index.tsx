@@ -1,4 +1,4 @@
-import SchoolSetting from '~components/pages/Settings/SchoolSettings';
+import SchoolSetting from '~components/pages/Settings/SchoolSetting';
 import NotificationSetting from './NotificationSetting/index';
 
 const Settings = () => (

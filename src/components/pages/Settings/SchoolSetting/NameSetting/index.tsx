@@ -14,32 +14,30 @@ const NameSetting = () => {
     setTemporarySchoolName(e.target.value);
   }
 
-  function toggleModalAndUpdateTemporaryValue() {
+  const toggleModalAndUpdateTemporaryValue = () => {
     setIsModalOpen(!isModalOpen);
 
-    setTemporarySchoolName(
-      temporarySchoolName === activeSchoolName
-        ? temporarySchoolName
-        : activeSchoolName
-    );
-  }
+    if (temporarySchoolName === activeSchoolName) return;
 
-  function updateSchoolName() {
+    setTemporarySchoolName(activeSchoolName);
+  };
+
+  const updateSchoolName = () => {
     setActiveSchoolName(temporarySchoolName);
 
     toggleModalAndUpdateTemporaryValue();
-  }
+  };
 
   return (
     <ListItem
       key="School Name"
       title="School Name"
-      description={<p>{activeSchoolName.length ? activeSchoolName : 'N/A'}</p>}
+      description={<p>{activeSchoolName || 'N/A'}</p>}
       action={
         <div>
           <div className="flex gap-4 justify-center">
             <BaseBtn
-              onClick={() => toggleModalAndUpdateTemporaryValue()}
+              onClick={toggleModalAndUpdateTemporaryValue}
               className=" text-purple.dark hover:-translate-y-0.5"
             >
               Edit
@@ -48,17 +46,12 @@ const NameSetting = () => {
           {isModalOpen && (
             <Modal
               size="sm"
-              close={() => {
-                toggleModalAndUpdateTemporaryValue();
-              }}
+              close={toggleModalAndUpdateTemporaryValue}
               title="Update School Name"
-              action={() => {
-                updateSchoolName();
-              }}
+              action={updateSchoolName}
               actionText="Update"
               content={
                 <div className="mt-4 mb-6">
-                  {' '}
                   <TextField
                     placeholder="Type School Name here"
                     onChange={(e) => handleTemporarySchoolName(e)}

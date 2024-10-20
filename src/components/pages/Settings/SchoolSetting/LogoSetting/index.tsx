@@ -16,21 +16,19 @@ const LogoSetting = () => {
     }
   }
 
-  function toggleModalAndUpdateTemporaryValue() {
+  const toggleModalAndUpdateTemporaryValue = () => {
     setIsModalOpen(!isModalOpen);
 
-    setTemporarySchoolLogo(
-      temporarySchoolLogo === activeSchoolLogo
-        ? temporarySchoolLogo
-        : activeSchoolLogo
-    );
-  }
+    if (temporarySchoolLogo === activeSchoolLogo) return;
 
-  function updateSchoolLogo() {
+    setTemporarySchoolLogo(activeSchoolLogo);
+  };
+
+  const updateSchoolLogo = () => {
     setActiveSchoolLogo(temporarySchoolLogo);
 
     toggleModalAndUpdateTemporaryValue();
-  }
+  };
 
   return (
     <ListItem
@@ -51,7 +49,7 @@ const LogoSetting = () => {
         <div>
           <div className="flex gap-4 justify-center">
             <BaseBtn
-              onClick={() => toggleModalAndUpdateTemporaryValue()}
+              onClick={toggleModalAndUpdateTemporaryValue}
               className=" text-purple.dark hover:-translate-y-0.5"
             >
               Edit
@@ -61,13 +59,9 @@ const LogoSetting = () => {
           {isModalOpen && (
             <Modal
               size="sm"
-              close={() => {
-                toggleModalAndUpdateTemporaryValue();
-              }}
+              close={toggleModalAndUpdateTemporaryValue}
               title="Update Logo"
-              action={() => {
-                updateSchoolLogo();
-              }}
+              action={updateSchoolLogo}
               actionText="Update"
               content={
                 <div className="pb-8">
