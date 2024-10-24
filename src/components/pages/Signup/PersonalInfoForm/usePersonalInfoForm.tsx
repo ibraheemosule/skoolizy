@@ -25,7 +25,7 @@ const usePersonalInfoForm = () => {
     middle_name: signupDetails.middle_name || '',
     last_name: signupDetails.last_name || '',
     gender: signupDetails.gender || '',
-    nationality: signupDetails.nationality || '',
+    country: signupDetails.country || '',
     state_of_origin: signupDetails.state_of_origin || '',
     date_of_birth: signupDetails.date_of_birth || '',
   });
@@ -34,7 +34,7 @@ const usePersonalInfoForm = () => {
     ...personalInfoInitialState,
   });
 
-  useEffect(() => setCountry(String(state.nationality)), [state.nationality]);
+  useEffect(() => setCountry(String(state.country)), [state.country]);
 
   const validateInput = (key: string, value: string | string[]) => {
     setError((prev) => ({

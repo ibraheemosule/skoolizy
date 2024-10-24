@@ -27,7 +27,7 @@ const Announcements = () => {
   const [modal, setModal] = useState('');
   const [view, setView] = useState<number | null>(null);
 
-  const { data, isFetching, refetch } = useQuery({
+  const { data, isFetching, refetch, isError } = useQuery({
     queryKey: [
       'announcements',
       search,
@@ -125,8 +125,13 @@ const Announcements = () => {
               ))
             ) : (
               <EmptyView
-                message="Could not Fetch Announcements"
-                action={refetch}
+                error={isError}
+                message={
+                  isError
+                    ? 'Could not Fetch Announcements'
+                    : 'No Announcements yet'
+                }
+                {...(isError ? { action: refetch } : {})}
               />
             )}
           </div>

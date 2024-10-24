@@ -50,7 +50,7 @@ export const personalInfoFieldValidation = (
       break;
 
     case 'gender':
-    case 'nationality':
+    case 'country':
     case 'state_of_origin':
     case 'date_of_birth':
       if (!value.length) {

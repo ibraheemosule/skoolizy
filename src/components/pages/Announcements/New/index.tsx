@@ -1,30 +1,27 @@
 import { memo, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import DateTimePicker from 'react-datetime-picker';
-import CustomField from '~reusables/CustomField';
-import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import Modal from '~reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
 import { recipientsList, reminders, navRouting } from './u-new';
 import Api from '~api';
 import { dateToDbFormat, formatDate } from '~utils/format';
+import SelectField from '~components/reusables/CustomField/SelectField';
+import TextField from '~components/reusables/CustomField/TextField';
 
 const { api } = new Api();
 
 const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
-  const [type, setType] = useCustomField<
-    'single_event' | 'multi_event' | 'memo'
-  >('memo');
-  const [title, setTitle] = useCustomField('');
-  const [message, setMessage] = useCustomField('');
-  const [recipient, setRecipient] = useCustomField<
+  const [type, setType] = useState<'single_event' | 'multi_event' | 'memo'>(
+    'memo'
+  );
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [recipient, setRecipient] = useState<
     'all' | 'parents' | 'students' | 'teachers'
   >('all');
-  const [reminder, setReminder, reminderList] = useCustomField(
-    '',
-    Object.keys(reminders)
-  );
+  const [reminder, setReminder] = useState('');
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [eventTime, setEventTime] = useState<Date | null>(null);
@@ -54,6 +51,8 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       }),
   });
 
+  console.dir(reminders[reminder as keyof typeof reminders]);
+
   const nav = {
     Memo: () => setType('memo'),
     'Single-day event': () => setType('single_event'),
@@ -74,13 +73,18 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
           <div className="mt-4">
             <BoldText>Title:</BoldText>
             <div className="mt-1">
-              <CustomField
+              <TextField
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder={`Type ${type.split('_').join(' ')} title`}
+              />
+              {/* <CustomField
                 onChange={setTitle}
                 field="input"
                 value={title}
                 placeholder={`Type ${type.split('_').join(' ')} title`}
                 icon={null}
-              />
+              /> */}
             </div>
           </div>
 
@@ -151,7 +155,12 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
               <div className="w-[150px]">
                 <BoldText>Reminder:</BoldText>
                 <div className="mt-1">
-                  <CustomField
+                  <SelectField
+                    onSelect={setReminder}
+                    value={reminder}
+                    list={Object.keys(reminders)}
+                  />
+                  {/* <CustomField
                     placeholder="Set Reminder"
                     value={reminder}
                     onSelect={setReminder}
@@ -164,7 +173,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                         </CustomField.Dropdown>
                       ))}
                     </CustomField.DropdownWrapper>
-                  </CustomField>
+                  </CustomField> */}
                 </div>
               </div>
             )}
@@ -172,7 +181,12 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
             <div className="w-[150px]">
               <BoldText>Recipient:</BoldText>
               <div className="mt-1">
-                <CustomField
+                <SelectField
+                  onSelect={setRecipient as (arg: string) => void}
+                  value={recipient}
+                  list={recipientsList}
+                />
+                {/* <CustomField
                   placeholder="Recipients"
                   value={recipient}
                   onSelect={setRecipient}
@@ -185,7 +199,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                       </CustomField.Dropdown>
                     ))}
                   </CustomField.DropdownWrapper>
-                </CustomField>
+                </CustomField> */}
               </div>
             </div>
           </div>

@@ -121,17 +121,15 @@ const PersonalInfoForm = () => {
 
       <div>
         <label className="block text-sm font-medium leading-6 text-gray-900">
-          Nationality
+          Country
         </label>
         <div>
           <SelectField
             list={countries}
-            value={String(state.nationality)}
-            onSelect={(arg: string) => setState({ nationality: arg })}
-            onBlur={() =>
-              validateInput('nationality', String(state.nationality))
-            }
-            error={error.nationality}
+            value={String(state.country)}
+            onSelect={(arg: string) => setState({ country: arg })}
+            onBlur={() => validateInput('country', String(state.country))}
+            error={error.country}
             loading={fetchingCountry}
           />
         </div>
@@ -150,7 +148,7 @@ const PersonalInfoForm = () => {
               validateInput('state_of_origin', String(state.state_of_origin))
             }
             error={error.state_of_origin}
-            disabled={!state.nationality}
+            disabled={!state.country}
           />
         </div>
       </div>

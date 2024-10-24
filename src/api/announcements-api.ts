@@ -27,6 +27,7 @@ export default (api: AxiosInstance) => ({
     event_start_date?: string;
     event_end_date?: string;
     event_time?: string;
+    reminder?: number | null;
   }): Promise<TListApi<TAnnouncementsData>> => {
     const res = await api.post('/announcements', body);
     return res.data;
