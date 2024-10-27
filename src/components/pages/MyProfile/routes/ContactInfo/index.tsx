@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { BaseBtn } from '~components/reusables/ui/Buttons';
-import { List, ListItem } from '~components/reusables/List/List';
-import { capCharRemoveUnderscore } from '~utils/format';
-import { contact, canEdit, contactAuthEdit } from './u-contact-info';
+import TextField from '~components/reusables/CustomField/TextField';
 import {
   ListItemAuthEditModal,
   ListItemEditModal,
 } from '~components/reusables/List/EditListItemModal';
-import TextField from '~components/reusables/CustomField/TextField';
+import { List, ListItem } from '~components/reusables/List/List';
+import { BaseBtn } from '~components/reusables/ui/Buttons';
+import { capCharRemoveUnderscore } from '~utils/format';
+import { canEdit, contact, contactAuthEdit } from './u-contact-info';
 
 const ContactInfo = () => {
   const [info, setInfo] = useState<Record<string, string>>({});
 
-  const udpateValue = (key: string) => (v: string) => setInfo({ [key]: v });
+  const updateValue = (key: string) => (v: string) => setInfo({ [key]: v });
 
   return (
     <List>
@@ -37,7 +37,7 @@ const ContactInfo = () => {
                     >
                       <TextField
                         value={info[key]}
-                        onChange={(e) => udpateValue(key)(e.target.value)}
+                        onChange={(e) => updateValue(key)(e.target.value)}
                         placeholder={`Update ${capCharRemoveUnderscore(
                           key
                         )}...`}
@@ -58,7 +58,7 @@ const ContactInfo = () => {
                     >
                       <TextField
                         value={info[key]}
-                        onChange={(e) => udpateValue(key)(e.target.value)}
+                        onChange={(e) => updateValue(key)(e.target.value)}
                         placeholder={`Update ${capCharRemoveUnderscore(
                           key
                         )}...`}
