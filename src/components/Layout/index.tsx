@@ -1,13 +1,22 @@
-import { useState, FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useState, FC, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import SideNav from '~components/Layout/SideNav';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
+import authStore from '~src/store/auth';
 
 const Layout: FC = () => {
+  const navigate = useNavigate();
+
   const [toggleNav, setToggleNav] = useState(false);
   const animate = toggleNav ? 'animate-in' : 'animate-out';
+
+  useEffect(() => {
+    if (!authStore.getState().token) {
+      navigate('/auth/login');
+    }
+  }, []);
 
   return (
     <main className="absolute inset-0 flex overflow-hidden">

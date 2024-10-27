@@ -9,7 +9,7 @@ import { TIconNames } from '~assets/Icons/IconNames';
 import Icon from '~assets/Icons';
 
 type TTextField = InputHTMLAttributes<HTMLInputElement> & {
-  error?: string;
+  error?: string | string[];
   icon?: TIconNames;
   onBlur?: () => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -29,12 +29,12 @@ const TextField = ({ error, icon, ...props }: TTextField) => {
   }, [props.value]);
 
   return (
-    <div className="flex h-full relative">
+    <div className="flex flex-wrap h-full relative">
       <div
-        className={`w-full cursor-pointer ${
+        className={`w-full cursor-pointer relative ${
           props.disabled ? 'bg-gray-200' : 'bg-white cursor-pointer'
         } items-center border ${
-          error ? 'border-pink-800' : 'border-gray-200'
+          error?.length ? 'border-pink-800' : 'border-gray-200'
         }  rounded-lg overflow-hidden`}
       >
         <input
@@ -60,11 +60,19 @@ const TextField = ({ error, icon, ...props }: TTextField) => {
           </button>
         ) : null}
       </div>
-      {error && (
-        <small className="text-pink-800 absolute -bottom-6 left-0 first-letter:capitalize">
-          {error}
+      {error?.length ? (
+        <small
+          className={`text-pink-800 ${
+            typeof error === 'string' ? 'absolute' : 'block'
+          } -bottom-6 left-0 first-letter:capitalize`}
+        >
+          {Array.isArray(error)
+            ? error.map((err) => (
+                <div className="mt-1" key={err}>{`- ${err}`}</div>
+              ))
+            : error}
         </small>
-      )}
+      ) : null}
     </div>
   );
 };

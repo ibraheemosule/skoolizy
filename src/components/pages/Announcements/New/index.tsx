@@ -51,8 +51,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
       }),
   });
 
-  console.dir(reminders[reminder as keyof typeof reminders]);
-
   const nav = {
     Memo: () => setType('memo'),
     'Single-day event': () => setType('single_event'),

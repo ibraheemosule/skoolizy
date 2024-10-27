@@ -7,26 +7,27 @@ export const validateEmail = (email: string) => {
 };
 
 export const validatePassword = (password: string) => {
+  const requirements = [];
   if (password.length < 8) {
-    return 'minimum length of 8 characters';
+    requirements.push('Password must have a minimum length of 8 characters');
   }
   if (password.length > 30) {
-    return 'maximum length of 30 characters';
+    requirements.push('Password must have a maximum length of 30 characters');
   }
   if (!/(?=.*[A-Z])/.test(password)) {
-    return 'uppercase letter';
+    requirements.push('Password must contain an uppercase letter');
   }
   if (!/(?=.*[a-z])/.test(password)) {
-    return 'lowercase letter';
+    requirements.push('Password must contain a lowercase letter');
   }
   if (!/(?=.*\d)/.test(password)) {
-    return 'number';
+    requirements.push('Password must contain a number');
   }
   if (!/(?=.*[^A-Za-z0-9])/.test(password)) {
-    return 'special character';
+    requirements.push('Password must contain a symbol');
   }
 
-  return 'true';
+  return requirements;
 };
 
 export const validatePhoneNumber = (num: number) => {

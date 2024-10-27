@@ -235,12 +235,20 @@ const router = createBrowserRouter([
     ],
   },
   lazyLoad({
-    path: 'login',
-    url: () => import('~components/pages/Login'),
+    path: 'auth/login',
+    url: () => import('~components/pages/Auth/Login'),
   }),
   lazyLoad({
-    path: 'signup',
-    url: () => import('~components/pages/Signup'),
+    path: 'auth/signup',
+    url: () => import('~components/pages/Auth/Signup'),
+  }),
+  lazyLoad({
+    path: 'auth/reset-password',
+    url: () => import('~components/pages/Auth/ResetPassword'),
+  }),
+  lazyLoad({
+    path: 'auth/verify-account',
+    url: () => import('~components/pages/Auth/VerifyAccount'),
   }),
 ]);
 

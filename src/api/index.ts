@@ -2,6 +2,8 @@ import axios, { AxiosInstance } from 'axios';
 import externalApi from './external-api';
 import announcementsApi from './announcements-api';
 import TApi from '~shared-ts-types/t-api';
+import authStore from '~src/store/auth';
+import auth from './auth-api';
 
 const baseURL = String(import.meta.env.VITE_BASE_URL);
 class Api {
@@ -10,9 +12,46 @@ class Api {
     responseType: 'json',
   });
 
+  refreshToken = this.axiosInstance.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+      console.log(error);
+
+      if (error.response.data.message !== 'Unauthorized') {
+        return Promise.reject(error);
+      }
+
+      try {
+        const data = await this.axiosInstance.get('/refresh-token');
+        console.log(data.data);
+        authStore.getState().login(data.data);
+        originalRequest.headers.Authorization = `Bearer ${data.data}`;
+
+        return await this.axiosInstance(originalRequest);
+      } catch (e) {
+        const err = e as { data: { message: string } };
+        if (err?.data?.message === 'Token is missing') {
+          authStore.getState().logout();
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  auth = this.axiosInstance.interceptors.request.use((config) => {
+    const { token } = authStore.getState();
+    const cloneConfig = { ...config };
+    if (token) {
+      cloneConfig.headers.Authorization = `Bearer ${token}`;
+    }
+    return cloneConfig;
+  });
+
   api: TApi = {
     ...externalApi(this.axiosInstance),
     ...announcementsApi(this.axiosInstance),
+    ...auth(this.axiosInstance),
   };
 }
 

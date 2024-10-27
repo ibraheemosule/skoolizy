@@ -1,21 +1,35 @@
 import { memo, useMemo, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { SignupContext } from './u-signup';
 
 import logo from '~assets/images/logo.png';
 import PersonalInfoForm from './PersonalInfoForm';
 import ContactInfoForm from './ContactInfoForm';
 import useBulkState from '~components/reusables/hooks/useBulkState';
+import Api from '~api';
+import useStore from '~src/store';
+import CompleteSignup from './CompleteSignup';
 
 const steps = {
   1: 'Personal Info',
   2: 'Contact Info',
+  3: 'Create Password',
 };
 
 const totalSteps = Object.keys(steps).length;
 
+const { api } = new Api();
+
 const Signup = () => {
   const [step, setStep] = useState(1);
   const [signupDetails, setSignupDetails] = useBulkState({});
+  const { mutateAsync } = useMutation({
+    mutationFn: () => api.signup(signupDetails),
+    onSuccess: (data) => {
+      console.log(data);
+      useStore.getState().login(data.data.access_token);
+    },
+  });
 
   const values = useMemo(
     () => ({
@@ -54,69 +68,16 @@ const Signup = () => {
               <span className="text-gray-400 text-sm">Step {step}</span>
               <h6 className="text-xl">{steps[step as keyof typeof steps]}</h6>
               <form
-                action="https://goal.com"
-                method="POST"
+                onSubmit={(e) => e.preventDefault()}
                 className="space-y-6 mt-6"
               >
                 {
                   {
                     1: <PersonalInfoForm />,
                     2: <ContactInfoForm />,
+                    3: <CompleteSignup signupFn={mutateAsync} />,
                   }[step]
                 }
-
-                {/* <div className="flex flex-wrap justify-between">
-                  <ActionBtn
-                    disabled={step === 1}
-                    onClick={() => step > 1 && setStep(step - 1)}
-                    className="flex gap-1
-                    px-2 py-1 disabled:bg-gray-200 disabled:hover:opacity-100
-                     items-center text-white text-sm font-normal bg-purple.dark
-                      rounded-lg hover:opacity-50"
-                  >
-                    <Icon name="caretLeftSolid" width={12} height={12} />
-                    <span>Previous</span>
-                  </ActionBtn>
-                  <ActionBtn
-                    disabled={step === totalSteps}
-                    onClick={() => step < totalSteps && setStep(step + 1)}
-                    className="flex gap-1 px-2 py-1 disabled:bg-gray-200 disabled:hover:opacity-100
-                     items-center ml-auto text-white text-sm font-normal
-                     bg-purple.dark rounded-lg hover:opacity-50"
-                  >
-                    <span>Next</span>
-                    <Icon name="caretRightSolid" width={12} height={12} />
-                  </ActionBtn>
-                </div> */}
-
-                {/* <div className="flex items-center justify-between mt-6 mb-3">
-                 <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 rounded
-                    border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-3 block text-sm leading-6 text-gray-700"
-                  >
-                    Remember me
-                  </label>
-                </div>
-
-                <div className="text-sm leading-6">
-                  <a
-                    href="https://goal.com"
-                    className="font-semibold text-purple.dark hover:text-purple"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
-              </div> */}
-
-                {/* <ActionBtn>Sign up</ActionBtn> */}
               </form>
 
               {/* <div className="mt-10">
