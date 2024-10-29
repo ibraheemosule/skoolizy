@@ -24,7 +24,7 @@ const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
       <div>
         <label
           htmlFor="password"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Password
         </label>
@@ -54,13 +54,13 @@ const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
       <div>
         <label
           htmlFor="retype-password"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Retype Password
         </label>
         <div className="mb-8">
           <TextField
-            type="retype-password"
+            type="password"
             id="retype-password"
             error={error.retypePassword}
             value={String(state.retypePassword)}

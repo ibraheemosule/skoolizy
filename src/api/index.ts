@@ -16,15 +16,18 @@ class Api {
     (response) => response,
     async (error) => {
       const originalRequest = error.config;
-      console.log(error);
 
-      if (error.response.data.message !== 'Unauthorized') {
+      const getNewToken =
+        error.response.data.message === 'Expired token' &&
+        authStore.getState().staySignedIn;
+
+      if (!getNewToken) {
+        authStore.getState().logout();
         return Promise.reject(error);
       }
 
       try {
-        const data = await this.axiosInstance.get('/refresh-token');
-        console.log(data.data);
+        const data = await this.axiosInstance.get('/auth/refresh-token');
         authStore.getState().login(data.data);
         originalRequest.headers.Authorization = `Bearer ${data.data}`;
 

@@ -7,4 +7,5 @@ export type TUserSignupPayload = {
   state_of_origin: string;
   date_of_birth: string;
   email: string;
+  role: string;
 };

@@ -15,7 +15,7 @@ const Auth = ({ children }: { children: ReactElement }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!allowed.includes(location.state?.from)) {
+    if (location.state?.from && !allowed.includes(location.state?.from)) {
       navigate(authStore.getState().token ? '/dashboard' : location.state?.to);
     }
   }, [allowed]);

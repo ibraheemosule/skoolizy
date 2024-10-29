@@ -5,7 +5,7 @@ export default (api: AxiosInstance) => ({
   signup: async (
     body: TUserSignupPayload
   ): Promise<{ data: { message: string } }> => {
-    const res = await api.post('/teachers', body);
+    const res = await api.post('/auth/signup', body);
     return res.data;
   },
 
@@ -13,7 +13,15 @@ export default (api: AxiosInstance) => ({
     email: string;
     otp: string;
   }): Promise<{ data: { access_token: string } }> => {
-    const res = await api.post('/teachers/verify', body);
+    const res = await api.patch('/auth/confirm-signup', body);
+    return res.data;
+  },
+
+  signin: async (body: {
+    tag: string;
+    password: string;
+  }): Promise<{ data: { access_token: string } }> => {
+    const res = await api.post('/auth/signin', body);
     return res.data;
   },
 
@@ -28,7 +36,7 @@ export default (api: AxiosInstance) => ({
   },
 
   createNewPassword: async (body: { token: string; new_password: string }) => {
-    const res = await api.post('/auth/create-new-password', body);
+    const res = await api.put('/auth/create-new-password', body);
     return res.data;
   },
 });

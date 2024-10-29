@@ -8,6 +8,7 @@ import Auth from '..';
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
+  console.dir(token);
 
   return (
     <Auth>

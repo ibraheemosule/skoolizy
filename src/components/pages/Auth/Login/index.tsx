@@ -1,100 +1,121 @@
-import { memo } from 'react';
-import CustomField from '~components/reusables/CustomField';
-import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
+import { memo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Auth from '..';
 import TextField from '~components/reusables/CustomField/TextField';
+import Api from '~api';
+import authStore from '~src/store/auth';
+
+const { api } = new Api();
 
 const Login = () => {
-  const [email, setEmail] = useCustomField('');
-  const [password, setPassword] = useCustomField('');
+  const { update } = authStore((state) => state);
+  const navigate = useNavigate();
+  const [tag, setTag] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { mutateAsync } = useMutation({
+    mutationFn: () => api.signin({ tag, password }),
+    onSuccess: (data) => {
+      authStore.getState().login(data.data.access_token);
+      navigate('/dashboard');
+    },
+  });
+
   return (
     <Auth>
-      <div>
-        <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-gray-500">
-          Don&apos;t have an account?{' '}
-          <a
-            href="https://goal.com"
-            className="font-semibold text-purple.dark hover:text-purple"
-          >
-            Sign up
-          </a>
-        </p>
-      </div>
-
-      <div className="mt-10">
+      <>
         <div>
-          <form action="https://goal.com" method="POST" className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <CustomField
-                  field="input"
-                  value={email}
-                  onChange={setEmail}
-                  type="email"
-                  id="email"
-                  icon={null}
-                />
-              </div>
-            </div>
+          <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+          <p className="mt-2 leading-6 text-gray-500">
+            Don&apos;t have an account?{' '}
+            <Link
+              to="/auth/signup"
+              className="font-semibold text-purple.dark hover:text-purple"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="mt-2">
-                <TextField
-                  type="password"
-                  id="paassword"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Input your password"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
+        <div className="mt-6">
+          <div>
+            <form action="https://goal.com" method="POST" className="space-y-6">
+              <div>
                 <label
-                  htmlFor="remember-me"
-                  className="ml-3 block text-sm leading-6 text-gray-700"
+                  htmlFor="tag"
+                  className="block text-sm font-medium leading-6 text-brown.dark"
                 >
-                  Remember me
+                  Tag (e.g staff-123)
                 </label>
+                <div className="mt-1">
+                  <TextField
+                    value={tag}
+                    onChange={(e) => setTag(e.target.value)}
+                    type="text"
+                    id="tag"
+                    placeholder="Input your tag"
+                  />
+                </div>
               </div>
 
-              <div className="text-sm leading-6">
-                <a
-                  href="https://goal.com"
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-brown.dark"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <TextField
+                    type="password"
+                    id="paassword"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Input your password"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    aria-label="remember me option"
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 rounded cursor-pointer border-gray-300 bg-brown.dark text-brown.dark focus:ring-brown.dark"
+                    onChange={(e) => update({ staySignedIn: e.target.checked })}
+                  />
+                  <label
+                    htmlFor="remember-me"
+                    className="ml-2 block font-semibold leading-6 text-brown.dark"
+                  >
+                    Remember me
+                  </label>
+                </div>
+
+                <Link
+                  to="/auth/reset-password"
                   className="font-semibold text-purple.dark hover:text-purple"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
-            </div>
 
-            <ActionBtn>Sign in</ActionBtn>
-          </form>
+              <ActionBtn
+                onClick={async () => mutateAsync()}
+                disabled={!tag || !password}
+              >
+                Sign in
+              </ActionBtn>
+            </form>
+          </div>
         </div>
-      </div>
+      </>
     </Auth>
   );
 };

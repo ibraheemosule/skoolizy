@@ -3,8 +3,7 @@ import {
   QueryClient,
   QueryCache,
 } from '@tanstack/react-query';
-import { RouterProvider } from 'react-router-dom';
-import router from '~src/router';
+import AppRoutes from '~src/router';
 import popup from '~utils/popup';
 
 const queryCache = new QueryCache({
@@ -29,7 +28,7 @@ const queryClient = new QueryClient({
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />;
+    <AppRoutes />
   </QueryClientProvider>
 );
 

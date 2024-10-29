@@ -21,7 +21,7 @@ const ContactInfoForm = () => {
       <div>
         <label
           htmlFor="first-name"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Email
         </label>
@@ -40,7 +40,7 @@ const ContactInfoForm = () => {
       <div>
         <label
           htmlFor="phone-number"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Phone Number
         </label>
@@ -65,7 +65,7 @@ const ContactInfoForm = () => {
       <div>
         <label
           htmlFor="home-address"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Home Address
         </label>

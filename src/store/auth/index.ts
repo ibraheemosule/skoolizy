@@ -3,7 +3,7 @@ import { persist, devtools } from 'zustand/middleware';
 
 export type TAuthStore = {
   token: string | null;
-  isAuthenticated: boolean;
+  staySignedIn: boolean;
   login: (token: string) => void;
   logout: () => void;
   update: (arg: Partial<TAuthStore>) => void;
@@ -14,7 +14,7 @@ const authStore = create<TAuthStore>()(
     persist(
       (set) => ({
         token: null,
-        isAuthenticated: false,
+        staySignedIn: false,
 
         update: (arg: Partial<TAuthStore>) =>
           set((state) => ({ ...state, ...arg })),
@@ -22,14 +22,14 @@ const authStore = create<TAuthStore>()(
         login: (token: string) =>
           set((state) => ({
             ...state,
-            isAuthenticated: true,
+            staySignedIn: true,
             token,
           })),
 
         logout: () =>
           set((state) => ({
             ...state,
-            isAuthenticated: false,
+            staySignedIn: false,
             token: null,
           })),
       }),
@@ -37,7 +37,7 @@ const authStore = create<TAuthStore>()(
         name: 'auth-store',
         partialize: (state) => ({
           token: state.token,
-          isAuthenticated: state.isAuthenticated,
+          staySignedIn: state.staySignedIn,
         }),
       }
     )

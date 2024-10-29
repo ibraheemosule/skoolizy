@@ -26,7 +26,7 @@ const PersonalInfoForm = () => {
       <div>
         <label
           htmlFor="first-name"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           First Name
         </label>
@@ -44,7 +44,7 @@ const PersonalInfoForm = () => {
       <div>
         <label
           htmlFor="middle-name"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Middle Name
         </label>
@@ -65,7 +65,7 @@ const PersonalInfoForm = () => {
       <div>
         <label
           htmlFor="last-name"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Last Name
         </label>
@@ -83,7 +83,7 @@ const PersonalInfoForm = () => {
       <div>
         <label
           htmlFor="gender"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Gender
         </label>
@@ -101,7 +101,7 @@ const PersonalInfoForm = () => {
       <div>
         <label
           htmlFor="date-of-birth"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-brown.dark"
         >
           Date of Birth
         </label>
@@ -120,7 +120,7 @@ const PersonalInfoForm = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium leading-6 text-gray-900">
+        <label className="block text-sm font-medium leading-6 text-brown.dark">
           Country
         </label>
         <div>
@@ -136,7 +136,7 @@ const PersonalInfoForm = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium leading-6 text-gray-900">
+        <label className="block text-sm font-medium leading-6 text-brown.dark">
           State of Origin
         </label>
         <div>

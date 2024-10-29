@@ -1,6 +1,6 @@
 import { memo, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SignupContext } from './u-signup';
 
 import PersonalInfoForm from './PersonalInfoForm';
@@ -10,12 +10,14 @@ import Api from '~api';
 import CompleteSignup from './CompleteSignup';
 import userStore from '~src/store/user';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
+import SignupOptions from './SignupOptions';
 import Auth from '..';
 
 const steps = {
-  1: 'Personal Info',
-  2: 'Contact Info',
-  3: 'Create Password',
+  1: 'Choose an account',
+  2: 'Personal Info',
+  3: 'Contact Info',
+  4: 'Create Password',
 };
 
 const totalSteps = Object.keys(steps).length;
@@ -30,8 +32,7 @@ const Signup = () => {
   );
   const { mutateAsync } = useMutation({
     mutationFn: () => api.signup(signupDetails),
-    onSuccess: (data) => {
-      console.log('here', data);
+    onSuccess: () => {
       userStore.getState().update({
         email: signupDetails.email,
       });
@@ -58,15 +59,15 @@ const Signup = () => {
           <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create a Skoolizy Account
           </h2>
-          <p className="mt-2 text-sm leading-6 text-gray-500">
-            Be a part of 100+ Schools already on Skoolizy. Want to know more
-            about us?{' '}
-            <a
-              href="https://goal.com"
+          <p className="mt-2 leading-6 text-gray-500">
+            Be a part of 100+ Schools already on Skoolizy. Already have an
+            account?{' '}
+            <Link
+              to="/auth/login"
               className="font-semibold text-purple.dark hover:text-purple"
             >
-              Learn more
-            </a>
+              Sign in
+            </Link>
           </p>
         </div>
 
@@ -76,9 +77,10 @@ const Signup = () => {
           <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-6">
             {
               {
-                1: <PersonalInfoForm />,
-                2: <ContactInfoForm />,
-                3: <CompleteSignup signupFn={mutateAsync} />,
+                1: <SignupOptions />,
+                2: <PersonalInfoForm />,
+                3: <ContactInfoForm />,
+                4: <CompleteSignup signupFn={mutateAsync} />,
               }[step]
             }
           </form>
