@@ -15,7 +15,7 @@ const Login = () => {
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
     onSuccess: (data) => {
       authStore.getState().login(data.data.access_token);
@@ -43,7 +43,13 @@ const Login = () => {
 
         <div className="mt-6">
           <div>
-            <form action="https://goal.com" method="POST" className="space-y-6">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+              method="POST"
+              className="space-y-6"
+            >
               <div>
                 <label
                   htmlFor="tag"
@@ -109,6 +115,7 @@ const Login = () => {
               <ActionBtn
                 onClick={async () => mutateAsync()}
                 disabled={!tag || !password}
+                loading={isPending}
               >
                 Sign in
               </ActionBtn>
