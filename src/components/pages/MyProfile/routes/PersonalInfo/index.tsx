@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from 'react';
-import { BaseBtn } from '~components/reusables/ui/Buttons';
-import { List, ListItem } from '~components/reusables/List/List';
-import { capCharRemoveUnderscore } from '~utils/format';
-import { personal, canEdit, personalInfoDropdownEdit } from './u-personal-info';
-import { ListItemEditModal } from '~components/reusables/List/EditListItemModal';
-import { SmallText } from '~components/reusables/ui/Text';
-import TextField from '~components/reusables/CustomField/TextField';
 import SelectField from '~components/reusables/CustomField/SelectField';
+import TextField from '~components/reusables/CustomField/TextField';
+import { ListItemEditModal } from '~components/reusables/List/EditListItemModal';
+import { List, ListItem } from '~components/reusables/List/List';
+import { BaseBtn } from '~components/reusables/ui/Buttons';
+import { SmallText } from '~components/reusables/ui/Text';
+import { capCharRemoveUnderscore } from '~utils/format';
+import { canEdit, personal, personalInfoDropdownEdit } from './u-personal-info';
 
 const PersonalInfo = () => {
   const [info, setInfo] = useState<Record<string, string>>({});
@@ -16,7 +16,7 @@ const PersonalInfo = () => {
     if (e.target?.files) setImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const udpateValue = (key: string) => (v: string) => setInfo({ [key]: v });
+  const updateValue = (key: string) => (v: string) => setInfo({ [key]: v });
 
   return (
     <>
@@ -62,12 +62,12 @@ const PersonalInfo = () => {
                           ]
                         }
                         value={info[key]}
-                        onSelect={(arg: string) => udpateValue(key)(arg)}
+                        onSelect={(arg: string) => updateValue(key)(arg)}
                       />
                     ) : (
                       <TextField
                         value={info[key]}
-                        onChange={(e) => udpateValue(key)(e.target.value)}
+                        onChange={(e) => updateValue(key)(e.target.value)}
                         placeholder={`Update ${capCharRemoveUnderscore(
                           key
                         )}...`}
