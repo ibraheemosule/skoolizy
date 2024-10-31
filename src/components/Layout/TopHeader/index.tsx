@@ -11,13 +11,14 @@ interface ITopHeader {
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
   const { pathname } = useLocation();
-  const route = pathname.slice(1).replace(/-/g, ' ').split('/');
+  const route = pathname.slice(1).split('/');
 
   const [user, setUser] = useCustomField('john');
 
   return (
     <>
       <button
+        title="menu-btn"
         data-testid="menu-btn"
         onClick={() => setToggleNav(true)}
         className="shrink-0 mr-4 md:hidden"
@@ -33,7 +34,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
               className="tracking-tight first:before:hidden before:content-['-'] before:mx-2 hover:text-purple.dark"
               to={route.slice(0, i + 1).join('/')}
             >
-              {capCharRemoveUnderscore(r)}
+              {capCharRemoveUnderscore(r.replace(/-/g, ' '))}
             </NavLink>
           ))}
         </h2>
