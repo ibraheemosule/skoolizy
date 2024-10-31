@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { IBaseProp } from '~src/shared-ts-types/react-types';
+import { IBaseProp } from '~utils/shared-ts-types/react-types';
 
 export const Circle = memo(
   ({ children, className, size }: IBaseProp & { size: string }) => (

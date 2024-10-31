@@ -5,8 +5,8 @@ const SubjectList = () => (
     <NavLink className="p-1 horizontal-nav shrink-0" to="topics">
       Topics
     </NavLink>
-    <NavLink className="p-1 horizontal-nav shrink-0" to="teachers">
-      Teachers
+    <NavLink className="p-1 horizontal-nav shrink-0" to="staffs">
+      Staffs
     </NavLink>
   </nav>
 );

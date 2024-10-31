@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { IconType } from '~src/shared-ts-types/react-types';
+import { IconType } from '~utils/shared-ts-types/react-types';
 
 const SendIcon = ({ color, size = 24 }: IconType) => (
   <svg

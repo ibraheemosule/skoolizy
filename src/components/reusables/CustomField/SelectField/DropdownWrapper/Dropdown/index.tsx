@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { IBaseProp } from '~src/shared-ts-types/react-types';
+import { IBaseProp } from '~utils/shared-ts-types/react-types';
 
 type TDropdown = IBaseProp & {
   value: string | number | null;

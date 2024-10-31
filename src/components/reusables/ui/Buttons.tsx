@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode, memo } from 'react';
-import { IBaseProp } from '~src/shared-ts-types/react-types';
 import Icon from '~assets/Icons';
+import { IBaseProp } from '~utils/shared-ts-types/react-types';
 
 type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;

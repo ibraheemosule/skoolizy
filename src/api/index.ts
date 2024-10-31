@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import externalApi from './external-api';
+import TApi from '~utils/shared-ts-types/t-api';
 import announcementsApi from './announcements-api';
-import TApi from '~shared-ts-types/t-api';
+import externalApi from './external-api';
 
 const baseURL = String(import.meta.env.VITE_BASE_URL);
 class Api {

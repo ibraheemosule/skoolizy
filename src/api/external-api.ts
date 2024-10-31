@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { TCountry } from '~src/shared-ts-types/data-types';
+import { TCountry } from '~utils/shared-ts-types/data-types';
 
 const COUNTRY_URL = String(import.meta.env.VITE_COUNTRIES_URL);
 

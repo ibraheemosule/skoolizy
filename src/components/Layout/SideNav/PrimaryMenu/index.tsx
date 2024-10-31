@@ -27,8 +27,8 @@ const navs = [
     icon: 'user',
   } as const,
   {
-    label: 'teachers',
-    route: 'teachers',
+    label: 'staffs',
+    route: 'staffs',
     icon: 'tutor',
   } as const,
   {
