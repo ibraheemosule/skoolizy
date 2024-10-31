@@ -18,7 +18,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
   return (
     <>
       <button
-        title="menu-btn"
+        title="menu button"
         data-testid="menu-btn"
         onClick={() => setToggleNav(true)}
         className="shrink-0 mr-4 md:hidden"
