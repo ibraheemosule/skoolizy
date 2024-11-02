@@ -13,7 +13,7 @@
       "~icons/*": ["./src/asseets/Icons/*"],
       "~assets/*": ["./src/assets/*"],
       "~reusables/*": ["./src/components/reusables/*"],
-      "~shared-ts-types/*": ["./src/utils/shared-ts-types/*"],
+      "~shared-ts-types/*": ["./src/shared-ts-types/*"],
       "~src/*": ["./src/*"]
     },
     "types": ["vite/client"],

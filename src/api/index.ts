@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import TApi from '~utils/shared-ts-types/t-api';
+import TApi from '~src/shared-ts-types/t-api';
 import announcementsApi from './announcements-api';
 import externalApi from './external-api';
 

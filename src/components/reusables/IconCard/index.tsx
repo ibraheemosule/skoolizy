@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Card, Circle } from '~reusables/ui/Others';
-import { IBaseProp } from '~utils/shared-ts-types/react-types';
+import { IBaseProp } from '~src/shared-ts-types/react-types';
 
 const IconCard = ({ children, className }: IBaseProp) => (
   <Card className={`p-3 grow md:grow-0 ${className}`}>{children}</Card>

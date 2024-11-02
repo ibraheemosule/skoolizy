@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
-import { TAnnouncementsData } from '~utils/shared-ts-types/t-announcements-data';
-import { TListApi } from '~utils/shared-ts-types/t-api';
+import { TAnnouncementsData } from '~src/shared-ts-types/t-announcements-data';
+import { TListApi } from '~src/shared-ts-types/t-api';
 
 export default (api: AxiosInstance) => ({
   getAllAnnouncements: async (params?: {

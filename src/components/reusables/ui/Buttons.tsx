@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode, memo } from 'react';
 import Icon from '~assets/Icons';
-import { IBaseProp } from '~utils/shared-ts-types/react-types';
+import { IBaseProp } from '~src/shared-ts-types/react-types';
 
 type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -67,6 +67,7 @@ DeleteBtn.displayName = 'DeleteBtn';
 
 export const Check = () => (
   <button
+    title="check button"
     className="p-1 text-purple.dark hover:text-purple.light"
     type="button"
   >
@@ -76,6 +77,7 @@ export const Check = () => (
 
 export const CancelBtn = ({ onClick }: TBtn) => (
   <button
+    title="cancel button"
     onClick={() => onClick?.()}
     className="p-1 text-red-800 hover:text-purple.light"
     type="button"
