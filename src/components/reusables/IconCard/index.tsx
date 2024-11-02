@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Circle, Card } from '~reusables/ui/Others';
+import { Card, Circle } from '~reusables/ui/Others';
 import { IBaseProp } from '~src/shared-ts-types/react-types';
 
 const IconCard = ({ children, className }: IBaseProp) => (

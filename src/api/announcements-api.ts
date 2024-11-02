@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
-import { TAnnouncementsData } from '~shared-ts-types/t-announcements-data';
-import { TListApi } from '~shared-ts-types/t-api';
+import { TAnnouncementsData } from '~src/shared-ts-types/t-announcements-data';
+import { TListApi } from '~src/shared-ts-types/t-api';
 
 export default (api: AxiosInstance) => ({
   getAllAnnouncements: async (params?: {
@@ -23,7 +23,7 @@ export default (api: AxiosInstance) => ({
     title: string;
     type: 'single_event' | 'multi_event' | 'memo';
     message: string;
-    recipient?: 'all' | 'parents' | 'teachers' | 'students';
+    recipient?: 'all' | 'parents' | 'staffs' | 'students';
     event_start_date?: string;
     event_end_date?: string;
     event_time?: string;
@@ -37,7 +37,7 @@ export default (api: AxiosInstance) => ({
     body: {
       title?: string;
       message?: string;
-      recipient?: 'all' | 'parents' | 'teachers' | 'students';
+      recipient?: 'all' | 'parents' | 'staffs' | 'students';
       event_start_date?: string;
       event_end_date?: string;
       event_time?: string;

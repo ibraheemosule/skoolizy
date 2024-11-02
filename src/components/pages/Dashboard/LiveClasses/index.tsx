@@ -1,7 +1,7 @@
-import { BoldText } from '~reusables/ui/Text';
 import SideHeaderTable from '~reusables/custom-table/SideHeaderTable';
+import { BoldText } from '~reusables/ui/Text';
 
-const sideHeader = ['Classroom', 'Subject', 'Teacher'];
+const sideHeader = ['Classroom', 'Subject', 'Staff'];
 const topHeader = ['JSS-1', 'JSS-2', 'JSS-3', 'SSS-1', 'SSS-2', 'SSS-3'];
 
 const content = [

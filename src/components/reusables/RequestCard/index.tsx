@@ -1,7 +1,7 @@
-import { BaseText, BoldText, SmallText } from '~reusables/ui/Text';
 import IconCard from '~reusables/IconCard';
+import { CancelBtn, Check } from '~reusables/ui/Buttons';
 import { Tag } from '~reusables/ui/Others';
-import { Check, CancelBtn } from '~reusables/ui/Buttons';
+import { BaseText, BoldText, SmallText } from '~reusables/ui/Text';
 
 const RequestCard = () => (
   <IconCard className="text-black ">
@@ -12,7 +12,7 @@ const RequestCard = () => (
       <IconCard.IconInfo className="grow ml-2 flex gap-2">
         <div>
           <BoldText className="text-gray-500">Mr John Doe</BoldText>
-          <SmallText>Teacher</SmallText>
+          <SmallText>Staff</SmallText>
         </div>
         <div className="ml-auto text-gray-500">
           <SmallText>02/10/23</SmallText>

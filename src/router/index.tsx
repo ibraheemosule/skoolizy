@@ -1,7 +1,7 @@
-import { Navigate, createBrowserRouter, RouteObject } from 'react-router-dom';
 import { ComponentType, Suspense, lazy } from 'react';
-import Layout from '~components/Layout';
+import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
+import Layout from '~components/Layout';
 
 type TRouter = RouteObject & {
   url: () => Promise<{ default: ComponentType<unknown> }>;
@@ -99,16 +99,16 @@ const router = createBrowserRouter([
         ],
       }),
       lazyLoad({
-        path: 'teachers',
-        url: () => import('~components/pages/Teachers'),
+        path: 'staffs',
+        url: () => import('~components/pages/Staffs'),
         children: [
           lazyLoad({
             path: '',
-            url: () => import('~components/pages/Teachers/AllTeachers'),
+            url: () => import('~components/pages/Staffs/AllStaffs'),
           }),
           lazyLoad({
             path: ':id',
-            url: () => import('~components/pages/Teachers/Detail'),
+            url: () => import('~components/pages/Staffs/Detail'),
             children: [
               {
                 path: '',
@@ -117,19 +117,17 @@ const router = createBrowserRouter([
               lazyLoad({
                 path: 'biodata',
                 url: () =>
-                  import('~components/pages/Teachers/Detail/routes/Biodata'),
+                  import('~components/pages/Staffs/Detail/routes/Biodata'),
               }),
               lazyLoad({
                 path: 'performance',
                 url: () =>
-                  import(
-                    '~components/pages/Teachers/Detail/routes/Performance'
-                  ),
+                  import('~components/pages/Staffs/Detail/routes/Performance'),
               }),
               lazyLoad({
                 path: 'results',
                 url: () =>
-                  import('~components/pages/Teachers/Detail/routes/Results'),
+                  import('~components/pages/Staffs/Detail/routes/Results'),
               }),
             ],
           }),
@@ -191,9 +189,9 @@ const router = createBrowserRouter([
                   import('~components/pages/Subjects/Detail/routes/Topics'),
               }),
               lazyLoad({
-                path: 'teachers',
+                path: 'staffs',
                 url: () =>
-                  import('~components/pages/Subjects/Detail/routes/Teachers'),
+                  import('~components/pages/Subjects/Detail/routes/Staffs'),
               }),
             ],
           }),

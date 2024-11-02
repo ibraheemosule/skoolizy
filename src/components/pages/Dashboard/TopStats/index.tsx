@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BoldText } from '~reusables/ui/Text';
-import { BaseBtn } from '~components/reusables/ui/Buttons';
-import ReportAbsence from '~components/reusables/ReportAbsence';
 import NewAnnouncement from '~components/pages/Announcements/New';
+import ReportAbsence from '~components/reusables/ReportAbsence';
+import { BaseBtn } from '~components/reusables/ui/Buttons';
+import { BoldText } from '~reusables/ui/Text';
 
 const nav = ['report absence', 'make announcement', 'record grade'];
 
@@ -38,7 +38,7 @@ const TopStats = () => {
         </menu>
         <div className="bg-brown.dark grow rounded-lg grid grid-cols-1 gap-px  xs:grid-cols-2">
           <div className=" px-4 py-6 max-xs:mx-auto">
-            <BoldText className="text-2xl text-white">Teachers</BoldText>
+            <BoldText className="text-2xl text-white">Staffs</BoldText>
             <div className="mt-2">
               <p className="text-sm font-medium  text-gray-400">Present</p>
               <p className=" flex items-baseline gap-x-2">
