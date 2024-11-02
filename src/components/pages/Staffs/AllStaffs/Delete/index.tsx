@@ -9,13 +9,8 @@ type TDeleteStaff = {
 const DeleteStaff = ({ staff, closeModal }: TDeleteStaff) => (
   <Modal
     size="sm"
-    title="Remove Staff from subject?"
-    content={
-      <p>
-        Deleting {staff} means the staff won&apos;t be registered under this
-        subject
-      </p>
-    }
+    title="Delete Staff from School?"
+    content={<p>Deleting {staff} would also delete the staff information</p>}
     action={() => null}
     close={() => closeModal()}
     actionText="Delete"

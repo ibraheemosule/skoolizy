@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ListOptions from '~components/reusables/ListOptions';
-import NewStaff from './Add';
-import FilterStaffs from './Filter';
+import AddStudent from '../Add';
+import FilterStaffs from '../Filter';
 
 export default function StaffsOption() {
   const [modal, setModal] = useState('');
@@ -9,12 +9,12 @@ export default function StaffsOption() {
   return (
     <>
       <ListOptions
-        onActionClick={() => setModal('newStaff')}
         onManageClick={() => setModal('filter')}
-        actionText="Add a staff to subject"
+        onActionClick={() => setModal('new')}
+        actionText="Add a new staff"
       />
       {modal === 'filter' && <FilterStaffs closeModal={() => setModal('')} />}
-      {modal === 'newStaff' && <NewStaff closeModal={() => setModal('')} />}
+      {modal === 'new' && <AddStudent closeModal={() => setModal('')} />}
     </>
   );
 }

@@ -1,7 +1,7 @@
-import { it, describe } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
+import { describe, it } from 'vitest';
 import TestWrapper from '~components/reusables/TestWrapper';
 import Announcements from '.';
 
@@ -39,7 +39,7 @@ describe('Announcements Page', () => {
     await act(async () => userEvent.click(announcement));
 
     expect(await screen.findByTestId('announcement-title')).toHaveTextContent(
-      /loofor teachers ng/i
+      /loofor staffs ng/i
     );
     expect(await screen.findByTestId('announcement-modal')).toHaveTextContent(
       /here is anosdftherorking/i

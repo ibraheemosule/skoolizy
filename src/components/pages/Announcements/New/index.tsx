@@ -19,7 +19,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   const [title, setTitle] = useCustomField('');
   const [message, setMessage] = useCustomField('');
   const [recipient, setRecipient] = useCustomField<
-    'all' | 'parents' | 'students' | 'teachers'
+    'all' | 'parents' | 'students' | 'staffs'
   >('all');
   const [reminder, setReminder, reminderList] = useCustomField(
     '',

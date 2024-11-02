@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import { BoldText } from '~reusables/ui/Text';
 
 const FilterTopics = ({ closeModal }: { closeModal: () => void }) => {
   const [subject, setSubject, subjectList] = useCustomField('', [
@@ -23,7 +23,7 @@ const FilterTopics = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <Modal
       size="sm"
-      title="Filter Teachers By"
+      title="Filter Staffs By"
       content={
         <div className="text-left mb-4">
           <div>
