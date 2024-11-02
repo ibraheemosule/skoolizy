@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Heading2 } from '~reusables/ui/Heading';
 import UserCard from '~reusables/UserCard';
 import UsersListLayout from '~reusables/UsersListLayout';
-import DeleteStudent from '../Delete';
-import StudentsFilter from './Options';
+import DeleteStaff from './Delete';
+import StaffsOptions from './Options';
 
 const people = new Array(30).fill({
   user: {
@@ -11,7 +11,7 @@ const people = new Array(30).fill({
     url: 'test',
   },
   role: {
-    name: 'Student',
+    name: 'Staff',
     url: '/Staffs/test',
   },
   rating: 4.5,
@@ -21,20 +21,20 @@ const people = new Array(30).fill({
   linkedin: '#',
 });
 
-const AllStudents = () => {
-  const [deleteStudent, setDeleteStudent] = useState('');
+const AllStaffs = () => {
+  const [deleteStaff, setDeleteStaff] = useState('');
   return (
     <>
-      {deleteStudent && (
-        <DeleteStudent
-          student={deleteStudent}
-          closeModal={() => setDeleteStudent('')}
+      {deleteStaff && (
+        <DeleteStaff
+          staff={deleteStaff}
+          closeModal={() => setDeleteStaff('')}
         />
       )}
       <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
         <div className="w-full min-h-full shrink-0">
           <Heading2 className="capitalize text-center">
-            Meet our Students
+            Meet our Staffs
           </Heading2>
           <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden mt-6">
             <UsersListLayout
@@ -47,12 +47,12 @@ const AllStudents = () => {
                       role={person.role}
                       rating={person.rating}
                       imageSrc={person.imageUrl}
-                      deleteAction={() => setDeleteStudent('delete')}
+                      deleteAction={() => setDeleteStaff('delete')}
                     />
                   ))}
                 </>
               }
-              Filter={StudentsFilter}
+              Filter={StaffsOptions}
             />
           </div>
         </div>
@@ -61,4 +61,4 @@ const AllStudents = () => {
   );
 };
 
-export default AllStudents;
+export default AllStaffs;
