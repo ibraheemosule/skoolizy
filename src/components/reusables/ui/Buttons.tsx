@@ -29,7 +29,7 @@ export const ActionBtn = memo(
       {...props}
     >
       {loading ? (
-        <Icon name="spinner" width={40} height={40} fill="white" />
+        <Icon name="spinner" width={40} height={40} fill="currentColor" />
       ) : (
         children
       )}

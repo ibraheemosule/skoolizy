@@ -3,8 +3,7 @@ import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import SkeletonLoader from '../SkeletonLoader';
 import { isFuncPromise } from '~utils/index';
-import popup from '~utils/popup';
-import { TError, TModal } from './t-modal';
+import { TModal } from './t-modal';
 import { sizes } from './u-modal';
 
 const Modal: FC<TModal> = ({
@@ -25,15 +24,10 @@ const Modal: FC<TModal> = ({
     let res: unknown;
     if (action && isFuncPromise(action)) {
       setLoading(true);
-      try {
-        res = await action();
-        if (res) popup('success', (res as { message: string }).message);
-      } catch (e: unknown) {
-        const err = e as TError;
-        popup('error', err?.response?.data?.error || err.message);
-      } finally {
-        setLoading(false);
-      }
+
+      res = await action();
+
+      setLoading(false);
     } else action?.();
     if (res) close((prev) => !prev);
   };
@@ -58,11 +52,16 @@ const Modal: FC<TModal> = ({
           sizes[size || 'lg']
         } bg-white shadow-sm p-6 rounded-md`}
       >
-        <div className="text-right">
-          <BaseBtn testId="close-modal" onClick={() => close((prev) => !prev)}>
-            <CancelIcon height={25} width={25} />
-          </BaseBtn>
-        </div>
+        {close && (
+          <div className="text-right">
+            <BaseBtn
+              testId="close-modal"
+              onClick={() => close((prev) => !prev)}
+            >
+              <CancelIcon height={25} width={25} />
+            </BaseBtn>
+          </div>
+        )}
         {isLoading ? (
           <div className="mt-8">
             <SkeletonLoader type="text" />

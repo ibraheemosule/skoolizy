@@ -18,3 +18,13 @@ export type IconType = {
   fill?: string;
   strokeWidth?: number;
 };
+
+export interface IBannerOptions {
+  text: string;
+  type: 'warning' | 'error' | 'info' | 'success';
+  action?: (() => void) | null;
+  btnText?: string;
+  persist?: boolean;
+  id?: number;
+  timeout?: number;
+}

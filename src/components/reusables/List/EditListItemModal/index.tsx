@@ -54,10 +54,7 @@ export const ListItemAuthEditModal = ({
     ? 'Input the code sent to your email and password to confirm update'
     : `To update ${fieldToEdit}, an OTP will be sent to confirm new ${fieldToEdit}`;
 
-  const sendOtp = () => {
-    console.log(value);
-    setOtpSent(true);
-  };
+  const sendOtp = () => setOtpSent(true);
 
   return (
     <Modal

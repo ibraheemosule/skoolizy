@@ -8,7 +8,6 @@ const AcademicInfo = () =>
       <div className="py-6 font-bold text-sm border-b border-gray-100">
         {capCharRemoveUnderscore(academicKey)}
       </div>
-
       <List key={academicKey}>
         {Object.entries(academicValue).map(([key, value]) => (
           <ListItem
