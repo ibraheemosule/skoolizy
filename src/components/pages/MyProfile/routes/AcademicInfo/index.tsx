@@ -14,10 +14,10 @@ const AcademicInfo = () =>
             key={key}
             title={capCharRemoveUnderscore(key)}
             description={
-              key === 'certificate_obtained' && Array.isArray(value) ? (
-                <DocumentList doc={value} />
+              key === 'certificate_obtained' ? (
+                <DocumentList doc={academicValue[key]} />
               ) : (
-                <span>{value}</span>
+                <span>{value as string}</span>
               )
             }
           />
