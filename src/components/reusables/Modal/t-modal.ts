@@ -4,7 +4,7 @@ export type TModal = {
   close: Dispatch<SetStateAction<boolean>> | (() => void);
   action?: () => void;
   actionText?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   scroll?: boolean;
   fixedActionBtn?: boolean;
   isLoading?: boolean;
