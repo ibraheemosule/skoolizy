@@ -3,6 +3,7 @@ import announcementsApi from './announcements-api';
 import TApi from '~shared-ts-types/t-api';
 import authStore from '~src/store/auth';
 import auth from './auth-api';
+import externalApi from './external-api';
 
 const baseURL = String(import.meta.env.VITE_BASE_URL);
 class Api {
