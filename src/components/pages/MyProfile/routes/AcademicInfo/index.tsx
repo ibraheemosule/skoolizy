@@ -8,16 +8,17 @@ const AcademicInfo = () =>
       <div className="py-6 font-bold text-sm border-b border-gray-100">
         {capCharRemoveUnderscore(academicKey)}
       </div>
+
       <List key={academicKey}>
         {Object.entries(academicValue).map(([key, value]) => (
           <ListItem
             key={key}
             title={capCharRemoveUnderscore(key)}
             description={
-              key === 'certificate_obtained' && Array.isArray(value) ? (
-                <DocumentList doc={value} />
+              key === 'certificate_obtained' ? (
+                <DocumentList doc={academicValue[key]} />
               ) : (
-                <span>{value}</span>
+                <span>{value as string}</span>
               )
             }
           />
