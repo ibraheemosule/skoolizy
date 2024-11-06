@@ -28,3 +28,4 @@ dist-ssr
 
 # Project dump files
 coverage
+code_dump.ts

@@ -50,9 +50,9 @@ const RecordGrade = () => {
               </CustomField>
             </div>
           </div>
-          <ActionBtn className="self-end xl:ml-auto py-2 px-3 border">
-            Submit Grade
-          </ActionBtn>
+          <div className="self-end xl:ml-auto mb-1">
+            <ActionBtn>Submit Grade</ActionBtn>
+          </div>
         </div>
         <div className="mt-8">
           <ScoreBoard />

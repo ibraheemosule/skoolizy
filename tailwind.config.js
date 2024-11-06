@@ -16,6 +16,16 @@ export default {
         xs: '440px',
         xlg: '900px',
       },
+
+      keyframes: {
+        slideDown: {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        slideDown: 'slideDown 0.3s ease-in-out',
+      },
     },
   },
   variants: {

@@ -1,18 +1,38 @@
-import { memo } from 'react';
+import { ButtonHTMLAttributes, ReactNode, memo } from 'react';
+import Icon from '~assets/Icons';
 import { IBaseProp } from '~src/shared-ts-types/react-types';
+
+type TButton = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: ReactNode;
+  testId?: string;
+  loading?: boolean;
+};
 
 type TBtn = Omit<IBaseProp, 'children'> & { onClick?: () => void };
 type TBtnWithChild = IBaseProp & { onClick?: () => void };
 
+const styles =
+  'text-white font-normal bg-purple.dark rounded-lg flex w-full justify-center';
+
 export const ActionBtn = memo(
-  ({ children, className, onClick, testId }: TBtnWithChild) => (
+  ({ children, onClick, testId, loading, className, ...props }: TButton) => (
     <button
+      disabled={loading}
       data-testid={testId}
       onClick={onClick}
-      className={`text-white bg-purple.dark rounded-lg ${className}`}
+      className={`${className || styles} ${
+        loading
+          ? 'opacity-50 cursor-waitx'
+          : ` ${className ? '' : 'px-4 py-2 hover:bg-purple'}`
+      } ${props.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       type="button"
+      {...props}
     >
-      {children}
+      {loading ? (
+        <Icon name="spinner" width={40} height={40} fill="currentColor" />
+      ) : (
+        children
+      )}
     </button>
   )
 );
@@ -47,6 +67,7 @@ DeleteBtn.displayName = 'DeleteBtn';
 
 export const Check = () => (
   <button
+    title="check button"
     className="p-1 text-purple.dark hover:text-purple.light"
     type="button"
   >
@@ -56,6 +77,7 @@ export const Check = () => (
 
 export const CancelBtn = ({ onClick }: TBtn) => (
   <button
+    title="cancel button"
     onClick={() => onClick?.()}
     className="p-1 text-red-800 hover:text-purple.light"
     type="button"

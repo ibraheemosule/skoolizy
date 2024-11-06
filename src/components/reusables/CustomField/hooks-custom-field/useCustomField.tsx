@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 
 /**
  * @param {string | string []} initialValue  The initial value of the input field
@@ -24,7 +24,20 @@ const useCustomField = <T extends string | string[]>(
   const [value, updateValue] = useState(initialValue);
   const [filteredList, setFilteredList] = useState([...dropDownist]);
 
-  const filterFn = (arg: string | string[]) => {
+  const filterFn = (
+    arg: string | string[],
+    onChange?: Dispatch<SetStateAction<string>>
+  ) => {
+    if (onChange) {
+      const doesOptionExist = list.current.find(
+        (item) => item.toLowerCase() === arg
+      );
+      if (!doesOptionExist) {
+        onChange('');
+        setTimeout(() => setFilteredList([...list.current]), 100);
+      }
+      return;
+    }
     if (Array.isArray(arg)) {
       list.current = arg;
       setFilteredList(arg);

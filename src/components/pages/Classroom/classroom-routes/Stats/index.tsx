@@ -3,7 +3,7 @@ import RateSomeone from '~reusables/RateSomeone';
 
 const TopStats = () => (
   <>
-    <div className=" max-w-sm">
+    <div className=" max-w-md">
       <RateSomeone />
     </div>
     <div className=" bg-brown.dark mt-8 rounded-lg">

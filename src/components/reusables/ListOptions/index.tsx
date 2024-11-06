@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { BaseBtn, ActionBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
 
-type TListOptins = {
+type TListOptions = {
   onManageClick?: () => void;
   manageText?: string;
   onActionClick?: () => void;
@@ -14,8 +14,8 @@ const ListOptions = ({
   manageText = 'Manage List',
   onActionClick,
   actionText = 'Add new',
-}: TListOptins) => (
-  <div className="flex flex-wrap justify-end gap-4">
+}: TListOptions) => (
+  <div className="flex flex-wrap justify-end gap-4 text-purple.dark font-semibold">
     {onManageClick && (
       <BaseBtn
         testId="manage-list"
@@ -26,13 +26,11 @@ const ListOptions = ({
       </BaseBtn>
     )}
     {onActionClick && (
-      <ActionBtn
-        testId="list-action-btn"
-        onClick={onActionClick}
-        className="px-4 py-2 text-purple.dark hover:opacity-50"
-      >
-        {actionText}
-      </ActionBtn>
+      <div>
+        <ActionBtn testId="list-action-btn" onClick={onActionClick}>
+          {actionText}
+        </ActionBtn>
+      </div>
     )}
   </div>
 );

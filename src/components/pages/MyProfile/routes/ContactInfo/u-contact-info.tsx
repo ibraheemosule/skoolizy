@@ -6,10 +6,6 @@ export const contact = {
   emergency_phone_number: '08012345678',
 };
 
-export const canEdit = [
-  'email_address',
-  'phone_number',
-  'home_address',
-  'emergency_email_address',
-  'emergency_phone_number',
-];
+export const contactAuthEdit = ['email_address', 'phone_number'];
+
+export const canEdit = Object.keys(contact);

@@ -1,49 +1,96 @@
 import { useState } from 'react';
-import AsideAdmin from '~components/Layout/AsideAdmin';
-import { BaseBtn } from '~reusables/ui/Buttons';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
+import useFilter from '~components/reusables/hooks/useFilter';
 import Icon from '~assets/Icons';
 import NewAnnouncement from './New';
 import FilterAnnouncements from './Filter';
-import { formatDate } from '~utils/format';
+import { capCharRemoveUnderscore, formatDate } from '~utils/format';
 import ViewAnnouncement from './View';
 import ListOptions from '~components/reusables/ListOptions';
+import Api from '~api';
+import SkeletonLoader from '~components/reusables/SkeletonLoader';
+import Pagination from '~components/reusables/Pagination';
+import EmptyView from '~components/reusables/empty-view';
+
+const { api } = new Api();
 
 const Announcements = () => {
+  const filter = useFilter();
+  const { state } = useLocation();
+  const search = state?.search || '';
+  const type = state?.type || '';
+  const page = state?.page || 1;
+  const fromDate = state?.from_date || '';
+  const toDate = state?.to_date || '';
+  const eventDays = state?.event_days || '';
   const [modal, setModal] = useState('');
-  const [view, setView] = useState('');
+  const [view, setView] = useState<number | null>(null);
+
+  const { data, isFetching, refetch, isError } = useQuery({
+    queryKey: [
+      'announcements',
+      search,
+      type,
+      page,
+      eventDays,
+      fromDate,
+      toDate,
+    ],
+    queryFn: () => api.getAllAnnouncements(state),
+    placeholderData: keepPreviousData,
+  });
+
+  const annoucements = data?.data;
+
+  const filterAnnouncements = (arg: { [key: string]: string | number } = {}) =>
+    filter({ ...arg });
 
   return (
     <section
       data-testid="announcements-page"
-      className="flex _full flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto"
+      className="flex max-h-full gap-6 overflow-auto"
     >
-      <div className="w-full min-h-full lg:w-3/5 xl:w-8/12  shrink-0">
-        <div className="flex flex-col md:h-full md:overflow-hidden">
+      <div className="w-full min-h-full shrink-0">
+        <div className="flex flex-col h-full overflow-hidden">
           {modal === 'new' && (
             <NewAnnouncement closeModal={() => setModal('')} />
           )}
           {modal === 'filter' && (
-            <FilterAnnouncements closeModal={() => setModal('')} />
+            <FilterAnnouncements
+              action={filterAnnouncements}
+              closeModal={() => setModal('')}
+            />
           )}
           {view && (
-            <ViewAnnouncement view={view} closeModal={() => setView('')} />
+            <ViewAnnouncement id={view} closeModal={() => setView(null)} />
           )}
-          <div className="mt-8">
-            <ListOptions
-              onManageClick={() => setModal('filter')}
-              onActionClick={() => setModal('new')}
-              actionText="New announcement"
+          <div className="mt-8 flex gap-4 flex-wrap">
+            <Pagination
+              page={data?.page}
+              totalPage={data?.total_pages}
+              items={data?.total_items}
+              filterAction={filterAnnouncements}
+              type="announcements"
             />
+            <div className="ml-auto">
+              <ListOptions
+                onManageClick={() => setModal('filter')}
+                onActionClick={() => setModal('new')}
+                actionText="New announcement"
+              />
+            </div>
           </div>
 
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
-            {Array(5)
-              .fill('')
-              .map(() => (
-                <BaseBtn
-                  testId="annoucement"
+            {isFetching ? (
+              <SkeletonLoader type="text" />
+            ) : annoucements?.length ? (
+              annoucements?.map((a) => (
+                <button
+                  data-testid="announcement"
                   key={Math.random()}
-                  onClick={() => setView('annoucement')}
+                  onClick={() => setView(a.id)}
                   className="mt-4 p-2 w-full hover:translate-y-0.5 flex gap-4 justify-between bg-gray-100 text-gray-600 items-start rounded-lg"
                 >
                   <h4 className="flex gap-2 items-center text-left font-semibold">
@@ -53,19 +100,42 @@ const Announcements = () => {
                       fill="gray"
                       style={{ alignSelf: 'flex-start', marginTop: 2 }}
                     />
-                    <span>Examamination is starting next week monday</span>
+                    <div>
+                      <p className="first-letter:uppercase">{a.title}</p>
+                      <div>
+                        <span className="text-sm text-gray-500 font-semibold">
+                          Created on{' '}
+                          <small className="font-bold">
+                            {formatDate(a.date_created).getDate} -{' '}
+                            {formatDate(a.date_created).getTime}
+                          </small>
+                        </span>
+                      </div>
+                    </div>
                   </h4>
-                  <div className="flex flex-col mt-0.5">
-                    <small>{formatDate().getDate}</small>
-                    <small>{formatDate().getTime}</small>
-                  </div>
-                </BaseBtn>
-              ))}
+                  <span className="sr-only">
+                    A {capCharRemoveUnderscore(a.type.split('_').join(' '))}{' '}
+                    announcement sent to {a.recipient}
+                  </span>
+                  <span className="capitalize text-sm p-0 bg-transparent text-gray-500 font-semibold mr-4">
+                    {a.recipient}{' '}
+                    {capCharRemoveUnderscore(a.type.split('_').join(' '))}
+                  </span>
+                </button>
+              ))
+            ) : (
+              <EmptyView
+                error={isError}
+                message={
+                  isError
+                    ? 'Could not Fetch Announcements'
+                    : 'No Announcements yet'
+                }
+                {...(isError ? { action: refetch } : {})}
+              />
+            )}
           </div>
         </div>
-      </div>
-      <div className="w-full lg:w-auto grow overflow-auto">
-        <AsideAdmin />
       </div>
     </section>
   );

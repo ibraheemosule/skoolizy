@@ -1,4 +1,5 @@
 import { VerticalNav } from '~reusables/Menu';
+import authStore from '~src/store/auth';
 
 const nav = [
   {
@@ -13,7 +14,7 @@ const nav = [
   } as const,
   {
     label: 'Sign out',
-    action: () => null,
+    action: authStore.getState().logout,
     icon: 'exit',
   } as const,
 ];

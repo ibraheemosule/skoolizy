@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, memo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { capitalizeChar } from '~src/utils';
+import { capCharRemoveUnderscore } from '~src/utils';
 import Menu from '~assets/Icons/MenuIcon';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
@@ -11,13 +11,14 @@ interface ITopHeader {
 
 const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
   const { pathname } = useLocation();
-  const route = pathname.slice(1).replace(/-/g, ' ').split('/');
+  const route = pathname.slice(1).split('/');
 
   const [user, setUser] = useCustomField('john');
 
   return (
     <>
       <button
+        title="menu button"
         data-testid="menu-btn"
         onClick={() => setToggleNav(true)}
         className="shrink-0 mr-4 md:hidden"
@@ -33,7 +34,7 @@ const TopHeader: FC<ITopHeader> = ({ setToggleNav }) => {
               className="tracking-tight first:before:hidden before:content-['-'] before:mx-2 hover:text-purple.dark"
               to={route.slice(0, i + 1).join('/')}
             >
-              {capitalizeChar(r)}
+              {capCharRemoveUnderscore(r.replace(/-/g, ' '))}
             </NavLink>
           ))}
         </h2>

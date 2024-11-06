@@ -1,12 +1,33 @@
-import { useState, FC } from 'react';
+import { useState, FC, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import SideNav from '~components/Layout/SideNav';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
 
+import useBanner from '~components/reusables/hooks/useBanner';
+import { getPrevRoute } from '~utils/query';
+
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
+  const { banner } = useBanner();
   const animate = toggleNav ? 'animate-in' : 'animate-out';
+
+  useEffect(() => {
+    const bannerOption = {
+      type: 'success',
+      timeout: 3,
+      persist: true,
+    } as const;
+    if (
+      ['/auth/login', '/auth/verify-account'].includes(String(getPrevRoute()))
+    ) {
+      banner({
+        text: 'Login Successful!',
+        ...bannerOption,
+      });
+    }
+  }, []);
 
   return (
     <main className="absolute inset-0 flex overflow-hidden">
@@ -18,11 +39,14 @@ const Layout: FC = () => {
       >
         <SideNav />
       </section>
-      <section className="h-full flex flex-col overflow-y-auto grow pt-6">
+      <section
+        id="layout"
+        className="h-full flex flex-col overflow-y-auto grow pt-6"
+      >
         <header className="_full shrink-0 flex">
           <TopHeader setToggleNav={setToggleNav} />
         </header>
-        <div className="page w-full overflow-hidden grow max-w-[86rem] mx-auto my-6">
+        <div className="_full overflow-hidden grow max-w-[96rem] mx-auto mb-6">
           <Outlet />
         </div>
       </section>

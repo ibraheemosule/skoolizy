@@ -1,137 +1,150 @@
 import { memo, useState } from 'react';
-import CustomField from '~reusables/CustomField';
-import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import DateTimePicker from 'react-datetime-picker';
 import Modal from '~reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
+import { recipientsList, reminders, navRouting } from './u-new';
+import Api from '~api';
+import { dateToDbFormat, formatDate } from '~utils/format';
+import SelectField from '~components/reusables/CustomField/SelectField';
+import TextField from '~components/reusables/CustomField/TextField';
+import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
 
-const testing = ['everyone', 'parents', 'teachers', 'students'];
+const { api } = new Api();
 
 const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
-  const [type, setType] = useState('memo');
-  const [announcement, setAnnouncement] = useCustomField('');
-  const [value, setValue, list, filterFn] = useCustomField<string[]>(
-    [],
-    testing
-  );
-  const [reminder, setReminder, reminderList] = useCustomField('', [
-    'None',
-    'daily',
-    'Every Two days',
-    'Every week',
-  ]);
-  const [startDate, setStartDate] = useCustomField('');
-  const [endDate, setEndDate] = useCustomField('');
+  const [type, setType] = useCustomField<
+    'single_event' | 'multi_event' | 'memo'
+  >('memo');
+  const [title, setTitle] = useCustomField('');
+  const [message, setMessage] = useCustomField('');
+  const [recipient, setRecipient] = useCustomField<
+    'all' | 'parents' | 'students' | 'staffs'
+  >('all');
+  const [reminder, setReminder] = useState('');
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [eventTime, setEventTime] = useState<Date | null>(null);
+
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation({
+    mutationFn: () =>
+      api.postAnnouncement({
+        title,
+        message,
+        ...(type !== 'memo' && {
+          event_start_date: dateToDbFormat(startDate) || '',
+          reminder: reminders[reminder as keyof typeof reminders],
+        }),
+        ...(type === 'multi_event' && {
+          event_end_date: dateToDbFormat(endDate) || '',
+        }),
+        ...(type === 'single_event' && {
+          event_time: formatDate(String(eventTime), 24).getTime,
+        }),
+        recipient,
+        type,
+      }),
+    onSuccess: async () =>
+      queryClient.invalidateQueries({
+        queryKey: ['announcements'],
+      }),
+  });
 
   const nav = {
     Memo: () => setType('memo'),
-    'Single-day event': () => setType('single-day event'),
-    'Multi-day event': () => setType('multi-day event'),
+    'Single-day event': () => setType('single_event'),
+    'Multi-day event': () => setType('multi_event'),
   };
 
   return (
     <Modal
       size="md"
       title="Make a new announcement"
-      action={() => null}
+      action={async () => mutateAsync()}
+      close={() => closeModal()}
       actionText="Send Announcement"
       fixedActionBtn
       content={
-        <div className="pb-8">
-          <HorizontalNav nav={nav} active={type} />
+        <div className="pb-8 mt-6">
+          <HorizontalNav nav={nav} active={navRouting[type]} />
           <div className="mt-4">
             <BoldText>Title:</BoldText>
             <div className="mt-1">
-              <CustomField
-                onChange={(v) => setAnnouncement(v)}
-                field="input"
-                value={announcement}
-                placeholder={`Type ${type} title`}
-                icon={null}
+              <TextField
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder={`Type ${type.split('_').join(' ')} title`}
               />
+              {/* <CustomField
+                onChange={setTitle}
+                field="input"
+                value={title}
+                placeholder={`Type ${type.split('_').join(' ')} title`}
+                icon={null}
+              /> */}
             </div>
           </div>
 
           <div className="mt-4">
-            <BoldText>Details:</BoldText>
+            <BoldText>Message {type !== 'memo' && '(Optional)'}:</BoldText>
             <div className="mt-1">
               <textarea
-                placeholder={`Type more details about ${type} here...`}
+                placeholder="Type Message here..."
                 className="w-full outline-none resize-none h-28 bg-gray-100 p-2 rounded-lg"
-                maxLength={200}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
           </div>
 
-          {/* <div>
-            <div className="flex flex-wrap items-center mt-4 gap-4 gap-x-6 sm:justify-end">
-              <label className="w-full sm:w-auto" htmlFor="memo">
-                <input
-                  id="memo"
-                  type="radio"
-                  className="cursor-pointer mr-2"
-                  name="announcement-type"
-                  checked={type === 'memo'}
-                  value={type}
-                  onChange={() => setType('memo')}
-                />
-                Memo
-              </label>
-
-              <label className="w-full sm:w-auto" htmlFor="one-day">
-                <input
-                  id="one-day"
-                  type="radio"
-                  className="cursor-pointer mr-2"
-                  name="announcement-type"
-                  value={type}
-                  onChange={() => setType('one-day')}
-                />
-                Single Day Event
-              </label>
-
-              <label className="w-full sm:w-auto" htmlFor="multi-day">
-                <input
-                  id="multi-day"
-                  type="radio"
-                  className="cursor-pointer mr-2"
-                  name="announcement-type"
-                  value={type}
-                  onChange={() => setType('multi-day')}
-                />
-                Multi-day Event
-              </label>
-            </div>
-          </div> */}
-
-          <div className="flex mt-4 gap-4 flex-wrap sm:justify-end">
+          <div className="flex mt-4 gap-4 flex-wrap">
             {type !== 'memo' && (
               <div className="w-[150px]">
-                <BoldText>
-                  {type === 'multi-day event' && 'Start '}Date:
-                </BoldText>
+                <BoldText>{type === 'multi_event' && 'Start '}Date:</BoldText>
                 <div className="mt-1">
-                  <CustomField
-                    placeholder="Recipients"
+                  <DateTimePicker
+                    format="dd/MM/yyyy"
+                    dayPlaceholder="DD"
+                    monthPlaceholder="MM"
+                    yearPlaceholder="YYYY"
+                    calendarIcon={null}
+                    onChange={(arg: Date | null) => setStartDate(arg)}
                     value={startDate}
-                    onChange={setStartDate}
-                    field="input"
-                    type="date"
                   />
                 </div>
               </div>
             )}
 
-            {type === 'multi-day event' && (
+            {type === 'multi_event' && (
               <div className="w-[150px]">
                 <BoldText>End Date:</BoldText>
                 <div className="mt-1">
-                  <CustomField
-                    placeholder="Recipients"
+                  <DateTimePicker
+                    format="dd/MM/yyyy"
+                    dayPlaceholder="DD"
+                    monthPlaceholder="MM"
+                    yearPlaceholder="YYYY"
+                    calendarIcon={null}
+                    onChange={(arg: Date | null) => setEndDate(arg)}
                     value={endDate}
-                    onChange={setEndDate}
-                    field="input"
-                    type="date"
+                  />
+                </div>
+              </div>
+            )}
+
+            {type === 'single_event' && (
+              <div className="w-[150px]">
+                <BoldText>Time of Event:</BoldText>
+                <div className="mt-1">
+                  <DateTimePicker
+                    format="hh:mm a"
+                    hourPlaceholder="HH"
+                    minutePlaceholder="MM"
+                    calendarIcon={null}
+                    onChange={(arg: Date | null) => setEventTime(arg)}
+                    value={eventTime}
                   />
                 </div>
               </div>
@@ -141,7 +154,12 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
               <div className="w-[150px]">
                 <BoldText>Reminder:</BoldText>
                 <div className="mt-1">
-                  <CustomField
+                  <SelectField
+                    onSelect={setReminder}
+                    value={reminder}
+                    list={Object.keys(reminders)}
+                  />
+                  {/* <CustomField
                     placeholder="Set Reminder"
                     value={reminder}
                     onSelect={setReminder}
@@ -154,7 +172,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                         </CustomField.Dropdown>
                       ))}
                     </CustomField.DropdownWrapper>
-                  </CustomField>
+                  </CustomField> */}
                 </div>
               </div>
             )}
@@ -162,27 +180,30 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
             <div className="w-[150px]">
               <BoldText>Recipient:</BoldText>
               <div className="mt-1">
-                <CustomField
+                <SelectField
+                  onSelect={setRecipient as (arg: string) => void}
+                  value={recipient}
+                  list={recipientsList}
+                />
+                {/* <CustomField
                   placeholder="Recipients"
-                  value={value}
-                  onSelect={setValue}
+                  value={recipient}
+                  onSelect={setRecipient}
                   field="select"
-                  filterFn={filterFn}
                 >
                   <CustomField.DropdownWrapper width={100}>
-                    {list.map((name) => (
+                    {recipientsList.map((name) => (
                       <CustomField.Dropdown key={name} value={name}>
-                        {name}
+                        <span className="capitalize block p-2">{name}</span>
                       </CustomField.Dropdown>
                     ))}
                   </CustomField.DropdownWrapper>
-                </CustomField>
+                </CustomField> */}
               </div>
             </div>
           </div>
         </div>
       }
-      close={() => closeModal()}
     />
   );
 };

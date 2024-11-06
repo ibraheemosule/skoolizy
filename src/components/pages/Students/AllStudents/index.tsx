@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import UsersListLayout from '~reusables/UsersListLayout';
-import StudentsFilter from './Options';
 import { Heading2 } from '~reusables/ui/Heading';
 import UserCard from '~reusables/UserCard';
+import UsersListLayout from '~reusables/UsersListLayout';
 import DeleteStudent from '../Delete';
+import StudentsFilter from './Options';
 
 const people = new Array(30).fill({
   user: {
@@ -12,7 +12,7 @@ const people = new Array(30).fill({
   },
   role: {
     name: 'Student',
-    url: '/teachers/test',
+    url: '/Staffs/test',
   },
   rating: 4.5,
   imageUrl:
