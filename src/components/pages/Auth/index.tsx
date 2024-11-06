@@ -1,24 +1,36 @@
 import { memo, ReactElement, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
+import useBanner from '~components/reusables/hooks/useBanner';
 import authStore from '~src/store/auth';
+import { getPrevRoute } from '~utils/query';
 
 const allowed = [
   '/auth/signup',
   '/auth/login',
   '/auth/verify-account',
-  '/auth/forgot-password',
+  '/auth/reset-password',
 ];
 
 const Auth = ({ children }: { children: ReactElement }) => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { banner } = useBanner();
 
   useEffect(() => {
-    if (location.state?.from && !allowed.includes(location.state?.from)) {
-      navigate(authStore.getState().token ? '/dashboard' : location.state?.to);
+    if (authStore.getState().token) {
+      navigate('/dashboard');
+      return;
     }
-  }, [allowed]);
+
+    const prevRoute = getPrevRoute();
+    if (prevRoute && allowed.includes(prevRoute)) return;
+
+    banner({
+      type: 'success',
+      timeout: 2,
+      text: 'You have successfully logged out!',
+    });
+  }, []);
 
   return (
     <section className="flex _full flex-wrap fixed inset-0 xlg:flex-nowrap overflow-auto xlg:overflow-hidden gap-6">

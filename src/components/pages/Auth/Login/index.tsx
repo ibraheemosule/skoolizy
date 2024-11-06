@@ -15,7 +15,7 @@ const Login = () => {
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
     onSuccess: (data) => {
       authStore.getState().login(data.data.access_token);
@@ -114,8 +114,8 @@ const Login = () => {
 
               <ActionBtn
                 onClick={async () => mutateAsync()}
-                disabled={!tag || !password}
-                loading={isPending}
+                disabled={!tag || !password || isPending || isSuccess}
+                loading={isPending || isSuccess}
               >
                 Sign in
               </ActionBtn>

@@ -18,7 +18,7 @@ class Api {
       const originalRequest = error.config;
 
       const getNewToken =
-        error.response.data.message === 'Expired token' &&
+        error.response?.data?.message === 'Expired token' &&
         authStore.getState().staySignedIn;
 
       if (!getNewToken) {

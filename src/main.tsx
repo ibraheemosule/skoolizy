@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from '~components/App';
+import App from './App';
 import './index.css';
 
-const baseURL = String(import.meta.env.MODE);
-const Container = baseURL === 'development' ? React.Fragment : React.StrictMode;
+const env = String(import.meta.env.MODE);
+const Container = env === 'development' ? React.Fragment : React.StrictMode;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Container>

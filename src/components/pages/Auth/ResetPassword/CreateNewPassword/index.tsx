@@ -6,6 +6,7 @@ import {
   createNewPasswordInputFieldValidation,
   TCreateNewPasswordProps,
 } from './u-createNewPassword';
+import Modal from '~components/reusables/Modal';
 
 const CreateNewPassword: FC<TCreateNewPasswordProps> = ({ token }) => {
   const {
@@ -16,6 +17,8 @@ const CreateNewPassword: FC<TCreateNewPasswordProps> = ({ token }) => {
     setError,
     createNewPassword,
     isPending,
+    resetSuccessful,
+    routeToLogin,
   } = useCreateNewPassword(token);
 
   return (
@@ -89,6 +92,21 @@ const CreateNewPassword: FC<TCreateNewPasswordProps> = ({ token }) => {
           Create new password
         </ActionBtn>
       </div>
+      {resetSuccessful && (
+        <Modal
+          close={routeToLogin}
+          title="Password reset successful"
+          size="sm"
+          content={
+            <p className="my-8">
+              You have successfully reset your password. You can now sign in
+              with your new password.
+            </p>
+          }
+          action={routeToLogin}
+          actionText="Proceed to Login"
+        />
+      )}
     </>
   );
 };

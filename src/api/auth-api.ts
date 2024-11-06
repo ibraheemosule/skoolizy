@@ -4,7 +4,7 @@ import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 export default (api: AxiosInstance) => ({
   signup: async (
     body: TUserSignupPayload
-  ): Promise<{ data: { message: string } }> => {
+  ): Promise<{ data: { message: string; tag: string } }> => {
     const res = await api.post('/auth/signup', body);
     return res.data;
   },

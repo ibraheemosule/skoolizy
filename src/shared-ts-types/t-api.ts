@@ -8,10 +8,14 @@ type TApi = ReturnType<typeof externalApi> &
 
 export type TListApi<T> = {
   data: T[];
-  page: 1;
-  per_page: 10;
-  total_items: 14;
-  total_pages: 2;
+  page: number;
+  per_page: number;
+  total_items: number;
+  total_pages: number;
+};
+
+export type TApiError = {
+  response: { data: { error: string; message: string }; status: number };
 };
 
 export default TApi;

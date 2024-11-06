@@ -7,71 +7,221 @@ import {
 import Layout from '~components/Layout';
 import AuthAccess from './router-widgets/AuthAccess';
 import LazyLoad from './router-widgets/LazyLoad';
+import SaveLastRoute from './router-widgets/SaveLastRoute';
 
 function AppRoutes() {
   return (
     <Router>
-      <Routes>
-        <Route element={<AuthAccess />}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Navigate to="dashboard" />} />
-            <Route
-              path="dashboard"
-              element={
-                <LazyLoad url={() => import('~components/pages/Dashboard')} />
-              }
-            />
-            <Route
-              path="announcements"
-              element={
-                <LazyLoad
-                  url={() => import('~components/pages/Announcements')}
-                />
-              }
-            />
-            <Route
-              path="feeds"
-              element={
-                <LazyLoad url={() => import('~components/pages/Feeds')} />
-              }
-            />
-            <Route
-              path="requests"
-              element={
-                <LazyLoad url={() => import('~components/pages/Requests')} />
-              }
-            />
-
-            <Route
-              path="students"
-              element={
-                <LazyLoad url={() => import('~components/pages/Students')} />
-              }
-            >
+      <SaveLastRoute>
+        <Routes>
+          <Route element={<AuthAccess />}>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Navigate to="dashboard" />} />
               <Route
-                index
+                path="dashboard"
+                element={
+                  <LazyLoad url={() => import('~components/pages/Dashboard')} />
+                }
+              />
+              <Route
+                path="announcements"
                 element={
                   <LazyLoad
-                    url={() => import('~components/pages/Students/AllStudents')}
+                    url={() => import('~components/pages/Announcements')}
                   />
                 }
               />
               <Route
-                path=":id"
+                path="feeds"
                 element={
-                  <LazyLoad
-                    url={() => import('~components/pages/Students/Detail')}
-                  />
+                  <LazyLoad url={() => import('~components/pages/Feeds')} />
+                }
+              />
+              <Route
+                path="requests"
+                element={
+                  <LazyLoad url={() => import('~components/pages/Requests')} />
+                }
+              />
+
+              <Route
+                path="students"
+                element={
+                  <LazyLoad url={() => import('~components/pages/Students')} />
                 }
               >
-                <Route index element={<Navigate to="biodata" />} />
                 <Route
-                  path="biodata"
+                  index
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import('~components/pages/Students/AllStudents')
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path=":id"
+                  element={
+                    <LazyLoad
+                      url={() => import('~components/pages/Students/Detail')}
+                    />
+                  }
+                >
+                  <Route index element={<Navigate to="biodata" />} />
+                  <Route
+                    path="biodata"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Students/Detail/routes/Biodata'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="performance"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Students/Detail/routes/Performance'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="results"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Students/Detail/routes/Results'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="attendance"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Students/Detail/routes/Attendance'
+                          )
+                        }
+                      />
+                    }
+                  />
+                </Route>
+              </Route>
+
+              <Route
+                path="teachers"
+                element={
+                  <LazyLoad url={() => import('~components/pages/Teachers')} />
+                }
+              >
+                <Route
+                  index
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import('~components/pages/Teachers/AllTeachers')
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path=":id"
+                  element={
+                    <LazyLoad
+                      url={() => import('~components/pages/Teachers/Detail')}
+                    />
+                  }
+                >
+                  <Route index element={<Navigate to="biodata" />} />
+                  <Route
+                    path="biodata"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Teachers/Detail/routes/Biodata'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="performance"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Teachers/Detail/routes/Performance'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="results"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Teachers/Detail/routes/Results'
+                          )
+                        }
+                      />
+                    }
+                  />
+                </Route>
+              </Route>
+
+              <Route
+                path="classroom"
+                element={
+                  <LazyLoad url={() => import('~components/pages/Classroom')} />
+                }
+              >
+                <Route index element={<Navigate to="stats" />} />
+                <Route
+                  path="stats"
                   element={
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Students/Detail/routes/Biodata'
+                          '~components/pages/Classroom/classroom-routes/Stats'
+                        )
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="timetable"
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import(
+                          '~components/pages/Classroom/classroom-routes/Timetable'
+                        )
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="record-grade"
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import(
+                          '~components/pages/Classroom/classroom-routes/RecordGrade'
                         )
                       }
                     />
@@ -83,293 +233,155 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Students/Detail/routes/Performance'
-                        )
-                      }
-                    />
-                  }
-                />
-                <Route
-                  path="results"
-                  element={
-                    <LazyLoad
-                      url={() =>
-                        import(
-                          '~components/pages/Students/Detail/routes/Results'
-                        )
-                      }
-                    />
-                  }
-                />
-                <Route
-                  path="attendance"
-                  element={
-                    <LazyLoad
-                      url={() =>
-                        import(
-                          '~components/pages/Students/Detail/routes/Attendance'
+                          '~components/pages/Classroom/classroom-routes/Performance'
                         )
                       }
                     />
                   }
                 />
               </Route>
-            </Route>
 
-            <Route
-              path="teachers"
-              element={
-                <LazyLoad url={() => import('~components/pages/Teachers')} />
-              }
-            >
               <Route
-                index
+                path="subjects"
                 element={
-                  <LazyLoad
-                    url={() => import('~components/pages/Teachers/AllTeachers')}
-                  />
-                }
-              />
-              <Route
-                path=":id"
-                element={
-                  <LazyLoad
-                    url={() => import('~components/pages/Teachers/Detail')}
-                  />
+                  <LazyLoad url={() => import('~components/pages/Subjects')} />
                 }
               >
-                <Route index element={<Navigate to="biodata" />} />
                 <Route
-                  path="biodata"
+                  index
                   element={
                     <LazyLoad
                       url={() =>
-                        import(
-                          '~components/pages/Teachers/Detail/routes/Biodata'
-                        )
+                        import('~components/pages/Subjects/AllSubjects')
                       }
                     />
                   }
                 />
                 <Route
-                  path="performance"
+                  path=":id"
                   element={
                     <LazyLoad
-                      url={() =>
-                        import(
-                          '~components/pages/Teachers/Detail/routes/Performance'
-                        )
-                      }
+                      url={() => import('~components/pages/Subjects/Detail')}
                     />
                   }
-                />
-                <Route
-                  path="results"
-                  element={
-                    <LazyLoad
-                      url={() =>
-                        import(
-                          '~components/pages/Teachers/Detail/routes/Results'
-                        )
-                      }
-                    />
-                  }
-                />
+                >
+                  <Route index element={<Navigate to="topics" />} />
+                  <Route
+                    path="topics"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Subjects/Detail/routes/Topics'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="teachers"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Subjects/Detail/routes/Teachers'
+                          )
+                        }
+                      />
+                    }
+                  />
+                </Route>
               </Route>
-            </Route>
 
-            <Route
-              path="classroom"
-              element={
-                <LazyLoad url={() => import('~components/pages/Classroom')} />
-              }
-            >
-              <Route index element={<Navigate to="stats" />} />
               <Route
-                path="stats"
+                path="media"
                 element={
-                  <LazyLoad
-                    url={() =>
-                      import(
-                        '~components/pages/Classroom/classroom-routes/Stats'
-                      )
-                    }
-                  />
+                  <LazyLoad url={() => import('~components/pages/Media')} />
                 }
               />
               <Route
-                path="timetable"
+                path="settings"
                 element={
-                  <LazyLoad
-                    url={() =>
-                      import(
-                        '~components/pages/Classroom/classroom-routes/Timetable'
-                      )
-                    }
-                  />
+                  <LazyLoad url={() => import('~components/pages/Settings')} />
                 }
               />
-              <Route
-                path="record-grade"
-                element={
-                  <LazyLoad
-                    url={() =>
-                      import(
-                        '~components/pages/Classroom/classroom-routes/RecordGrade'
-                      )
-                    }
-                  />
-                }
-              />
-              <Route
-                path="performance"
-                element={
-                  <LazyLoad
-                    url={() =>
-                      import(
-                        '~components/pages/Classroom/classroom-routes/Performance'
-                      )
-                    }
-                  />
-                }
-              />
-            </Route>
 
-            <Route
-              path="subjects"
-              element={
-                <LazyLoad url={() => import('~components/pages/Subjects')} />
-              }
-            >
               <Route
-                index
+                path="my-profile"
                 element={
-                  <LazyLoad
-                    url={() => import('~components/pages/Subjects/AllSubjects')}
-                  />
-                }
-              />
-              <Route
-                path=":id"
-                element={
-                  <LazyLoad
-                    url={() => import('~components/pages/Subjects/Detail')}
-                  />
+                  <LazyLoad url={() => import('~components/pages/MyProfile')} />
                 }
               >
-                <Route index element={<Navigate to="topics" />} />
+                <Route index element={<Navigate to="personal-information" />} />
                 <Route
-                  path="topics"
+                  path="personal-information"
                   element={
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Subjects/Detail/routes/Topics'
+                          '~components/pages/MyProfile/routes/PersonalInfo'
                         )
                       }
                     />
                   }
                 />
                 <Route
-                  path="teachers"
+                  path="academic-information"
                   element={
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Subjects/Detail/routes/Teachers'
+                          '~components/pages/MyProfile/routes/AcademicInfo'
                         )
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="contact-information"
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import('~components/pages/MyProfile/routes/ContactInfo')
                       }
                     />
                   }
                 />
               </Route>
-            </Route>
-
-            <Route
-              path="media"
-              element={
-                <LazyLoad url={() => import('~components/pages/Media')} />
-              }
-            />
-            <Route
-              path="settings"
-              element={
-                <LazyLoad url={() => import('~components/pages/Settings')} />
-              }
-            />
-
-            <Route
-              path="my-profile"
-              element={
-                <LazyLoad url={() => import('~components/pages/MyProfile')} />
-              }
-            >
-              <Route index element={<Navigate to="personal-information" />} />
-              <Route
-                path="personal-information"
-                element={
-                  <LazyLoad
-                    url={() =>
-                      import('~components/pages/MyProfile/routes/PersonalInfo')
-                    }
-                  />
-                }
-              />
-              <Route
-                path="academic-information"
-                element={
-                  <LazyLoad
-                    url={() =>
-                      import('~components/pages/MyProfile/routes/AcademicInfo')
-                    }
-                  />
-                }
-              />
-              <Route
-                path="contact-information"
-                element={
-                  <LazyLoad
-                    url={() =>
-                      import('~components/pages/MyProfile/routes/ContactInfo')
-                    }
-                  />
-                }
-              />
             </Route>
           </Route>
-        </Route>
-
-        <Route path="auth">
-          <Route
-            path="login"
-            element={
-              <LazyLoad url={() => import('~components/pages/Auth/Login')} />
-            }
-          />
-          <Route
-            path="signup"
-            element={
-              <LazyLoad url={() => import('~components/pages/Auth/Signup')} />
-            }
-          />
-          <Route
-            path="reset-password"
-            element={
-              <LazyLoad
-                url={() => import('~components/pages/Auth/ResetPassword')}
-              />
-            }
-          />
-          <Route
-            path="verify-account"
-            element={
-              <LazyLoad
-                url={() => import('~components/pages/Auth/VerifyAccount')}
-              />
-            }
-          />
-        </Route>
-      </Routes>
+          <Route path="auth">
+            <Route
+              path="login"
+              element={
+                <LazyLoad url={() => import('~components/pages/Auth/Login')} />
+              }
+            />
+            <Route
+              path="signup"
+              element={
+                <LazyLoad url={() => import('~components/pages/Auth/Signup')} />
+              }
+            />
+            <Route
+              path="reset-password"
+              element={
+                <LazyLoad
+                  url={() => import('~components/pages/Auth/ResetPassword')}
+                />
+              }
+            />
+            <Route
+              path="verify-account"
+              element={
+                <LazyLoad
+                  url={() => import('~components/pages/Auth/VerifyAccount')}
+                />
+              }
+            />
+          </Route>
+        </Routes>
+      </SaveLastRoute>
     </Router>
   );
 }
