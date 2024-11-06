@@ -1,4 +1,4 @@
-type TRecipients = 'parents' | 'teachers' | 'students' | 'all';
+type TRecipients = 'parents' | 'staffs' | 'students' | 'all';
 
 type TCommon = {
   message: string;

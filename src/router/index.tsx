@@ -121,18 +121,16 @@ function AppRoutes() {
               </Route>
 
               <Route
-                path="teachers"
+                path="Staffs"
                 element={
-                  <LazyLoad url={() => import('~components/pages/Teachers')} />
+                  <LazyLoad url={() => import('~components/pages/Staffs')} />
                 }
               >
                 <Route
                   index
                   element={
                     <LazyLoad
-                      url={() =>
-                        import('~components/pages/Teachers/AllTeachers')
-                      }
+                      url={() => import('~components/pages/Staffs/AllStaffs')}
                     />
                   }
                 />
@@ -140,7 +138,7 @@ function AppRoutes() {
                   path=":id"
                   element={
                     <LazyLoad
-                      url={() => import('~components/pages/Teachers/Detail')}
+                      url={() => import('~components/pages/Staffs/Detail')}
                     />
                   }
                 >
@@ -151,7 +149,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Teachers/Detail/routes/Biodata'
+                            '~components/pages/Staffs/Detail/routes/Biodata'
                           )
                         }
                       />
@@ -163,7 +161,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Teachers/Detail/routes/Performance'
+                            '~components/pages/Staffs/Detail/routes/Performance'
                           )
                         }
                       />
@@ -175,7 +173,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Teachers/Detail/routes/Results'
+                            '~components/pages/Staffs/Detail/routes/Results'
                           )
                         }
                       />
@@ -279,12 +277,12 @@ function AppRoutes() {
                     }
                   />
                   <Route
-                    path="teachers"
+                    path="Staffs"
                     element={
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Subjects/Detail/routes/Teachers'
+                            '~components/pages/Subjects/Detail/routes/Staffs'
                           )
                         }
                       />

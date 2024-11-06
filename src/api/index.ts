@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import externalApi from './external-api';
 import announcementsApi from './announcements-api';
 import TApi from '~shared-ts-types/t-api';
 import authStore from '~src/store/auth';

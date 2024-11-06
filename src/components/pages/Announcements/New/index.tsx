@@ -9,17 +9,18 @@ import Api from '~api';
 import { dateToDbFormat, formatDate } from '~utils/format';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import TextField from '~components/reusables/CustomField/TextField';
+import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
 
 const { api } = new Api();
 
 const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
-  const [type, setType] = useState<'single_event' | 'multi_event' | 'memo'>(
-    'memo'
-  );
-  const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
-  const [recipient, setRecipient] = useState<
-    'all' | 'parents' | 'students' | 'teachers'
+  const [type, setType] = useCustomField<
+    'single_event' | 'multi_event' | 'memo'
+  >('memo');
+  const [title, setTitle] = useCustomField('');
+  const [message, setMessage] = useCustomField('');
+  const [recipient, setRecipient] = useCustomField<
+    'all' | 'parents' | 'students' | 'staffs'
   >('all');
   const [reminder, setReminder] = useState('');
   const [startDate, setStartDate] = useState<Date | null>(null);
