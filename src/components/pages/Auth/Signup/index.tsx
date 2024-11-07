@@ -12,8 +12,6 @@ import userStore from '~src/store/user';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 import SignupOptions from './SignupOptions';
 import Auth from '..';
-import useBanner from '~components/reusables/hooks/useBanner';
-import { TApiError } from '~shared-ts-types/t-api';
 
 const steps = {
   1: 'Choose an account',
@@ -27,7 +25,6 @@ const totalSteps = Object.keys(steps).length;
 const { api } = new Api();
 
 const Signup = () => {
-  const { banner } = useBanner();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [signupDetails, setSignupDetails] = useBulkState(
@@ -35,13 +32,6 @@ const Signup = () => {
   );
   const { mutateAsync } = useMutation({
     mutationFn: () => api.signup(signupDetails),
-    onError: (err: TApiError) => {
-      banner({
-        type: 'error',
-        text: err.response?.data?.message ?? 'An Error occurred',
-        timeout: 5,
-      });
-    },
     onSuccess: (data) => {
       userStore.getState().update({
         email: signupDetails.email,
