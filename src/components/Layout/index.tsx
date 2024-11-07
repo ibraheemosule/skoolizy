@@ -15,7 +15,7 @@ const Layout: FC = () => {
   useEffect(() => {
     const bannerOption = {
       type: 'success',
-      timeout: 3,
+      timeout: 4,
       persist: true,
     } as const;
     if (

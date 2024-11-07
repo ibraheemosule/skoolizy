@@ -23,11 +23,12 @@ const Auth = ({ children }: { children: ReactElement }) => {
     }
 
     const prevRoute = getPrevRoute();
-    if (prevRoute && allowed.includes(prevRoute)) return;
+    if (!prevRoute) return;
+    if (allowed.includes(prevRoute)) return;
 
     banner({
       type: 'success',
-      timeout: 2,
+      timeout: 4,
       text: 'You have successfully logged out!',
     });
   }, []);
