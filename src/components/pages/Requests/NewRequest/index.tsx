@@ -26,7 +26,7 @@ const NewRequest = ({ closeModal }: { closeModal: () => void }) => {
       size="md"
       title="New Request"
       content={
-        <div className="pb-8">
+        <div className="my-4 pb-8">
           <textarea
             placeholder="Add a new request"
             className="w-full outline-none resize-none h-20 bg-gray-100 p-2 rounded-lg"

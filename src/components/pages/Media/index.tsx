@@ -10,12 +10,12 @@ import ListOptions from '~components/reusables/ListOptions';
 
 const a =
   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1695677680/The_Lean_Startup_oaqmsl.png';
-const b =
-  'https://res.cloudinary.com/ibraheemsulay/image/upload/v1645458430/bincom_xyrzzj.png';
-const c =
-  'https://res.cloudinary.com/ibraheemsulay/image/upload/v1661931985/hippo%20labs%20task/surgeons2_tawgyq.jpg';
-const d =
-  'https://res.cloudinary.com/ibraheemsulay/image/upload/v1645458413/beatchain_nszwlv.png';
+// const b =
+//   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1645458430/bincom_xyrzzj.png';
+// const c =
+//   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1661931985/hippo%20labs%20task/surgeons2_tawgyq.jpg';
+// const d =
+//   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1645458413/beatchain_nszwlv.png';
 
 const Media = () => {
   const [modal, setModal] = useState('');
@@ -51,7 +51,7 @@ const Media = () => {
                   onClick={() => downloadFile(a)}
                   className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
                   <Icon
@@ -66,7 +66,7 @@ const Media = () => {
                   onClick={() => setView(a)}
                   className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 text-white tracking-tight text-xs">
                     View
                   </span>
                   <Icon
@@ -96,168 +96,14 @@ const Media = () => {
               <img src={a} alt="imaging" />
             </div>
             <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232df]">
-                <BaseBtn
-                  onClick={() => downloadFile(b)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
-                    Download
-                  </span>
-
-                  <Icon
-                    name="download"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-                <BaseBtn
-                  onClick={() => setView(b)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
-                    View
-                  </span>
-                  <Icon
-                    name="eye"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-                <BaseBtn
-                  onClick={() => setDeleteMedia(b)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
-                    Delete
-                  </span>
-                  <Icon
-                    name="trash"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-              </div>
-              <img src={b} alt="imaging" />
-            </div>
-            <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn
-                  onClick={() => downloadFile(c)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
-                    Download
-                  </span>
-
-                  <Icon
-                    name="download"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-                <BaseBtn
-                  onClick={() => setView(c)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
-                    View
-                  </span>
-                  <Icon
-                    name="eye"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-                <BaseBtn
-                  onClick={() => setDeleteMedia(c)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
-                    Delete
-                  </span>
-                  <Icon
-                    name="trash"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-              </div>
-              <img src={c} alt="imaging" />
-            </div>
-            <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
-                <BaseBtn
-                  onClick={() => downloadFile(d)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
-                    Download
-                  </span>
-
-                  <Icon
-                    name="download"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-                <BaseBtn
-                  onClick={() => setView(d)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
-                    View
-                  </span>
-                  <Icon
-                    name="eye"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-                <BaseBtn
-                  onClick={() => setDeleteMedia(d)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
-                >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
-                    Delete
-                  </span>
-                  <Icon
-                    name="trash"
-                    stroke="#fff"
-                    strokeWidth={2}
-                    height={22}
-                    width={22}
-                  />
-                </BaseBtn>
-              </div>
-              <img src={d} alt="imaging" />
-            </div>{' '}
-            <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
+              <div className="absolute flex justify-around items-center bottom-0 h-14 left-0 w-full bg-[#343232d7]">
                 <BaseBtn
                   onClick={() => downloadFile(a)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-
                   <Icon
                     name="download"
                     stroke="#fff"
@@ -268,9 +114,9 @@ const Media = () => {
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setView(a)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 text-white tracking-tight text-xs">
                     View
                   </span>
                   <Icon
@@ -283,7 +129,7 @@ const Media = () => {
                 </BaseBtn>
                 <BaseBtn
                   onClick={() => setDeleteMedia(a)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
                   <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
                     Delete
@@ -300,15 +146,14 @@ const Media = () => {
               <img src={a} alt="imaging" />
             </div>
             <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
+              <div className="absolute flex justify-around items-center bottom-0 h-14 left-0 w-full bg-[#343232d7]">
                 <BaseBtn
-                  onClick={() => downloadFile(b)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  onClick={() => downloadFile(a)}
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-
                   <Icon
                     name="download"
                     stroke="#fff"
@@ -318,10 +163,10 @@ const Media = () => {
                   />
                 </BaseBtn>
                 <BaseBtn
-                  onClick={() => setView(b)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  onClick={() => setView(a)}
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 text-white tracking-tight text-xs">
                     View
                   </span>
                   <Icon
@@ -333,8 +178,8 @@ const Media = () => {
                   />
                 </BaseBtn>
                 <BaseBtn
-                  onClick={() => setDeleteMedia(b)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  onClick={() => setDeleteMedia(a)}
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
                   <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
                     Delete
@@ -348,18 +193,17 @@ const Media = () => {
                   />
                 </BaseBtn>
               </div>
-              <img src={b} alt="imaging" />
+              <img src={a} alt="imaging" />
             </div>
             <div className="mb-2 relative group">
-              <div className="absolute flex transition-all  justify-around items-center inset-0 hover:bg-[#343232db]">
+              <div className="absolute flex justify-around items-center bottom-0 h-14 left-0 w-full bg-[#343232d7]">
                 <BaseBtn
-                  onClick={() => downloadFile(d)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  onClick={() => downloadFile(a)}
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 -left-1/2 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 -left-1/2 text-white tracking-tight text-xs">
                     Download
                   </span>
-
                   <Icon
                     name="download"
                     stroke="#fff"
@@ -369,10 +213,10 @@ const Media = () => {
                   />
                 </BaseBtn>
                 <BaseBtn
-                  onClick={() => setView(d)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  onClick={() => setView(a)}
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 text-white tracking-tight text-xs">
                     View
                   </span>
                   <Icon
@@ -384,10 +228,10 @@ const Media = () => {
                   />
                 </BaseBtn>
                 <BaseBtn
-                  onClick={() => setDeleteMedia(d)}
-                  className="flex-col relative _media-options-btn items-center hidden group-hover:flex"
+                  onClick={() => setDeleteMedia(a)}
+                  className="flex-col relative _media-options-btn items-center flex"
                 >
-                  <span className="absolute  -top-3/4 text-white tracking-tight text-xs">
+                  <span className="absolute -top-3/4 text-white tracking-tight text-xs">
                     Delete
                   </span>
                   <Icon
@@ -399,7 +243,7 @@ const Media = () => {
                   />
                 </BaseBtn>
               </div>
-              <img src={d} alt="imaging" />
+              <img src={a} alt="imaging" />
             </div>
           </div>
         </div>

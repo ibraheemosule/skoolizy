@@ -97,7 +97,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
               </CustomField>
             </div>
           </div>
-          <div className="mt-4">
+          <div className={`mt-4 ${!fromDate ? 'pb-4' : ''}`}>
             <BoldText>Date range from:</BoldText>
             <div className="mt-1">
               {/* <CustomField
@@ -119,7 +119,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
             </div>
           </div>
           {fromDate && (
-            <div className="mt-4">
+            <div className={`mt-4 ${fromDate ? 'pb-4' : ''}`}>
               <BoldText>Date range to (Optional):</BoldText>
               <div className="mt-1">
                 <DateTimePicker
