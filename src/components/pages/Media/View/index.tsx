@@ -12,7 +12,7 @@ const ViewMedia = ({ img, closeModal }: TViewMedia) => (
     scroll={false}
     content={
       <img
-        className=" mx-auto w-auto h-full object-contain"
+        className=" mx-auto my-4 w-auto h-full object-contain"
         src={img}
         alt="imaging"
       />

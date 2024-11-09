@@ -13,7 +13,7 @@ const NewMedia = ({ closeModal }: { closeModal: () => void }) => {
       size="sm"
       title="Upload New Image"
       content={
-        <div className="pb-8">
+        <div className="py-8">
           {image && (
             <img
               src={image}

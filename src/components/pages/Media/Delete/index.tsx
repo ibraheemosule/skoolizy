@@ -14,7 +14,7 @@ const DeleteMedia = ({ img, closeModal }: TDeleteMedia) => (
       <img
         src={img}
         alt="media to delete"
-        className="w-40 mx-auto h-40 mb-8 object-contain"
+        className="w-40 mx-auto h-40 my-8 object-contain"
       />
     }
     action={() => null}
