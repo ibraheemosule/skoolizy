@@ -10,12 +10,6 @@ import ListOptions from '~components/reusables/ListOptions';
 
 const a =
   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1695677680/The_Lean_Startup_oaqmsl.png';
-// const b =
-//   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1645458430/bincom_xyrzzj.png';
-// const c =
-//   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1661931985/hippo%20labs%20task/surgeons2_tawgyq.jpg';
-// const d =
-//   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1645458413/beatchain_nszwlv.png';
 
 const Media = () => {
   const [modal, setModal] = useState('');

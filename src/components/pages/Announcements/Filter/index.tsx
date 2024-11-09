@@ -1,10 +1,10 @@
 import { memo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import DateTimePicker from 'react-datetime-picker';
-import { BoldText } from '~reusables/ui/Text';
+import { useLocation } from 'react-router-dom';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import { BoldText } from '~reusables/ui/Text';
 import { capCharRemoveUnderscore, dateToDbFormat } from '~utils/format';
 
 const nums = Array(365)
@@ -97,16 +97,9 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
               </CustomField>
             </div>
           </div>
-          <div className={`mt-4 ${!fromDate ? 'pb-4' : ''}`}>
+          <div className="my-4">
             <BoldText>Date range from:</BoldText>
             <div className="mt-1">
-              {/* <CustomField
-                type="date"
-                onChange={setFromDate}
-                field="input"
-                value={fromDate}
-                id="announcement-date-range-from"
-              /> */}
               <DateTimePicker
                 format="dd/MM/yyyy"
                 dayPlaceholder="DD"
@@ -119,7 +112,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
             </div>
           </div>
           {fromDate && (
-            <div className={`mt-4 ${fromDate ? 'pb-4' : ''}`}>
+            <div className="my-4">
               <BoldText>Date range to (Optional):</BoldText>
               <div className="mt-1">
                 <DateTimePicker
