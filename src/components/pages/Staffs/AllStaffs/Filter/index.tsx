@@ -27,7 +27,7 @@ const FilterStaffs = ({ closeModal }: { closeModal: () => void }) => {
       content={
         <div className="text-left mb-4">
           <div>
-            <BoldText>Subject:</BoldText>
+            <BoldText className="mt-4">Subject:</BoldText>
             <div className="mt-1">
               <CustomField value={subject} onSelect={setSubject} field="select">
                 <CustomField.DropdownWrapper>
@@ -65,7 +65,7 @@ const FilterStaffs = ({ closeModal }: { closeModal: () => void }) => {
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 pb-4">
             <BoldText>Ratings:</BoldText>
             <div className="mt-1">
               <CustomField value={rating} onSelect={setRating} field="select">

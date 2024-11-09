@@ -48,7 +48,7 @@ const FilterMedia = ({ closeModal }: { closeModal: () => void }) => {
       content={
         <>
           <div>
-            <BoldText>Search Keyword:</BoldText>
+            <BoldText className="mt-4">Search Keyword:</BoldText>
             <div className="mt-1">
               <CustomField onChange={setSearch} field="input" value={search} />
             </div>
@@ -111,7 +111,7 @@ const FilterMedia = ({ closeModal }: { closeModal: () => void }) => {
               </CustomField>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 pb-4">
             <BoldText>Select Class:</BoldText>
             <div className="mt-1">
               <CustomField

@@ -12,7 +12,7 @@ const NewStudent = ({ closeModal }: { closeModal: () => void }) => {
       title="Send an invite link to a student"
       content={
         <>
-          <div>
+          <div className="mt-6 pb-4">
             <CustomField
               field="input"
               type="email"
@@ -22,7 +22,7 @@ const NewStudent = ({ closeModal }: { closeModal: () => void }) => {
               icon={null}
             />
           </div>
-          <div className="mt-4">
+          <div className="mt-4 pb-4">
             <CustomField
               field="select"
               value={classroom}

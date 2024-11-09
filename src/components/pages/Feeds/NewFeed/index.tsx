@@ -7,7 +7,7 @@ const NewFeed = ({ closeModal }: { closeModal: () => void }) => (
     size="md"
     title="New Feed"
     content={
-      <div className="pb-8">
+      <div className="pb-8 mt-4">
         <textarea
           placeholder="Share your thoughts..."
           className="w-full outline-none resize-none h-20 bg-gray-100 p-2 rounded-lg"

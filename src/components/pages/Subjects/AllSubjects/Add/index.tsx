@@ -13,7 +13,7 @@ const NewSubject = ({ closeModal }: { closeModal: () => void }) => {
       title="Add a new subject"
       content={
         <>
-          <div>
+          <div className="mt-6">
             <CustomField
               field="input"
               type="email"
@@ -23,7 +23,7 @@ const NewSubject = ({ closeModal }: { closeModal: () => void }) => {
               icon={null}
             />
           </div>
-          <div className="mt-4">
+          <div className="mt-6 pb-4">
             <CustomField
               field="select"
               value={classroom}

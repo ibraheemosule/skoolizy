@@ -30,7 +30,7 @@ const FilterStudents = ({ closeModal }: { closeModal: () => void }) => {
       content={
         <div className="text-left mb-4">
           <div>
-            <BoldText>Classroom:</BoldText>
+            <BoldText className="mt-4">Classroom:</BoldText>
             <div className="mt-1">
               <CustomField
                 value={classroom}
@@ -72,7 +72,7 @@ const FilterStudents = ({ closeModal }: { closeModal: () => void }) => {
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 pb-4">
             <BoldText>Ratings:</BoldText>
             <div className="mt-1">
               <CustomField value={rating} onSelect={setRating} field="select">

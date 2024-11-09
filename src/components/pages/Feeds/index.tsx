@@ -20,7 +20,7 @@ const Feeds = () => {
             <ListOptions
               onManageClick={() => setModal('filter')}
               onActionClick={() => setModal('new')}
-              actionText="New feed"
+              actionText="New Feed"
             />
           </div>
 
