@@ -34,7 +34,6 @@ const Signup = () => {
   const { mutateAsync } = useMutation({
     mutationFn: () => api.signup(signupDetails),
     onSuccess: (data) => {
-      console.log('success??');
       userStore.getState().update({
         email: signupDetails.email,
         tag: data.data.tag,
