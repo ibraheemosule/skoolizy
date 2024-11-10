@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 import AppRoutes from '~src/router';
 import AppErrorHandler from './AppErrorHandler';
-import ApiErrorHandler, { handleApiErrorFn } from './apiErrorHandler';
+import ApiErrorHandler, { handleApiErrorFn } from './ApiErrorHandler';
 import { TApiError } from '~shared-ts-types/t-api';
 
 const queryClient = new QueryClient({
