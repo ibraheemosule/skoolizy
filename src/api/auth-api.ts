@@ -25,7 +25,9 @@ export default (api: AxiosInstance) => ({
     return res.data;
   },
 
-  sendOtp: async (body: { email: string }) => {
+  sendOtp: async (body: {
+    email: string;
+  }): Promise<{ data: { message: string } }> => {
     const res = await api.post('/auth/send-otp', body);
     return res.data;
   },

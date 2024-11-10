@@ -1,21 +1,22 @@
 import { useEffect, useRef } from 'react';
 import { IBannerOptions } from '~shared-ts-types/react-types';
 import globalStore from '~src/store/global';
+import { getUid } from '~utils/query';
 
 export default function useBanner() {
-  const { update, bannerOptions } = globalStore((state) => state);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const idArray = useRef<number[]>([]);
+  const { update } = globalStore((state) => state);
+  const timeoutRef = useRef<NodeJS.Timeout[]>([]);
+  const idArray = useRef<string[]>([]);
 
   const bannerUpdate = (args: IBannerOptions) => {
-    const id = Math.random();
+    const id = getUid();
     idArray.current = [...idArray.current, id];
 
     const { timeout = null, ...rest } = args;
 
     update({
       bannerOptions: [
-        ...bannerOptions,
+        ...globalStore.getState().bannerOptions,
         {
           persist: false,
           id,
@@ -25,35 +26,38 @@ export default function useBanner() {
     });
 
     if (timeout) {
-      timeoutRef.current = setTimeout(
-        () => {
-          update({
-            bannerOptions: bannerOptions.filter((opt) => id !== opt.id),
-          });
-        },
-        (Math.abs(timeout) || 5) * 1000
+      timeoutRef.current.push(
+        setTimeout(
+          () => {
+            update({
+              bannerOptions: globalStore
+                .getState()
+                .bannerOptions.filter((opt) => opt.id !== id),
+            });
+          },
+          (Math.abs(timeout) || 3) * 1000
+        )
       );
     }
   };
 
-  useEffect(
-    () => () => {
-      const activeBanners = bannerOptions.filter((banner) => banner.persist);
-      update({
-        bannerOptions: activeBanners,
-      });
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+  useEffect(() => {
+    idArray.current = [
+      ...idArray.current,
+      ...globalStore.getState().bannerOptions.map((banner) => banner.id!),
+    ];
 
-        update({
-          bannerOptions: bannerOptions.filter(
-            (opt) => !idArray.current.includes(opt.id || 1)
-          ),
-        });
-      }
-    },
-    []
-  );
+    return () => {
+      timeoutRef.current?.forEach((timeout) => clearTimeout(timeout));
+      timeoutRef.current = [];
+
+      update({
+        bannerOptions: globalStore
+          .getState()
+          .bannerOptions.filter((opt) => opt.persist),
+      });
+    };
+  }, []);
 
   return {
     banner: bannerUpdate,
