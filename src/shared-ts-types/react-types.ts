@@ -25,6 +25,6 @@ export interface IBannerOptions {
   action?: (() => void) | null;
   btnText?: string;
   persist?: boolean;
-  id?: number;
+  id?: string;
   timeout?: number;
 }

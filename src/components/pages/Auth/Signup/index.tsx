@@ -30,6 +30,7 @@ const Signup = () => {
   const [signupDetails, setSignupDetails] = useBulkState(
     {} as TUserSignupPayload
   );
+
   const { mutateAsync } = useMutation({
     mutationFn: () => api.signup(signupDetails),
     onSuccess: (data) => {

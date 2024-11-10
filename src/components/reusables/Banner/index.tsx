@@ -30,8 +30,8 @@ export default function Banner() {
   const lastBannerLength = useRef(bannerOptions.length);
 
   useEffect(() => {
-    lastBannerLength.current = bannerOptions.length;
-  }, [bannerOptions.length]);
+    lastBannerLength.current = globalStore.getState().bannerOptions.length;
+  }, [globalStore.getState().bannerOptions.length]);
 
   return bannerOptions.length ? (
     <div className="fixed z-10 w-full top-0 ">

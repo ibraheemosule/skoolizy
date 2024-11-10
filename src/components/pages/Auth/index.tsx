@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
 import useBanner from '~components/reusables/hooks/useBanner';
 import authStore from '~src/store/auth';
+import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
 import { getPrevRoute } from '~utils/query';
 
 const allowed = [
@@ -28,7 +29,7 @@ const Auth = ({ children }: { children: ReactElement }) => {
 
     banner({
       type: 'success',
-      timeout: 4,
+      timeout: BANNER_DEFAULT_TIMEOUT,
       text: 'You have successfully logged out!',
     });
   }, []);
