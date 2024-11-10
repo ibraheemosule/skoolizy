@@ -15,7 +15,7 @@ const NewStaff = ({ closeModal }: { closeModal: () => void }) => {
       title="Send an invite link to a Staff"
       content={
         <>
-          <div>
+          <div className="mt-6 pb-4">
             <CustomField
               field="input"
               type="email"

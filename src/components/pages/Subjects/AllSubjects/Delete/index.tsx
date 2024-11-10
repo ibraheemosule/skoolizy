@@ -11,7 +11,7 @@ const DeleteSubject = ({ subject, closeModal }: TDeleteSubject) => (
     size="sm"
     title="Proceed to delete subject?"
     content={
-      <p>
+      <p className="mt-4 pb-4">
         Deleting {subject} will also delete all the topics created for this
         subject. This action cannot be undone
       </p>
