@@ -6,6 +6,7 @@ import TopHeader from './TopHeader';
 
 import useBanner from '~components/reusables/hooks/useBanner';
 import { getPrevRoute } from '~utils/query';
+import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
 
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
@@ -13,17 +14,11 @@ const Layout: FC = () => {
   const animate = toggleNav ? 'animate-in' : 'animate-out';
 
   useEffect(() => {
-    const bannerOption = {
-      type: 'success',
-      timeout: 4,
-      persist: true,
-    } as const;
-    if (
-      ['/auth/login', '/auth/verify-account'].includes(String(getPrevRoute()))
-    ) {
+    if (['/auth/login'].includes(String(getPrevRoute()))) {
       banner({
         text: 'Login Successful!',
-        ...bannerOption,
+        type: 'success',
+        timeout: BANNER_DEFAULT_TIMEOUT,
       });
     }
   }, []);
