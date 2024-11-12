@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import FilterTopics from './Filter';
-import AddTopic from './Add';
+import FilterTopics from './FilterSubjectTopics';
+import AddTopic from './AddSubjectTopic';
 import ListOptions from '~components/reusables/ListOptions';
 
 export default function TopicsOption() {

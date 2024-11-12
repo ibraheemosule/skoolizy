@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import AddTopic from './Options/Add';
+import AddTopic from './Options/AddSubjectTopic';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import DeleteTopic from './Options/Delete';
+import DeleteTopic from './Options/DeleteSubjectTopic';
 import TopicsOption from './Options';
 
 const Topics = () => {
