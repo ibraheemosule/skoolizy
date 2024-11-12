@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewMedia from './Add';
-import FilterMedia from './Filter';
-import DeleteMedia from './Delete';
-import ViewMedia from './View';
+import NewMedia from './AddMedia';
+import FilterMedia from './FilterMedia';
+import DeleteMedia from './DeleteMedia';
+import ViewMedia from './ViewMedia';
 import { downloadFile } from '~utils/files';
 import ListOptions from '~components/reusables/ListOptions';
 

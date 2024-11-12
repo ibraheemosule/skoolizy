@@ -2,7 +2,7 @@ import { useState } from 'react';
 import UserCard from '~components/reusables/UserCard';
 import UsersListLayout from '~components/reusables/UsersListLayout';
 import StaffsOptions from './Options';
-import DeleteStaff from './Options/Delete';
+import DeleteStaff from './Options/DeleteSubjectStaff';
 
 const people = new Array(30).fill({
   user: {

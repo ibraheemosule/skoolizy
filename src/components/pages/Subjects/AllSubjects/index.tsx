@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewSubject from './Add';
-import FilterSubjects from './Filter';
-import DeleteSubject from './Delete';
+import NewSubject from '../AddSubject';
+import FilterSubjects from './FilterSubjects';
+import DeleteSubject from '../DeleteSubject';
 import ListOptions from '~components/reusables/ListOptions';
 
 const AllSubjects = () => {

@@ -5,7 +5,7 @@ import { BaseText } from '~reusables/ui/Text';
 import { ActionBtn } from '~reusables/ui/Buttons';
 import { Card } from '~reusables/ui/Others';
 import Carousel from '~reusables/Carousel';
-import ViewAnnouncementModal from '~components/pages/Announcements/View';
+import ViewAnnouncementModal from '~components/pages/Announcements/ViewAnnouncement';
 import SkeletonLoader from '~components/reusables/SkeletonLoader';
 import Api from '~api';
 import EmptyView from '~components/reusables/empty-view';

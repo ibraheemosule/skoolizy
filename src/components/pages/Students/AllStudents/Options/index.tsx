@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import FilterStudents from '../Filter';
-import AddStudent from '../Add';
+import FilterStudents from '../FilterStudents';
+import AddStudent from '../../AddStudent';
 import ListOptions from '~components/reusables/ListOptions';
 
 export default function StudentsOption() {

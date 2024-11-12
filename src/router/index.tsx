@@ -270,7 +270,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Subjects/Detail/routes/Topics'
+                            '~components/pages/Subjects/Detail/routes/SubjectTopics'
                           )
                         }
                       />
@@ -282,7 +282,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Subjects/Detail/routes/Staffs'
+                            '~components/pages/Subjects/Detail/routes/SubjectStaffs'
                           )
                         }
                       />
