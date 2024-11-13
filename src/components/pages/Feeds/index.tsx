@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import FeedCard from '~reusables/FeedCard';
-import NewFeed from './NewFeed';
-import FilterFeeds from './FilterFeeds';
+import NewFeed from './feeds-widgets/NewFeed';
+import FilterFeeds from './feeds-widgets/FilterFeeds';
 import ListOptions from '~components/reusables/ListOptions';
 
 const Feeds = () => {

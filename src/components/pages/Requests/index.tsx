@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
 import RequestCard from '~reusables/RequestCard';
-import NewRequest from './NewRequest';
-import RequestsFilter from './FilterRequests';
+import NewRequest from './requests-widgets/NewRequest';
+import RequestsFilter from './requests-widgets/FilterRequests';
 import ListOptions from '~components/reusables/ListOptions';
 
 const Requests = () => {

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Heading2 } from '~reusables/ui/Heading';
 import UserCard from '~reusables/UserCard';
 import UsersListLayout from '~reusables/UsersListLayout';
-import DeleteStudent from '../DeleteStudent';
-import StudentsFilter from './Options';
+import DeleteStudent from '../student-widgets/DeleteStudent';
+import StudentsFilter from '../student-widgets/StudentOptions';
 
 const people = new Array(30).fill({
   user: {

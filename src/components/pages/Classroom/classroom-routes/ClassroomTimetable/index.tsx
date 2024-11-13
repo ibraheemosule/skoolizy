@@ -1,5 +1,5 @@
 import SideHeaderTable from '~reusables/custom-table/SideHeaderTable';
-import EditTimeTable from './Edit';
+import EditTimeTable from './EditClassroomTimetable';
 
 const topHeader = [
   '8-9',

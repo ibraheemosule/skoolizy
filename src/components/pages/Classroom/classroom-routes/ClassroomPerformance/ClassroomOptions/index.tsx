@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FilterPerformance from './Filter';
+import FilterPerformance from './FilterClassroom';
 import ListOptions from '~components/reusables/ListOptions';
 import { BoldText } from '~components/reusables/ui/Text';
 import CustomField from '~components/reusables/CustomField';

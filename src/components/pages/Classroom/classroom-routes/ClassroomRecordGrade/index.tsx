@@ -2,7 +2,7 @@ import { BoldText } from '~reusables/ui/Text';
 import CustomField from '~components/reusables/CustomField';
 import { ActionBtn } from '~reusables/ui/Buttons';
 import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
-import ScoreBoard from './ScoreBoard';
+import ScoreBoard from './ClassroomScoreBoard';
 
 const RecordGrade = () => {
   const [subject, setSubject, subjectList] = useCustomField('', [

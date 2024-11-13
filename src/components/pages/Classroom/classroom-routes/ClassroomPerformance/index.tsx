@@ -1,5 +1,5 @@
 import CustomTable from '~reusables/custom-table/CustomTable';
-import PerformanceOptions from './Options';
+import PerformanceOptions from './ClassroomOptions';
 
 const topHeader = ['Student', 'Grade'];
 
