@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import SubjectList from './List';
+import SubjectList from './SubjectList';
 
 const SubjectDetail = () => (
   <div className="flex mx-auto flex-col md:h-full md:overflow-hidden">

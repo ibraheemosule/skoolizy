@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ListOptions from '~components/reusables/ListOptions';
 import NewStaff from './AddSubjectStaff';
-import FilterStaffs from './FilterSubjectStaffs';
+import FilterStaffs from './FilterSubjectStaff';
 
 export default function StaffsOption() {
   const [modal, setModal] = useState('');
