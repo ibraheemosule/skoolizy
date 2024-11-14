@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useSignupContext } from '../u-signup';
+import { useSignupContext } from '../utils-signup';
 import Icon from '~assets/Icons';
 
 const SignupOptions = () => {
