@@ -82,7 +82,7 @@ const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
       <PrevNextBtn
         disablePrev={false}
         disableNext
-        prevAction={() => setStep((prev: number) => prev - 1)}
+        prevAction={() => setStep((prev) => prev - 1)}
       />
       <ActionBtn
         onClick={async () => {
