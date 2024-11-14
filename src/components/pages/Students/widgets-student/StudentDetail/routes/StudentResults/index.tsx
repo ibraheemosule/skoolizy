@@ -1,6 +1,6 @@
 import { DocumentList, List, ListItem } from '~components/reusables/List/List';
 import { capCharRemoveUnderscore } from '~utils/format';
-import { academic } from './u-results';
+import { academic } from './utils-results';
 
 const Results = () => (
   <List>

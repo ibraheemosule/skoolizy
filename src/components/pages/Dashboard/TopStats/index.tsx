@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NewAnnouncement from '~components/pages/Announcements/announcements-widgets/NewAnnouncement';
+import NewAnnouncement from '~components/pages/Announcements/widgets-announcements/NewAnnouncement';
 import ReportAbsence from '~components/reusables/ReportAbsence';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { BoldText } from '~reusables/ui/Text';

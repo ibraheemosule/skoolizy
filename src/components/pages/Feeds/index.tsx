@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
-import FeedCard from '~reusables/FeedCard';
-import NewFeed from './feeds-widgets/NewFeed';
-import FilterFeeds from './feeds-widgets/FilterFeeds';
 import ListOptions from '~components/reusables/ListOptions';
+import FeedCard from '~reusables/FeedCard';
+import FilterFeeds from './widgets-feeds/FilterFeeds';
+import NewFeed from './widgets-feeds/NewFeed';
 
 const Feeds = () => {
   const [modal, setModal] = useState('');

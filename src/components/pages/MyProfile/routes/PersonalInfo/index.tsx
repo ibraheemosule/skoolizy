@@ -6,7 +6,11 @@ import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { SmallText } from '~components/reusables/ui/Text';
 import { capCharRemoveUnderscore } from '~utils/format';
-import { canEdit, personal, personalInfoDropdownEdit } from './u-personal-info';
+import {
+  canEdit,
+  personal,
+  personalInfoDropdownEdit,
+} from './utils-personal-info';
 
 const PersonalInfo = () => {
   const [info, setInfo] = useState<Record<string, string>>({});

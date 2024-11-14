@@ -1,17 +1,17 @@
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
-import useFilter from '~components/reusables/hooks/useFilter';
-import Icon from '~assets/Icons';
-import NewAnnouncement from './announcements-widgets/NewAnnouncement';
-import FilterAnnouncements from './announcements-widgets/FilterAnnouncements';
-import { capCharRemoveUnderscore, formatDate } from '~utils/format';
-import ViewAnnouncement from './announcements-widgets/ViewAnnouncement';
-import ListOptions from '~components/reusables/ListOptions';
 import Api from '~api';
-import SkeletonLoader from '~components/reusables/SkeletonLoader';
+import Icon from '~assets/Icons';
+import ListOptions from '~components/reusables/ListOptions';
 import Pagination from '~components/reusables/Pagination';
+import SkeletonLoader from '~components/reusables/SkeletonLoader';
 import EmptyView from '~components/reusables/empty-view';
+import useFilter from '~components/reusables/hooks/useFilter';
+import { capCharRemoveUnderscore, formatDate } from '~utils/format';
+import FilterAnnouncements from './widgets-announcements/FilterAnnouncements';
+import NewAnnouncement from './widgets-announcements/NewAnnouncement';
+import ViewAnnouncement from './widgets-announcements/ViewAnnouncement';
 
 const { api } = new Api();
 

@@ -6,7 +6,7 @@ import { ActionBtn } from '~components/reusables/ui/Buttons';
 import {
   completeSignupInputFieldValidation,
   TCompleteSignupProps,
-} from './u-completeSignup';
+} from './utils-completeSignup';
 
 const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
   const {

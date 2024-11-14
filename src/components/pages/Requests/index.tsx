@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import AsideAdmin from '~components/Layout/AsideAdmin';
-import RequestCard from '~reusables/RequestCard';
-import NewRequest from './requests-widgets/NewRequest';
-import RequestsFilter from './requests-widgets/FilterRequests';
 import ListOptions from '~components/reusables/ListOptions';
+import RequestCard from '~reusables/RequestCard';
+import RequestsFilter from './widgets-requests/FilterRequests';
+import NewRequest from './widgets-requests/NewRequest';
 
 const Requests = () => {
   const [modal, setModal] = useState('');

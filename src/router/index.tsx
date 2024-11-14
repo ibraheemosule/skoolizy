@@ -1,13 +1,13 @@
 import {
+  Navigate,
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
 } from 'react-router-dom';
 import Layout from '~components/Layout';
-import AuthAccess from './router-widgets/AuthAccess';
-import LazyLoad from './router-widgets/LazyLoad';
-import SaveLastRoute from './router-widgets/SaveLastRoute';
+import AuthAccess from './widgets-router/AuthAccess';
+import LazyLoad from './widgets-router/LazyLoad';
+import SaveLastRoute from './widgets-router/SaveLastRoute';
 
 function AppRoutes() {
   return (
@@ -66,7 +66,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Students/student-widgets/StudentDetail'
+                          '~components/pages/Students/widgets-student/StudentDetail'
                         )
                       }
                     />
@@ -79,7 +79,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/student-widgets/StudentDetail/routes/StudentBiodata'
+                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentBiodata'
                           )
                         }
                       />
@@ -91,7 +91,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/student-widgets/StudentDetail/routes/StudentPerformance'
+                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentPerformance'
                           )
                         }
                       />
@@ -103,7 +103,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/student-widgets/StudentDetail/routes/StudentResults'
+                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentResults'
                           )
                         }
                       />
@@ -115,7 +115,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/student-widgets/StudentDetail/routes/StudentAttendance'
+                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentAttendance'
                           )
                         }
                       />
@@ -144,7 +144,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Staffs/staff-widgets/StaffDetail'
+                          '~components/pages/Staffs/widgets-staff/StaffDetail'
                         )
                       }
                     />
@@ -157,7 +157,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Staffs/staff-widgets/StaffDetail/routes/StaffBiodata'
+                            '~components/pages/Staffs/widgets-staff/StaffDetail/routes/StaffBiodata'
                           )
                         }
                       />
@@ -169,7 +169,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Staffs/staff-widgets/StaffDetail/routes/StaffPerformance'
+                            '~components/pages/Staffs/widgets-staff/StaffDetail/routes/StaffPerformance'
                           )
                         }
                       />
@@ -181,7 +181,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Staffs/staff-widgets/StaffDetail/routes/StaffResults'
+                            '~components/pages/Staffs/widgets-staff/StaffDetail/routes/StaffResults'
                           )
                         }
                       />
@@ -203,7 +203,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Classroom/classroom-routes/ClassroomStats'
+                          '~components/pages/Classroom/routes/ClassroomStats'
                         )
                       }
                     />
@@ -215,7 +215,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Classroom/classroom-routes/ClassroomTimetable'
+                          '~components/pages/Classroom/routes/ClassroomTimetable'
                         )
                       }
                     />
@@ -227,7 +227,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Classroom/classroom-routes/ClassroomRecordGrade'
+                          '~components/pages/Classroom/routes/ClassroomRecordGrade'
                         )
                       }
                     />
@@ -239,7 +239,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Classroom/classroom-routes/ClassroomPerformance'
+                          '~components/pages/Classroom/routes/ClassroomPerformance'
                         )
                       }
                     />
@@ -269,7 +269,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/Subjects/subject-widgets/SubjectDetail'
+                          '~components/pages/Subjects/widgets-subject/SubjectDetail'
                         )
                       }
                     />
@@ -282,7 +282,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Subjects/subject-widgets/SubjectDetail/routes/SubjectTopics'
+                            '~components/pages/Subjects/widgets-subject/SubjectDetail/routes/SubjectTopics'
                           )
                         }
                       />
@@ -294,7 +294,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Subjects/subject-widgets/SubjectDetail/routes/SubjectStaff'
+                            '~components/pages/Subjects/widgets-subject/SubjectDetail/routes/SubjectStaff'
                           )
                         }
                       />

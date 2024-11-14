@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewSubject from '../subject-widgets/AddSubject';
-import FilterSubjects from '../subject-widgets/FilterSubjects';
-import DeleteSubject from '../subject-widgets/DeleteSubject';
 import ListOptions from '~components/reusables/ListOptions';
+import { BaseBtn } from '~reusables/ui/Buttons';
+import NewSubject from '../widgets-subject/AddSubject';
+import DeleteSubject from '../widgets-subject/DeleteSubject';
+import FilterSubjects from '../widgets-subject/FilterSubjects';
 
 const AllSubjects = () => {
   const [modal, setModal] = useState('');
