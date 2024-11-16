@@ -4,7 +4,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Modal from '~reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
-import { recipientsList, reminders, navRouting } from './utils-new';
+import { recipientsList, reminders, navRouting } from './utils-newAnouncement';
 import Api from '~api';
 import { dateToDbFormat, formatDate } from '~utils/format';
 import SelectField from '~components/reusables/CustomField/SelectField';

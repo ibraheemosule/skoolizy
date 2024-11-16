@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FiterAbsenceDate from './Filter';
+import FiterAbsenceDate from './FilterStudentAttendance';
 import ReportAbsence from '~components/reusables/ReportAbsence';
 import ListOptions from '~components/reusables/ListOptions';
 

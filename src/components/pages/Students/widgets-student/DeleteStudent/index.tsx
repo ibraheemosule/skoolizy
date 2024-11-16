@@ -11,7 +11,9 @@ const DeleteStudent = ({ student, closeModal }: TDeleteStudent) => (
     size="sm"
     title="Delete Student from School?"
     content={
-      <p>Deleting {student} would also delete the student information</p>
+      <p className="my-6">
+        Deleting {student} would also delete the student information
+      </p>
     }
     action={() => null}
     close={() => closeModal()}
