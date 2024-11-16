@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Heading2 } from '~reusables/ui/Heading';
 import UserCard from '~reusables/UserCard';
 import UsersListLayout from '~reusables/UsersListLayout';
-import DeleteStaff from './Delete';
-import StaffsOptions from './Options';
+import DeleteStaff from '../widgets-staff/DeleteStaff';
+import StaffsOptions from '../widgets-staff/StaffOptions';
 
 const people = new Array(30).fill({
   user: {

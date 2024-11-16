@@ -5,7 +5,7 @@ import { ActionBtn } from '~components/reusables/ui/Buttons';
 import {
   createNewPasswordInputFieldValidation,
   TCreateNewPasswordProps,
-} from './u-createNewPassword';
+} from './utils-createNewPassword';
 import Modal from '~components/reusables/Modal';
 
 const CreateNewPassword: FC<TCreateNewPasswordProps> = ({ token }) => {
