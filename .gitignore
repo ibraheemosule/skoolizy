@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Env variable
+.env
+
+# Project dump files
+coverage
+code_dump.ts
