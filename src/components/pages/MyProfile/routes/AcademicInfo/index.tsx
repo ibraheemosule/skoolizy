@@ -1,6 +1,6 @@
 import { DocumentList, List, ListItem } from '~components/reusables/List/List';
 import { capCharRemoveUnderscore } from '~utils/format';
-import { academic } from './u-academic-info';
+import { academic } from './utils-academic-info';
 
 const AcademicInfo = () =>
   Object.entries(academic).map(([academicKey, academicValue]) => (

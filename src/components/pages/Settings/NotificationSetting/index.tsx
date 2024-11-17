@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Toggle from '~components/reusables/Toggle/index';
 import { List, ListItem } from '~reusables/List/List';
 import { BoldText } from '~reusables/ui/Text';
-import { alerts } from './u-notifications';
+import { alerts } from './utils-notifications';
 
 type AlertType = (typeof alerts)[number];
 const NotificationSetting = () => {

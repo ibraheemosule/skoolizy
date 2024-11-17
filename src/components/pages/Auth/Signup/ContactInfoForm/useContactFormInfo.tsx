@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
-import { useSignupContext } from '../u-signup';
+import { useSignupContext } from '../utils-signup';
 import useBulkState from '~components/reusables/hooks/useBulkState';
 import {
   contactInfoFieldValidation,
   contactInfoInitialState,
   contactInfoOptionalFields,
-} from './u-contactInfoForm';
+} from './utils-contactInfoForm';
 
 const useContactInfoForm = () => {
   const { step, setStep, totalSteps, signupDetails, setSignupDetails } =

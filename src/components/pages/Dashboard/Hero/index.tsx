@@ -1,14 +1,14 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Heading1 } from '~reusables/ui/Heading';
-import { BaseText } from '~reusables/ui/Text';
-import { ActionBtn } from '~reusables/ui/Buttons';
-import { Card } from '~reusables/ui/Others';
-import Carousel from '~reusables/Carousel';
-import ViewAnnouncementModal from '~components/pages/Announcements/View';
-import SkeletonLoader from '~components/reusables/SkeletonLoader';
+import { useState } from 'react';
 import Api from '~api';
+import ViewAnnouncementModal from '~components/pages/Announcements/widgets-announcements/ViewAnnouncement';
 import EmptyView from '~components/reusables/empty-view';
+import SkeletonLoader from '~components/reusables/SkeletonLoader';
+import Carousel from '~reusables/Carousel';
+import { ActionBtn } from '~reusables/ui/Buttons';
+import { Heading1 } from '~reusables/ui/Heading';
+import { Card } from '~reusables/ui/Others';
+import { BaseText } from '~reusables/ui/Text';
 
 const { api } = new Api();
 

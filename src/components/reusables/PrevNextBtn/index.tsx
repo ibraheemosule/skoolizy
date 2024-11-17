@@ -1,5 +1,5 @@
 import { memo, FC } from 'react';
-import { TPrevNextBtn } from './u-prevNextBtn';
+import { TPrevNextBtn } from './utils-prevNextBtn';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Icon from '~assets/Icons';
 
