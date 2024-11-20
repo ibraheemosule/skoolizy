@@ -1,5 +1,5 @@
-import CryptoJS, { enc } from 'crypto-js';
 import { Dispatch, SetStateAction, useEffect } from 'react';
+import { decryptInput, encryptInput } from '~utils/encryption';
 
 type TUserCredentials = {
   tag?: string;
@@ -14,7 +14,7 @@ type TRememberMeActions = {
 
 type TRememberMeProps = TUserCredentials & TRememberMeActions;
 
-const key = import.meta.env.VITE_ENCRYPT_KEY;
+const key = import.meta.env.VITE_CRYPTOJS_KEY;
 
 function saveUser({ tag, password }: TUserCredentials) {
   const prevUser = localStorage.getItem('skoolizy-USER');
@@ -23,17 +23,17 @@ function saveUser({ tag, password }: TUserCredentials) {
 
   if (!tag || !password) return;
   localStorage.setItem(
-    'skoolizy-USER',
+    'skoolizy_user',
     JSON.stringify({
       tag,
-      password: CryptoJS.AES.encrypt(password, key).toString(),
+      password: encryptInput(password, key),
     })
   );
 }
 
-function isUserSaved(): { tag: string; password: string } {
-  const data = localStorage.getItem('skoolizy-USER');
-  return data !== null ? JSON.parse(data || '') : { tag: '', password: '' };
+function isUserSaved(): { tag: string; password: string } | null {
+  const data = localStorage.getItem('skoolizy_user');
+  return data ? JSON.parse(data) : null;
 }
 
 const useRememberMe = ({
@@ -51,11 +51,10 @@ const useRememberMe = ({
 
   useEffect(() => {
     const user = isUserSaved();
-    const pword = CryptoJS.AES.decrypt(user.password, key);
 
-    if (user.tag) {
+    if (user?.tag) {
       setTag(user.tag);
-      setPassword(pword.toString(enc.Utf8));
+      setPassword(decryptInput(user.password, key));
     }
   }, []);
 };

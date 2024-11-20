@@ -11,8 +11,7 @@ import useRememberMe from '~components/pages/Auth/Login/hooks-login/useRememberM
 const { api } = new Api();
 
 const Login = () => {
-  const { update } = authStore((state) => state);
-  console.log(update);
+  // const { update } = authStore((state) => state);
   const navigate = useNavigate();
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
