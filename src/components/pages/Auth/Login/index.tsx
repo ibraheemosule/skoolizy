@@ -17,7 +17,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  useRememberMe({ rememberMe, tag, setTag, password, setPassword });
+  useRememberMe({
+    rememberMe,
+    setRememberMe,
+    tag,
+    setTag,
+    password,
+    setPassword,
+  });
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
@@ -98,6 +105,7 @@ const Login = () => {
                     name="remember-me"
                     type="checkbox"
                     className="h-4 w-4 rounded cursor-pointer border-gray-300 bg-brown.dark text-brown.dark focus:ring-brown.dark"
+                    checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                   />
                   <label

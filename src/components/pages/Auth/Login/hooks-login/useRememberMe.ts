@@ -8,6 +8,7 @@ type TUserCredentials = {
 
 type TRememberMeActions = {
   rememberMe: boolean;
+  setRememberMe: Dispatch<SetStateAction<boolean>>;
   setTag: Dispatch<SetStateAction<string>>;
   setPassword: Dispatch<SetStateAction<string>>;
 };
@@ -17,7 +18,7 @@ type TRememberMeProps = TUserCredentials & TRememberMeActions;
 const key = import.meta.env.VITE_CRYPTOJS_KEY;
 
 function saveUser({ tag, password }: TUserCredentials) {
-  const prevUser = localStorage.getItem('skoolizy-USER');
+  const prevUser = localStorage.getItem('skoolizy_user');
 
   if (prevUser) localStorage.clear();
 
@@ -40,6 +41,7 @@ const useRememberMe = ({
   tag,
   password,
   rememberMe,
+  setRememberMe,
   setTag,
   setPassword,
 }: TRememberMeProps) => {
@@ -55,6 +57,7 @@ const useRememberMe = ({
     if (user?.tag) {
       setTag(user.tag);
       setPassword(decryptInput(user.password, key));
+      setRememberMe(true);
     }
   }, []);
 };
