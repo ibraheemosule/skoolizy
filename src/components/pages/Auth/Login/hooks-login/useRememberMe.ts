@@ -16,6 +16,7 @@ type TRememberMeActions = {
 type TRememberMeProps = TUserCredentials & TRememberMeActions;
 
 const key = import.meta.env.VITE_CRYPTOJS_KEY;
+console.log(key);
 
 function saveUser({ tag, password }: TUserCredentials) {
   const prevUser = localStorage.getItem('skoolizy_user');
