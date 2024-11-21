@@ -6,14 +6,25 @@ import Auth from '..';
 import TextField from '~components/reusables/CustomField/TextField';
 import Api from '~api';
 import authStore from '~src/store/auth';
+import useRememberMe from '~components/pages/Auth/Login/hooks-login/useRememberMe';
 
 const { api } = new Api();
 
 const Login = () => {
-  const { update } = authStore((state) => state);
+  // const { update } = authStore((state) => state);
   const navigate = useNavigate();
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  useRememberMe({
+    rememberMe,
+    setRememberMe,
+    tag,
+    setTag,
+    password,
+    setPassword,
+  });
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
@@ -94,7 +105,8 @@ const Login = () => {
                     name="remember-me"
                     type="checkbox"
                     className="h-4 w-4 rounded cursor-pointer border-gray-300 bg-brown.dark text-brown.dark focus:ring-brown.dark"
-                    onChange={(e) => update({ staySignedIn: e.target.checked })}
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
                   />
                   <label
                     htmlFor="remember-me"
