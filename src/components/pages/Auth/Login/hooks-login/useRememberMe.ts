@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import { decryptInput, encryptInput } from '~utils/encryption';
+import { decrypt, encrypt } from '~utils/encryption';
 
 type TUserCredentials = {
   tag?: string;
@@ -27,7 +27,7 @@ function saveUser({ tag, password }: TUserCredentials) {
     'skoolizy_user',
     JSON.stringify({
       tag,
-      password: encryptInput(password, key),
+      password: encrypt(password, key),
     })
   );
 }
@@ -56,7 +56,7 @@ const useRememberMe = ({
 
     if (user?.tag) {
       setTag(user.tag);
-      setPassword(decryptInput(user.password, key));
+      setPassword(decrypt(user.password, key));
       setRememberMe(true);
     }
   }, []);
