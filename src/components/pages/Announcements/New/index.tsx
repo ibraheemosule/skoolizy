@@ -9,6 +9,7 @@ import Api from '~api';
 import { dateToDbFormat, formatDate } from '~utils/format';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import TextField from '~components/reusables/CustomField/TextField';
+import { TAnnouncementRecipients } from '~shared-ts-types/t-announcements-data';
 
 const { api } = new Api();
 
@@ -18,9 +19,8 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
   );
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
-  const [recipient, setRecipient] = useState<
-    'general' | 'guardians' | 'students' | 'staffs'
-  >('general');
+  const [recipient, setRecipient] =
+    useState<TAnnouncementRecipients>('general');
   const [reminder, setReminder] = useState('');
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);

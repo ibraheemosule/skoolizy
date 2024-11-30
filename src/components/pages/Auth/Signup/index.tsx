@@ -12,6 +12,7 @@ import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 import SignupOptions from './SignupOptions';
 import Auth from '..';
 import authStore from '~src/store/auth';
+import userStore from '~src/store/user';
 
 const steps = {
   1: 'Choose an account',
@@ -30,10 +31,15 @@ const Signup = () => {
     {} as TUserSignupPayload
   );
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signup(signupDetails),
     onSuccess: (data) => {
-      authStore.getState().token = data.data.access_token;
+      userStore.getState().update({
+        verified: data.data.verified,
+        tag: data.data.tag,
+        email: data.data.email,
+      });
+      authStore.getState().login(data.data);
     },
   });
 
@@ -76,7 +82,12 @@ const Signup = () => {
                 1: <SignupOptions />,
                 2: <PersonalInfoForm />,
                 3: <ContactInfoForm />,
-                4: <CompleteSignup signupFn={mutateAsync} />,
+                4: (
+                  <CompleteSignup
+                    signupFn={mutateAsync}
+                    loading={isPending || isSuccess}
+                  />
+                ),
               }[step]
             }
           </form>

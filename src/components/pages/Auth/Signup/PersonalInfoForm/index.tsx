@@ -5,6 +5,7 @@ import DateTimeField from '~components/reusables/CustomField/DateTimeField';
 import TextField from '~components/reusables/CustomField/TextField';
 
 import usePersonalInfoForm from './usePersonalInfoForm';
+import { titles } from './u-personalInfoForm';
 
 const PersonalInfoForm = () => {
   const {
@@ -23,6 +24,24 @@ const PersonalInfoForm = () => {
 
   return (
     <>
+      <div>
+        <label
+          htmlFor="title"
+          className="block text-sm font-medium leading-6 text-brown.dark"
+        >
+          Title
+        </label>
+        <div>
+          <SelectField
+            list={titles}
+            value={String(state.title)}
+            onSelect={(arg: string) => setState({ title: arg })}
+            onBlur={() => validateInput('title', String(state.title))}
+            error={error.gender}
+          />
+        </div>
+      </div>
+
       <div>
         <label
           htmlFor="first-name"

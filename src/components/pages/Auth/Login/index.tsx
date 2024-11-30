@@ -18,7 +18,11 @@ const Login = () => {
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
     onSuccess: (data) => {
-      userStore.getState().update({ verified: data.data.verified });
+      userStore.getState().update({
+        verified: data.data.verified,
+        tag: data.data.tag,
+        email: data.data.email,
+      });
       authStore.getState().login(data.data);
     },
   });

@@ -7,12 +7,7 @@ import userStore from '~src/store/user';
 import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
 import { getPrevRoute } from '~utils/query';
 
-const allowed = [
-  '/auth/signup',
-  '/auth/login',
-  '/auth/verify-account',
-  '/auth/reset-password',
-];
+const allowed = ['/auth/signup', '/auth/login', '/auth/reset-password'];
 
 const Auth = ({ children }: { children: ReactElement }) => {
   const { token, sessionEnd, update } = authStore((state) => state);
@@ -22,19 +17,28 @@ const Auth = ({ children }: { children: ReactElement }) => {
   const path = window.location.pathname;
 
   useEffect(() => {
-    if (token && verified) {
-      navigate('/dashboard');
+    if (
+      !token &&
+      !['/auth/login', '/auth/signup', '/auth/reset-password'].includes(path)
+    ) {
+      navigate('/auth/login');
       return;
     }
-    if (token && !verified && path !== '/auth/verify-account') {
-      navigate('/auth/verify-account');
-      return;
-    }
+    if (token) {
+      if (verified) {
+        navigate('/dashboard');
+        return;
+      }
+      if (!verified && path !== '/auth/verify-account') {
+        navigate('/auth/verify-account');
+        return;
+      }
 
-    if (token && path === '/auth/login') {
-      navigate((sessionEnd && getPrevRoute()) || '/dashboard');
-      update({ sessionEnd: false });
-      return;
+      if (path === '/auth/login') {
+        navigate((sessionEnd && getPrevRoute()) || '/dashboard');
+        update({ sessionEnd: false });
+        return;
+      }
     }
 
     const prevRoute = getPrevRoute();
@@ -46,7 +50,7 @@ const Auth = ({ children }: { children: ReactElement }) => {
       timeout: BANNER_DEFAULT_TIMEOUT,
       text: 'You have successfully logged out!',
     });
-  }, [token]);
+  }, [token, verified]);
 
   return (
     <section className="flex _full flex-wrap fixed inset-0 xlg:flex-nowrap overflow-auto xlg:overflow-hidden gap-6">

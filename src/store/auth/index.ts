@@ -4,7 +4,11 @@ import { persist, devtools } from 'zustand/middleware';
 export type TAuthStore = {
   token: string | null;
   sessionEnd: boolean;
-  login: (arg: { access_token: string; verified: boolean }) => void;
+  login: (arg: {
+    access_token: string;
+    verified: boolean;
+    tag: string;
+  }) => void;
   logout: () => void;
   update: (arg: Partial<TAuthStore>) => void;
 };
@@ -24,6 +28,7 @@ const authStore = create<TAuthStore>()(
             ...state,
             token: arg.access_token,
             verified: arg.verified,
+            tag: arg.tag,
           })),
 
         logout: () =>

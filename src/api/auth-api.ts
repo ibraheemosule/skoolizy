@@ -5,17 +5,21 @@ export default (api: AxiosInstance) => ({
   signup: async (
     body: TUserSignupPayload
   ): Promise<{
-    data: { message: string; tag: string; access_token: string };
+    data: {
+      access_token: string;
+      verified: boolean;
+      tag: string;
+      email: string;
+    };
   }> => {
     const res = await api.post('/auth/signup', body);
     return res.data;
   },
 
-  confirmSignup: async (body: {
-    tag: string;
-    otp: string;
-  }): Promise<{ data: { access_token: string } }> => {
-    const res = await api.patch('/auth/confirm-signup', body);
+  verifyAccount: async (body: {
+    code: string;
+  }): Promise<{ data: { message: string } }> => {
+    const res = await api.patch('/auth/verify-account', body);
     return res.data;
   },
 
@@ -23,7 +27,12 @@ export default (api: AxiosInstance) => ({
     tag: string;
     password: string;
   }): Promise<{
-    data: { access_token: string; verified: boolean; tag: string };
+    data: {
+      access_token: string;
+      verified: boolean;
+      tag: string;
+      email: string;
+    };
   }> => {
     const res = await api.post('/auth/signin', body);
     return res.data;
