@@ -21,6 +21,7 @@ const usePersonalInfoForm = () => {
   const [state, setState] = useBulkState<{
     [key: string]: string | Date;
   }>({
+    title: signupDetails.title || '',
     first_name: signupDetails.first_name || '',
     middle_name: signupDetails.middle_name || '',
     last_name: signupDetails.last_name || '',

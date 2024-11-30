@@ -1,5 +1,5 @@
 import { memo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Auth from '..';
@@ -8,11 +8,11 @@ import Api from '~api';
 import authStore from '~src/store/auth';
 import useRememberMe from '~components/pages/Auth/Login/hooks-login/useRememberMe';
 
+import userStore from '~src/store/user';
+
 const { api } = new Api();
 
 const Login = () => {
-  // const { update } = authStore((state) => state);
-  const navigate = useNavigate();
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -29,8 +29,12 @@ const Login = () => {
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
     onSuccess: (data) => {
-      authStore.getState().login(data.data.access_token);
-      navigate('/dashboard');
+      userStore.getState().update({
+        verified: data.data.verified,
+        tag: data.data.tag,
+        email: data.data.email,
+      });
+      authStore.getState().login(data.data);
     },
   });
 

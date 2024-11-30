@@ -12,32 +12,30 @@ class Api {
     responseType: 'json',
   });
 
+  private refetchToken = false;
+
   refreshToken = this.axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
       const originalRequest = error.config;
 
-      const getNewToken =
-        error.response?.data?.message === 'Expired token' &&
-        authStore.getState().staySignedIn;
+      const getNewToken = error.response?.data?.message === 'Expired token';
 
-      if (!getNewToken) {
-        authStore.getState().logout();
-        return Promise.reject(error);
-      }
+      if (getNewToken && !this.refetchToken) {
+        this.refetchToken = true;
 
-      try {
-        const data = await this.axiosInstance.get('/auth/refresh-token');
-        authStore.getState().login(data.data);
-        originalRequest.headers.Authorization = `Bearer ${data.data}`;
+        try {
+          const data = await this.axiosInstance.get('/auth/refresh-token');
+          authStore.getState().login(data.data);
+          originalRequest.headers.Authorization = `Bearer ${data.data}`;
 
-        return await this.axiosInstance(originalRequest);
-      } catch (e) {
-        const err = e as { data: { message: string } };
-        if (err?.data?.message === 'Token is missing') {
+          return await this.axiosInstance(originalRequest);
+        } catch {
           authStore.getState().logout();
+          authStore.getState().update({ sessionEnd: true });
         }
       }
+
       return Promise.reject(error);
     }
   );

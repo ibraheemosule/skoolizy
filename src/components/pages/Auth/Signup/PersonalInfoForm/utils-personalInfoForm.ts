@@ -2,6 +2,8 @@ import { capCharRemoveUnderscore, onlyAlphabet } from '~utils/format';
 
 export const optional = ['middleName'];
 
+export const titles = ['mr', 'mrs', 'master', 'miss'];
+
 export const personalInfoFieldValidation = (
   key: string,
   value: string | string[]
@@ -33,6 +35,9 @@ export const personalInfoFieldValidation = (
   //   }
 
   switch (key) {
+    case 'title':
+      if (!value) error[key] = `${capCharRemoveUnderscore(key)} is required`;
+      break;
     case 'first_name':
     case 'last_name':
     case 'middle_name':

@@ -15,11 +15,17 @@ import ViewAnnouncement from './widgets-announcements/ViewAnnouncement';
 
 const { api } = new Api();
 
+const announcementIcons = {
+  multi_event: 'calendarDays',
+  single_event: 'calendar',
+  memo: 'message',
+} as const;
+
 const Announcements = () => {
   const filter = useFilter();
   const { state } = useLocation();
   const search = state?.search || '';
-  const type = state?.type || '';
+  const type = state?.announcement_type || '';
   const page = state?.page || 1;
   const fromDate = state?.from_date || '';
   const toDate = state?.to_date || '';
@@ -40,8 +46,7 @@ const Announcements = () => {
     queryFn: () => api.getAllAnnouncements(state),
     placeholderData: keepPreviousData,
   });
-
-  const annoucements = data?.data;
+  const annoucements = data?.data.list;
 
   const filterAnnouncements = (arg: { [key: string]: string | number } = {}) =>
     filter({ ...arg });
@@ -67,9 +72,9 @@ const Announcements = () => {
           )}
           <div className="mt-8 flex gap-4 flex-wrap">
             <Pagination
-              page={data?.page}
-              totalPage={data?.total_pages}
-              items={data?.total_items}
+              page={data?.data.page}
+              totalPage={data?.data.total_pages}
+              items={data?.data.total_items}
               filterAction={filterAnnouncements}
               type="announcements"
             />
@@ -95,10 +100,15 @@ const Announcements = () => {
                 >
                   <h4 className="flex gap-2 items-center text-left font-semibold">
                     <Icon
-                      name="info"
+                      name={announcementIcons[a.announcement_type]}
                       stroke="white"
                       fill="gray"
-                      style={{ alignSelf: 'flex-start', marginTop: 2 }}
+                      style={{
+                        alignSelf: 'flex-start',
+                        marginTop: 2,
+                        height: 20,
+                        width: 20,
+                      }}
                     />
                     <div>
                       <p className="first-letter:uppercase">{a.title}</p>
@@ -114,12 +124,17 @@ const Announcements = () => {
                     </div>
                   </h4>
                   <span className="sr-only">
-                    A {capCharRemoveUnderscore(a.type.split('_').join(' '))}{' '}
+                    A{' '}
+                    {capCharRemoveUnderscore(
+                      a.announcement_type.split('_').join(' ')
+                    )}{' '}
                     announcement sent to {a.recipient}
                   </span>
-                  <span className="capitalize text-sm p-0 bg-transparent text-gray-500 font-semibold mr-4">
-                    {a.recipient}{' '}
-                    {capCharRemoveUnderscore(a.type.split('_').join(' '))}
+                  <span className="capitalize text-sm px-2 py-0.5 bg-purple.light rounded-md  text-gray-500 font-semibold mr-4">
+                    {a.recipient} -{' '}
+                    {capCharRemoveUnderscore(
+                      a.announcement_type.split('_').join(' ')
+                    )}
                   </span>
                 </button>
               ))

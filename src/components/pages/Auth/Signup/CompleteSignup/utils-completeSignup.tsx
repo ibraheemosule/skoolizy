@@ -2,6 +2,7 @@ import { validatePassword } from '~utils/validations';
 
 export type TCompleteSignupProps = {
   signupFn: () => void;
+  loading: boolean;
 };
 
 export const completeSignupInputFieldValidation = (

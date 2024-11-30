@@ -8,7 +8,7 @@ import {
   TCompleteSignupProps,
 } from './utils-completeSignup';
 
-const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
+const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn, loading }) => {
   const {
     setState,
     setStep,
@@ -89,7 +89,8 @@ const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
           proceed();
           signupFn();
         }}
-        disabled={disableSignupBtn}
+        loading={loading}
+        disabled={disableSignupBtn || loading}
       >
         Sign Up
       </ActionBtn>
