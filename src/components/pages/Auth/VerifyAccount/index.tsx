@@ -1,10 +1,8 @@
 import { memo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Api from '~api';
 import userStore from '~src/store/user';
-import authStore from '~src/store/auth';
 import TextField from '~components/reusables/CustomField/TextField';
 import { onlyNumericInput } from '~utils/format';
 import Auth from '..';
@@ -13,8 +11,7 @@ import useBanner from '~components/reusables/hooks/useBanner';
 const { api } = new Api();
 
 const VerifyAccount = () => {
-  const navigate = useNavigate();
-  const { email } = userStore.getState();
+  const { email, tag } = userStore.getState();
   const { banner } = useBanner();
   const [otp, setOtp] = useState('');
   const [optSent, setOtpSent] = useState(false);
@@ -23,21 +20,20 @@ const VerifyAccount = () => {
     mutationFn: () => api.sendOtp({ email }),
     onSuccess: (data) => {
       setOtpSent(true);
-
-      const isPrevCodeStillValid = data.data.message.includes('still valid');
+      const isPrevCodeStillValid = data.message.includes('still valid');
       banner({
-        text: data.data.message,
+        text: data.message,
         persist: false,
         type: isPrevCodeStillValid ? 'info' : 'success',
+        timeout: 5,
       });
     },
   });
 
   const { mutateAsync: verifyAccount, isPending } = useMutation({
-    mutationFn: () => api.confirmSignup({ email, otp }),
-    onSuccess: (data) => {
-      authStore.getState().update({ token: data.data.access_token });
-      navigate('/dashboard');
+    mutationFn: () => api.confirmSignup({ tag, otp }),
+    onSuccess: () => {
+      userStore.getState().update({ verified: true });
     },
   });
 

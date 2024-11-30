@@ -1,5 +1,5 @@
 import { memo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Auth from '..';
@@ -7,19 +7,19 @@ import TextField from '~components/reusables/CustomField/TextField';
 import Api from '~api';
 import authStore from '~src/store/auth';
 
+import userStore from '~src/store/user';
+
 const { api } = new Api();
 
 const Login = () => {
-  const { update } = authStore((state) => state);
-  const navigate = useNavigate();
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signin({ tag, password }),
     onSuccess: (data) => {
-      authStore.getState().login(data.data.access_token);
-      navigate('/dashboard');
+      userStore.getState().update({ verified: data.data.verified });
+      authStore.getState().login(data.data);
     },
   });
 
@@ -94,7 +94,7 @@ const Login = () => {
                     name="remember-me"
                     type="checkbox"
                     className="h-4 w-4 rounded cursor-pointer border-gray-300 bg-brown.dark text-brown.dark focus:ring-brown.dark"
-                    onChange={(e) => update({ staySignedIn: e.target.checked })}
+                    onChange={() => null}
                   />
                   <label
                     htmlFor="remember-me"

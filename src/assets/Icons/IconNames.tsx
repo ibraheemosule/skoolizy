@@ -1,4 +1,7 @@
 export type TIconNames =
+  | 'message'
+  | 'calendarDays'
+  | 'calendar'
   | 'cancel'
   | 'filter'
   | 'search'

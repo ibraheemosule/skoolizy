@@ -9,19 +9,18 @@ import Api from '~api';
 import { dateToDbFormat, formatDate } from '~utils/format';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import TextField from '~components/reusables/CustomField/TextField';
-import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
 
 const { api } = new Api();
 
 const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
-  const [type, setType] = useCustomField<
-    'single_event' | 'multi_event' | 'memo'
-  >('memo');
-  const [title, setTitle] = useCustomField('');
-  const [message, setMessage] = useCustomField('');
-  const [recipient, setRecipient] = useCustomField<
-    'all' | 'parents' | 'students' | 'staffs'
-  >('all');
+  const [type, setType] = useState<'single_event' | 'multi_event' | 'memo'>(
+    'memo'
+  );
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
+  const [recipient, setRecipient] = useState<
+    'general' | 'guardians' | 'students' | 'staffs'
+  >('general');
   const [reminder, setReminder] = useState('');
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -44,7 +43,7 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
           event_time: formatDate(String(eventTime), 24).getTime,
         }),
         recipient,
-        type,
+        announcement_type: type,
       }),
     onSuccess: async () =>
       queryClient.invalidateQueries({
@@ -77,13 +76,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder={`Type ${type.split('_').join(' ')} title`}
               />
-              {/* <CustomField
-                onChange={setTitle}
-                field="input"
-                value={title}
-                placeholder={`Type ${type.split('_').join(' ')} title`}
-                icon={null}
-              /> */}
             </div>
           </div>
 
@@ -159,20 +151,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                     value={reminder}
                     list={Object.keys(reminders)}
                   />
-                  {/* <CustomField
-                    placeholder="Set Reminder"
-                    value={reminder}
-                    onSelect={setReminder}
-                    field="select"
-                  >
-                    <CustomField.DropdownWrapper width={100}>
-                      {reminderList.map((name) => (
-                        <CustomField.Dropdown key={name} value={name}>
-                          {name}
-                        </CustomField.Dropdown>
-                      ))}
-                    </CustomField.DropdownWrapper>
-                  </CustomField> */}
                 </div>
               </div>
             )}
@@ -185,20 +163,6 @@ const NewAnnouncement = ({ closeModal }: { closeModal: () => void }) => {
                   value={recipient}
                   list={recipientsList}
                 />
-                {/* <CustomField
-                  placeholder="Recipients"
-                  value={recipient}
-                  onSelect={setRecipient}
-                  field="select"
-                >
-                  <CustomField.DropdownWrapper width={100}>
-                    {recipientsList.map((name) => (
-                      <CustomField.Dropdown key={name} value={name}>
-                        <span className="capitalize block p-2">{name}</span>
-                      </CustomField.Dropdown>
-                    ))}
-                  </CustomField.DropdownWrapper>
-                </CustomField> */}
               </div>
             </div>
           </div>

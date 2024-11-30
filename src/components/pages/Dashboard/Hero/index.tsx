@@ -29,8 +29,8 @@ const Hero = () => {
         />
       )}
       <Carousel>
-        {data?.data?.length ? (
-          data.data.map((datum) => (
+        {data?.data?.list.length ? (
+          data.data.list.map((datum) => (
             <div className="item" key={datum.id}>
               <Card className="bg-purple.light p-6 ">
                 <Heading1 className="truncate first-letter:capitalize">

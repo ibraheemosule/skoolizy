@@ -14,7 +14,7 @@ const SignupOptions = () => {
             key={Math.random()}
             onClick={() => {
               setStep((prev) => prev + 1);
-              setSignupDetails({ role: 'staff' });
+              setSignupDetails({ group: 'staffs' });
             }}
             className="flex items-center gap-2 px-8 py-3 bg-purple rounded-lg text-white font-semibold text-xl transform transition-transform duration-200 hover:scale-105"
           >

@@ -4,13 +4,15 @@ import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 export default (api: AxiosInstance) => ({
   signup: async (
     body: TUserSignupPayload
-  ): Promise<{ data: { message: string; tag: string } }> => {
+  ): Promise<{
+    data: { message: string; tag: string; access_token: string };
+  }> => {
     const res = await api.post('/auth/signup', body);
     return res.data;
   },
 
   confirmSignup: async (body: {
-    email: string;
+    tag: string;
     otp: string;
   }): Promise<{ data: { access_token: string } }> => {
     const res = await api.patch('/auth/confirm-signup', body);
@@ -20,14 +22,14 @@ export default (api: AxiosInstance) => ({
   signin: async (body: {
     tag: string;
     password: string;
-  }): Promise<{ data: { access_token: string } }> => {
+  }): Promise<{
+    data: { access_token: string; verified: boolean; tag: string };
+  }> => {
     const res = await api.post('/auth/signin', body);
     return res.data;
   },
 
-  sendOtp: async (body: {
-    email: string;
-  }): Promise<{ data: { message: string } }> => {
+  sendOtp: async (body: { email: string }): Promise<{ message: string }> => {
     const res = await api.post('/auth/send-otp', body);
     return res.data;
   },

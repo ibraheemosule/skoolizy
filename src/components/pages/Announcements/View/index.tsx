@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Api from '~api';
 import Modal from '~components/reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
@@ -91,9 +92,12 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
       title={
         <div className="flex flex-col gap-1 capitalize">
           <h3 data-testid="announcement-title">{data?.data.title}</h3>
-          <span className="text-gray-500 text-sm border-b pb-3">
-            By Mr Tosin olawole
-          </span>
+          <Link
+            to={`/staffs/${data?.data.created_by.tag}`}
+            className="text-gray-500 text-sm border-b pb-3"
+          >
+            By {data?.data.created_by.first_name}
+          </Link>
           {isEditable && (
             <>
               <div className="flex mt-4 gap-6 sm:gap-6 gap-y-4 flex-wrap border-b pb-3">

@@ -1,6 +1,6 @@
 import { memo, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SignupContext } from './u-signup';
 
 import PersonalInfoForm from './PersonalInfoForm';
@@ -8,10 +8,10 @@ import ContactInfoForm from './ContactInfoForm';
 import useBulkState from '~components/reusables/hooks/useBulkState';
 import Api from '~api';
 import CompleteSignup from './CompleteSignup';
-import userStore from '~src/store/user';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 import SignupOptions from './SignupOptions';
 import Auth from '..';
+import authStore from '~src/store/auth';
 
 const steps = {
   1: 'Choose an account',
@@ -25,7 +25,6 @@ const totalSteps = Object.keys(steps).length;
 const { api } = new Api();
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [signupDetails, setSignupDetails] = useBulkState(
     {} as TUserSignupPayload
@@ -34,12 +33,7 @@ const Signup = () => {
   const { mutateAsync } = useMutation({
     mutationFn: () => api.signup(signupDetails),
     onSuccess: (data) => {
-      userStore.getState().update({
-        email: signupDetails.email,
-        tag: data.data.tag,
-      });
-
-      navigate('/auth/verify-account');
+      authStore.getState().token = data.data.access_token;
     },
   });
 

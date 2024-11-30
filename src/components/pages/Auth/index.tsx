@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
 import useBanner from '~components/reusables/hooks/useBanner';
 import authStore from '~src/store/auth';
+import userStore from '~src/store/user';
 import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
 import { getPrevRoute } from '~utils/query';
 
@@ -14,12 +15,25 @@ const allowed = [
 ];
 
 const Auth = ({ children }: { children: ReactElement }) => {
+  const { token, sessionEnd, update } = authStore((state) => state);
+  const { verified } = userStore((state) => state);
   const navigate = useNavigate();
   const { banner } = useBanner();
+  const path = window.location.pathname;
 
   useEffect(() => {
-    if (authStore.getState().token) {
+    if (token && verified) {
       navigate('/dashboard');
+      return;
+    }
+    if (token && !verified && path !== '/auth/verify-account') {
+      navigate('/auth/verify-account');
+      return;
+    }
+
+    if (token && path === '/auth/login') {
+      navigate((sessionEnd && getPrevRoute()) || '/dashboard');
+      update({ sessionEnd: false });
       return;
     }
 
@@ -32,7 +46,7 @@ const Auth = ({ children }: { children: ReactElement }) => {
       timeout: BANNER_DEFAULT_TIMEOUT,
       text: 'You have successfully logged out!',
     });
-  }, []);
+  }, [token]);
 
   return (
     <section className="flex _full flex-wrap fixed inset-0 xlg:flex-nowrap overflow-auto xlg:overflow-hidden gap-6">
