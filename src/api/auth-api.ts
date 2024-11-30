@@ -38,8 +38,8 @@ export default (api: AxiosInstance) => ({
     return res.data;
   },
 
-  sendOtp: async (body: { email: string }): Promise<{ message: string }> => {
-    const res = await api.post('/auth/send-otp', body);
+  sendCode: async (body: { email: string }): Promise<{ message: string }> => {
+    const res = await api.post('/auth/send-code', body);
     return res.data;
   },
 

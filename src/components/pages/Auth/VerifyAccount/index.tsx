@@ -18,8 +18,8 @@ const VerifyAccount = () => {
   const [code, setCode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
 
-  const { mutateAsync: sendOtp, isPending: codeReqPending } = useMutation({
-    mutationFn: () => api.sendOtp({ email }),
+  const { mutateAsync: sendCode, isPending: codeReqPending } = useMutation({
+    mutationFn: () => api.sendCode({ email }),
     onSuccess: (data) => {
       setCodeSent(true);
       const isPrevCodeStillValid = data.message.includes('still valid');
@@ -29,16 +29,13 @@ const VerifyAccount = () => {
         type: isPrevCodeStillValid ? 'info' : 'success',
         timeout: 5,
       });
-      if (isPrevCodeStillValid) return;
-
-      update({ verified: true });
     },
   });
 
   const { mutateAsync: verifyAccount, isPending } = useMutation({
     mutationFn: () => api.verifyAccount({ code }),
     onSuccess: () => {
-      userStore.getState().update({ verified: true });
+      update({ verified: true });
     },
   });
 
@@ -92,7 +89,7 @@ const VerifyAccount = () => {
                   <div className="text-sm text-center leading-6">
                     <ActionBtn
                       loading={codeReqPending}
-                      onClick={() => sendOtp()}
+                      onClick={() => sendCode()}
                       className="font-semibold text-base mx-auto text-purple.dark hover:text-purple"
                     >
                       Resend Code
@@ -106,7 +103,7 @@ const VerifyAccount = () => {
                   </ActionBtn>
                 </>
               ) : (
-                <ActionBtn loading={codeReqPending} onClick={() => sendOtp()}>
+                <ActionBtn loading={codeReqPending} onClick={() => sendCode()}>
                   Request for code
                 </ActionBtn>
               )}
