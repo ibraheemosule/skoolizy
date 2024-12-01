@@ -5,7 +5,7 @@ import DateTimeField from '~components/reusables/CustomField/DateTimeField';
 import TextField from '~components/reusables/CustomField/TextField';
 
 import usePersonalInfoForm from './usePersonalInfoForm';
-import { titles } from './u-personalInfoForm';
+import { titles } from './utils-personalInfoForm';
 
 const PersonalInfoForm = () => {
   const {
