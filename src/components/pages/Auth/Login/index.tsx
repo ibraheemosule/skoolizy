@@ -108,7 +108,7 @@ const Login = () => {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 rounded cursor-pointer border-gray-300 bg-brown.dark text-brown.dark focus:ring-brown.dark"
+                    className="h-4 w-4 rounded cursor-pointer "
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                   />

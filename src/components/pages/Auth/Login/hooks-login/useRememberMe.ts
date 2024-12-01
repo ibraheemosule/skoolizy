@@ -46,12 +46,6 @@ const useRememberMe = ({
   setPassword,
 }: TRememberMeProps) => {
   useEffect(() => {
-    if (rememberMe) {
-      saveUser({ tag, password });
-    }
-  }, [tag, password, rememberMe]);
-
-  useEffect(() => {
     const user = isUserSaved();
 
     if (user?.tag) {
@@ -60,6 +54,14 @@ const useRememberMe = ({
       setRememberMe(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (rememberMe) {
+      saveUser({ tag, password });
+    } else {
+      saveUser({ tag: '', password: '' });
+    }
+  }, [tag, password, rememberMe]);
 };
 
 export default useRememberMe;
