@@ -74,8 +74,23 @@ const Signup = () => {
         </div>
 
         <div className="mt-6">
-          <span className="text-gray-400 text-sm">Step {step}</span>
-          <h6 className="text-xl">{steps[step as keyof typeof steps]}</h6>
+          <div className="mb-2 flex flex-wrap justify-between">
+            <span className="text-gray-400 text-sm">Step {step}</span>
+            {step > 1 ? (
+              <button
+                onClick={() => {
+                  setSignupDetails({});
+                  setStep(1);
+                }}
+                className="text-purple.dark text-sm font-semibold"
+              >
+                Select Account
+              </button>
+            ) : (
+              <h6 className="text-xl w-full mt-y">Select an account</h6>
+            )}
+          </div>
+
           <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-6">
             {
               {
