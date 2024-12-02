@@ -60,6 +60,15 @@ export const personalInfoFieldValidation = (
     case 'date_of_birth':
       if (!value.length) {
         error[key] = `${capCharRemoveUnderscore(key)} is required`;
+      } else {
+        const lessThan16 =
+          new Date().getFullYear() - new Date(String(value)).getFullYear() < 16;
+
+        if (lessThan16) {
+          error[key] = `${capCharRemoveUnderscore(
+            key
+          )} Should be over 16 years`;
+        }
       }
       break;
 
