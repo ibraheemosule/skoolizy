@@ -23,10 +23,17 @@ export default (api: AxiosInstance) => ({
     return res.data;
   },
 
-  signin: async (body: {
-    tag: string;
-    password: string;
-  }): Promise<{
+  signin: async (
+    body:
+      | {
+          tag: string;
+          password: string;
+        }
+      | {
+          phone_number: string;
+          password: string;
+        }
+  ): Promise<{
     data: {
       access_token: string;
       verified: boolean;
