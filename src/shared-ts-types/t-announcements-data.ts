@@ -36,7 +36,7 @@ export type TAnnouncementPayload = TCommon &
   );
 
 type TFromApi = {
-  date_created: string;
+  created_at: string;
   id: number;
 };
 

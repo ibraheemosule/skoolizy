@@ -116,8 +116,8 @@ const Announcements = () => {
                         <span className="text-sm text-gray-500 font-semibold">
                           Created on{' '}
                           <small className="font-bold">
-                            {formatDate(a.date_created).getDate} -{' '}
-                            {formatDate(a.date_created).getTime}
+                            {formatDate(a.created_at).getDate} -{' '}
+                            {formatDate(a.created_at).getTime}
                           </small>
                         </span>
                       </div>
