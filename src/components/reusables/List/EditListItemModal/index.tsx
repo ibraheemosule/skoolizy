@@ -44,17 +44,17 @@ export const ListItemAuthEditModal = ({
   field,
   children,
 }: TEditInfo) => {
-  const [otpSent, setOtpSent] = useState(false);
+  const [codeSent, setCodeSent] = useState(false);
   const [password, setPassword] = useState('');
-  const [otp, setOtp] = useState('');
+  const [code, setCode] = useState('');
   const initialValue = useRef(value);
 
   const fieldToEdit = capCharRemoveUnderscore(field).toLowerCase();
-  const title = otpSent
+  const title = codeSent
     ? 'Input the code sent to your email and password to confirm update'
-    : `To update ${fieldToEdit}, an OTP will be sent to confirm new ${fieldToEdit}`;
+    : `To update ${fieldToEdit}, a code will be sent to confirm new ${fieldToEdit}`;
 
-  const sendOtp = () => setOtpSent(true);
+  const sendCode = () => setCodeSent(true);
 
   return (
     <Modal
@@ -63,12 +63,12 @@ export const ListItemAuthEditModal = ({
       title={title}
       content={
         <div className="mt-6">
-          {otpSent ? (
+          {codeSent ? (
             <>
               <TextField
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                placeholder="Enter OTP"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Enter Code"
               />
               <div className="mt-4">
                 <TextField
@@ -88,9 +88,9 @@ export const ListItemAuthEditModal = ({
               <div className="p-2 w-full mt-6">
                 <ActionBtn
                   disabled={initialValue.current === value}
-                  onClick={sendOtp}
+                  onClick={sendCode}
                 >
-                  {otpSent ? 'Resend' : 'Send'} OTP
+                  {codeSent ? 'Resend' : 'Send'} Code
                 </ActionBtn>
               </div>
             </>

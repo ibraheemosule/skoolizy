@@ -1,38 +1,27 @@
-import { memo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Auth from '..';
 import TextField from '~components/reusables/CustomField/TextField';
-import Api from '~api';
-import authStore from '~src/store/auth';
-import useRememberMe from '~components/pages/Auth/Login/hooks-login/useRememberMe';
-
-const { api } = new Api();
+import useLogin from '~components/pages/Auth/Login/hooks-login/useLogin';
+import LoginOptions from './LoginOptions';
+import { onlyNumericInput } from '~utils/format';
 
 const Login = () => {
-  // const { update } = authStore((state) => state);
-  const navigate = useNavigate();
-  const [tag, setTag] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-
-  useRememberMe({
+  const {
+    tag,
+    password,
+    isGuardian,
     rememberMe,
     setRememberMe,
-    tag,
-    setTag,
-    password,
     setPassword,
-  });
-
-  const { mutateAsync, isPending, isSuccess } = useMutation({
-    mutationFn: () => api.signin({ tag, password }),
-    onSuccess: (data) => {
-      authStore.getState().login(data.data.access_token);
-      navigate('/dashboard');
-    },
-  });
+    setTag,
+    account,
+    setAccount,
+    loginFn,
+    isPending,
+    isSuccess,
+  } = useLogin();
 
   return (
     <Auth>
@@ -53,12 +42,30 @@ const Login = () => {
         </div>
 
         <div className="mt-6">
-          <div>
+          <div className="mb-2 flex flex-wrap justify-between">
+            <span className="text-gray-400 text-sm">
+              Step {account ? 2 : 1}
+            </span>
+            {account ? (
+              <button
+                onClick={() => {
+                  setAccount('');
+                  setTag('');
+                  setPassword('');
+                }}
+                className="text-purple.dark text-sm font-semibold"
+              >
+                Select Account
+              </button>
+            ) : (
+              <h6 className="text-xl w-full mt-y">Select an account</h6>
+            )}
+          </div>
+          {account ? (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
               }}
-              method="POST"
               className="space-y-6"
             >
               <div>
@@ -66,15 +73,23 @@ const Login = () => {
                   htmlFor="tag"
                   className="block text-sm font-medium leading-6 text-brown.dark"
                 >
-                  Tag (e.g staff-123)
+                  {isGuardian ? 'Phone Number' : 'Tag (e.g staff-123)'}
                 </label>
                 <div className="mt-1">
                   <TextField
                     value={tag}
-                    onChange={(e) => setTag(e.target.value)}
+                    onChange={(e) =>
+                      setTag(
+                        isGuardian
+                          ? onlyNumericInput(e.target.value)
+                          : e.target.value
+                      )
+                    }
                     type="text"
                     id="tag"
-                    placeholder="Input your tag"
+                    placeholder={`Input your ${
+                      isGuardian ? 'Phone Number' : 'tag'
+                    }`}
                   />
                 </div>
               </div>
@@ -104,7 +119,7 @@ const Login = () => {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 rounded cursor-pointer border-gray-300 bg-brown.dark text-brown.dark focus:ring-brown.dark"
+                    className="h-4 w-4 rounded cursor-pointer "
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                   />
@@ -125,14 +140,16 @@ const Login = () => {
               </div>
 
               <ActionBtn
-                onClick={async () => mutateAsync()}
+                onClick={async () => loginFn()}
                 disabled={!tag || !password || isPending || isSuccess}
                 loading={isPending || isSuccess}
               >
                 Sign in
               </ActionBtn>
             </form>
-          </div>
+          ) : (
+            <LoginOptions setAccount={setAccount} />
+          )}
         </div>
       </>
     </Auth>

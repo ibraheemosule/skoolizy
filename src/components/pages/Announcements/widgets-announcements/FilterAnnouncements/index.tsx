@@ -21,7 +21,7 @@ type TFilterAnnouncement = {
 const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   const state = useLocation().state ?? {};
   const [search, setSearch] = useCustomField<string>(state.search || '');
-  const [type, setType] = useCustomField<string>(state.type || '');
+  const [type, setType] = useCustomField<string>(state.announcement_type || '');
   const [fromDate, setFromDate] = useState<Date | null>(
     state.from_date ? new Date(state.from_date) : null
   );
@@ -36,7 +36,7 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   const filterAnnouncements = () => {
     action({
       search,
-      type,
+      announcement_type: type,
       event_days: days,
       from_date: dateToDbFormat(fromDate) || '',
       to_date: dateToDbFormat(toDate) || '',

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Api from '~api';
 import Modal from '~components/reusables/Modal';
 import { HorizontalNav } from '~components/reusables/Menu';
@@ -35,7 +36,9 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
     queryKey: [`announcements_${id}`],
     queryFn: () => api.getAnnouncement(id),
   });
-  const isEditable = new Date(data?.data.event_start_date || '') > new Date();
+  const isEditable =
+    data?.data.announcement_type !== 'memo' &&
+    new Date(data?.data.event_start_date || '') > new Date();
 
   const { mutateAsync: deleteAnnouncement } = useMutation({
     mutationFn: () => api.deleteAnnouncement(id),
@@ -51,18 +54,25 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
         ...(data?.data.title !== title && {
           title,
         }),
+
         ...(data?.data.message !== message && {
           message,
         }),
-        ...(String(data?.data.event_start_date) !== fromDate && {
-          event_start_date: fromDate,
-        }),
-        ...(String(data?.data.event_end_date) !== toDate && {
-          event_end_date: toDate,
-        }),
-        ...(String(data?.data.event_time) !== eventTime && {
-          event_time: `${eventTime}:00`,
-        }),
+
+        ...(data?.data.announcement_type === 'multi_event' &&
+          String(data?.data.event_start_date) !== fromDate && {
+            event_start_date: fromDate,
+          }),
+
+        ...(data?.data.announcement_type === 'multi_event' &&
+          String(data?.data.event_end_date) !== toDate && {
+            event_end_date: toDate,
+          }),
+
+        ...(data?.data.announcement_type === 'single_event' &&
+          String(data?.data.event_time) !== eventTime && {
+            event_time: `${eventTime}:00`,
+          }),
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -78,9 +88,18 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
     if (data && isEditable) {
       setTitle(data.data.title);
       setMessage(String(data.data.message));
-      setFromDate(String(data.data.event_start_date));
-      setToDate(String(data.data.event_end_date));
-      setEventTime(String(data.data.event_time));
+
+      if (data?.data.announcement_type !== 'memo') {
+        setFromDate(String(data.data.event_start_date));
+      }
+
+      if (data?.data.announcement_type === 'multi_event') {
+        setToDate(String(data.data.event_end_date));
+      }
+
+      if (data?.data.announcement_type === 'single_event') {
+        setEventTime(String(data.data.event_time));
+      }
     }
   }, [data?.data]);
 
@@ -91,36 +110,42 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
       title={
         <div className="flex flex-col gap-1 capitalize">
           <h3 data-testid="announcement-title">{data?.data.title}</h3>
-          <span className="text-gray-500 text-sm border-b pb-3">
-            By Mr Tosin olawole
-          </span>
+          <Link
+            to={`/staffs/${data?.data.created_by.tag}`}
+            className="text-gray-500 text-sm border-b pb-3"
+          >
+            By {data?.data.created_by.title} {data?.data.created_by.first_name}
+          </Link>
           {isEditable && (
             <>
               <div className="flex mt-4 gap-6 sm:gap-6 gap-y-4 flex-wrap border-b pb-3">
-                {data?.data.event_start_date && (
-                  <div className="flex flex-col">
-                    <small className="text-xs font-bold">Event Starts</small>
-                    <small className="text-sm text-gray-500">
-                      {formatDate(data?.data.event_start_date || '').getDate}
-                    </small>
-                  </div>
-                )}
-                {data?.data.event_end_date && (
-                  <div className="flex flex-col">
-                    <small className="text-xs font-bold">Event Ends</small>
-                    <small className="text-sm text-gray-500">
-                      {formatDate(data.data.event_end_date || '').getDate}
-                    </small>
-                  </div>
-                )}
-                {data?.data.event_time && (
-                  <div className="flex flex-col">
-                    <small className="text-xs font-bold">Time of Event</small>
-                    <small className="text-sm text-gray-500">
-                      {formatDate(data?.data.event_time || '').getTime}
-                    </small>
-                  </div>
-                )}
+                {data?.data.announcement_type !== 'memo' &&
+                  data?.data.event_start_date && (
+                    <div className="flex flex-col">
+                      <small className="text-xs font-bold">Event Starts</small>
+                      <small className="text-sm text-gray-500">
+                        {formatDate(data?.data.event_start_date || '').getDate}
+                      </small>
+                    </div>
+                  )}
+                {data?.data.announcement_type === 'multi_event' &&
+                  data?.data.event_end_date && (
+                    <div className="flex flex-col">
+                      <small className="text-xs font-bold">Event Ends</small>
+                      <small className="text-sm text-gray-500">
+                        {formatDate(data.data.event_end_date || '').getDate}
+                      </small>
+                    </div>
+                  )}
+                {data?.data.announcement_type === 'single_event' &&
+                  data?.data.event_time && (
+                    <div className="flex flex-col">
+                      <small className="text-xs font-bold">Time of Event</small>
+                      <small className="text-sm text-gray-500">
+                        {formatDate(data?.data.event_time || '').getTime}
+                      </small>
+                    </div>
+                  )}
                 {data?.data.reminder && active === 'edit event' && (
                   <div className=" self-start sm:ml-auto">
                     <ActionBtn className="p-0 bg-transparent">
@@ -178,35 +203,37 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
                 </div>
               </div>
 
-              {data?.data.event_end_date && (
-                <div className="mt-4">
-                  <BoldText>Event End Date:</BoldText>
-                  <div className="mt-1">
-                    <CustomField
-                      type="date"
-                      onChange={setToDate}
-                      field="input"
-                      value={toDate}
-                    />
+              {data?.data.announcement_type === 'multi_event' &&
+                data?.data.event_end_date && (
+                  <div className="mt-4">
+                    <BoldText>Event End Date:</BoldText>
+                    <div className="mt-1">
+                      <CustomField
+                        type="date"
+                        onChange={setToDate}
+                        field="input"
+                        value={toDate}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {data?.data.event_time && (
-                <div className="mt-4">
-                  <BoldText>Time of Event:</BoldText>
-                  <div className="mt-1">
-                    <CustomField
-                      placeholder="Recipients"
-                      value={eventTime}
-                      onChange={setEventTime}
-                      field="input"
-                      type="time"
-                      icon={null}
-                    />
+              {data?.data.announcement_type === 'single_event' &&
+                data?.data.event_time && (
+                  <div className="mt-4">
+                    <BoldText>Time of Event:</BoldText>
+                    <div className="mt-1">
+                      <CustomField
+                        placeholder="Recipients"
+                        value={eventTime}
+                        onChange={setEventTime}
+                        field="input"
+                        type="time"
+                        icon={null}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </div>
           )}
           {active === 'information' && isEditable && (
