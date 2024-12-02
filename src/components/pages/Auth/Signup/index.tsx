@@ -1,17 +1,18 @@
 import { memo, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Link, useNavigate } from 'react-router-dom';
-import { SignupContext } from './u-signup';
+import { Link } from 'react-router-dom';
+import { SignupContext } from './utils-signup';
 
 import PersonalInfoForm from './PersonalInfoForm';
 import ContactInfoForm from './ContactInfoForm';
 import useBulkState from '~components/reusables/hooks/useBulkState';
 import Api from '~api';
 import CompleteSignup from './CompleteSignup';
-import userStore from '~src/store/user';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 import SignupOptions from './SignupOptions';
 import Auth from '..';
+import authStore from '~src/store/auth';
+import userStore from '~src/store/user';
 
 const steps = {
   1: 'Choose an account',
@@ -25,21 +26,20 @@ const totalSteps = Object.keys(steps).length;
 const { api } = new Api();
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [signupDetails, setSignupDetails] = useBulkState(
     {} as TUserSignupPayload
   );
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signup(signupDetails),
     onSuccess: (data) => {
       userStore.getState().update({
-        email: signupDetails.email,
+        verified: data.data.verified,
         tag: data.data.tag,
+        email: data.data.email,
       });
-
-      navigate('/auth/verify-account');
+      authStore.getState().login(data.data);
     },
   });
 
@@ -74,15 +74,35 @@ const Signup = () => {
         </div>
 
         <div className="mt-6">
-          <span className="text-gray-400 text-sm">Step {step}</span>
-          <h6 className="text-xl">{steps[step as keyof typeof steps]}</h6>
+          <div className="mb-2 flex flex-wrap justify-between">
+            <span className="text-gray-400 text-sm">Step {step}</span>
+            {step > 1 ? (
+              <button
+                onClick={() => {
+                  setSignupDetails({});
+                  setStep(1);
+                }}
+                className="text-purple.dark text-sm font-semibold"
+              >
+                Select Account
+              </button>
+            ) : (
+              <h6 className="text-xl w-full mt-y">Select an account</h6>
+            )}
+          </div>
+
           <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-6">
             {
               {
                 1: <SignupOptions />,
                 2: <PersonalInfoForm />,
                 3: <ContactInfoForm />,
-                4: <CompleteSignup signupFn={mutateAsync} />,
+                4: (
+                  <CompleteSignup
+                    signupFn={mutateAsync}
+                    loading={isPending || isSuccess}
+                  />
+                ),
               }[step]
             }
           </form>

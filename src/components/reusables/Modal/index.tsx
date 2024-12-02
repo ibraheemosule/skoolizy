@@ -4,7 +4,7 @@ import CancelIcon from '~src/assets/Icons/CancelIcon';
 import SkeletonLoader from '../SkeletonLoader';
 import { isFuncPromise } from '~utils/index';
 import { TModal } from './t-modal';
-import { sizes } from './u-modal';
+import { sizes } from './utils-modal';
 
 const Modal: FC<TModal> = ({
   close,
@@ -24,10 +24,11 @@ const Modal: FC<TModal> = ({
     let res: unknown;
     if (action && isFuncPromise(action)) {
       setLoading(true);
-
-      res = await action();
-
-      setLoading(false);
+      try {
+        res = await action();
+      } finally {
+        setLoading(false);
+      }
     } else action?.();
     if (res) close((prev) => !prev);
   };

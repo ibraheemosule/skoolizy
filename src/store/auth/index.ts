@@ -3,8 +3,12 @@ import { persist, devtools } from 'zustand/middleware';
 
 export type TAuthStore = {
   token: string | null;
-  staySignedIn: boolean;
-  login: (token: string) => void;
+  sessionEnd: boolean;
+  login: (arg: {
+    access_token: string;
+    verified: boolean;
+    tag: string;
+  }) => void;
   logout: () => void;
   update: (arg: Partial<TAuthStore>) => void;
 };
@@ -14,30 +18,30 @@ const authStore = create<TAuthStore>()(
     persist(
       (set) => ({
         token: null,
-        staySignedIn: false,
+        sessionEnd: false,
 
         update: (arg: Partial<TAuthStore>) =>
           set((state) => ({ ...state, ...arg })),
 
-        login: (token: string) =>
+        login: (arg) =>
           set((state) => ({
             ...state,
-            staySignedIn: true,
-            token,
+            token: arg.access_token,
+            verified: arg.verified,
+            tag: arg.tag,
           })),
 
         logout: () =>
           set((state) => ({
             ...state,
-            staySignedIn: false,
+            verified: false,
             token: null,
           })),
       }),
       {
-        name: 'auth-store',
+        name: 'skoolizy-auth-store',
         partialize: (state) => ({
           token: state.token,
-          staySignedIn: state.staySignedIn,
         }),
       }
     )

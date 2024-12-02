@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import useGetCountriesAndState from '~components/reusables/hooks/useGetCountriesAndState';
-import { useSignupContext } from '../u-signup';
+import { useSignupContext } from '../utils-signup';
 import useBulkState from '~components/reusables/hooks/useBulkState';
 import {
   personalInfoFieldValidation,
   personalInfoInitialState,
   personalInfoOptionalFields,
-} from './u-personalInfoForm';
+} from './utils-personalInfoForm';
 
 const usePersonalInfoForm = () => {
   const { step, setStep, totalSteps, signupDetails, setSignupDetails } =
@@ -21,6 +21,7 @@ const usePersonalInfoForm = () => {
   const [state, setState] = useBulkState<{
     [key: string]: string | Date;
   }>({
+    title: signupDetails.title || '',
     first_name: signupDetails.first_name || '',
     middle_name: signupDetails.middle_name || '',
     last_name: signupDetails.last_name || '',

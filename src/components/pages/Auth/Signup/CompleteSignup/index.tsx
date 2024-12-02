@@ -6,9 +6,9 @@ import { ActionBtn } from '~components/reusables/ui/Buttons';
 import {
   completeSignupInputFieldValidation,
   TCompleteSignupProps,
-} from './u-completeSignup';
+} from './utils-completeSignup';
 
-const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
+const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn, loading }) => {
   const {
     setState,
     setStep,
@@ -87,9 +87,10 @@ const CompleteSignup: FC<TCompleteSignupProps> = ({ signupFn }) => {
       <ActionBtn
         onClick={async () => {
           proceed();
-          await signupFn();
+          signupFn();
         }}
-        disabled={disableSignupBtn}
+        loading={loading}
+        disabled={disableSignupBtn || loading}
       >
         Sign Up
       </ActionBtn>

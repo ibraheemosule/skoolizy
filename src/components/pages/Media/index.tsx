@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { BaseBtn } from '~reusables/ui/Buttons';
 import Icon from '~assets/Icons';
-import NewMedia from './Add';
-import FilterMedia from './Filter';
-import DeleteMedia from './Delete';
-import ViewMedia from './View';
-import { downloadFile } from '~utils/files';
 import ListOptions from '~components/reusables/ListOptions';
+import { BaseBtn } from '~reusables/ui/Buttons';
+import { downloadFile } from '~utils/files';
+import NewMedia from './widgets-media/AddMedia';
+import DeleteMedia from './widgets-media/DeleteMedia';
+import FilterMedia from './widgets-media/FilterMedia';
+import ViewMedia from './widgets-media/ViewMedia';
 
 const a =
   'https://res.cloudinary.com/ibraheemsulay/image/upload/v1695677680/The_Lean_Startup_oaqmsl.png';

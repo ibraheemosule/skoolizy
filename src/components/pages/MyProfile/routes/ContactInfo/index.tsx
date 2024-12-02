@@ -7,7 +7,7 @@ import {
 import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { capCharRemoveUnderscore } from '~utils/format';
-import { canEdit, contact, contactAuthEdit } from './u-contact-info';
+import { canEdit, contact, contactAuthEdit } from './utils-contact-info';
 
 const ContactInfo = () => {
   const [info, setInfo] = useState<Record<string, string>>({});
