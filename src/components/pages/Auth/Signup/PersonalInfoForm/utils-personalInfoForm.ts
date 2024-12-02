@@ -2,6 +2,8 @@ import { capCharRemoveUnderscore, onlyAlphabet } from '~utils/format';
 
 export const optional = ['middleName'];
 
+export const titles = ['mr', 'mrs', 'master', 'miss'];
+
 export const personalInfoFieldValidation = (
   key: string,
   value: string | string[]
@@ -33,6 +35,9 @@ export const personalInfoFieldValidation = (
   //   }
 
   switch (key) {
+    case 'title':
+      if (!value) error[key] = `${capCharRemoveUnderscore(key)} is required`;
+      break;
     case 'first_name':
     case 'last_name':
     case 'middle_name':
@@ -55,6 +60,15 @@ export const personalInfoFieldValidation = (
     case 'date_of_birth':
       if (!value.length) {
         error[key] = `${capCharRemoveUnderscore(key)} is required`;
+      } else {
+        const lessThan16 =
+          new Date().getFullYear() - new Date(String(value)).getFullYear() < 16;
+
+        if (lessThan16) {
+          error[key] = `${capCharRemoveUnderscore(
+            key
+          )} Should be over 16 years`;
+        }
       }
       break;
 

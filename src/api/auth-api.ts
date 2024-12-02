@@ -4,31 +4,49 @@ import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 export default (api: AxiosInstance) => ({
   signup: async (
     body: TUserSignupPayload
-  ): Promise<{ data: { message: string; tag: string } }> => {
+  ): Promise<{
+    data: {
+      access_token: string;
+      verified: boolean;
+      tag: string;
+      email: string;
+    };
+  }> => {
     const res = await api.post('/auth/signup', body);
     return res.data;
   },
 
-  confirmSignup: async (body: {
-    email: string;
-    otp: string;
-  }): Promise<{ data: { access_token: string } }> => {
-    const res = await api.patch('/auth/confirm-signup', body);
+  verifyAccount: async (body: {
+    code: string;
+  }): Promise<{ data: { message: string } }> => {
+    const res = await api.patch('/auth/verify-account', body);
     return res.data;
   },
 
-  signin: async (body: {
-    tag: string;
-    password: string;
-  }): Promise<{ data: { access_token: string } }> => {
+  signin: async (
+    body:
+      | {
+          tag: string;
+          password: string;
+        }
+      | {
+          phone_number: string;
+          password: string;
+        }
+  ): Promise<{
+    data: {
+      access_token: string;
+      verified: boolean;
+      tag: string;
+      email: string;
+    };
+  }> => {
     const res = await api.post('/auth/signin', body);
     return res.data;
   },
 
-  sendOtp: async (body: {
-    email: string;
-  }): Promise<{ data: { message: string } }> => {
-    const res = await api.post('/auth/send-otp', body);
+  sendCode: async (body: { email: string }): Promise<{ message: string }> => {
+    const res = await api.post('/auth/send-code', body);
     return res.data;
   },
 

@@ -1,4 +1,4 @@
-export const recipientsList = ['all', 'parents', 'staffs', 'students'];
+export const recipientsList = ['general', 'guardians', 'staffs', 'students'];
 export const navRouting = {
   memo: 'Memo',
   single_event: 'Single-day event',

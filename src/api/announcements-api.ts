@@ -7,7 +7,7 @@ export default (api: AxiosInstance) => ({
     search?: string;
     type?: string;
     page?: number;
-  }): Promise<TListApi<TAnnouncementsData>> => {
+  }): Promise<{ data: TListApi<Omit<TAnnouncementsData, 'created_by'>> }> => {
     const res = await api.get('/announcements', { params });
     return res.data;
   },
@@ -21,9 +21,9 @@ export default (api: AxiosInstance) => ({
 
   postAnnouncement: async (body: {
     title: string;
-    type: 'single_event' | 'multi_event' | 'memo';
+    announcement_type: 'single_event' | 'multi_event' | 'memo';
     message: string;
-    recipient?: 'all' | 'parents' | 'staffs' | 'students';
+    recipient?: 'general' | 'guardians' | 'staffs' | 'students';
     event_start_date?: string;
     event_end_date?: string;
     event_time?: string;

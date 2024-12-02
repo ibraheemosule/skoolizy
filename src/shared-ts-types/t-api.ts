@@ -7,7 +7,7 @@ type TApi = ReturnType<typeof externalApi> &
   ReturnType<typeof authApi>;
 
 export type TListApi<T> = {
-  data: T[];
+  list: T[];
   page: number;
   per_page: number;
   total_items: number;
