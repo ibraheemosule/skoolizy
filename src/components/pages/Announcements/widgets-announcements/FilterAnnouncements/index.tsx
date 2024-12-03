@@ -1,17 +1,35 @@
 import { memo, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 import { useLocation } from 'react-router-dom';
+import SelectField from '~components/reusables/CustomField/SelectField';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import { BoldText } from '~reusables/ui/Text';
 import { capCharRemoveUnderscore, dateToDbFormat } from '~utils/format';
 
-const nums = Array(365)
+const nums = Array(366)
   .fill('')
-  .map((_, i) => String(i));
+  .map((_, i) => i)
+  .slice(1);
 
 const types = ['memo', 'single_event', 'multi_event'];
+
+const announcementTypeDropdown = (val: string | number) => (
+  <div className="py-2">{capCharRemoveUnderscore(String(val))}</div>
+);
+
+const eventDaysDropdown = (val: string | number) => (
+  <div className="py-3">
+    {val} Day{+val > 1 && 's'}
+  </div>
+);
+
+const selectedEventDaysElement = (val: string | number) => (
+  <span>
+    {val} Day{+val > 1 && 's'}
+  </span>
+);
 
 type TFilterAnnouncement = {
   action: (arg: { [key: string]: string | number }) => void;
@@ -21,17 +39,14 @@ type TFilterAnnouncement = {
 const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
   const state = useLocation().state ?? {};
   const [search, setSearch] = useCustomField<string>(state.search || '');
-  const [type, setType] = useCustomField<string>(state.announcement_type || '');
+  const [type, setType] = useState<string>(state.announcement_type || '');
   const [fromDate, setFromDate] = useState<Date | null>(
     state.from_date ? new Date(state.from_date) : null
   );
   const [toDate, setToDate] = useState<Date | null>(
     state.to_date ? new Date(state.to_date) : null
   );
-  const [days, setDays, daysList, daysListFilterFn] = useCustomField<string>(
-    state.event_days || '',
-    nums
-  );
+  const [days, setDays] = useState<string>(state.event_days || '');
 
   const filterAnnouncements = () => {
     action({
@@ -60,41 +75,24 @@ const FilterAnnouncement = ({ closeModal, action }: TFilterAnnouncement) => {
           <div className="mt-4">
             <BoldText>Announcement Type:</BoldText>
             <div className="mt-1">
-              <CustomField
-                onSelect={setType}
-                field="select"
+              <SelectField
+                list={types}
                 value={type}
-                placeholder="search..."
-              >
-                <CustomField.DropdownWrapper>
-                  {types.map((t) => (
-                    <CustomField.Dropdown key={t} value={t}>
-                      {capCharRemoveUnderscore(t)}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
+                onSelect={setType}
+                dropdownElement={announcementTypeDropdown}
+              />
             </div>
           </div>
           <div className="mt-4">
-            <BoldText>Event days:</BoldText>
+            <BoldText>Event duration (days):</BoldText>
             <div className="mt-1">
-              <CustomField
-                field="input"
-                placeholder="Select event duration range..."
-                filterFn={daysListFilterFn}
-                onChange={setDays}
+              <SelectField
+                list={nums}
                 value={days}
-                icon="caretDown"
-              >
-                <CustomField.DropdownWrapper>
-                  {daysList.map((name) => (
-                    <CustomField.Dropdown key={name} value={name}>
-                      {name}
-                    </CustomField.Dropdown>
-                  ))}
-                </CustomField.DropdownWrapper>
-              </CustomField>
+                onSelect={setDays}
+                dropdownElement={eventDaysDropdown}
+                selectedElement={selectedEventDaysElement}
+              />
             </div>
           </div>
           <div className="my-4">
