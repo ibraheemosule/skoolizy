@@ -2,9 +2,11 @@ import { memo, useEffect, useRef, useState } from 'react';
 import Icon from '~assets/Icons';
 import { Tag } from '~components/reusables/ui/Others';
 import DropdownWrapper from './DropdownWrapper';
+import { capCharRemoveUnderscore } from '~utils/format';
 
 type TSelectField = {
   dropdownElement?: (value: string | number) => JSX.Element;
+  selectedElement?: (value: string | number) => JSX.Element;
   width?: number;
   loading?: boolean;
   error?: string;
@@ -28,6 +30,7 @@ const SelectField = ({
   placeholder,
   list,
   dropdownElement,
+  selectedElement,
   onBlur,
   disabled,
 }: TSelectField) => {
@@ -51,17 +54,6 @@ const SelectField = ({
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('click', toggleDropdown);
-    return () => {
-      document.removeEventListener('click', toggleDropdown);
-    };
-  }, [disabled]);
-
-  const emptyValue = (
-    <span className="text-gray-400">{placeholder || 'Select..'}</span>
-  );
-
   const handleSelect = (arg: string | number) => {
     if (multiselect) {
       const itemInState = value.find((item) => String(item) === String(arg));
@@ -76,6 +68,20 @@ const SelectField = ({
     (onSelect as (e: string | number) => void)(arg);
   };
 
+  useEffect(() => {
+    document.addEventListener('click', toggleDropdown);
+    return () => {
+      document.removeEventListener('click', toggleDropdown);
+    };
+  }, [disabled]);
+
+  const emptyValue = (
+    <span className="text-gray-400">{placeholder || 'Select..'}</span>
+  );
+
+  const cancelIcon = (
+    <Icon name="cancel" width={16} height={16} strokeWidth={2} />
+  );
   return (
     <div className="flex h-full relative" ref={elementRef}>
       <div
@@ -94,28 +100,29 @@ const SelectField = ({
           }`}
         >
           {multiselect &&
-            (value.length
-              ? value.map((prop) => (
-                  <Tag
-                    onClick={() => toggle && handleSelect(prop)}
-                    key={Math.random()}
-                  >
-                    <div className="flex items-center">
-                      <span className=" whitespace-nowrap pr-2">
-                        {String(prop).split('_').join(' ')}
-                      </span>
-                      <Icon
-                        name="cancel"
-                        width={16}
-                        height={16}
-                        strokeWidth={3}
-                      />
-                    </div>
-                  </Tag>
-                ))
-              : emptyValue)}
+            value.map((prop) =>
+              selectedElement ? (
+                <button className="flex items-center gap-1" key={prop}>
+                  {selectedElement?.(prop)} {cancelIcon}
+                </button>
+              ) : (
+                <Tag
+                  onClick={() => toggle && handleSelect(prop)}
+                  key={Math.random()}
+                >
+                  <div className="flex items-center">
+                    <span className=" whitespace-nowrap pr-2">
+                      {capCharRemoveUnderscore(String(prop))}
+                    </span>
+                    {cancelIcon}
+                  </div>
+                </Tag>
+              )
+            )}
 
-          {!multiselect && (String(value)?.split('_').join(' ') || emptyValue)}
+          {!multiselect && String(value).length
+            ? selectedElement?.(value) || capCharRemoveUnderscore(String(value))
+            : emptyValue}
         </div>
         <span className=" mr-1">
           <Icon height={20} width={20} name="caretDown" />
