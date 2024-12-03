@@ -7,7 +7,10 @@ import TopHeader from './TopHeader';
 import useBanner from '~components/reusables/hooks/useBanner';
 import { getPrevRoute } from '~utils/query';
 import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
+import Api from '~api';
+import userStore from '~src/store/user';
 
+const { api } = new Api();
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
   const { banner } = useBanner();
@@ -21,6 +24,20 @@ const Layout: FC = () => {
         timeout: BANNER_DEFAULT_TIMEOUT,
       });
     }
+    api.getAccount().then(({ data }) => {
+      userStore.getState().update({
+        email: data.email,
+        nationality: data.country,
+        firstName: data.first_name,
+        lastName: data.last_name,
+        middleName: data.middle_name,
+        gender: data.gender,
+        homeAddress: data.home_address,
+        phoneNumber: data.phone_number,
+        state: data.state_of_origin,
+        dateOfBirth: data.date_of_birth,
+      });
+    });
   }, []);
 
   return (

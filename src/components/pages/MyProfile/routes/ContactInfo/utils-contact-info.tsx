@@ -1,7 +1,11 @@
+import userStore from '~src/store/user';
+
+const { email, phoneNumber, homeAddress } = userStore.getState();
+
 export const contact = {
-  email_address: 'test@yop.com',
-  phone_number: '08012345678',
-  home_address: '15, at test, idimy,lagos',
+  email_address: email,
+  phone_number: phoneNumber,
+  home_address: homeAddress,
   emergency_email_address: 'test@yop.com',
   emergency_phone_number: '08012345678',
 };

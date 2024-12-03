@@ -4,6 +4,7 @@ import TApi from '~shared-ts-types/t-api';
 import authStore from '~src/store/auth';
 import auth from './auth-api';
 import externalApi from './external-api';
+import accountApi from '~src/api/account-api';
 
 const baseURL = String(import.meta.env.VITE_BASE_URL);
 class Api {
@@ -53,6 +54,7 @@ class Api {
     ...externalApi(this.axiosInstance),
     ...announcementsApi(this.axiosInstance),
     ...auth(this.axiosInstance),
+    ...accountApi(this.axiosInstance),
   };
 }
 

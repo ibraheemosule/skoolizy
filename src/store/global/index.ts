@@ -4,6 +4,7 @@ import { IBannerOptions } from '~shared-ts-types/react-types';
 type TGlobalStore = {
   bannerOptions: IBannerOptions[];
   prevRoute: string;
+  // user:
   update: (arg: Partial<TGlobalStore>) => void;
 };
 
