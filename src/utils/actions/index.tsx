@@ -60,7 +60,7 @@ export const logout = async (arg?: { sessionLogout: boolean }) => {
         {
           id: getUid(),
           type: 'info',
-          text: 'You are logged out',
+          text: 'Logged out successfully',
         },
       ],
     });
