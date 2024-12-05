@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import authStore from '~src/store/auth';
-import userStore from '~src/store/user';
+import authStore from '~src/store/authStore';
+import userStore from '~src/store/userStore';
 
 const AuthAccess: FC = () => {
   const { token } = authStore((state) => state);

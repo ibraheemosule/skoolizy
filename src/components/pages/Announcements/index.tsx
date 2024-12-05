@@ -8,7 +8,7 @@ import Pagination from '~components/reusables/Pagination';
 import SkeletonLoader from '~components/reusables/SkeletonLoader';
 import EmptyView from '~components/reusables/empty-view';
 import useFilter from '~components/reusables/hooks/useFilter';
-import { capCharRemoveUnderscore, formatDate } from '~utils/format';
+import { capCharRemoveUnderscore, formatDate } from '~utils';
 import FilterAnnouncements from './widgets-announcements/FilterAnnouncements';
 import NewAnnouncement from './widgets-announcements/NewAnnouncement';
 import ViewAnnouncement from './widgets-announcements/ViewAnnouncement';

@@ -1,9 +1,12 @@
 import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
+import globalStore from '../globalStore';
+import { BANNER_DEFAULT_TIMEOUT, getUid } from '~utils';
 
 export type TAuthStore = {
   token: string | null;
   sessionEnd: boolean;
+  returnPage: string;
   login: (arg: {
     access_token: string;
     verified: boolean;
@@ -19,6 +22,7 @@ const authStore = create<TAuthStore>()(
       (set) => ({
         token: null,
         sessionEnd: false,
+        returnPage: '',
 
         update: (arg: Partial<TAuthStore>) =>
           set((state) => ({ ...state, ...arg })),
@@ -31,12 +35,29 @@ const authStore = create<TAuthStore>()(
             tag: arg.tag,
           })),
 
-        logout: () =>
+        logout: () => {
+          setTimeout(() => {
+            globalStore.getState().update({
+              bannerOptions: [
+                {
+                  id: getUid(),
+                  type: 'success',
+                  timeout: BANNER_DEFAULT_TIMEOUT,
+                  text: 'You have successfully logged out!',
+                },
+              ],
+            });
+          }, 100);
+          globalStore.getState().update({
+            bannerOptions: [],
+          });
+
           set((state) => ({
             ...state,
             verified: false,
             token: null,
-          })),
+          }));
+        },
       }),
       {
         name: 'skoolizy-auth-store',

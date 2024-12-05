@@ -3,7 +3,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Modal from '~components/reusables/Modal';
 import { ListItem } from '~reusables/List/List';
 import { ActionBtn } from '~reusables/ui/Buttons';
-import { formatDate } from '~utils/format';
+import { formatDate } from '~utils';
 
 const dateType = ['Start Date', 'End Date'] as const;
 

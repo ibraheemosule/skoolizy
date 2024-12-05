@@ -11,8 +11,8 @@ import CompleteSignup from './CompleteSignup';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 import SignupOptions from './SignupOptions';
 import Auth from '..';
-import authStore from '~src/store/auth';
-import userStore from '~src/store/user';
+import authStore from '~src/store/authStore';
+import userStore from '~src/store/userStore';
 
 const steps = {
   1: 'Choose an account',

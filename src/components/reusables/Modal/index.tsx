@@ -2,7 +2,7 @@ import { FC, memo, useState } from 'react';
 import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import SkeletonLoader from '../SkeletonLoader';
-import { isFuncPromise } from '~utils/index';
+import { isFuncPromise } from '~utils';
 import { TModal } from './t-modal';
 import { sizes } from './utils-modal';
 

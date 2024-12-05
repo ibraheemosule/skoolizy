@@ -1,55 +1,32 @@
 import { memo, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
-import useBanner from '~components/reusables/hooks/useBanner';
-import authStore from '~src/store/auth';
-import userStore from '~src/store/user';
-import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
-import { getPrevRoute } from '~utils/query';
+
+import authStore from '~src/store/authStore';
+import userStore from '~src/store/userStore';
 
 const allowed = ['/auth/signup', '/auth/login', '/auth/reset-password'];
 
 const Auth = ({ children }: { children: ReactElement }) => {
-  const { token, sessionEnd, update } = authStore((state) => state);
+  const { token, returnPage } = authStore((state) => state);
   const { verified } = userStore((state) => state);
   const navigate = useNavigate();
-  const { banner } = useBanner();
   const path = window.location.pathname;
 
   useEffect(() => {
-    if (
-      !token &&
-      !['/auth/login', '/auth/signup', '/auth/reset-password'].includes(path)
-    ) {
+    if (!token && !allowed.includes(path)) {
       navigate('/auth/login');
       return;
     }
     if (token) {
       if (verified) {
-        navigate('/dashboard');
+        navigate(returnPage || '/dashboard');
         return;
       }
-      if (!verified && path !== '/auth/verify-account') {
+      if (path !== '/auth/verify-account') {
         navigate('/auth/verify-account');
-        return;
-      }
-
-      if (path === '/auth/login') {
-        navigate((sessionEnd && getPrevRoute()) || '/dashboard');
-        update({ sessionEnd: false });
-        return;
       }
     }
-
-    const prevRoute = getPrevRoute();
-    if (!prevRoute) return;
-    if (allowed.includes(prevRoute)) return;
-
-    banner({
-      type: 'success',
-      timeout: BANNER_DEFAULT_TIMEOUT,
-      text: 'You have successfully logged out!',
-    });
   }, [token, verified]);
 
   return (

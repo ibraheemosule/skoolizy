@@ -2,12 +2,12 @@ import { memo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Api from '~api';
-import userStore from '~src/store/user';
+import userStore from '~src/store/userStore';
 import TextField from '~components/reusables/CustomField/TextField';
-import { onlyNumericInput } from '~utils/format';
+import { onlyNumericInput } from '~utils';
 import Auth from '..';
 import useBanner from '~components/reusables/hooks/useBanner';
-import authStore from '~src/store/auth';
+import authStore from '~src/store/authStore';
 
 const { api } = new Api();
 

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { ActionBtn } from '~reusables/ui/Buttons';
-import { capCharRemoveUnderscore } from '~utils/format';
+import { capCharRemoveUnderscore } from '~utils';
 import Modal from '~reusables/Modal';
 import TextField from '~components/reusables/CustomField/TextField';
 

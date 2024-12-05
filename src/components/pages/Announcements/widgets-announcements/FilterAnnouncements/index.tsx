@@ -6,7 +6,7 @@ import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
 import { BoldText } from '~reusables/ui/Text';
-import { capCharRemoveUnderscore, dateToDbFormat } from '~utils/format';
+import { capCharRemoveUnderscore, dateToDbFormat } from '~utils';
 
 const nums = Array(366)
   .fill('')

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import PrevNextBtn from '~components/reusables/PrevNextBtn';
 import TextField from '~components/reusables/CustomField/TextField';
 import useContactInfoForm from './useContactFormInfo';
-import { onlyNumericInput } from '~utils/format';
+import { onlyNumericInput } from '~utils';
 
 const ContactInfoForm = () => {
   const {

@@ -1,9 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import announcementsApi from './announcements-api';
 import TApi from '~shared-ts-types/t-api';
-import authStore from '~src/store/auth';
+import authStore from '~src/store/authStore';
 import auth from './auth-api';
 import externalApi from './external-api';
+import { logout } from '~utils';
 
 const baseURL = String(import.meta.env.VITE_BASE_URL);
 class Api {
@@ -18,8 +19,10 @@ class Api {
     (response) => response,
     async (error) => {
       const originalRequest = error.config;
+      const errMessage = error.response?.data?.message;
+      const customError = { ...error };
 
-      const getNewToken = error.response?.data?.message === 'Expired token';
+      const getNewToken = errMessage === 'Expired token';
 
       if (getNewToken && !this.refetchToken) {
         this.refetchToken = true;
@@ -31,12 +34,19 @@ class Api {
 
           return await this.axiosInstance(originalRequest);
         } catch {
-          authStore.getState().logout();
-          authStore.getState().update({ sessionEnd: true });
+          customError.response.data.message =
+            'Current Session has expired, Please sign in again';
+          logout({ sessionLogout: true });
         }
       }
 
-      return Promise.reject(error);
+      if (errMessage === 'Invalid token') {
+        customError.response.data.message =
+          'Unknown session, Please sign in again';
+        logout({ sessionLogout: true });
+      }
+
+      return Promise.reject(customError);
     }
   );
 

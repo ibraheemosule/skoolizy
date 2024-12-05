@@ -1,27 +1,13 @@
-import { useState, FC, useEffect } from 'react';
+import { useState, FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import SideNav from '~components/Layout/SideNav';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
 
-import useBanner from '~components/reusables/hooks/useBanner';
-import { getPrevRoute } from '~utils/query';
-import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
-
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
-  const { banner } = useBanner();
-  const animate = toggleNav ? 'animate-in' : 'animate-out';
 
-  useEffect(() => {
-    if (['/auth/login'].includes(String(getPrevRoute()))) {
-      banner({
-        text: 'Login Successful!',
-        type: 'success',
-        timeout: BANNER_DEFAULT_TIMEOUT,
-      });
-    }
-  }, []);
+  const animate = toggleNav ? 'animate-in' : 'animate-out';
 
   return (
     <main className="absolute inset-0 flex overflow-hidden">
