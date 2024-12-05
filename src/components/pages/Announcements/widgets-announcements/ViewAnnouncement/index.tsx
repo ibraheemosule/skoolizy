@@ -1,5 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  memo,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 import Api from '~api';
 import Modal from '~components/reusables/Modal';
@@ -48,38 +55,39 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
       }),
   });
 
-  const { mutateAsync: updateAnnouncement } = useMutation({
-    mutationFn: () =>
-      api.updateAnnouncement(id, {
-        ...(data?.data.title !== title && {
-          title,
-        }),
-
-        ...(data?.data.message !== message && {
-          message,
-        }),
-
-        ...(data?.data.announcement_type === 'multi_event' &&
-          String(data?.data.event_start_date) !== fromDate && {
-            event_start_date: fromDate,
-          }),
-
-        ...(data?.data.announcement_type === 'multi_event' &&
-          String(data?.data.event_end_date) !== toDate && {
-            event_end_date: toDate,
-          }),
-
-        ...(data?.data.announcement_type === 'single_event' &&
-          String(data?.data.event_time) !== eventTime && {
-            event_time: `${eventTime}:00`,
-          }),
+  const newData = useMemo(
+    () => ({
+      ...(data?.data.title !== title && {
+        title,
       }),
+
+      ...(data?.data.message !== message && {
+        message,
+      }),
+
+      ...(data?.data.announcement_type !== 'memo' &&
+        String(data?.data.event_start_date) !== fromDate && {
+          event_start_date: fromDate,
+        }),
+
+      ...(data?.data.announcement_type === 'multi_event' &&
+        String(data?.data.event_end_date) !== toDate && {
+          event_end_date: toDate,
+        }),
+
+      ...(data?.data.announcement_type === 'single_event' &&
+        String(data?.data.event_time) !== eventTime && {
+          event_time: `${eventTime}:00`,
+        }),
+    }),
+    [title, message, fromDate, toDate, eventTime]
+  );
+
+  const { mutateAsync: updateAnnouncement } = useMutation({
+    mutationFn: () => api.updateAnnouncement(id, newData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['announcements'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [`announcements_${id}`],
+        queryKey: ['announcements', `announcements_${id}`],
       });
     },
   });
@@ -253,6 +261,9 @@ const ViewAnnouncement = ({ id, closeModal }: TViewAnnouncement) => {
       })}
       fixedActionBtn
       actionText={active === 'information' ? 'Delete' : 'Update Event'}
+      disableActionBtn={
+        active !== 'information' && !Object.keys(newData).length
+      }
     />
   );
 };

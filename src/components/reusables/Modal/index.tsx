@@ -17,6 +17,7 @@ const Modal: FC<TModal> = ({
   fixedActionBtn = false,
   isLoading = false,
   btnClass,
+  disableActionBtn,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +41,7 @@ const Modal: FC<TModal> = ({
         className={btnClass}
         loading={loading}
         onClick={modalAction}
+        disabled={disableActionBtn}
       >
         {actionText || 'Submit'}
       </ActionBtn>

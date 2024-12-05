@@ -1,6 +1,7 @@
 import storeGlobal from '~src/store/globalStore';
 import storeUser from '~src/store/userStore';
 import { getPrevRoute, getUid } from '~utils';
+import appQueryClient from '~src/App/appQueryClient';
 
 export const login = (arg: {
   access_token: string;
@@ -43,6 +44,8 @@ export const login = (arg: {
 };
 
 export const logout = async (arg?: { sessionLogout: boolean }) => {
+  setTimeout(() => appQueryClient.removeQueries(), 3000);
+
   const globalStore = storeGlobal.getState();
   const userStore = storeUser.getState();
 
