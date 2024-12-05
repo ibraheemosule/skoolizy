@@ -11,9 +11,6 @@ export const login = (arg: {
   const globalStore = storeGlobal.getState();
   const userStore = storeUser.getState();
   const id = getUid();
-  globalStore.update({
-    token: arg.access_token,
-  });
 
   userStore.update({
     verified: arg.verified ?? userStore.verified,
@@ -22,6 +19,7 @@ export const login = (arg: {
   });
 
   globalStore.update({
+    token: arg.access_token,
     bannerOptions: [
       {
         id,
@@ -35,23 +33,26 @@ export const login = (arg: {
 
   setTimeout(() => {
     globalStore.update({
-      bannerOptions: globalStore.bannerOptions.filter(
-        (option) => option.id !== id
-      ),
-    });
-    globalStore.update({
       returnPage: '',
+      sessionEndUser: '',
+      bannerOptions: storeGlobal
+        .getState()
+        .bannerOptions.filter((option) => option.id !== id),
     });
   }, 3000);
 };
 
 export const logout = async (arg?: { sessionLogout: boolean }) => {
   const globalStore = storeGlobal.getState();
+  const userStore = storeUser.getState();
 
   globalStore.update({ token: null });
 
   if (arg?.sessionLogout) {
-    globalStore.update({ sessionEnd: true, returnPage: getPrevRoute() || '' });
+    globalStore.update({
+      sessionEndUser: userStore.tag,
+      returnPage: getPrevRoute() || '/',
+    });
     return;
   }
   setTimeout(() => {

@@ -8,8 +8,8 @@ import userStore from '~src/store/userStore';
 const allowed = ['/auth/signup', '/auth/login', '/auth/reset-password'];
 
 const Auth = ({ children }: { children: ReactElement }) => {
-  const { token, returnPage } = globalStore((state) => state);
-  const { verified } = userStore((state) => state);
+  const { token, returnPage, sessionEndUser } = globalStore((state) => state);
+  const { verified, tag } = userStore((state) => state);
   const navigate = useNavigate();
   const path = window.location.pathname;
 
@@ -20,7 +20,7 @@ const Auth = ({ children }: { children: ReactElement }) => {
     }
     if (token) {
       if (verified) {
-        navigate(returnPage || '/dashboard');
+        navigate(tag === sessionEndUser ? returnPage : '/dashboard');
         return;
       }
       if (path !== '/auth/verify-account') {

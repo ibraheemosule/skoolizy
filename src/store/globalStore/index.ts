@@ -5,7 +5,7 @@ import { IBannerOptions } from '~shared-ts-types/react-types';
 type TGlobalStore = {
   bannerOptions: IBannerOptions[];
   token: string | null;
-  sessionEnd: boolean;
+  sessionEndUser: string;
   returnPage: string;
   update: (arg: Partial<TGlobalStore>) => void;
 };
@@ -16,7 +16,7 @@ const globalStore = create<TGlobalStore>()(
       (set) => ({
         bannerOptions: [],
         token: null,
-        sessionEnd: false,
+        sessionEndUser: '',
         returnPage: '',
 
         update: (arg: Partial<TGlobalStore>) => {
