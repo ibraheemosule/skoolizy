@@ -32,10 +32,7 @@ const Signup = () => {
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signup(signupDetails),
-    onSuccess: (data) => {
-      console.log(data, 'ehreee');
-      login(data.data);
-    },
+    onSuccess: (data) => login(data.data),
   });
 
   const values = useMemo(
