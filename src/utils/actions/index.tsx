@@ -1,23 +1,24 @@
-import storeAuth from '~src/store/authStore';
 import storeGlobal from '~src/store/globalStore';
-import userStore from '~src/store/userStore';
+import storeUser from '~src/store/userStore';
 import { getPrevRoute, getUid } from '~utils';
 
 export const login = (arg: {
   access_token: string;
   verified: boolean;
   tag: string;
+  email: string;
 }) => {
-  const authStore = storeAuth.getState();
   const globalStore = storeGlobal.getState();
+  const userStore = storeUser.getState();
   const id = getUid();
-  authStore.update({
+  globalStore.update({
     token: arg.access_token,
   });
 
-  userStore.getState().update({
-    verified: arg.verified,
-    tag: arg.tag,
+  userStore.update({
+    verified: arg.verified ?? userStore.verified,
+    tag: arg.tag ?? userStore.tag,
+    email: arg.email ?? userStore.email,
   });
 
   globalStore.update({
@@ -25,7 +26,9 @@ export const login = (arg: {
       {
         id,
         type: 'success',
-        text: 'You have successfully logged in!',
+        text: arg.verified
+          ? 'You have successfully logged in!'
+          : 'Verify your account to complete sign up process',
       },
     ],
   });
@@ -36,20 +39,19 @@ export const login = (arg: {
         (option) => option.id !== id
       ),
     });
-    authStore.update({
+    globalStore.update({
       returnPage: '',
     });
   }, 3000);
 };
 
 export const logout = async (arg?: { sessionLogout: boolean }) => {
-  const authStore = storeAuth.getState();
   const globalStore = storeGlobal.getState();
 
-  authStore.update({ token: null });
+  globalStore.update({ token: null });
 
   if (arg?.sessionLogout) {
-    authStore.update({ sessionEnd: true, returnPage: getPrevRoute() || '' });
+    globalStore.update({ sessionEnd: true, returnPage: getPrevRoute() || '' });
     return;
   }
   setTimeout(() => {

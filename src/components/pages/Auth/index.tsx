@@ -1,14 +1,14 @@
 import { memo, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
+import globalStore from '~src/store/globalStore';
 
-import authStore from '~src/store/authStore';
 import userStore from '~src/store/userStore';
 
 const allowed = ['/auth/signup', '/auth/login', '/auth/reset-password'];
 
 const Auth = ({ children }: { children: ReactElement }) => {
-  const { token, returnPage } = authStore((state) => state);
+  const { token, returnPage } = globalStore((state) => state);
   const { verified } = userStore((state) => state);
   const navigate = useNavigate();
   const path = window.location.pathname;

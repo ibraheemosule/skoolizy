@@ -1,10 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import announcementsApi from './announcements-api';
 import TApi from '~shared-ts-types/t-api';
-import authStore from '~src/store/authStore';
 import auth from './auth-api';
 import externalApi from './external-api';
-import { logout } from '~utils';
+import { login, logout } from '~utils';
+import globalStore from '~src/store/globalStore';
 
 const baseURL = String(import.meta.env.VITE_BASE_URL);
 class Api {
@@ -29,7 +29,7 @@ class Api {
 
         try {
           const data = await this.axiosInstance.get('/auth/refresh-token');
-          authStore.getState().login(data.data);
+          login(data.data);
           originalRequest.headers.Authorization = `Bearer ${data.data}`;
 
           return await this.axiosInstance(originalRequest);
@@ -51,7 +51,7 @@ class Api {
   );
 
   auth = this.axiosInstance.interceptors.request.use((config) => {
-    const { token } = authStore.getState();
+    const { token } = globalStore.getState();
     const cloneConfig = { ...config };
     if (token) {
       cloneConfig.headers.Authorization = `Bearer ${token}`;
