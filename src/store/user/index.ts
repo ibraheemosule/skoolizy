@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools, persist, createJSONStorage } from 'zustand/middleware';
+import secureStorage from '~src/store/user/utils-user';
 
-type TUserStore = {
+export type TUserStore = {
   email: string;
   tag: string;
   verified: boolean;
@@ -17,31 +18,32 @@ type TUserStore = {
   update: (arg: Partial<TUserStore>) => void;
 };
 
+const initialState = (arg?: Omit<TUserStore, 'update'>) => ({
+  email: arg?.email || '',
+  tag: arg?.tag || '',
+  verified: arg?.verified || false,
+  nationality: arg?.nationality || '',
+  firstName: arg?.firstName || '',
+  lastName: arg?.lastName || '',
+  middleName: arg?.middleName || '',
+  gender: arg?.gender || '',
+  homeAddress: arg?.homeAddress || '',
+  phoneNumber: arg?.phoneNumber || '',
+  state: arg?.state || '',
+  dateOfBirth: arg?.dateOfBirth || '',
+});
+
 const userStore = create<TUserStore>()(
   devtools(
     persist(
       (set) => ({
-        email: '',
-        tag: '',
-        verified: false,
-        nationality: '',
-        firstName: '',
-        lastName: '',
-        middleName: '',
-        gender: '',
-        homeAddress: '',
-        phoneNumber: '',
-        state: '',
-        dateOfBirth: '',
+        ...initialState(),
         update: (arg: Partial<TUserStore>) =>
           set((state) => ({ ...state, ...arg })),
       }),
       {
         name: 'skoolizy-user-store',
-        partialize: (state) => ({
-          tag: state.tag,
-          verified: state.verified,
-        }),
+        storage: createJSONStorage(() => secureStorage),
       }
     )
   )

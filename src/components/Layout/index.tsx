@@ -1,20 +1,42 @@
-import { useState, FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import SideNav from '~components/Layout/SideNav';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
 
-import useBanner from '~components/reusables/hooks/useBanner';
-import { getPrevRoute } from '~utils/query';
-import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
 import Api from '~api';
+import useBanner from '~components/reusables/hooks/useBanner';
 import userStore from '~src/store/user';
+import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
+import { getPrevRoute } from '~utils/query';
 
 const { api } = new Api();
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
   const { banner } = useBanner();
   const animate = toggleNav ? 'animate-in' : 'animate-out';
+  const { data } = useQuery({
+    queryKey: ['account'],
+    queryFn: () => api.getAccount(),
+  });
+
+  useEffect(() => {
+    if (data) {
+      userStore.getState().update({
+        email: data?.data.email,
+        nationality: data?.data.country,
+        firstName: data?.data.first_name,
+        lastName: data?.data.last_name,
+        middleName: data?.data.middle_name,
+        gender: data?.data.gender,
+        homeAddress: data?.data.home_address,
+        phoneNumber: data?.data.phone_number,
+        state: data?.data.state_of_origin,
+        dateOfBirth: data?.data.date_of_birth,
+      });
+    }
+  }, [data]);
 
   useEffect(() => {
     if (['/auth/login'].includes(String(getPrevRoute()))) {
@@ -24,20 +46,6 @@ const Layout: FC = () => {
         timeout: BANNER_DEFAULT_TIMEOUT,
       });
     }
-    api.getAccount().then(({ data }) => {
-      userStore.getState().update({
-        email: data.email,
-        nationality: data.country,
-        firstName: data.first_name,
-        lastName: data.last_name,
-        middleName: data.middle_name,
-        gender: data.gender,
-        homeAddress: data.home_address,
-        phoneNumber: data.phone_number,
-        state: data.state_of_origin,
-        dateOfBirth: data.date_of_birth,
-      });
-    });
   }, []);
 
   return (
