@@ -5,7 +5,7 @@ import { ListItemEditModal } from '~components/reusables/List/EditListItemModal'
 import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { SmallText } from '~components/reusables/ui/Text';
-import { capCharRemoveUnderscore } from '~utils/format';
+import { capCharRemoveUnderscore } from '~utils';
 import {
   canEdit,
   personal,

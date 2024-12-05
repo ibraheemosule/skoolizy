@@ -5,7 +5,7 @@ import Auth from '..';
 import TextField from '~components/reusables/CustomField/TextField';
 import useLogin from '~components/pages/Auth/Login/hooks-login/useLogin';
 import LoginOptions from './LoginOptions';
-import { onlyNumericInput } from '~utils/format';
+import { onlyNumericInput } from '~utils';
 
 const Login = () => {
   const {

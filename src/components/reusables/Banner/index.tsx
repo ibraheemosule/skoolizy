@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import globalStore from '~src/store/global';
+import globalStore from '~src/store/globalStore';
 import Icon from '~assets/Icons';
 
 const palletes = {
@@ -31,7 +31,7 @@ export default function Banner() {
 
   useEffect(() => {
     lastBannerLength.current = globalStore.getState().bannerOptions.length;
-  }, [globalStore.getState().bannerOptions.length]);
+  }, [bannerOptions[bannerOptions.length - 1]?.id]);
 
   return bannerOptions.length ? (
     <div className="fixed z-10 w-full top-0 ">

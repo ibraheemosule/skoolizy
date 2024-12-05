@@ -1,19 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { decrypt, encrypt } from '~utils/encryption';
-
+import { decrypt, encrypt, login } from '~utils';
 import Api from '~api';
-import authStore from '~src/store/auth';
-
-import userStore from '~src/store/user';
+import { TUserCredentials } from '../types-login';
 
 const { api } = new Api();
-
-type TUserCredentials = {
-  tag: string;
-  password: string;
-  account: string;
-};
 
 const key = import.meta.env.VITE_CRYPTOJS_KEY;
 
@@ -23,6 +14,7 @@ function saveUser({ tag, password, account }: TUserCredentials) {
   if (prevUser) localStorage.clear();
 
   if (!tag || !password || !account) return;
+
   localStorage.setItem(
     'skoolizy_user',
     JSON.stringify({
@@ -52,12 +44,7 @@ const useLogin = () => {
         password,
       }),
     onSuccess: (data) => {
-      userStore.getState().update({
-        verified: data.data.verified,
-        tag: data.data.tag,
-        email: data.data.email,
-      });
-      authStore.getState().login(data.data);
+      login(data.data);
     },
   });
 

@@ -7,7 +7,7 @@ import { HorizontalNav } from '~components/reusables/Menu';
 import CustomField from '~components/reusables/CustomField';
 import { BoldText } from '~components/reusables/ui/Text';
 import useCustomField from '~components/reusables/CustomField/hooks-custom-field/useCustomField';
-import { formatDate } from '~utils/format';
+import { formatDate } from '~utils';
 import { Tag } from '~components/reusables/ui/Others';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 

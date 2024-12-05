@@ -6,7 +6,7 @@ import {
 } from '~components/reusables/List/EditListItemModal';
 import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
-import { capCharRemoveUnderscore } from '~utils/format';
+import { capCharRemoveUnderscore } from '~utils';
 import { canEdit, contact, contactAuthEdit } from './utils-contact-info';
 
 const ContactInfo = () => {
