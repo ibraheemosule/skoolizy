@@ -1,6 +1,7 @@
 import { decrypt, encrypt } from '~utils/encryption';
 
 const secureStorage = {
+  ...(window && window.localStorage),
   getItem: (name: string): string | null => {
     const data = localStorage.getItem(name);
     if (!data) return null;
