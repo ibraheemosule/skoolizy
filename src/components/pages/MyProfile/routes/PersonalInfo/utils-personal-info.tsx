@@ -1,5 +1,5 @@
-import userStore from '~src/store/user';
-import { capCharRemoveUnderscore, formatDate } from '~utils/format';
+import userStore from '~src/store/userStore';
+import { capCharRemoveUnderscore, formatDate } from '~utils';
 
 const {
   firstName,

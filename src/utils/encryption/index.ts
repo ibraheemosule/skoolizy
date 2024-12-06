@@ -1,5 +1,5 @@
 import CryptoJS, { enc } from 'crypto-js';
-import { env } from '~utils/constants';
+import { env } from '~src/utils/constants';
 
 const key = env.VITE_CRYPTOJS_KEY;
 
