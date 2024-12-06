@@ -1,6 +1,7 @@
 import CryptoJS, { enc } from 'crypto-js';
+import { env } from '~utils/constants';
 
-const key = import.meta.env.VITE_CRYPTOJS_KEY;
+const key = env.VITE_CRYPTOJS_KEY;
 
 export const encrypt = (data: unknown) => {
   const jsonData = JSON.stringify(data);
@@ -10,5 +11,5 @@ export const encrypt = (data: unknown) => {
 
 export const decrypt = <T>(str: string) => {
   const decryptedData = CryptoJS.AES.decrypt(str, key).toString(enc.Utf8);
-  return JSON.parse(decryptedData || '') as T;
+  return JSON.parse(decryptedData) as T;
 };

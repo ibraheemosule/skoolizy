@@ -1,7 +1,8 @@
 import { AxiosInstance } from 'axios';
 import { TCountry } from '~src/shared-ts-types/data-types';
+import { env } from '~utils/constants';
 
-const COUNTRY_URL = String(import.meta.env.VITE_COUNTRIES_URL);
+const COUNTRY_URL = String(env.VITE_COUNTRIES_URL);
 
 export default (api: AxiosInstance) => ({
   getCountryAndState: async (): Promise<{
