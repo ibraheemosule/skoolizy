@@ -1,6 +1,14 @@
 import { encrypt, decrypt } from '~utils/encryption';
 
 describe('CryptoJS Encrypt/Decrypt', () => {
+  beforeAll(() => {
+    process.env.VITE_CRYPTOJS_KEY = 'some-secret-key';
+  });
+
+  afterAll(() => {
+    delete process.env.VITE_CRYPTOJS_KEY;
+  });
+
   const plainText = 'za-testing';
 
   test('encrypt() should return a valid encrypted string', () => {
