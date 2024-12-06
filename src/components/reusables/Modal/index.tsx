@@ -2,7 +2,7 @@ import { FC, memo, useState } from 'react';
 import { ActionBtn, BaseBtn } from '~components/reusables/ui/Buttons';
 import CancelIcon from '~src/assets/Icons/CancelIcon';
 import SkeletonLoader from '../SkeletonLoader';
-import { isFuncPromise } from '~utils/index';
+import { isFuncPromise } from '~utils';
 import { TModal } from './t-modal';
 import { sizes } from './utils-modal';
 
@@ -17,6 +17,7 @@ const Modal: FC<TModal> = ({
   fixedActionBtn = false,
   isLoading = false,
   btnClass,
+  disableActionBtn,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +41,7 @@ const Modal: FC<TModal> = ({
         className={btnClass}
         loading={loading}
         onClick={modalAction}
+        disabled={disableActionBtn}
       >
         {actionText || 'Submit'}
       </ActionBtn>

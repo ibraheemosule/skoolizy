@@ -1,4 +1,4 @@
-import { encrypt, decrypt } from '~utils/encryption';
+import { encrypt, decrypt } from '~utils';
 
 describe('CryptoJS Encrypt/Decrypt', () => {
   const secretKey = 'key123';

@@ -8,11 +8,11 @@
     "skipLibCheck": true,
     "paths": {
       "~api": ["./src/api"],
-      "~components/*": ["./src/components/*"],
-      "~utils/*": ["./src/utils/*"],
+      "~utils": ["./src/utils"],
       "~icons/*": ["./src/asseets/Icons/*"],
       "~assets/*": ["./src/assets/*"],
       "~reusables/*": ["./src/components/reusables/*"],
+      "~components/*": ["./src/components/*"],
       "~shared-ts-types/*": ["./src/shared-ts-types/*"],
       "~src/*": ["./src/*"]
     },

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Icon from '~assets/Icons';
 import ListOptions from '~components/reusables/ListOptions';
 import { BaseBtn } from '~reusables/ui/Buttons';
-import { downloadFile } from '~utils/files';
+import { downloadFile } from '~utils';
 import NewMedia from './widgets-media/AddMedia';
 import DeleteMedia from './widgets-media/DeleteMedia';
 import FilterMedia from './widgets-media/FilterMedia';

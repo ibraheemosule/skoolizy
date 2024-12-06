@@ -1,4 +1,4 @@
-import { validatePassword } from '~utils/validations';
+import { validatePassword } from '~utils';
 
 export type TCompleteSignupProps = {
   signupFn: () => void;

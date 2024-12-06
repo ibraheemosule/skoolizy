@@ -9,6 +9,7 @@ export type TModal = {
   fixedActionBtn?: boolean;
   isLoading?: boolean;
   btnClass?: string;
+  disableActionBtn?: boolean;
 } & {
   [key in 'title' | 'content']?: ReactNode;
 };

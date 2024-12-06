@@ -1,4 +1,4 @@
-import { capCharRemoveUnderscore, onlyAlphabet } from '~utils/format';
+import { capCharRemoveUnderscore, onlyAlphabet } from '~utils';
 
 export const optional = ['middleName'];
 
