@@ -46,7 +46,7 @@ const Announcements = () => {
     queryFn: () => api.getAllAnnouncements(state),
     placeholderData: keepPreviousData,
   });
-  const annoucements = data?.data.list;
+  const announcements = data?.data.list;
 
   const filterAnnouncements = (arg: { [key: string]: string | number } = {}) =>
     filter({ ...arg });
@@ -90,8 +90,8 @@ const Announcements = () => {
           <div className="mt-6 pb-8 grow md:h-auto overflow-auto">
             {isFetching ? (
               <SkeletonLoader type="text" />
-            ) : annoucements?.length ? (
-              annoucements?.map((a) => (
+            ) : announcements?.length ? (
+              announcements?.map((a) => (
                 <button
                   data-testid="announcement"
                   key={Math.random()}

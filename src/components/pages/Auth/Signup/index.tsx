@@ -79,7 +79,7 @@ const Signup = () => {
             {step > 1 ? (
               <button
                 onClick={() => {
-                  setSignupDetails({});
+                  setSignupDetails({ resetBulkState: true });
                   setStep(1);
                 }}
                 className="text-purple.dark text-sm font-semibold"

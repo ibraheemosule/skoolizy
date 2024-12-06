@@ -38,7 +38,6 @@ const VerifyAccount = () => {
       update({ verified: true });
     },
   });
-
   return (
     <Auth>
       <div>

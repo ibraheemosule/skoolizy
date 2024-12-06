@@ -9,6 +9,7 @@ jobs:
     env:
       VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
       VITE_COUNTRIES_URL: ${{ secrets.VITE_COUNTRIES_URL }}
+      VITE_CRYPTOJS_KEY:  ${{ secrets.VITE_CRYPTOJS_KEY }}
 
     steps:
       - name: Checkout code
