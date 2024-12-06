@@ -48,5 +48,4 @@ const userStore = create<TUserStore>()(
     )
   )
 );
-
 export default userStore;

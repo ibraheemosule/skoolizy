@@ -15,8 +15,6 @@ type TUserCredentials = {
   account: string;
 };
 
-const key = import.meta.env.VITE_CRYPTOJS_KEY;
-
 function saveUser({ tag, password, account }: TUserCredentials) {
   const prevUser = localStorage.getItem('skoolizy_user');
 
@@ -27,7 +25,7 @@ function saveUser({ tag, password, account }: TUserCredentials) {
     'skoolizy_user',
     JSON.stringify({
       tag,
-      password: encrypt(password, key),
+      password: encrypt(password),
       account,
     })
   );
@@ -66,7 +64,7 @@ const useLogin = () => {
 
     if (user?.tag) {
       setTag(user.tag);
-      setPassword(decrypt(user.password, key));
+      setPassword(decrypt<string>(user.password));
       setAccount(user.account);
       setRememberMe(true);
     }
