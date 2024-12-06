@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist, createJSONStorage } from 'zustand/middleware';
-import secureStorage from '~src/store/user/utils-user';
+import secureStorage from '~src/store/userStore/utils-userStore';
 
 export type TUserStore = {
   email: string;
