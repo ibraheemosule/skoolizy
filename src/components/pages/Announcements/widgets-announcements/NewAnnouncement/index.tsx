@@ -6,7 +6,7 @@ import { HorizontalNav } from '~components/reusables/Menu';
 import { BoldText } from '~components/reusables/ui/Text';
 import { recipientsList, reminders, navRouting } from './utils-newAnouncement';
 import Api from '~api';
-import { dateToDbFormat, formatDate } from '~utils/format';
+import { dateToDbFormat, formatDate } from '~utils';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import TextField from '~components/reusables/CustomField/TextField';
 import { TAnnouncementRecipients } from '~shared-ts-types/t-announcements-data';

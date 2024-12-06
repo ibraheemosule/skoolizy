@@ -2,7 +2,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import Icon from '~assets/Icons';
 import Modal from '~components/reusables/Modal';
-import { downloadFile } from '~utils/files';
+import { downloadFile } from '~utils';
 import ViewerWrapper from '../PdfViewer/index';
 import { BaseBtn } from '../ui/Buttons';
 
