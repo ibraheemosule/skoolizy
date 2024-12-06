@@ -1,10 +1,10 @@
 import { delay, http, HttpResponse } from 'msw';
-import { account } from './mockData';
-import { baseUrl } from '~src/mocks/requests';
+import { getAccountDetails } from './mockData';
+import { baseUrl } from '../index';
 
 export default [
   http.get(baseUrl('/account'), async () => {
     await delay(100);
-    return HttpResponse.json(account);
+    return HttpResponse.json(getAccountDetails);
   }),
 ];
