@@ -1,4 +1,4 @@
-import userStore from '~src/store/user';
+import userStore from '~src/store/userStore';
 
 const { email, phoneNumber, homeAddress } = userStore.getState();
 
