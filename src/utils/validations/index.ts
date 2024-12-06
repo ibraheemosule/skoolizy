@@ -1,4 +1,4 @@
-import { phoneNumberFormats } from '~utils/format';
+import { phoneNumberFormats } from '~utils';
 
 export const validateEmail = (email: string) => {
   const pattern =

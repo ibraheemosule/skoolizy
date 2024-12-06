@@ -2,18 +2,16 @@ import { memo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { ActionBtn } from '~components/reusables/ui/Buttons';
 import Api from '~api';
-import userStore from '~src/store/user';
+import userStore from '~src/store/userStore';
 import TextField from '~components/reusables/CustomField/TextField';
-import { onlyNumericInput } from '~utils/format';
+import { logout, onlyNumericInput } from '~utils';
 import Auth from '..';
 import useBanner from '~components/reusables/hooks/useBanner';
-import authStore from '~src/store/auth';
 
 const { api } = new Api();
 
 const VerifyAccount = () => {
   const { email, tag, update } = userStore.getState();
-  const { logout } = authStore.getState();
   const { banner } = useBanner();
   const [code, setCode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
@@ -63,8 +61,11 @@ const VerifyAccount = () => {
 
         <p className="mt-2 leading-6 text-gray-500">
           If you prefer to complete this step at later, you may{' '}
-          <button className="text-purple.dark font-bold" onClick={logout}>
-            log out
+          <button
+            className="text-purple.dark font-bold text-lg"
+            onClick={() => logout()}
+          >
+            Log out
           </button>
         </p>
 

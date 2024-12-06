@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { IBannerOptions } from '~shared-ts-types/react-types';
-import globalStore from '~src/store/global';
-import { getUid } from '~utils/query';
+import globalStore from '~src/store/globalStore';
+import { getUid } from '~utils';
 
 export default function useBanner() {
   const { update } = globalStore((state) => state);

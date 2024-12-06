@@ -1,5 +1,5 @@
 import { List, ListItem } from '~components/reusables/List/List';
-import { capCharRemoveUnderscore } from '~utils/format';
+import { capCharRemoveUnderscore } from '~utils';
 
 export const personal = {
   first_name: 'Tajudeen',

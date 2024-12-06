@@ -5,7 +5,7 @@ import useBanner from '~components/reusables/hooks/useBanner';
 
 import { IBannerOptions } from '~shared-ts-types/react-types';
 import { TApiError } from '~shared-ts-types/t-api';
-import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
+import { BANNER_DEFAULT_TIMEOUT } from '~utils';
 
 let apiErrorBanner: ((args: IBannerOptions) => void) | null = null;
 

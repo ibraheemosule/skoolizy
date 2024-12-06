@@ -1,21 +1,15 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import Api from '~api';
 import SideNav from '~components/Layout/SideNav';
+import userStore from '~src/store/userStore';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
-
-import Api from '~api';
-import useBanner from '~components/reusables/hooks/useBanner';
-import userStore from '~src/store/user';
-import { BANNER_DEFAULT_TIMEOUT } from '~utils/constants';
-import { getPrevRoute } from '~utils/query';
 
 const { api } = new Api();
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
-  const { banner } = useBanner();
-  const animate = toggleNav ? 'animate-in' : 'animate-out';
   const { data } = useQuery({
     queryKey: ['account'],
     queryFn: () => api.getAccount(),
@@ -38,15 +32,7 @@ const Layout: FC = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (['/auth/login'].includes(String(getPrevRoute()))) {
-      banner({
-        text: 'Login Successful!',
-        type: 'success',
-        timeout: BANNER_DEFAULT_TIMEOUT,
-      });
-    }
-  }, []);
+  const animate = toggleNav ? 'animate-in' : 'animate-out';
 
   return (
     <main className="absolute inset-0 flex overflow-hidden">

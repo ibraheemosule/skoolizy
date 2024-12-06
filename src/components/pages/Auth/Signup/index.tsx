@@ -11,8 +11,7 @@ import CompleteSignup from './CompleteSignup';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 import SignupOptions from './SignupOptions';
 import Auth from '..';
-import authStore from '~src/store/auth';
-import userStore from '~src/store/user';
+import { login } from '~utils';
 
 const steps = {
   1: 'Choose an account',
@@ -33,14 +32,7 @@ const Signup = () => {
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: () => api.signup(signupDetails),
-    onSuccess: (data) => {
-      userStore.getState().update({
-        verified: data.data.verified,
-        tag: data.data.tag,
-        email: data.data.email,
-      });
-      authStore.getState().login(data.data);
-    },
+    onSuccess: (data) => login(data.data),
   });
 
   const values = useMemo(

@@ -1,5 +1,5 @@
 import { DocumentList, List, ListItem } from '~components/reusables/List/List';
-import { capCharRemoveUnderscore } from '~utils/format';
+import { capCharRemoveUnderscore } from '~utils';
 import { academic } from './utils-results';
 
 const Results = () => (
