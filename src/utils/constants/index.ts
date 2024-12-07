@@ -1,2 +1,2 @@
 export const BANNER_DEFAULT_TIMEOUT = 3;
-export const a = '';
+export const test1 = '';

@@ -1,11 +1,36 @@
-import { useState, FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import Api from '~api';
 import SideNav from '~components/Layout/SideNav';
+import userStore from '~src/store/userStore';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
 
+const { api } = new Api();
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
+  const { data } = useQuery({
+    queryKey: ['account'],
+    queryFn: () => api.getAccount(),
+  });
+
+  useEffect(() => {
+    if (data) {
+      userStore.getState().update({
+        email: data?.data.email,
+        nationality: data?.data.country,
+        firstName: data?.data.first_name,
+        lastName: data?.data.last_name,
+        middleName: data?.data.middle_name,
+        gender: data?.data.gender,
+        homeAddress: data?.data.home_address,
+        phoneNumber: data?.data.phone_number,
+        state: data?.data.state_of_origin,
+        dateOfBirth: data?.data.date_of_birth,
+      });
+    }
+  }, [data]);
 
   const animate = toggleNav ? 'animate-in' : 'animate-out';
 

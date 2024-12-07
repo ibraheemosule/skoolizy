@@ -1,8 +1,8 @@
-import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import { screen, render, waitFor } from '@testing-library/react';
 import Layout from '.';
+import TestWrapper from '~reusables/TestWrapper';
 
 describe('testing the side nav animation', () => {
   let menuBtn: HTMLElement;
@@ -10,9 +10,9 @@ describe('testing the side nav animation', () => {
 
   beforeEach(async () => {
     render(
-      <MemoryRouter>
+      <TestWrapper>
         <Layout />
-      </MemoryRouter>
+      </TestWrapper>
     );
     menuBtn = await screen.findByTestId('menu-btn');
     navWrapper = await screen.findByTestId('nav-wrapper');

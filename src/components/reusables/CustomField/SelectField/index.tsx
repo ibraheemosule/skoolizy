@@ -1,8 +1,8 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import Icon from '~assets/Icons';
 import { Tag } from '~components/reusables/ui/Others';
-import DropdownWrapper from './DropdownWrapper';
 import { capCharRemoveUnderscore } from '~utils';
+import DropdownWrapper from './DropdownWrapper';
 
 type TSelectField = {
   dropdownElement?: (value: string | number) => JSX.Element;

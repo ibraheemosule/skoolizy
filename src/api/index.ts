@@ -1,12 +1,13 @@
 import axios, { AxiosInstance } from 'axios';
-import announcementsApi from './announcements-api';
 import TApi from '~shared-ts-types/t-api';
+import accountApi from '~src/api/account-api';
+import globalStore from '~src/store/globalStore';
+import { getEnv, login, logout } from '~utils';
+import announcementsApi from './announcements-api';
 import auth from './auth-api';
 import externalApi from './external-api';
-import { login, logout } from '~utils';
-import globalStore from '~src/store/globalStore';
 
-const baseURL = String(import.meta.env.VITE_BASE_URL);
+const baseURL = getEnv('VITE_BASE_URL');
 class Api {
   private axiosInstance: AxiosInstance = axios.create({
     baseURL,
@@ -63,6 +64,7 @@ class Api {
     ...externalApi(this.axiosInstance),
     ...announcementsApi(this.axiosInstance),
     ...auth(this.axiosInstance),
+    ...accountApi(this.axiosInstance),
   };
 }
 
