@@ -1,8 +1,8 @@
 import { HttpResponseResolver, delay } from 'msw';
-import { env } from '~utils';
+import { getEnv } from '~utils';
 
 export const baseUrl = (path: string) =>
-  new URL(path, String(env.VITE_BASE_URL)).href;
+  new URL(path, getEnv('VITE_BASE_URL')).href;
 
 export const withDelay =
   (resolver: HttpResponseResolver): HttpResponseResolver =>
