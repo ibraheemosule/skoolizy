@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { IBannerOptions } from '~shared-ts-types/react-types';
 
-type TGlobalStore = {
+export type TGlobalStore = {
   bannerOptions: IBannerOptions[];
   token: string | null;
   sessionEndUser: string;
@@ -10,7 +10,7 @@ type TGlobalStore = {
   update: (arg: Partial<TGlobalStore>) => void;
 };
 
-const globalStore = create<TGlobalStore>()(
+export const globalStore = create<TGlobalStore>()(
   devtools(
     persist(
       (set) => ({
@@ -25,9 +25,12 @@ const globalStore = create<TGlobalStore>()(
       }),
       {
         name: 'skoolizy-global-store',
+        partialize: (state) => ({
+          token: state.token,
+          sessionEndUser: state.sessionEndUser,
+          returnPage: state.returnPage,
+        }),
       }
     )
   )
 );
-
-export default globalStore;

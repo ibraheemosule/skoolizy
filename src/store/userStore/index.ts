@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist, createJSONStorage } from 'zustand/middleware';
-import secureStorage from '~src/store/userStore/utils-userStore';
+import { secureStorage } from '../utils-store';
 
 export type TUserStore = {
   email: string;
@@ -33,7 +33,7 @@ const initialState = (arg?: Omit<TUserStore, 'update'>) => ({
   dateOfBirth: arg?.dateOfBirth || '',
 });
 
-const userStore = create<TUserStore>()(
+export const userStore = create<TUserStore>()(
   devtools(
     persist(
       (set) => ({
@@ -48,4 +48,3 @@ const userStore = create<TUserStore>()(
     )
   )
 );
-export default userStore;

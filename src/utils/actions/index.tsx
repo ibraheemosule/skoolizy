@@ -1,5 +1,4 @@
-import storeGlobal from '~src/store/globalStore';
-import storeUser from '~src/store/userStore';
+import { globalStore as storeGlobal, userStore as storeUser } from '~src/store';
 import { getPrevRoute, getUid } from '~utils';
 import appQueryClient from '~src/App/appQueryClient';
 
@@ -43,7 +42,7 @@ export const login = (arg: {
   }, 3000);
 };
 
-export const logout = async (arg?: { sessionLogout: boolean }) => {
+export const logout = (arg?: { sessionLogout: boolean }) => {
   setTimeout(() => appQueryClient.removeQueries(), 3000);
 
   const globalStore = storeGlobal.getState();
@@ -70,7 +69,7 @@ export const logout = async (arg?: { sessionLogout: boolean }) => {
     });
   }, 50);
 
-  await setTimeout(() => {
+  setTimeout(() => {
     globalStore.update({
       bannerOptions: [],
     });

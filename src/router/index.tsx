@@ -15,6 +15,7 @@ function AppRoutes() {
     <Router>
       <SaveLastRoute>
         <Routes>
+          <Route path="/" element={<Navigate to="auth/login" replace />} />
           <Route path="auth">
             <Route
               path="login"
@@ -46,7 +47,7 @@ function AppRoutes() {
             />
           </Route>
           <Route element={<AuthAccess />}>
-            <Route path="/" element={<Layout />}>
+            <Route element={<Layout />}>
               <Route index element={<Navigate to="dashboard" />} />
               <Route
                 path="dashboard"

@@ -1,11 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
 import TApi from '~shared-ts-types/t-api';
 import accountApi from '~src/api/account-api';
-import globalStore from '~src/store/globalStore';
+
 import { getEnv, login, logout } from '~utils';
 import announcementsApi from './announcements-api';
 import auth from './auth-api';
 import externalApi from './external-api';
+import { globalStore } from '~src/store';
 
 const baseURL = getEnv('VITE_BASE_URL');
 class Api {

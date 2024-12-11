@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import globalStore from '~src/store/globalStore';
 import Icon from '~assets/Icons';
+import { globalStore } from '~src/store';
 
 const palletes = {
   success: {

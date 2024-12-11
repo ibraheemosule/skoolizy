@@ -1,9 +1,7 @@
 import { memo, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '~assets/images/logo.png';
-import globalStore from '~src/store/globalStore';
-
-import userStore from '~src/store/userStore';
+import { globalStore, userStore } from '~src/store';
 
 const allowed = ['/auth/signup', '/auth/login', '/auth/reset-password'];
 

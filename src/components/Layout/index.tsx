@@ -3,19 +3,16 @@ import { FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Api from '~api';
 import SideNav from '~components/Layout/SideNav';
-import userStore from '~src/store/userStore';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
-import globalStore from '~src/store/globalStore';
+import { userStore } from '~src/store';
 
 const { api } = new Api();
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
-  const { token } = globalStore((state) => state);
   const { data } = useQuery({
     queryKey: ['account'],
     queryFn: () => api.getAccount(),
-    enabled: !!token,
   });
 
   useEffect(() => {

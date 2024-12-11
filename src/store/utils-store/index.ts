@@ -1,6 +1,6 @@
 import { decrypt, encrypt } from '~utils';
 
-const secureStorage = {
+export const secureStorage = {
   ...(window && window.localStorage),
   getItem: (name: string): string | null => {
     const data = localStorage.getItem(name);
@@ -19,4 +19,5 @@ const secureStorage = {
     localStorage.removeItem(name);
   },
 };
-export default secureStorage;
+
+export const teting = '';
