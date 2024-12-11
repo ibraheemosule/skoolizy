@@ -1,14 +1,22 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "esModuleInterop": true,
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "components/*": ["./src/components/*"],
-      "src/*": ["./src/*"]
+      "~api": ["./src/api"],
+      "~utils": ["./src/utils"],
+      "~icons/*": ["./src/asseets/Icons/*"],
+      "~assets/*": ["./src/assets/*"],
+      "~reusables/*": ["./src/components/reusables/*"],
+      "~components/*": ["./src/components/*"],
+      "~shared-ts-types/*": ["./src/shared-ts-types/*"],
+      "~src/*": ["./src/*"]
     },
+    "types": ["vite/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -25,8 +33,12 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
+    "@testing-library/jest-dom/vitest",
+    "test-config/setup.ts",
+    "vitest.config.ts",
     ".eslintrc.cjs",
     "vite.config.ts",
+    "jest.config.cjs",
     "tailwind.config.js",
     "postcss.config.js",
     "src"
