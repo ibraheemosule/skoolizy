@@ -6,13 +6,16 @@ import SideNav from '~components/Layout/SideNav';
 import userStore from '~src/store/userStore';
 import BgImage from './BgImage';
 import TopHeader from './TopHeader';
+import globalStore from '~src/store/globalStore';
 
 const { api } = new Api();
 const Layout: FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
+  const { token } = globalStore((state) => state);
   const { data } = useQuery({
     queryKey: ['account'],
     queryFn: () => api.getAccount(),
+    enabled: !!token,
   });
 
   useEffect(() => {
