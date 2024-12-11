@@ -1,7 +1,7 @@
 import CryptoJS, { enc } from 'crypto-js';
 import { getEnv } from '~src/utils/query';
 
-const key = getEnv('VITE_CRYPTOJS_KEY');
+const key = getEnv('VITE_CRYPTOJS_CODE');
 
 export const encrypt = (data: unknown) => {
   const jsonData = JSON.stringify(data);
