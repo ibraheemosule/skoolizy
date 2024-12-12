@@ -1,3 +1,5 @@
+import { FileType } from './react-types';
+
 export type TUserSignupPayload = {
   first_name: string;
   middle_name?: string;
@@ -8,4 +10,5 @@ export type TUserSignupPayload = {
   date_of_birth: string;
   email: string;
   role: string;
+  profile_picture: FileType;
 };

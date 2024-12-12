@@ -403,6 +403,7 @@ const icons: {
     stroke = 'currentColor',
     strokeWidth = 1.5,
     fill = 'none',
+    ...props
   }) => (
     <svg
       fill={fill}
@@ -412,6 +413,7 @@ const icons: {
       style={style}
       width={width}
       height={height}
+      {...props}
     >
       <path
         strokeLinecap="round"

@@ -28,3 +28,10 @@ export interface IBannerOptions {
   id?: string;
   timeout?: number;
 }
+
+export interface FileType extends Blob {
+  readonly lastModified: number;
+  readonly name: string;
+  readonly size: number;
+  readonly type: string;
+}

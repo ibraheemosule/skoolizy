@@ -3,10 +3,10 @@ import TextField from '~components/reusables/CustomField/TextField';
 import { ListItemEditModal } from '~components/reusables/List/EditListItemModal';
 import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
-import { SmallText } from '~components/reusables/ui/Text';
 import { capCharRemoveUnderscore } from '~utils';
 import { canEdit, personalInfoDropdownEdit } from './utils-personal-info';
 import usePersonalInfo from './hooks-personal-info/usePersonalInfo';
+import Photo from '~reusables/Photo';
 
 const PersonalInfo = () => {
   const { personal, updateValueFn, handleUploadFn, info, setInfo, image } =
@@ -14,25 +14,7 @@ const PersonalInfo = () => {
 
   return (
     <>
-      <div className="text-center">
-        <img
-          className="h-32 w-32 md:h-44 md:w-44 bg-gray-200 mx-auto object-contain rounded-full"
-          src={
-            image ||
-            'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80'
-          }
-          alt="profile"
-        />
-        <label className="block cursor-pointer text-purple.dark my-4 text-center">
-          <SmallText>Change Profile Picture</SmallText>
-          <input
-            onChange={handleUploadFn}
-            accept=".jpg, .png, .jpeg"
-            type="file"
-            className="hidden"
-          />
-        </label>
-      </div>
+      <Photo image={image} handleUploadFn={handleUploadFn} />
       <List>
         {Object.entries(personal).map(([key, value]) => {
           const edit = typeof info[key] === 'string';
