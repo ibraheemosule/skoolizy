@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import TextField from '~components/reusables/CustomField/TextField';
 import {
   ListItemAuthEditModal,
@@ -7,12 +6,11 @@ import {
 import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { capCharRemoveUnderscore } from '~utils';
-import { canEdit, contact, contactAuthEdit } from './utils-contact-info';
+import { canEdit, contactAuthEdit } from './utils-contact-info';
+import useContactInfo from './hooks-contactInfo/useContactInfo';
 
 const ContactInfo = () => {
-  const [info, setInfo] = useState<Record<string, string>>({});
-
-  const updateValue = (key: string) => (v: string) => setInfo({ [key]: v });
+  const { info, setInfo, updateValueFn, contact } = useContactInfo();
 
   return (
     <List>
@@ -37,7 +35,7 @@ const ContactInfo = () => {
                     >
                       <TextField
                         value={info[key]}
-                        onChange={(e) => updateValue(key)(e.target.value)}
+                        onChange={(e) => updateValueFn(key)(e.target.value)}
                         placeholder={`Update ${capCharRemoveUnderscore(
                           key
                         )}...`}
@@ -58,7 +56,7 @@ const ContactInfo = () => {
                     >
                       <TextField
                         value={info[key]}
-                        onChange={(e) => updateValue(key)(e.target.value)}
+                        onChange={(e) => updateValueFn(key)(e.target.value)}
                         placeholder={`Update ${capCharRemoveUnderscore(
                           key
                         )}...`}

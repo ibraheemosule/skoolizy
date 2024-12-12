@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from 'react';
 import SelectField from '~components/reusables/CustomField/SelectField';
 import TextField from '~components/reusables/CustomField/TextField';
 import { ListItemEditModal } from '~components/reusables/List/EditListItemModal';
@@ -6,21 +5,12 @@ import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
 import { SmallText } from '~components/reusables/ui/Text';
 import { capCharRemoveUnderscore } from '~utils';
-import {
-  canEdit,
-  personal,
-  personalInfoDropdownEdit,
-} from './utils-personal-info';
+import { canEdit, personalInfoDropdownEdit } from './utils-personal-info';
+import usePersonalInfo from './hooks-personal-info/usePersonalInfo';
 
 const PersonalInfo = () => {
-  const [info, setInfo] = useState<Record<string, string>>({});
-  const [image, setImage] = useState('');
-
-  const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target?.files) setImage(URL.createObjectURL(e.target.files[0]));
-  };
-
-  const updateValue = (key: string) => (v: string) => setInfo({ [key]: v });
+  const { personal, updateValueFn, handleUploadFn, info, setInfo, image } =
+    usePersonalInfo();
 
   return (
     <>
@@ -36,7 +26,7 @@ const PersonalInfo = () => {
         <label className="block cursor-pointer text-purple.dark my-4 text-center">
           <SmallText>Change Profile Picture</SmallText>
           <input
-            onChange={handleUpload}
+            onChange={handleUploadFn}
             accept=".jpg, .png, .jpeg"
             type="file"
             className="hidden"
@@ -66,12 +56,12 @@ const PersonalInfo = () => {
                           ]
                         }
                         value={info[key]}
-                        onSelect={(arg: string) => updateValue(key)(arg)}
+                        onSelect={(arg: string) => updateValueFn(key)(arg)}
                       />
                     ) : (
                       <TextField
                         value={info[key]}
-                        onChange={(e) => updateValue(key)(e.target.value)}
+                        onChange={(e) => updateValueFn(key)(e.target.value)}
                         placeholder={`Update ${capCharRemoveUnderscore(
                           key
                         )}...`}

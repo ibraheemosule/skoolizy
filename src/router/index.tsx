@@ -48,7 +48,7 @@ function AppRoutes() {
           </Route>
           <Route element={<AuthAccess />}>
             <Route element={<Layout />}>
-              <Route index element={<Navigate to="dashboard" />} />
+              <Route element={<Navigate to="dashboard" />} />
               <Route
                 path="dashboard"
                 element={
@@ -359,7 +359,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/MyProfile/routes/PersonalInfo'
+                          '~components/pages/MyProfile/routes-my-profile/PersonalInfo'
                         )
                       }
                     />
@@ -371,7 +371,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/MyProfile/routes/AcademicInfo'
+                          '~components/pages/MyProfile/routes-my-profile/AcademicInfo'
                         )
                       }
                     />
@@ -382,7 +382,9 @@ function AppRoutes() {
                   element={
                     <LazyLoad
                       url={() =>
-                        import('~components/pages/MyProfile/routes/ContactInfo')
+                        import(
+                          '~components/pages/MyProfile/routes-my-profile/ContactInfo'
+                        )
                       }
                     />
                   }
