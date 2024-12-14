@@ -165,7 +165,9 @@ function AppRoutes() {
                 <Route
                   index
                   element={
-                    <LazyLoad url={() => import('~components/pages/Staffs')} />
+                    <LazyLoad
+                      url={() => import('~components/pages/Staffs/AllStaffs')}
+                    />
                   }
                 />
                 <Route
