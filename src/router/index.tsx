@@ -171,14 +171,10 @@ function AppRoutes() {
                   }
                 />
                 <Route
-                  path=":id"
+                  path=":tag"
                   element={
                     <LazyLoad
-                      url={() =>
-                        import(
-                          '~components/pages/Staffs/widgets-staff/StaffDetail'
-                        )
-                      }
+                      url={() => import('~components/pages/Staffs/StaffDetail')}
                     />
                   }
                 >
@@ -189,7 +185,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Staffs/widgets-staff/StaffDetail/routes/StaffBiodata'
+                            '~components/pages/Staffs/StaffDetail/routes-staffDetail/StaffBiodata'
                           )
                         }
                       />
@@ -201,7 +197,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Staffs/widgets-staff/StaffDetail/routes/StaffPerformance'
+                            '~components/pages/Staffs/StaffDetail/routes-staffDetail/StaffPerformance'
                           )
                         }
                       />
@@ -213,7 +209,19 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Staffs/widgets-staff/StaffDetail/routes/StaffResults'
+                            '~components/pages/Staffs/StaffDetail/routes-staffDetail/StaffResults'
+                          )
+                        }
+                      />
+                    }
+                  />
+                  <Route
+                    path="attendance"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Staffs/StaffDetail/routes-staffDetail/StaffAttendance'
                           )
                         }
                       />

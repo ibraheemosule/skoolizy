@@ -8,7 +8,7 @@ const Photo = ({
   setImage,
   label = 'Change Picture',
 }: {
-  image: string;
+  image?: string;
   setImage?: (arg: FileType) => void;
   label?: string;
 }) => {
@@ -22,47 +22,51 @@ const Photo = ({
     }
   };
   return (
-    <div className="grid justify-center">
-      {image ? (
-        <div className="relative">
-          <img
-            className="h-32 w-32 md:h-44 md:w-44 bg-gray-100 mx-auto object-contain rounded-full"
-            src={typeof image === 'string' ? image : URL.createObjectURL(image)}
-            alt="avi"
-            onLoad={() => setLoading(false)}
-          />
-          {loading && (
-            <Icon
-              name="spinner"
-              height={40}
-              width={40}
-              fill="#432c81"
-              style={{ margin: 'auto' }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    <div className="inline-block">
+      <div className="text-center">
+        {image ? (
+          <div className="relative">
+            <img
+              className="h-32 w-32 md:h-44 md:w-44 bg-gray-100 mx-auto rounded-full"
+              src={
+                typeof image === 'string' ? image : URL.createObjectURL(image)
+              }
+              alt="avi"
+              onLoad={() => setLoading(false)}
             />
-          )}
-        </div>
-      ) : (
-        <div className="bg-gray-50 shadow-sm h-32 w-32 md:h-44 md:w-44 grid place-items-center rounded-full">
-          <Icon
-            name="user"
-            className="h-24 w-24 md:h-32 md:w-32"
-            strokeWidth={1}
-            stroke="#868686"
-          />
-        </div>
-      )}
-      {setImage && (
-        <label className="block cursor-pointer text-purple.dark my-4 text-center">
-          <SmallText>{label}</SmallText>
-          <input
-            onChange={handleUploadFn}
-            accept=".jpg, .png, .jpeg"
-            type="file"
-            className="hidden"
-          />
-        </label>
-      )}
+            {loading && (
+              <Icon
+                name="spinner"
+                height={40}
+                width={40}
+                fill="#432c81"
+                style={{ margin: 'auto' }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              />
+            )}
+          </div>
+        ) : (
+          <div className="bg-gray-50 shadow-sm h-32 w-32 md:h-44 md:w-44 grid place-items-center rounded-full">
+            <Icon
+              name="user"
+              className="h-16 w-16 md:h-24 md:w-24"
+              strokeWidth={1}
+              stroke="#868686"
+            />
+          </div>
+        )}
+        {setImage && (
+          <label className="block cursor-pointer text-purple.dark my-4 text-center">
+            <SmallText className="inline">{label}</SmallText>
+            <input
+              onChange={handleUploadFn}
+              accept=".jpg, .png, .jpeg"
+              type="file"
+              className="hidden"
+            />
+          </label>
+        )}
+      </div>
     </div>
   );
 };

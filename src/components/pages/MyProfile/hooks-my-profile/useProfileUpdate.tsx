@@ -13,7 +13,9 @@ export default function useProfileUpdate() {
   const { mutateAsync: updateAccount } = useMutation({
     mutationFn: (arg: Partial<TUserSignupPayload>) => api.updateAccount(arg),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['account'] });
+      queryClient.invalidateQueries({
+        queryKey: ['account', 'staffs', 'students', 'guardians'],
+      });
     },
   });
 

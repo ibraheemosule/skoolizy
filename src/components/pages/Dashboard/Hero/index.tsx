@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Api from '~api';
 import ViewAnnouncementModal from '~components/pages/Announcements/widgets-announcements/ViewAnnouncement';
-import EmptyView from '~components/reusables/empty-view';
+import EmptyView from '~reusables/EmptyView';
 import SkeletonLoader from '~components/reusables/SkeletonLoader';
 import Carousel from '~reusables/Carousel';
 import { ActionBtn } from '~reusables/ui/Buttons';

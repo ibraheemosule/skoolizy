@@ -1,6 +1,6 @@
 import { FileType } from './react-types';
 
-export type TUserSignupPayload = {
+export type TUser = {
   first_name: string;
   middle_name?: string;
   last_name: string;
@@ -13,3 +13,14 @@ export type TUserSignupPayload = {
   picture: FileType;
   title: string;
 };
+
+export type TUserSignupPayload = TUser & {
+  picture: FileType;
+};
+
+export type TStaff = TUser & { picture: string };
+
+export type TStaffs = Pick<
+  TUserSignupPayload,
+  'first_name' | 'middle_name' | 'last_name'
+> & { tag: string; group: string; picture: string };

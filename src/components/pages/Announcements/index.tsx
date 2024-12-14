@@ -6,7 +6,7 @@ import Icon from '~assets/Icons';
 import ListOptions from '~components/reusables/ListOptions';
 import Pagination from '~components/reusables/Pagination';
 import SkeletonLoader from '~components/reusables/SkeletonLoader';
-import EmptyView from '~components/reusables/empty-view';
+import EmptyView from '~reusables/EmptyView';
 import useFilter from '~components/reusables/hooks/useFilter';
 import { capCharRemoveUnderscore, formatDate } from '~utils';
 import FilterAnnouncements from './widgets-announcements/FilterAnnouncements';
