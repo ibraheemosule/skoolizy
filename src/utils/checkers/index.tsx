@@ -1,6 +1,6 @@
-type TFunc = () => void | (() => Promise<unknown>);
+type TFunc<T = unknown> = (arg?: T) => void | ((arg?: T) => Promise<unknown>);
 
-export const isFuncPromise = (fn: TFunc) =>
+export const isFuncPromise = <T,>(fn: TFunc<T>) =>
   ['new Promise', 'async', '.then', '.catch', 'resolve', 'reject'].some(
     (keyword) => fn.toString().includes(keyword)
   );

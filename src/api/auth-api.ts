@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
+import { formHeader } from '~utils';
 
 export default (api: AxiosInstance) => ({
   signup: async (
@@ -12,7 +13,7 @@ export default (api: AxiosInstance) => ({
       email: string;
     };
   }> => {
-    const res = await api.post('/auth/signup', body);
+    const res = await api.post('/auth/signup', body, formHeader);
     return res.data;
   },
 

@@ -3,18 +3,26 @@ import TextField from '~components/reusables/CustomField/TextField';
 import { ListItemEditModal } from '~components/reusables/List/EditListItemModal';
 import { List, ListItem } from '~components/reusables/List/List';
 import { BaseBtn } from '~components/reusables/ui/Buttons';
+
 import { capCharRemoveUnderscore } from '~utils';
 import { canEdit, personalInfoDropdownEdit } from './utils-personal-info';
 import usePersonalInfo from './hooks-personal-info/usePersonalInfo';
 import Photo from '~reusables/Photo';
 
 const PersonalInfo = () => {
-  const { personal, updateValueFn, handleUploadFn, info, setInfo, image } =
-    usePersonalInfo();
+  const {
+    personal,
+    updateValueFn,
+    handleUploadFn,
+    info,
+    setInfo,
+    image,
+    updateAccount,
+  } = usePersonalInfo();
 
   return (
     <>
-      <Photo image={image} handleUploadFn={handleUploadFn} />
+      <Photo image={image} setImage={handleUploadFn} />
       <List>
         {Object.entries(personal).map(([key, value]) => {
           const edit = typeof info[key] === 'string';
@@ -29,6 +37,8 @@ const PersonalInfo = () => {
                     close={() => setInfo({})}
                     value={info[key]}
                     field={key}
+                    scroll={false}
+                    actionFn={async () => updateAccount(info)}
                   >
                     {Object.keys(personalInfoDropdownEdit).includes(key) ? (
                       <SelectField

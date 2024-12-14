@@ -6,6 +6,7 @@ import TextField from '~components/reusables/CustomField/TextField';
 
 import usePersonalInfoForm from './usePersonalInfoForm';
 import { titles } from './utils-personalInfoForm';
+import Photo from '~reusables/Photo';
 
 const PersonalInfoForm = () => {
   const {
@@ -24,6 +25,13 @@ const PersonalInfoForm = () => {
 
   return (
     <>
+      <div>
+        <Photo
+          image={state.picture as string}
+          setImage={(arg: Blob) => setState({ picture: arg })}
+        />
+      </div>
+
       <div>
         <label
           htmlFor="title"
@@ -130,7 +138,7 @@ const PersonalInfoForm = () => {
             onChange={(arg: Date | null) =>
               arg && setState({ date_of_birth: arg })
             }
-            value={state.date_of_birth}
+            value={state.date_of_birth as Date}
             onBlur={() =>
               validateInput('date_of_birth', String(state.date_of_birth))
             }

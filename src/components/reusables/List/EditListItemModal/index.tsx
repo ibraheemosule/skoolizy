@@ -9,6 +9,8 @@ type TEditInfo = {
   close: () => void;
   field: string;
   children: JSX.Element;
+  actionFn?: () => void;
+  scroll: boolean;
 };
 
 export const ListItemEditModal = ({
@@ -16,6 +18,8 @@ export const ListItemEditModal = ({
   close,
   field,
   children,
+  actionFn,
+  scroll,
 }: TEditInfo) => {
   const initialValue = useRef(value);
 
@@ -24,16 +28,11 @@ export const ListItemEditModal = ({
       size="sm"
       close={close}
       title={`Update ${capCharRemoveUnderscore(field).toLowerCase()}`}
-      content={
-        <div className="mt-6">
-          {children}
-          <div className="p-2 w-full mt-6">
-            <ActionBtn disabled={initialValue.current === value}>
-              Update
-            </ActionBtn>
-          </div>
-        </div>
-      }
+      action={actionFn}
+      actionText="Update"
+      scroll={scroll}
+      disableActionBtn={initialValue.current === value}
+      content={<div className="mt-6">{children}</div>}
     />
   );
 };
@@ -43,6 +42,8 @@ export const ListItemAuthEditModal = ({
   close,
   field,
   children,
+  actionFn,
+  scroll,
 }: TEditInfo) => {
   const [codeSent, setCodeSent] = useState(false);
   const [password, setPassword] = useState('');
@@ -61,6 +62,8 @@ export const ListItemAuthEditModal = ({
       size="sm"
       close={close}
       title={title}
+      scroll={scroll}
+      action={actionFn}
       content={
         <div className="mt-6">
           {codeSent ? (

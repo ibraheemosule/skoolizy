@@ -10,5 +10,6 @@ export type TUserSignupPayload = {
   date_of_birth: string;
   email: string;
   role: string;
-  profile_picture: FileType;
+  picture: FileType;
+  title: string;
 };

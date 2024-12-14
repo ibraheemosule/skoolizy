@@ -570,7 +570,13 @@ const icons: {
     </svg>
   ),
 
-  spinner: ({ style = {}, fill = 'black', height = 200, width = 200 }) => (
+  spinner: ({
+    style = {},
+    fill = 'black',
+    height = 200,
+    width = 200,
+    ...props
+  }) => (
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
@@ -582,6 +588,7 @@ const icons: {
         display: 'block',
         ...style,
       }}
+      {...props}
     >
       <g>
         <g transform="rotate(0 50 50)">

@@ -15,6 +15,7 @@ export type TUserStore = {
   phoneNumber: string;
   state: string;
   dateOfBirth: string;
+  picture: string;
   update: (arg: Partial<TUserStore>) => void;
 };
 
@@ -31,6 +32,7 @@ const initialState = (arg?: Omit<TUserStore, 'update'>) => ({
   phoneNumber: arg?.phoneNumber || '',
   state: arg?.state || '',
   dateOfBirth: arg?.dateOfBirth || '',
+  picture: arg?.picture || '',
 });
 
 export const userStore = create<TUserStore>()(

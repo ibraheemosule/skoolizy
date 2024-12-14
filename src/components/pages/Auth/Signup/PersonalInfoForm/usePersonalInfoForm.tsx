@@ -19,8 +19,9 @@ const usePersonalInfoForm = () => {
   } = useGetCountriesAndState();
 
   const [state, setState] = useBulkState<{
-    [key: string]: string | Date;
+    [key: string]: string | Date | Blob;
   }>({
+    picture: signupDetails.picture,
     title: signupDetails.title || '',
     first_name: signupDetails.first_name || '',
     middle_name: signupDetails.middle_name || '',

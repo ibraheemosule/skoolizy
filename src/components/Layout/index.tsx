@@ -28,6 +28,7 @@ const Layout: FC = () => {
         phoneNumber: data?.data.phone_number,
         state: data?.data.state_of_origin,
         dateOfBirth: data?.data.date_of_birth,
+        picture: data?.data.picture,
       });
     }
   }, [data]);

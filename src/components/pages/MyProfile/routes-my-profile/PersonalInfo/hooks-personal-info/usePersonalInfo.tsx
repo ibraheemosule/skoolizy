@@ -1,17 +1,20 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { userStore } from '~src/store';
 import { personalInfoFn } from '../utils-personal-info';
+import { FileType } from '~shared-ts-types/react-types';
+import useProfileUpdate from '~components/pages/MyProfile/hooks-my-profile/useProfileUpdate';
 
 export default function usePersonalInfo() {
   const user = userStore((state) => state);
-  const [info, setInfo] = useState<Record<string, string>>({});
-  const [image, setImage] = useState('');
+  const { info, setInfo, updateAccount, updateValueFn } = useProfileUpdate();
 
-  const handleUploadFn = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target?.files) setImage(URL.createObjectURL(e.target.files[0]));
+  const [image, setImage] = useState(user.picture);
+
+  const handleUploadFn = async (arg: FileType) => {
+    if (!arg) return;
+    await updateAccount({ picture: arg });
+    setImage(URL.createObjectURL(arg));
   };
-
-  const updateValueFn = (key: string) => (v: string) => setInfo({ [key]: v });
 
   return {
     personal: personalInfoFn(user),
@@ -20,5 +23,6 @@ export default function usePersonalInfo() {
     setInfo,
     handleUploadFn,
     image,
+    updateAccount,
   };
 }

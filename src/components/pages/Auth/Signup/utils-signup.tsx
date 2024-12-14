@@ -1,11 +1,14 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react';
+import { TUserSignupPayload } from '~shared-ts-types/t-user-data';
 
 export const SignupContext = createContext<{
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   totalSteps: number;
-  signupDetails: { [key: string]: string | undefined | Date };
-  setSignupDetails: Dispatch<{ [key: string]: string | undefined | Date }>;
+  signupDetails: TUserSignupPayload;
+  setSignupDetails: Dispatch<{
+    [key: string]: string | undefined | Date | Blob;
+  }>;
 } | null>(null);
 
 export const useSignupContext = () => {
