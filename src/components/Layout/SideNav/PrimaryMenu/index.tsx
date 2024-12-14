@@ -32,6 +32,11 @@ const navs = [
     icon: 'tutor',
   } as const,
   {
+    label: 'guardians',
+    route: 'guardians',
+    icon: 'tutor',
+  } as const,
+  {
     label: 'classroom',
     route: 'classroom',
     icon: 'classroom',

@@ -231,6 +231,48 @@ function AppRoutes() {
               </Route>
 
               <Route
+                path="Guardians"
+                element={
+                  <LazyLoad url={() => import('~components/pages/Guardians')} />
+                }
+              >
+                <Route
+                  index
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import('~components/pages/Guardians/AllGuardians')
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path=":tag"
+                  element={
+                    <LazyLoad
+                      url={() =>
+                        import('~components/pages/Guardians/GuardianDetail')
+                      }
+                    />
+                  }
+                >
+                  <Route index element={<Navigate to="biodata" />} />
+                  <Route
+                    path="biodata"
+                    element={
+                      <LazyLoad
+                        url={() =>
+                          import(
+                            '~components/pages/Guardians/GuardianDetail/routes-guardianDetail/GuardianBiodata'
+                          )
+                        }
+                      />
+                    }
+                  />
+                </Route>
+              </Route>
+
+              <Route
                 path="classroom"
                 element={
                   <LazyLoad url={() => import('~components/pages/Classroom')} />
