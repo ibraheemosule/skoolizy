@@ -73,6 +73,7 @@ export const logout = (arg?: { sessionLogout: boolean }) => {
     globalStore.update({
       bannerOptions: [],
     });
+    userStore.update({});
   }, 3000);
 };
 

@@ -19,7 +19,7 @@ const StarRatings: FC<IStarRatings> = ({ rating, onClick }) => (
           type="button"
           className="h-full"
         >
-          <Icon name="star" offset={offset} />
+          <Icon name="star" width={18} height={18} offset={offset} />
         </button>
       );
     })}

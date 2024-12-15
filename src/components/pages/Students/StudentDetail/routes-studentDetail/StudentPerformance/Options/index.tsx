@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FilterPerformance from './FilterStudentPerformance';
+import FilterPerformance from './Filter';
 import ListOptions from '~components/reusables/ListOptions';
 
 const PerformanceOptions = () => {

@@ -20,8 +20,8 @@ const AllGuardians = () => {
       )}
       <section className="flex flex-wrap max-h-full lg:flex-nowrap gap-6 overflow-auto">
         <div className="w-full min-h-full shrink-0">
-          <Heading2 className="capitalize text-center">
-            Meet The Student&apos;s Guardians
+          <Heading2 className="text-center">
+            Meet the Student&apos;s Guardians
           </Heading2>
           <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden mt-6">
             {guardians ? (

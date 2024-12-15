@@ -93,13 +93,11 @@ function AppRoutes() {
                   }
                 />
                 <Route
-                  path=":id"
+                  path=":tag"
                   element={
                     <LazyLoad
                       url={() =>
-                        import(
-                          '~components/pages/Students/widgets-student/StudentDetail'
-                        )
+                        import('~components/pages/Students/StudentDetail')
                       }
                     />
                   }
@@ -111,7 +109,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentBiodata'
+                            '~components/pages/Students/StudentDetail/routes-studentDetail/StudentBiodata'
                           )
                         }
                       />
@@ -123,7 +121,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentPerformance'
+                            '~components/pages/Students/StudentDetail/routes-studentDetail/StudentPerformance'
                           )
                         }
                       />
@@ -135,7 +133,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentResults'
+                            '~components/pages/Students/StudentDetail/routes-studentDetail/StudentResults'
                           )
                         }
                       />
@@ -147,7 +145,7 @@ function AppRoutes() {
                       <LazyLoad
                         url={() =>
                           import(
-                            '~components/pages/Students/widgets-student/StudentDetail/routes/StudentAttendance'
+                            '~components/pages/Students/StudentDetail/routes-studentDetail/StudentAttendance'
                           )
                         }
                       />

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ListOptions from '~components/reusables/ListOptions';
-import FilterStaffs from '../FilterStaff';
+import FilterStaffs from '../FilterStudent';
 import Pagination from '~reusables/Pagination';
 
 import useFilter from '~reusables/hooks/useFilter';
@@ -26,7 +26,7 @@ export default function StaffsOption(paginate: TStaffOption) {
           totalPage={paginate?.total_pages}
           items={paginate?.total_items}
           filterAction={filterStaffs}
-          type="staffs"
+          type="students"
         />
         <div className="ml-auto grid">
           <ListOptions onManageClick={() => setModal('filter')} />

@@ -1,5 +1,6 @@
 import { decrypt, encrypt } from '~utils';
 
+// eslint-disable-next-line import/prefer-default-export
 export const secureStorage = {
   ...(window && window.localStorage),
   getItem: (name: string): string | null => {
@@ -19,5 +20,3 @@ export const secureStorage = {
     localStorage.removeItem(name);
   },
 };
-
-export const teting = '';

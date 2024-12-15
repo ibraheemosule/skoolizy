@@ -1,17 +1,14 @@
 import { memo } from 'react';
-import { BoldText } from '~reusables/ui/Text';
 import Modal from '~components/reusables/Modal';
 import CustomField from '~reusables/CustomField';
 import useCustomField from '~reusables/CustomField/hooks-custom-field/useCustomField';
+import { BoldText } from '~reusables/ui/Text';
 
 const FilterStudents = ({ closeModal }: { closeModal: () => void }) => {
-  const [classroom, setClassroom, classroomList] = useCustomField('', [
-    'JSS-1',
-    'JSS-2',
-    'JSS-3',
-    'SSS-1',
-    'SSS-2',
-    'SSS-3',
+  const [subject, setSubject, subjectList] = useCustomField('', [
+    'English',
+    'Math',
+    'Biology',
   ]);
   const [gender, setGender] = useCustomField('');
   const [year, setYear] = useCustomField('');
@@ -30,15 +27,11 @@ const FilterStudents = ({ closeModal }: { closeModal: () => void }) => {
       content={
         <div className="text-left mb-4">
           <div>
-            <BoldText className="mt-4">Classroom:</BoldText>
+            <BoldText className="mt-4">Subject:</BoldText>
             <div className="mt-1">
-              <CustomField
-                value={classroom}
-                onSelect={setClassroom}
-                field="select"
-              >
+              <CustomField value={subject} onSelect={setSubject} field="select">
                 <CustomField.DropdownWrapper>
-                  {classroomList.map((sub) => (
+                  {subjectList.map((sub) => (
                     <CustomField.Dropdown key={sub} value={sub}>
                       {sub}
                     </CustomField.Dropdown>

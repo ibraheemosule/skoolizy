@@ -4,6 +4,7 @@ import { BoldText, SmallText } from '../ui/Text';
 import Icon from '~assets/Icons';
 import { BaseBtn } from '../ui/Buttons';
 import Photo from '~reusables/Photo';
+import StarRating from '~reusables/StarRating';
 
 type TUserCard = {
   user: {
@@ -39,9 +40,9 @@ const UserCard = memo(
       )}
 
       {rating && (
-        <SmallText className="font-semibold text-gray-500  mt-1">
-          {rating} Rating
-        </SmallText>
+        <div className="flex justify-center mt-2">
+          <StarRating rating={4} />
+        </div>
       )}
       {deleteAction && (
         <div className="mt-3 flex justify-center gap-x-6">

@@ -1,7 +1,7 @@
 import AttendanceOptions from './Options';
 import EventCalendar from '~components/reusables/EventCalendar';
 
-const Attendance = () => (
+const StaffAttendance = () => (
   <section className="flex flex-wrap max-h-full lg:flex-nowrap overflow-auto">
     <div className="w-full min-h-full shrink-0">
       <div className="flex flex-col md:h-full md:overflow-hidden">
@@ -31,4 +31,4 @@ const Attendance = () => (
   </section>
 );
 
-export default Attendance;
+export default StaffAttendance;
