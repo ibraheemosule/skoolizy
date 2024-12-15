@@ -3,12 +3,14 @@ import announcementsApi from '~src/api/announcements-api';
 import authApi from '~src/api/auth-api';
 import accountApi from '~src/api/account-api';
 import staffsApi from '~src/api/staffs-api';
+import guardiansApi from '~src/api/guardians-api';
 
 type TApi = ReturnType<typeof externalApi> &
   ReturnType<typeof announcementsApi> &
   ReturnType<typeof authApi> &
   ReturnType<typeof accountApi> &
-  ReturnType<typeof staffsApi>;
+  ReturnType<typeof staffsApi> &
+  ReturnType<typeof guardiansApi>;
 
 export type TListApi<T> = {
   list: T[];

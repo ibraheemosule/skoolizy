@@ -9,7 +9,7 @@ const useGuardianDetail = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: [`guardians-${tag}`],
-    queryFn: () => api.getStaff(tag!),
+    queryFn: () => api.getGuardian(tag!),
     placeholderData: keepPreviousData,
   });
 

@@ -17,7 +17,7 @@ const StarRatings: FC<IStarRatings> = ({ rating, onClick }) => (
           onClick={() => onClick?.(i + 1)}
           key={Math.random()}
           type="button"
-          className="h-full"
+          className={`h-full ${onClick ? 'cursor-pointer' : 'cursor-default'}`}
         >
           <Icon name="star" width={18} height={18} offset={offset} />
         </button>

@@ -13,7 +13,7 @@ const useAllGuardians = () => {
 
   const { data, isFetching, refetch, isError } = useQuery({
     queryKey: ['guardians', search, page, fromDate, toDate],
-    queryFn: () => api.getAllStaffs(state),
+    queryFn: () => api.getAllGuardians(state),
     placeholderData: keepPreviousData,
   });
 
