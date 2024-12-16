@@ -409,7 +409,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/MyProfile/routes-my-profile/PersonalInfo'
+                          '~components/pages/MyProfile/routes-myProfile/PersonalInfo'
                         )
                       }
                     />
@@ -421,7 +421,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/MyProfile/routes-my-profile/AcademicInfo'
+                          '~components/pages/MyProfile/routes-myProfile/AcademicInfo'
                         )
                       }
                     />
@@ -433,7 +433,7 @@ function AppRoutes() {
                     <LazyLoad
                       url={() =>
                         import(
-                          '~components/pages/MyProfile/routes-my-profile/ContactInfo'
+                          '~components/pages/MyProfile/routes-myProfile/ContactInfo'
                         )
                       }
                     />

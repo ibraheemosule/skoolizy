@@ -10,7 +10,7 @@ type TEditInfo = {
   field: string;
   children: JSX.Element;
   actionFn?: () => void;
-  scroll: boolean;
+  scroll?: boolean;
 };
 
 export const ListItemEditModal = ({

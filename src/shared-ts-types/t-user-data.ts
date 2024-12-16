@@ -12,10 +12,13 @@ export type TUser = {
   role: string;
   picture: FileType;
   title: string;
+  phone_number: string;
+  home_address: string;
 };
 
 export type TUserSignupPayload = TUser & {
   picture: FileType;
+  password: string;
 };
 
 export type TStaff = TUser & { picture: string };
