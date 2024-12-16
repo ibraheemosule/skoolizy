@@ -32,6 +32,7 @@ const useLogin = () => {
   const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [inputError, setInputError] = useState('');
   const isGuardian = account === 'guardians';
 
   const { mutateAsync, isPending, isSuccess } = useMutation({
@@ -77,6 +78,8 @@ const useLogin = () => {
     loginFn: mutateAsync,
     isPending,
     isSuccess,
+    inputError,
+    setInputError,
   };
 };
 

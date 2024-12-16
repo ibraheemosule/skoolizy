@@ -2,9 +2,10 @@ import { memo } from 'react';
 import { useSignupContext } from '../utils-signup';
 import Icon from '~assets/Icons';
 
-const signupOptions = {
+const signupOptionsAndIcon = {
   guardians: 'user',
   staffs: 'tutor',
+  students: 'user',
 } as const;
 
 const SignupOptions = () => {
@@ -12,7 +13,7 @@ const SignupOptions = () => {
 
   return (
     <div className="mt-4 grid gap-8 grid-cols-2">
-      {Object.entries(signupOptions).map(([option, iconName]) => (
+      {Object.entries(signupOptionsAndIcon).map(([option, iconName]) => (
         <button
           key={option}
           onClick={() => {

@@ -21,6 +21,8 @@ const Login = () => {
     loginFn,
     isPending,
     isSuccess,
+    inputError,
+    setInputError,
   } = useLogin();
 
   return (
@@ -52,6 +54,7 @@ const Login = () => {
                   setAccount('');
                   setTag('');
                   setPassword('');
+                  setInputError('');
                 }}
                 className="text-purple.dark text-sm font-semibold"
               >
@@ -73,7 +76,9 @@ const Login = () => {
                   htmlFor="tag"
                   className="block text-sm font-medium leading-6 text-brown.dark"
                 >
-                  {isGuardian ? 'Phone Number' : 'Tag (e.g staff-123)'}
+                  {isGuardian && 'Phone Number'}
+                  {account === 'staff' && 'Tag (e.g staff-123)'}
+                  {account === 'student' && 'Tag (e.g student-123)'}
                 </label>
                 <div className="mt-1">
                   <TextField
@@ -87,6 +92,15 @@ const Login = () => {
                     }
                     type="text"
                     id="tag"
+                    onBlur={(e) => {
+                      const value = e?.target.value;
+                      if (!(Number(value?.indexOf(account)) + 1)) {
+                        setInputError(
+                          `${account} login tag must match format (${account}-123)`
+                        );
+                      }
+                    }}
+                    error={inputError}
                     placeholder={`Input your ${
                       isGuardian ? 'Phone Number' : 'tag'
                     }`}
@@ -138,10 +152,11 @@ const Login = () => {
                   Forgot password?
                 </Link>
               </div>
-
               <ActionBtn
                 onClick={async () => loginFn()}
-                disabled={!tag || !password || isPending || isSuccess}
+                disabled={
+                  !tag || !password || isPending || isSuccess || !!inputError
+                }
                 loading={isPending || isSuccess}
               >
                 Sign in

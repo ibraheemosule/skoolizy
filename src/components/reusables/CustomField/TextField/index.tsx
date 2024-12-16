@@ -4,6 +4,7 @@ import {
   useEffect,
   useRef,
   useState,
+  FocusEvent,
 } from 'react';
 import { TIconNames } from '~assets/Icons/IconNames';
 import Icon from '~assets/Icons';
@@ -11,7 +12,7 @@ import Icon from '~assets/Icons';
 type TTextField = InputHTMLAttributes<HTMLInputElement> & {
   error?: string | string[];
   icon?: TIconNames;
-  onBlur?: () => void;
+  onBlur?: (e?: FocusEvent<HTMLInputElement, Element>) => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
 };
