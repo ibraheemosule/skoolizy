@@ -83,23 +83,16 @@ const Login = () => {
                 <div className="mt-1">
                   <TextField
                     value={tag}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      setInputError('');
                       setTag(
                         isGuardian
                           ? onlyNumericInput(e.target.value)
                           : e.target.value
-                      )
-                    }
+                      );
+                    }}
                     type="text"
                     id="tag"
-                    onBlur={(e) => {
-                      const value = e?.target.value;
-                      if (!(Number(value?.indexOf(account)) + 1)) {
-                        setInputError(
-                          `${account} login tag must match format (${account}-123)`
-                        );
-                      }
-                    }}
                     error={inputError}
                     placeholder={`Input your ${
                       isGuardian ? 'Phone Number' : 'tag'
@@ -153,7 +146,15 @@ const Login = () => {
                 </Link>
               </div>
               <ActionBtn
-                onClick={async () => loginFn()}
+                onClick={async () => {
+                  if (!(tag.indexOf(account) + 1)) {
+                    setInputError(
+                      `${account} login tag must match format (${account}-123)`
+                    );
+                    return;
+                  }
+                  await loginFn();
+                }}
                 disabled={
                   !tag || !password || isPending || isSuccess || !!inputError
                 }
