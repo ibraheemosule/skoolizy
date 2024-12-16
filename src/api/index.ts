@@ -9,6 +9,7 @@ import externalApi from './external-api';
 import { globalStore } from '~src/store';
 import staffsApi from './staffs-api';
 import guardiansApi from './guardians-api';
+import studentsApi from './students-api';
 
 const baseURL = getEnv('VITE_BASE_URL');
 class Api {
@@ -70,6 +71,7 @@ class Api {
     ...accountApi(this.axiosInstance),
     ...staffsApi(this.axiosInstance),
     ...guardiansApi(this.axiosInstance),
+    ...studentsApi(this.axiosInstance),
   };
 }
 

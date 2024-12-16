@@ -13,7 +13,7 @@ const useAllStudents = () => {
 
   const { data, isFetching, refetch, isError } = useQuery({
     queryKey: ['students', search, page, fromDate, toDate],
-    queryFn: () => api.getAllStaffs(state),
+    queryFn: () => api.getAllStudents(state),
     placeholderData: keepPreviousData,
   });
 

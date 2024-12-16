@@ -6,9 +6,10 @@ import DeleteStudent from './widgets-allStudents/DeleteStudent';
 import StudentsOptions from './widgets-allStudents/StudentOptions';
 import useAllStudents from './hooks-allStudents';
 import Icon from '~assets/Icons';
+import EmptyView from '~reusables/EmptyView';
 
 const AllStudents = () => {
-  const { students, data } = useAllStudents();
+  const { students, data, isError, isFetching } = useAllStudents();
   const [deleteStudent, setDeleteStudent] = useState('');
   return (
     <>
@@ -24,7 +25,16 @@ const AllStudents = () => {
             Meet our Students
           </Heading2>
           <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden mt-6">
-            {students ? (
+            {isFetching ? (
+              <Icon
+                name="spinner"
+                height={40}
+                width={40}
+                fill="#432c81"
+                style={{ margin: 'auto' }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              />
+            ) : students?.length ? (
               <UsersListLayout
                 List={
                   <>
@@ -54,16 +64,11 @@ const AllStudents = () => {
                   />
                 }
               />
-            ) : (
-              <Icon
-                name="spinner"
-                height={40}
-                width={40}
-                fill="#432c81"
-                style={{ margin: 'auto' }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              />
-            )}
+            ) : students ? (
+              <EmptyView message="No students is registered to this school yet" />
+            ) : isError ? (
+              <EmptyView />
+            ) : null}
           </div>
         </div>
       </section>

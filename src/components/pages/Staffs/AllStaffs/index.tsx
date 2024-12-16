@@ -6,9 +6,10 @@ import DeleteStaff from './widgets-allStaffs/DeleteStaff';
 import StaffsOptions from './widgets-allStaffs/StaffOptions';
 import useAllStaffs from './hooks-allStaffs';
 import Icon from '~assets/Icons';
+import EmptyView from '~reusables/EmptyView';
 
 const AllStaffs = () => {
-  const { staffs, data } = useAllStaffs();
+  const { staffs, data, isError, isFetching } = useAllStaffs();
   const [deleteStaff, setDeleteStaff] = useState('');
   return (
     <>
@@ -24,7 +25,16 @@ const AllStaffs = () => {
             Meet our Staffs
           </Heading2>
           <div className="flex mx-auto text-center flex-col md:h-full md:overflow-hidden mt-6">
-            {staffs ? (
+            {isFetching ? (
+              <Icon
+                name="spinner"
+                height={40}
+                width={40}
+                fill="#432c81"
+                style={{ margin: 'auto' }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              />
+            ) : staffs?.length ? (
               <UsersListLayout
                 List={
                   <>
@@ -54,16 +64,11 @@ const AllStaffs = () => {
                   />
                 }
               />
-            ) : (
-              <Icon
-                name="spinner"
-                height={40}
-                width={40}
-                fill="#432c81"
-                style={{ margin: 'auto' }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              />
-            )}
+            ) : staffs ? (
+              <EmptyView message="No staffs is registered to this school yet" />
+            ) : isError ? (
+              <EmptyView />
+            ) : null}
           </div>
         </div>
       </section>

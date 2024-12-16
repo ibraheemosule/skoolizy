@@ -20,14 +20,21 @@ export type TUserSignupPayload = TUser & {
 
 export type TStaff = TUser & { picture: string };
 
-export type TGuardian = TUser & { picture: string };
-
 export type TStaffs = Pick<
   TUserSignupPayload,
   'first_name' | 'middle_name' | 'last_name'
 > & { tag: string; group: string; picture: string };
 
+export type TGuardian = TUser & { picture: string };
+
 export type TGuardians = Pick<
+  TUserSignupPayload,
+  'first_name' | 'middle_name' | 'last_name'
+> & { tag: string; group: string; picture: string };
+
+export type TStudent = TUser & { picture: string };
+
+export type TStudents = Pick<
   TUserSignupPayload,
   'first_name' | 'middle_name' | 'last_name'
 > & { tag: string; group: string; picture: string };

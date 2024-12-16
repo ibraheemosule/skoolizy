@@ -25,9 +25,10 @@ const PersonalInfoForm = () => {
 
   return (
     <>
-      <div>
+      <div className="text-center">
         <Photo
           image={state.picture as string}
+          label={state.picture ? 'Change photo' : 'Upload photo'}
           setImage={(arg: Blob) => setState({ picture: arg })}
         />
       </div>

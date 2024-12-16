@@ -23,7 +23,7 @@ const FilterPerformance = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <Modal
       size="sm"
-      title="Filter Staffs By"
+      title="Filter Students By"
       content={
         <div className="text-left mb-4">
           <div>

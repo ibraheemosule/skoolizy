@@ -8,13 +8,13 @@ const useStaffDetail = () => {
   const { tag } = useParams();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: [`staffs-${tag}`],
+    queryKey: [`students-${tag}`],
     queryFn: () => api.getStaff(tag!),
     placeholderData: keepPreviousData,
   });
 
   return {
-    staff: data?.data,
+    student: data?.data,
     isLoading,
     isError,
   };
